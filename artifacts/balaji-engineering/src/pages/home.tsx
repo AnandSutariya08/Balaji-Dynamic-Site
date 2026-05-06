@@ -57,6 +57,12 @@ export default function Home() {
     return () => { if (autoPlayRef.current) clearInterval(autoPlayRef.current); };
   }, [resetAutoPlay]);
 
+  // Preload below-fold images so they're ready before the user scrolls
+  useEffect(() => {
+    const imgs = ["/service-fabrication.png", "/service-bending.png", "/service-steel-cutting.png", "/service-plate-bending.png", "/service-cnc.png"];
+    imgs.forEach((src) => { const i = new Image(); i.src = src; });
+  }, []);
+
   const handlePrev = () => {
     const prev = (activeService - 1 + services.length) % services.length;
     scrollToIndex(prev);
@@ -192,7 +198,7 @@ export default function Home() {
                 transition={{ duration: 1.2, ease: "easeInOut" }}
                 className="relative aspect-square rounded-2xl overflow-hidden group"
               >
-                <img src="/service-fabrication.png" alt="Fabrication Excellence" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                <img src="/service-fabrication.png" alt="Fabrication Excellence" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="eager" fetchPriority="high" />
                 <div className="absolute inset-0 bg-primary/10 mix-blend-multiply" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
               </motion.div>
