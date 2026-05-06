@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 import {
   CheckCircle2, Factory, Target, Users, Award, ShieldCheck,
-  Zap, TrendingUp, ArrowRight, Calendar, MapPin, FileText
+  Zap, TrendingUp, ArrowRight, Calendar, FileText
 } from "lucide-react";
 
 const timeline = [
@@ -24,13 +24,6 @@ const certifications = [
   { title: "20+ Year Track Record", desc: "Proven Industrial Heritage", icon: Calendar },
 ];
 
-const team = [
-  { name: "Rahul Patel", role: "Managing Director", exp: "25 Years" },
-  { name: "Suresh Mehta", role: "Head of Production", exp: "18 Years" },
-  { name: "Kiran Shah", role: "CNC Specialist", exp: "12 Years" },
-  { name: "Ankit Joshi", role: "Quality Control", exp: "10 Years" },
-];
-
 const values = [
   { title: "Precision First", desc: "Every cut, bend, and weld is executed to the tightest possible tolerance. We don't compromise on accuracy.", icon: Target },
   { title: "Speed to Market", desc: "Fast turnaround is our promise. Advanced CNC automation enables rapid batch production without quality trade-offs.", icon: Zap },
@@ -41,45 +34,26 @@ const values = [
 export default function About() {
   return (
     <PageTransition>
-      <div className="bg-black">
+      <div className="bg-[#F7F5F1]">
 
-        {/* HERO */}
+        {/* HERO — dark image overlay, keep text white */}
         <section className="relative min-h-screen flex items-center overflow-hidden">
           <div className="absolute inset-0">
-            <div
-              className="w-full h-full bg-cover bg-center opacity-25"
-              style={{ backgroundImage: "url('/service-fabrication.png')" }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-black/20" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-            {/* Grid overlay */}
-            <div
-              className="absolute inset-0 opacity-[0.04]"
-              style={{
-                backgroundImage:
-                  "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "80px 80px",
-              }}
-            />
+            <div className="w-full h-full bg-cover bg-center opacity-30" style={{ backgroundImage: "url('/service-fabrication.png')" }} />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A] via-[#1A1A1A]/70 to-[#1A1A1A]/20" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-transparent to-transparent" />
+            <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "linear-gradient(rgba(0,0,0,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.4) 1px, transparent 1px)", backgroundSize: "80px 80px" }} />
           </div>
-
           <div className="container relative z-10 mx-auto px-4 pt-32 pb-24">
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9 }}
-              className="max-w-5xl"
-            >
+            <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }} className="max-w-5xl">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-primary mb-10">
                 <span className="text-[10px] font-bold tracking-[0.3em] uppercase">EST. 2001 · NAVAGAM, SURAT</span>
               </div>
               <h1 className="text-7xl md:text-[10rem] font-display font-black text-white uppercase tracking-tighter leading-[0.85] mb-10">
                 Built on<br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#AC3C3C] to-[#e05555]">
-                  Steel.
-                </span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#AC3C3C] to-[#e05555]">Steel.</span>
               </h1>
-              <p className="text-xl md:text-2xl text-zinc-400 font-light leading-relaxed max-w-2xl mb-14">
+              <p className="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed max-w-2xl mb-14">
                 Two decades of precision. Hundreds of industrial clients. One relentless commitment — delivering metal fabrication excellence from the heart of Gujarat.
               </p>
               <div className="flex flex-wrap gap-6">
@@ -92,42 +66,36 @@ export default function About() {
               </div>
             </motion.div>
           </div>
-
-          {/* Side stat strip */}
           <div className="absolute right-8 top-1/2 -translate-y-1/2 hidden xl:flex flex-col gap-8 z-20">
-            {[
-              { v: "20+", l: "Years" },
-              { v: "500+", l: "Projects" },
-              { v: "25+", l: "Experts" },
-            ].map((s, i) => (
+            {[{ v: "20+", l: "Years" }, { v: "500+", l: "Projects" }, { v: "25+", l: "Experts" }].map((s, i) => (
               <div key={i} className="text-right">
                 <div className="text-4xl font-display font-black text-white">{s.v}</div>
-                <div className="text-[10px] font-bold tracking-[0.3em] text-zinc-500 uppercase">{s.l}</div>
+                <div className="text-[10px] font-bold tracking-[0.3em] text-zinc-400 uppercase">{s.l}</div>
               </div>
             ))}
           </div>
         </section>
 
         {/* MARQUEE */}
-        <section className="py-8 bg-[#050505] border-y border-white/5 overflow-hidden">
-          <div className="flex whitespace-nowrap" style={{ animation: "marquee 35s linear infinite" }}>
+        <section className="py-8 bg-[#1C1C1C] overflow-hidden">
+          <div className="flex whitespace-nowrap" style={{ animation: "marquee2 35s linear infinite" }}>
             {Array.from({ length: 2 }).map((_, i) => (
               <div key={i} className="flex items-center gap-8 px-4 text-3xl md:text-5xl font-display font-black text-white/15 uppercase">
                 <span>PRECISION ENGINEERING</span><span className="w-2 h-2 rounded-full bg-primary inline-block" />
-                <span>20+ YEARS LEGACY</span><span className="w-2 h-2 rounded-full bg-white inline-block" />
+                <span>20+ YEARS LEGACY</span><span className="w-2 h-2 rounded-full bg-white/30 inline-block" />
                 <span>SURAT, GUJARAT</span><span className="w-2 h-2 rounded-full bg-primary inline-block" />
-                <span>ISO CERTIFIED</span><span className="w-2 h-2 rounded-full bg-white inline-block" />
+                <span>ISO CERTIFIED</span><span className="w-2 h-2 rounded-full bg-white/30 inline-block" />
                 <span>HEAVY FABRICATION</span><span className="w-2 h-2 rounded-full bg-primary inline-block" />
               </div>
             ))}
           </div>
-          <style>{`@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }`}</style>
+          <style>{`@keyframes marquee2 { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }`}</style>
         </section>
 
         {/* STATS ROW */}
-        <section className="py-28 bg-black relative overflow-hidden">
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.025]">
-            <span className="text-[30rem] font-display font-black text-white">24</span>
+        <section className="py-28 bg-[#F7F5F1] relative overflow-hidden">
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03]">
+            <span className="text-[30rem] font-display font-black text-[#1A1A1A]">24</span>
           </div>
           <div className="container mx-auto px-4 relative z-10">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-12">
@@ -137,21 +105,15 @@ export default function About() {
                 { value: 25, suffix: "+", label: "Skilled Professionals", icon: Users },
                 { value: 98, suffix: "%", label: "Client Retention Rate", icon: TrendingUp },
               ].map((stat, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                  className="flex flex-col items-center text-center group"
-                >
+                <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} className="flex flex-col items-center text-center group">
                   <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
                     <stat.icon className="w-7 h-7 text-primary" />
                   </div>
-                  <div className="text-6xl md:text-8xl font-display font-black text-white mb-3">
+                  <div className="text-6xl md:text-8xl font-display font-black text-[#1A1A1A] mb-3">
                     <Counter value={stat.value} suffix={stat.suffix} />
                   </div>
                   <div className="h-0.5 w-10 bg-primary mb-4" />
-                  <div className="text-xs font-bold tracking-[0.25em] text-zinc-500 uppercase">{stat.label}</div>
+                  <div className="text-xs font-bold tracking-[0.25em] text-slate-500 uppercase">{stat.label}</div>
                 </motion.div>
               ))}
             </div>
@@ -159,61 +121,39 @@ export default function About() {
         </section>
 
         {/* OUR STORY */}
-        <section className="py-32 bg-[#040404]">
+        <section className="py-32 bg-[#EDEAE4]">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-24 items-start">
               <div>
                 <span className="text-primary font-bold tracking-[0.3em] uppercase text-sm">Origin Story</span>
-                <h2 className="text-5xl md:text-7xl font-display font-black text-white uppercase tracking-tighter mt-4 mb-12 leading-[0.9]">
+                <h2 className="text-5xl md:text-7xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4 mb-12 leading-[0.9]">
                   From Workshop<br />to Powerhouse
                 </h2>
-                <div className="space-y-6 text-lg text-zinc-400 font-light leading-relaxed">
-                  <p>
-                    Balaji Engineering Works began in 2001 with a single shearing machine and a founder's obsession with precision. Located in the industrial heartland of Navagam, Surat — Gujarat's manufacturing backbone — we grew by doing one thing exceptionally well: delivering exactly what we promised.
-                  </p>
-                  <p>
-                    Today our 25,000 sq. ft. facility houses heavy-duty CNC press brakes capable of 800-tonne force, fiber laser cutters with ±0.1mm accuracy, and plate rolling machines that handle steel up to 60mm thick. Our 25+ specialists bring decades of collective knowledge to projects that range from custom automotive brackets to structural bridge components.
-                  </p>
-                  <p>
-                    With an annual turnover of ₹5–25 Crore, we serve clients across automotive, construction, energy, marine, and HVAC sectors — providing them with the critical components that keep India's infrastructure running.
-                  </p>
+                <div className="space-y-6 text-lg text-slate-600 font-light leading-relaxed">
+                  <p>Balaji Engineering Works began in 2001 with a single shearing machine and a founder's obsession with precision. Located in the industrial heartland of Navagam, Surat — Gujarat's manufacturing backbone — we grew by doing one thing exceptionally well: delivering exactly what we promised.</p>
+                  <p>Today our 25,000 sq. ft. facility houses heavy-duty CNC press brakes capable of 800-tonne force, fiber laser cutters with ±0.1mm accuracy, and plate rolling machines that handle steel up to 60mm thick. Our 25+ specialists bring decades of collective knowledge to projects across industries.</p>
+                  <p>With an annual turnover of ₹5–25 Crore, we serve clients across automotive, construction, energy, marine, and HVAC sectors — providing the critical components that keep India's infrastructure running.</p>
                 </div>
-
                 <div className="mt-12 grid grid-cols-2 gap-6">
-                  {[
-                    "CNC Press Brakes up to 800T",
-                    "Fiber Laser ±0.1mm Accuracy",
-                    "Plate Rolling up to 60mm",
-                    "25,000 sq.ft. Facility",
-                    "Full CAD/CAM Integration",
-                    "Same-Day Quotation"
-                  ].map((fact, i) => (
+                  {["CNC Press Brakes up to 800T", "Fiber Laser ±0.1mm Accuracy", "Plate Rolling up to 60mm", "25,000 sq.ft. Facility", "Full CAD/CAM Integration", "Same-Day Quotation"].map((fact, i) => (
                     <div key={i} className="flex items-center gap-3">
-                      <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
+                      <div className="w-6 h-6 rounded-full bg-primary/15 flex items-center justify-center shrink-0">
                         <CheckCircle2 className="w-3.5 h-3.5 text-primary" />
                       </div>
-                      <span className="text-xs font-bold text-zinc-300 uppercase tracking-widest">{fact}</span>
+                      <span className="text-xs font-bold text-[#1A1A1A] uppercase tracking-widest">{fact}</span>
                     </div>
                   ))}
                 </div>
               </div>
-
               <div className="space-y-6">
-                <motion.div
-                  initial={{ clipPath: 'inset(100% 0 0 0)' }}
-                  whileInView={{ clipPath: 'inset(0% 0 0 0)' }}
-                  transition={{ duration: 1.2, ease: "easeInOut" }}
-                  className="relative aspect-[4/3] rounded-2xl overflow-hidden group"
-                >
+                <motion.div initial={{ clipPath: 'inset(100% 0 0 0)' }} whileInView={{ clipPath: 'inset(0% 0 0 0)' }} transition={{ duration: 1.2, ease: "easeInOut" }} className="relative aspect-[4/3] rounded-2xl overflow-hidden group">
                   <img src="/service-fabrication.png" alt="Balaji Workshop" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute inset-0 bg-primary/10 mix-blend-multiply" />
                   <div className="absolute bottom-6 left-6 right-6">
-                    <div className="text-xs font-bold tracking-[0.3em] text-zinc-400 uppercase">Navagam Facility · Surat, Gujarat</div>
+                    <div className="text-xs font-bold tracking-[0.3em] text-zinc-300 uppercase">Navagam Facility · Surat, Gujarat</div>
                   </div>
                 </motion.div>
-
-                {/* Key facts panel */}
                 <div className="grid grid-cols-2 gap-4">
                   {[
                     { label: "Nature", value: "Manufacturer & Service Provider" },
@@ -221,9 +161,9 @@ export default function About() {
                     { label: "Location", value: "Navagam, Surat, Gujarat" },
                     { label: "Established", value: "2001" },
                   ].map((item, i) => (
-                    <div key={i} className="p-5 bg-zinc-900/50 border border-white/5 rounded-xl">
-                      <div className="text-[10px] font-bold tracking-[0.3em] text-zinc-500 uppercase mb-2">{item.label}</div>
-                      <div className="text-sm font-bold text-white font-mono">{item.value}</div>
+                    <div key={i} className="p-5 bg-[#F7F5F1] border border-black/8 rounded-xl">
+                      <div className="text-[10px] font-bold tracking-[0.3em] text-slate-400 uppercase mb-2">{item.label}</div>
+                      <div className="text-sm font-bold text-[#1A1A1A] font-mono">{item.value}</div>
                     </div>
                   ))}
                 </div>
@@ -233,19 +173,14 @@ export default function About() {
         </section>
 
         {/* TIMELINE */}
-        <section className="py-32 bg-black border-y border-white/5 overflow-hidden">
+        <section className="py-32 bg-[#F7F5F1] border-y border-black/8 overflow-hidden">
           <div className="container mx-auto px-4">
             <div className="text-center mb-24">
               <span className="text-primary font-bold tracking-[0.3em] uppercase text-sm">Our Journey</span>
-              <h2 className="text-5xl md:text-7xl font-display font-black text-white uppercase tracking-tighter mt-4">
-                24 Years in the Making
-              </h2>
+              <h2 className="text-5xl md:text-7xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4">24 Years in the Making</h2>
             </div>
-
             <div className="relative">
-              {/* Vertical line */}
-              <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/5 hidden lg:block" />
-
+              <div className="absolute left-1/2 top-0 bottom-0 w-px bg-black/8 hidden lg:block" />
               <div className="space-y-0">
                 {timeline.map((item, i) => (
                   <motion.div
@@ -255,20 +190,16 @@ export default function About() {
                     transition={{ duration: 0.7, delay: 0.1 }}
                     className={`relative flex items-center gap-8 py-12 ${i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}
                   >
-                    {/* Content */}
                     <div className={`flex-1 ${i % 2 === 0 ? 'lg:text-right' : 'lg:text-left'}`}>
-                      <div className="p-8 bg-zinc-900/30 border border-white/5 rounded-2xl hover:border-primary/30 transition-colors group">
-                        <div className="text-6xl font-display font-black text-white/10 mb-3 group-hover:text-primary/20 transition-colors">{item.year}</div>
-                        <h4 className="text-xl font-display font-black text-white uppercase tracking-tight mb-3">{item.title}</h4>
-                        <p className="text-zinc-500 font-light leading-relaxed text-sm">{item.desc}</p>
+                      <div className="p-8 bg-[#EDEAE4] border border-black/8 rounded-2xl hover:border-primary/30 transition-colors group">
+                        <div className="text-6xl font-display font-black text-black/8 mb-3 group-hover:text-primary/20 transition-colors">{item.year}</div>
+                        <h4 className="text-xl font-display font-black text-[#1A1A1A] uppercase tracking-tight mb-3">{item.title}</h4>
+                        <p className="text-slate-500 font-light leading-relaxed text-sm">{item.desc}</p>
                       </div>
                     </div>
-
-                    {/* Center dot */}
-                    <div className="hidden lg:flex w-16 h-16 rounded-full bg-black border-2 border-primary/40 items-center justify-center shrink-0 z-10">
+                    <div className="hidden lg:flex w-16 h-16 rounded-full bg-[#F7F5F1] border-2 border-primary/40 items-center justify-center shrink-0 z-10">
                       <div className="w-4 h-4 rounded-full bg-primary" />
                     </div>
-
                     <div className="flex-1 hidden lg:block" />
                   </motion.div>
                 ))}
@@ -278,13 +209,11 @@ export default function About() {
         </section>
 
         {/* VALUES */}
-        <section className="py-32 bg-[#040404]">
+        <section className="py-32 bg-[#EDEAE4]">
           <div className="container mx-auto px-4">
             <div className="text-center mb-24">
               <span className="text-primary font-bold tracking-[0.3em] uppercase text-sm">Core Philosophy</span>
-              <h2 className="text-5xl md:text-7xl font-display font-black text-white uppercase tracking-tighter mt-4">
-                What Drives Us
-              </h2>
+              <h2 className="text-5xl md:text-7xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4">What Drives Us</h2>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {values.map((v, i) => (
@@ -293,13 +222,13 @@ export default function About() {
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.1 }}
-                  className="p-10 bg-zinc-900/30 border border-white/5 rounded-2xl group hover:bg-zinc-900/60 hover:border-primary/30 transition-all duration-500"
+                  className="p-10 bg-[#F7F5F1] border border-black/8 rounded-2xl group hover:bg-[#1C1C1C] hover:border-[#1C1C1C] transition-all duration-500"
                 >
                   <div className="w-14 h-14 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-8 group-hover:bg-primary group-hover:border-primary transition-all duration-500">
                     <v.icon className="w-6 h-6 text-primary group-hover:text-white transition-colors duration-500" />
                   </div>
-                  <h4 className="text-xl font-display font-black text-white uppercase tracking-tight mb-4">{v.title}</h4>
-                  <p className="text-zinc-500 font-light leading-relaxed text-sm">{v.desc}</p>
+                  <h4 className="text-xl font-display font-black text-[#1A1A1A] group-hover:text-white uppercase tracking-tight mb-4 transition-colors duration-500">{v.title}</h4>
+                  <p className="text-slate-500 group-hover:text-zinc-400 font-light leading-relaxed text-sm transition-colors duration-500">{v.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -307,31 +236,25 @@ export default function About() {
         </section>
 
         {/* MISSION & VISION */}
-        <section className="py-32 bg-gradient-to-br from-[#0a0a0a] to-[#1a0505] relative overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px]" />
+        <section className="py-32 bg-[#F7F5F1] relative overflow-hidden">
+          <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px]" />
           <div className="container mx-auto px-4 relative z-10">
             <div className="grid md:grid-cols-2 gap-8 mb-16">
               {[
-                {
-                  label: "Mission",
-                  text: "To deliver precision-engineered fabrication solutions that empower industrial growth — maintaining the highest standards of quality, safety, and operational excellence in every project we undertake."
-                },
-                {
-                  label: "Vision",
-                  text: "To be India's most trusted technologically advanced metal fabrication partner — known for resolving the most complex engineering challenges through innovation, speed, and uncompromising craftsmanship."
-                }
+                { label: "Mission", text: "To deliver precision-engineered fabrication solutions that empower industrial growth — maintaining the highest standards of quality, safety, and operational excellence in every project we undertake." },
+                { label: "Vision", text: "To be India's most trusted technologically advanced metal fabrication partner — known for resolving the most complex engineering challenges through innovation, speed, and uncompromising craftsmanship." }
               ].map((card, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.2 }}
-                  className="p-12 bg-zinc-900/30 border border-white/5 rounded-2xl group hover:border-primary/40 transition-colors relative overflow-hidden"
+                  className="p-12 bg-[#EDEAE4] border border-black/8 rounded-2xl group hover:border-primary/40 transition-colors relative overflow-hidden"
                 >
                   <div className="absolute top-0 left-0 w-1 h-0 bg-primary group-hover:h-full transition-all duration-700" />
-                  <div className="text-6xl font-display font-black text-white/5 mb-4">{String(i + 1).padStart(2, "0")}</div>
-                  <h3 className="text-4xl font-display font-black text-white uppercase tracking-tight mb-6">{card.label}</h3>
-                  <p className="text-zinc-400 text-lg leading-relaxed font-light">{card.text}</p>
+                  <div className="text-6xl font-display font-black text-black/5 mb-4">{String(i + 1).padStart(2, "0")}</div>
+                  <h3 className="text-4xl font-display font-black text-[#1A1A1A] uppercase tracking-tight mb-6">{card.label}</h3>
+                  <p className="text-slate-600 text-lg leading-relaxed font-light">{card.text}</p>
                 </motion.div>
               ))}
             </div>
@@ -339,49 +262,35 @@ export default function About() {
         </section>
 
         {/* CERTIFICATIONS */}
-        <section className="py-28 bg-black border-t border-white/5">
+        <section className="py-28 bg-[#EDEAE4] border-t border-black/8">
           <div className="container mx-auto px-4">
             <div className="text-center mb-20">
               <span className="text-primary font-bold tracking-[0.3em] uppercase text-sm">Credentials</span>
-              <h2 className="text-5xl md:text-6xl font-display font-black text-white uppercase tracking-tighter mt-4">
-                Trust & Compliance
-              </h2>
+              <h2 className="text-5xl md:text-6xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4">Trust & Compliance</h2>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {certifications.map((cert, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: i * 0.1 }}
-                  className="p-8 border border-white/10 rounded-2xl text-center group hover:border-primary/40 hover:bg-primary/5 transition-all duration-300"
-                >
+                <motion.div key={i} initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.1 }} className="p-8 border border-black/10 rounded-2xl text-center group hover:border-primary/40 hover:bg-primary/5 transition-all duration-300 bg-[#F7F5F1]">
                   <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6 group-hover:bg-primary/20 transition-colors">
                     <cert.icon className="w-6 h-6 text-primary" />
                   </div>
-                  <h4 className="text-xl font-display font-black text-white uppercase tracking-tight mb-2">{cert.title}</h4>
-                  <p className="text-xs font-bold text-zinc-500 uppercase tracking-widest">{cert.desc}</p>
+                  <h4 className="text-xl font-display font-black text-[#1A1A1A] uppercase tracking-tight mb-2">{cert.title}</h4>
+                  <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">{cert.desc}</p>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="py-40 bg-[#040404] relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
+        {/* CTA — dark for final punch */}
+        <section className="py-40 bg-[#1C1C1C] relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/8 to-transparent" />
           <div className="container mx-auto px-4 text-center relative z-10">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8 }}
-            >
+            <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }}>
               <h2 className="text-6xl md:text-8xl font-display font-black text-white uppercase tracking-tighter mb-8 leading-[0.9]">
                 Let's Build<br />Something Massive
               </h2>
-              <p className="text-xl text-zinc-400 font-light max-w-xl mx-auto mb-14">
-                Our engineering team is ready to take on your most complex fabrication challenges.
-              </p>
+              <p className="text-xl text-zinc-400 font-light max-w-xl mx-auto mb-14">Our engineering team is ready to take on your most complex fabrication challenges.</p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                 <Button size="lg" className="h-16 px-12 text-base font-bold uppercase tracking-widest bg-primary hover:bg-primary/90 text-white shadow-[0_0_40px_rgba(172,60,60,0.4)] border-none" asChild>
                   <Link href="/contact">Get a Quote</Link>
