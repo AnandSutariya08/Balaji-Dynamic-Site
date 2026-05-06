@@ -1,0 +1,56 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "4e10kgcm2jyaQz6-lhj2i"
+uri = "file://artifacts/balaji-engineering/public/hero-bg.png"
+type = "image"
+title = "Hero background"
+
+[[generated]]
+id = "ewTggrJrS-OPUbWMHMwqZ"
+uri = "file://artifacts/balaji-engineering/public/service-bending.png"
+type = "image"
+title = "Sheet metal bending"
+
+[[generated]]
+id = "iQAOLz40facwW-MsPVYC6"
+uri = "file://artifacts/balaji-engineering/public/service-cnc.png"
+type = "image"
+title = "CNC laser cutting"
+
+[[generated]]
+id = "GuWiA8wnAg8Mkyp0Pn-KZ"
+uri = "file://artifacts/balaji-engineering/public/service-plate-bending.png"
+type = "image"
+title = "Plate bending"
+
+[[generated]]
+id = "3LNp6kB7_LR7b9k5Gd0YN"
+uri = "file://artifacts/balaji-engineering/public/service-steel-cutting.png"
+type = "image"
+title = "Steel cutting"
+
+[[generated]]
+id = "ybedQSA-IRPn7gZ22TnjL"
+uri = "file://artifacts/balaji-engineering/public/service-rolling.png"
+type = "image"
+title = "Rolling"
+
+[[generated]]
+id = "hmHKE_Z7KSgSfrWDNgI1L"
+uri = "file://artifacts/balaji-engineering/public/service-fabrication.png"
+type = "image"
+title = "Fabrication"
+
+[[generated]]
+id = "QQ0o3tD9tgoTv4mIR6xbh"
+uri = "file://artifacts/balaji-engineering/public/service-base-plates.png"
+type = "image"
+title = "Base plates"
+
+[[generated]]
+id = "RFVCBvp0j0MOEPx7yOvJb"
+uri = "file://artifacts/balaji-engineering/public/service-profile.png"
+type = "image"
+title = "Profile cutting"
