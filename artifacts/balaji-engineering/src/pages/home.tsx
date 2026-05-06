@@ -4,7 +4,7 @@ import { Counter } from "@/components/ui/counter";
 import { Link } from "wouter";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useEffect } from "react";
-import { ArrowRight, ChevronRight, Play, CheckCircle2, Factory, Zap, ShieldCheck, Target, Award, Users, TrendingUp } from "lucide-react";
+import { ArrowRight, ChevronRight, ChevronLeft, Play, CheckCircle2, Factory, Zap, ShieldCheck, Target, Award, Users, TrendingUp } from "lucide-react";
 import { HeroScene } from "@/components/3d/HeroScene";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -14,6 +14,13 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const aboutTextRef = useRef<HTMLDivElement>(null);
+  const servicesScrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollServices = (dir: 'left' | 'right') => {
+    if (servicesScrollRef.current) {
+      servicesScrollRef.current.scrollBy({ left: dir === 'right' ? 440 : -440, behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
     if (aboutTextRef.current) {
@@ -246,7 +253,7 @@ export default function Home() {
 
         {/* Section 5: Services Showcase */}
         <section className="py-32 bg-black border-y border-white/5">
-          <div className="container mx-auto px-4 mb-20">
+          <div className="container mx-auto px-4 mb-12">
             <div className="flex flex-col md:flex-row justify-between items-end gap-8">
               <div>
                 <span className="text-primary font-bold tracking-[0.3em] uppercase">Capabilities</span>
@@ -258,13 +265,34 @@ export default function Home() {
                 <Link href="/services">View All Capabilities <ArrowRight className="ml-2 w-4 h-4" /></Link>
               </Button>
             </div>
+
+            {/* Chevron buttons — top-left of card area */}
+            <div className="flex items-center gap-3 mt-10">
+              <button
+                onClick={() => scrollServices('left')}
+                data-testid="button-services-prev"
+                className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:border-primary hover:text-primary hover:bg-primary/10 transition-all duration-200"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                onClick={() => scrollServices('right')}
+                data-testid="button-services-next"
+                className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:border-primary hover:text-primary hover:bg-primary/10 transition-all duration-200"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
           </div>
 
-          <div className="flex gap-8 overflow-x-auto pb-16 px-[5%] snap-x no-scrollbar">
+          <div
+            ref={servicesScrollRef}
+            className="flex gap-8 overflow-x-auto pb-4 px-[5%] snap-x no-scrollbar"
+          >
             {services.map((service, i) => (
-              <div 
-                key={i} 
-                className="min-w-[400px] h-[500px] relative rounded-2xl overflow-hidden snap-center group border border-white/5"
+              <div
+                key={i}
+                className="min-w-[400px] h-[500px] relative rounded-2xl overflow-hidden snap-center group border border-white/5 flex-shrink-0"
               >
                 <img src={service.image} alt={service.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
