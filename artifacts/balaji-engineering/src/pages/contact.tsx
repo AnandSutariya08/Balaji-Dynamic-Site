@@ -44,7 +44,7 @@ export default function Contact() {
     <PageTransition>
       <div className="bg-[#F7F5F1]">
 
-        {/* HERO — dark image */}
+        {/* HERO */}
         <section className="relative min-h-[75vh] flex items-center overflow-hidden">
           <div className="absolute inset-0">
             <div className="w-full h-full bg-cover bg-center opacity-25" style={{ backgroundImage: "url('/service-cnc.png')" }} />
@@ -52,33 +52,33 @@ export default function Contact() {
             <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-transparent to-transparent" />
             <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "linear-gradient(rgba(0,0,0,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.5) 1px, transparent 1px)", backgroundSize: "70px 70px" }} />
           </div>
-          <div className="container relative z-10 mx-auto px-4 pt-32 pb-24">
+          <div className="container relative z-10 mx-auto px-4 pt-28 pb-16 md:pt-32 md:pb-24">
             <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }} className="max-w-4xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-primary mb-10">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-primary mb-8 md:mb-10">
                 <Zap className="w-3 h-3" />
-                <span className="text-[10px] font-bold tracking-[0.3em] uppercase">Response within 24 Hours</span>
+                <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase">Response within 24 Hours</span>
               </div>
-              <h1 className="text-7xl md:text-[9rem] font-display font-black text-white uppercase tracking-tighter leading-[0.85] mb-8">
+              <h1 className="text-4xl sm:text-6xl md:text-[9rem] font-display font-black text-white uppercase tracking-tighter leading-[0.85] mb-6 md:mb-8">
                 Let's<br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-[#AC3C3C] to-[#e05555]">Talk Steel.</span>
               </h1>
-              <p className="text-xl text-zinc-300 font-light leading-relaxed max-w-2xl">Tell us about your project — dimensions, material, quantity, timeline. Our engineering team will come back to you with a precise quote and a production plan.</p>
+              <p className="text-base sm:text-xl text-zinc-300 font-light leading-relaxed max-w-2xl">Tell us about your project — dimensions, material, quantity, timeline. Our engineering team will come back to you with a precise quote and a production plan.</p>
             </motion.div>
           </div>
         </section>
 
         {/* CONTACT CARDS ROW */}
-        <section className="py-16 bg-[#EDEAE4] border-y border-black/8">
+        <section className="py-10 md:py-16 bg-[#EDEAE4] border-y border-black/8">
           <div className="container mx-auto px-4">
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-black/8">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-black/8">
               {contactInfo.map((info, i) => (
-                <motion.div key={i} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} className="bg-[#EDEAE4] p-10 group hover:bg-[#F7F5F1] transition-colors">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:border-primary transition-all duration-500">
-                    <info.icon className="w-5 h-5 text-primary group-hover:text-white transition-colors duration-500" />
+                <motion.div key={i} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} className="bg-[#EDEAE4] p-6 md:p-10 group hover:bg-[#F7F5F1] transition-colors">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-4 md:mb-6 group-hover:bg-primary group-hover:border-primary transition-all duration-500">
+                    <info.icon className="w-4 h-4 md:w-5 md:h-5 text-primary group-hover:text-white transition-colors duration-500" />
                   </div>
-                  <h4 className="text-xs font-bold tracking-[0.3em] text-slate-500 uppercase mb-4">{info.title}</h4>
-                  <div className="space-y-1 mb-5">
+                  <h4 className="text-[10px] sm:text-xs font-bold tracking-[0.3em] text-slate-500 uppercase mb-3 md:mb-4">{info.title}</h4>
+                  <div className="space-y-1 mb-4 md:mb-5">
                     {info.lines.map((line, j) => (
-                      <p key={j} className="text-[#1A1A1A] font-bold text-sm">{line}</p>
+                      <p key={j} className="text-[#1A1A1A] font-bold text-xs sm:text-sm">{line}</p>
                     ))}
                   </div>
                   {info.action && (
@@ -93,16 +93,16 @@ export default function Contact() {
         </section>
 
         {/* MAIN CONTACT SECTION */}
-        <section className="py-32 bg-[#F7F5F1]">
+        <section className="py-16 md:py-32 bg-[#F7F5F1]">
           <div className="container mx-auto px-4">
-            <div className="grid lg:grid-cols-5 gap-16 xl:gap-24">
+            <div className="grid lg:grid-cols-5 gap-10 lg:gap-16 xl:gap-24">
 
               {/* LEFT */}
-              <div className="lg:col-span-2 space-y-12">
+              <div className="lg:col-span-2 space-y-8 md:space-y-12">
                 <div>
                   <span className="text-primary font-bold tracking-[0.3em] uppercase text-sm">Our Promise</span>
-                  <h2 className="text-4xl md:text-5xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4 mb-8 leading-[0.9]">What to Expect</h2>
-                  <div className="space-y-6">
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4 mb-6 md:mb-8 leading-[0.9]">What to Expect</h2>
+                  <div className="space-y-5 md:space-y-6">
                     {[
                       { title: "4–8 Hour Quote", desc: "Send files now — get a detailed quote today." },
                       { title: "Free DFM Review", desc: "We check your design for manufacturability at no cost." },
@@ -123,8 +123,8 @@ export default function Contact() {
                 </div>
 
                 {/* Legal Block */}
-                <div className="p-8 bg-[#EDEAE4] border border-black/8 rounded-2xl">
-                  <h4 className="text-xs font-bold tracking-[0.3em] text-slate-500 uppercase mb-6">Legal Information</h4>
+                <div className="p-6 md:p-8 bg-[#EDEAE4] border border-black/8 rounded-2xl">
+                  <h4 className="text-xs font-bold tracking-[0.3em] text-slate-500 uppercase mb-5 md:mb-6">Legal Information</h4>
                   <div className="space-y-3">
                     <div>
                       <div className="text-[10px] font-bold tracking-widest text-slate-400 uppercase mb-1">GST Registration</div>
@@ -142,22 +142,22 @@ export default function Contact() {
                 </div>
 
                 {/* Direct CTA */}
-                <div className="p-8 bg-primary/8 border border-primary/20 rounded-2xl">
-                  <h4 className="text-lg font-display font-black text-[#1A1A1A] uppercase tracking-tight mb-2">Prefer to call directly?</h4>
-                  <p className="text-slate-500 text-sm mb-6 font-light">Speak to our engineering team right now.</p>
-                  <a href="tel:+917942957640" className="flex items-center gap-3 text-2xl font-display font-black text-primary hover:text-[#1A1A1A] transition-colors">
-                    <Phone className="w-6 h-6" />+91-7942957640
+                <div className="p-6 md:p-8 bg-primary/8 border border-primary/20 rounded-2xl">
+                  <h4 className="text-base md:text-lg font-display font-black text-[#1A1A1A] uppercase tracking-tight mb-2">Prefer to call directly?</h4>
+                  <p className="text-slate-500 text-sm mb-5 md:mb-6 font-light">Speak to our engineering team right now.</p>
+                  <a href="tel:+917942957640" className="flex items-center gap-3 text-xl md:text-2xl font-display font-black text-primary hover:text-[#1A1A1A] transition-colors">
+                    <Phone className="w-5 h-5 md:w-6 md:h-6" />+91-7942957640
                   </a>
                 </div>
               </div>
 
               {/* RIGHT — Form */}
               <div className="lg:col-span-3">
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="bg-[#EDEAE4] border border-black/8 rounded-2xl p-10 xl:p-12">
-                  <h3 className="text-3xl font-display font-black text-[#1A1A1A] uppercase tracking-tight mb-2">Submit Your Inquiry</h3>
-                  <p className="text-slate-500 font-light text-sm mb-10">All fields marked * are required. We'll respond within 24 hours.</p>
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="bg-[#EDEAE4] border border-black/8 rounded-2xl p-6 sm:p-10 xl:p-12">
+                  <h3 className="text-2xl md:text-3xl font-display font-black text-[#1A1A1A] uppercase tracking-tight mb-2">Submit Your Inquiry</h3>
+                  <p className="text-slate-500 font-light text-sm mb-8 md:mb-10">All fields marked * are required. We'll respond within 24 hours.</p>
+                  <form onSubmit={handleSubmit} className="space-y-5 md:space-y-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
                       <div className="space-y-2">
                         <Label htmlFor="name" className="text-xs font-bold tracking-widest text-slate-500 uppercase">Full Name / Company *</Label>
                         <Input id="name" required placeholder="Your Name or Company" className="bg-[#F7F5F1] border-black/10 text-[#1A1A1A] placeholder:text-slate-400 h-12 focus:border-primary" />
@@ -171,7 +171,7 @@ export default function Contact() {
                       <Label htmlFor="email" className="text-xs font-bold tracking-widest text-slate-500 uppercase">Email Address *</Label>
                       <Input id="email" required type="email" placeholder="email@company.com" className="bg-[#F7F5F1] border-black/10 text-[#1A1A1A] placeholder:text-slate-400 h-12 focus:border-primary" />
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
                       <div className="space-y-2">
                         <Label htmlFor="service" className="text-xs font-bold tracking-widest text-slate-500 uppercase">Service Required *</Label>
                         <Select defaultValue={defaultService}>
@@ -202,9 +202,9 @@ export default function Contact() {
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="message" className="text-xs font-bold tracking-widest text-slate-500 uppercase">Project Details *</Label>
-                      <Textarea id="message" required placeholder="Describe your requirements — dimensions, tolerances, finish, timeline, and any special considerations..." className="min-h-[140px] bg-[#F7F5F1] border-black/10 text-[#1A1A1A] placeholder:text-slate-400 focus:border-primary resize-none" />
+                      <Textarea id="message" required placeholder="Describe your requirements — dimensions, tolerances, finish, timeline, and any special considerations..." className="min-h-[120px] md:min-h-[140px] bg-[#F7F5F1] border-black/10 text-[#1A1A1A] placeholder:text-slate-400 focus:border-primary resize-none" />
                     </div>
-                    <Button type="submit" size="lg" className="w-full h-16 font-bold tracking-widest uppercase text-base bg-primary hover:bg-primary/90 text-white shadow-[0_0_30px_rgba(172,60,60,0.3)] border-none" disabled={isSubmitting}>
+                    <Button type="submit" size="lg" className="w-full h-14 md:h-16 font-bold tracking-widest uppercase text-sm md:text-base bg-primary hover:bg-primary/90 text-white shadow-[0_0_30px_rgba(172,60,60,0.3)] border-none" disabled={isSubmitting}>
                       {isSubmitting ? (
                         <span className="flex items-center gap-3"><div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />Sending Inquiry...</span>
                       ) : (
@@ -220,7 +220,7 @@ export default function Contact() {
 
         {/* MAP SECTION */}
         <section className="relative overflow-hidden border-y border-black/8">
-          <div className="h-[500px] w-full bg-[#EDEAE4] relative">
+          <div className="h-[350px] sm:h-[500px] w-full bg-[#EDEAE4] relative">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3720.999999!2d72.85!3d21.18!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sNavagam%2C+Surat%2C+Gujarat!5e0!3m2!1sen!2sin!4v1000000000000"
               width="100%" height="100%"
@@ -228,13 +228,13 @@ export default function Contact() {
               allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"
               title="Balaji Engineering Works Location"
             />
-            <div className="absolute top-8 left-8 bg-[#F7F5F1]/95 border border-black/10 rounded-2xl p-6 backdrop-blur-sm shadow-lg">
+            <div className="absolute top-4 left-4 md:top-8 md:left-8 bg-[#F7F5F1]/95 border border-black/10 rounded-2xl p-4 md:p-6 backdrop-blur-sm shadow-lg">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-                  <MapPin className="w-4 h-4 text-white" />
+                <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-primary flex items-center justify-center">
+                  <MapPin className="w-3.5 h-3.5 md:w-4 md:h-4 text-white" />
                 </div>
                 <div>
-                  <div className="text-xs font-bold tracking-widest text-slate-500 uppercase">Location</div>
+                  <div className="text-[10px] font-bold tracking-widest text-slate-500 uppercase">Location</div>
                   <div className="text-[#1A1A1A] font-bold text-sm">Navagam, Surat</div>
                 </div>
               </div>
@@ -246,25 +246,25 @@ export default function Contact() {
         </section>
 
         {/* FAQ */}
-        <section className="py-32 bg-[#EDEAE4]">
+        <section className="py-16 md:py-32 bg-[#EDEAE4]">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-20">
+              <div className="text-center mb-14 md:mb-20">
                 <span className="text-primary font-bold tracking-[0.3em] uppercase text-sm">Common Questions</span>
-                <h2 className="text-5xl md:text-6xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4">FAQ</h2>
+                <h2 className="text-4xl sm:text-5xl md:text-6xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4">FAQ</h2>
               </div>
               <div className="space-y-3">
                 {faqs.map((faq, i) => (
                   <div key={i} className="border border-black/8 bg-[#F7F5F1] overflow-hidden rounded-xl">
-                    <button onClick={() => setExpandedFaq(expandedFaq === i ? null : i)} className="w-full flex items-center justify-between p-8 text-left group">
-                      <span className="text-lg font-display font-black text-[#1A1A1A] uppercase tracking-tight group-hover:text-primary transition-colors">{faq.q}</span>
-                      <div className={`w-8 h-8 rounded-full border border-black/15 flex items-center justify-center shrink-0 ml-4 transition-all ${expandedFaq === i ? 'bg-primary border-primary rotate-45' : 'group-hover:border-primary'}`}>
-                        <span className={`text-lg leading-none ${expandedFaq === i ? 'text-white' : 'text-[#1A1A1A]'}`}>+</span>
+                    <button onClick={() => setExpandedFaq(expandedFaq === i ? null : i)} className="w-full flex items-center justify-between p-5 md:p-8 text-left group">
+                      <span className="text-base md:text-lg font-display font-black text-[#1A1A1A] uppercase tracking-tight group-hover:text-primary transition-colors pr-4">{faq.q}</span>
+                      <div className={`w-7 h-7 md:w-8 md:h-8 rounded-full border border-black/15 flex items-center justify-center shrink-0 transition-all ${expandedFaq === i ? 'bg-primary border-primary rotate-45' : 'group-hover:border-primary'}`}>
+                        <span className={`text-base md:text-lg leading-none ${expandedFaq === i ? 'text-white' : 'text-[#1A1A1A]'}`}>+</span>
                       </div>
                     </button>
                     {expandedFaq === i && (
-                      <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3 }} className="px-8 pb-8">
-                        <p className="text-slate-600 font-light leading-relaxed">{faq.a}</p>
+                      <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3 }} className="px-5 pb-5 md:px-8 md:pb-8">
+                        <p className="text-slate-600 font-light leading-relaxed text-sm md:text-base">{faq.a}</p>
                       </motion.div>
                     )}
                   </div>
@@ -274,14 +274,14 @@ export default function Contact() {
           </div>
         </section>
 
-        {/* BOTTOM CTA — dark */}
-        <section className="py-32 bg-[#1C1C1C]">
+        {/* BOTTOM CTA */}
+        <section className="py-16 md:py-32 bg-[#1C1C1C]">
           <div className="container mx-auto px-4 text-center">
             <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7 }}>
-              <h2 className="text-5xl md:text-7xl font-display font-black text-white uppercase tracking-tighter mb-6 leading-[0.9]">Still Have<br />Questions?</h2>
-              <p className="text-zinc-400 font-light text-lg max-w-lg mx-auto mb-12">Our team is available 6 days a week. Pick up the phone — we love talking shop.</p>
-              <a href="tel:+917942957640" className="inline-flex items-center gap-4 text-4xl md:text-5xl font-display font-black text-white hover:text-primary transition-colors">
-                <Phone className="w-10 h-10 text-primary" />+91-7942957640
+              <h2 className="text-4xl sm:text-5xl md:text-7xl font-display font-black text-white uppercase tracking-tighter mb-5 md:mb-6 leading-[0.9]">Still Have<br />Questions?</h2>
+              <p className="text-zinc-400 font-light text-base md:text-lg max-w-lg mx-auto mb-10 md:mb-12">Our team is available 6 days a week. Pick up the phone — we love talking shop.</p>
+              <a href="tel:+917942957640" className="inline-flex items-center gap-3 md:gap-4 text-3xl sm:text-4xl md:text-5xl font-display font-black text-white hover:text-primary transition-colors">
+                <Phone className="w-8 h-8 md:w-10 md:h-10 text-primary" />+91-7942957640
               </a>
             </motion.div>
           </div>

@@ -46,17 +46,17 @@ export default function Blog() {
                 <BookOpen className="w-3 h-3" />
                 <span className="text-[10px] font-bold tracking-[0.3em] uppercase">{blogPosts.length} Articles · Engineering Intelligence</span>
               </div>
-              <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12">
+              <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 md:gap-12">
                 <div>
-                  <h1 className="text-7xl md:text-[9rem] font-display font-black text-white uppercase tracking-tighter leading-[0.85]">
+                  <h1 className="text-4xl sm:text-6xl md:text-[9rem] font-display font-black text-white uppercase tracking-tighter leading-[0.85]">
                     Insights &<br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-[#AC3C3C] to-[#e05555]">Knowledge</span>
                   </h1>
                 </div>
                 <div className="max-w-md">
-                  <p className="text-xl text-zinc-400 font-light leading-relaxed mb-8">Expert perspectives on metal fabrication, CNC precision, material science, and the future of industrial engineering.</p>
-                  <div className="flex items-center gap-8 text-sm">
+                  <p className="text-base md:text-xl text-zinc-400 font-light leading-relaxed mb-6 md:mb-8">Expert perspectives on metal fabrication, CNC precision, material science, and the future of industrial engineering.</p>
+                  <div className="flex items-center gap-6 md:gap-8 text-sm">
                     <div>
-                      <div className="text-3xl font-display font-black text-white">{blogPosts.length}</div>
+                      <div className="text-2xl md:text-3xl font-display font-black text-white">{blogPosts.length}</div>
                       <div className="text-xs font-bold tracking-widest text-zinc-500 uppercase">Articles</div>
                     </div>
                     <div className="w-px h-10 bg-white/10" />
@@ -78,9 +78,9 @@ export default function Blog() {
 
         {/* FEATURED POST */}
         {filter === "All" && (
-          <section className="py-20 border-b border-black/8 bg-[#F7F5F1]">
+          <section className="py-12 md:py-20 border-b border-black/8 bg-[#F7F5F1]">
             <div className="container mx-auto px-4">
-              <div className="flex items-center gap-4 mb-12">
+              <div className="flex items-center gap-4 mb-8 md:mb-12">
                 <div className="h-px flex-1 bg-black/8" />
                 <span className="text-xs font-bold tracking-[0.3em] text-primary uppercase flex items-center gap-2"><TrendingUp className="w-3 h-3" /> Featured Article</span>
                 <div className="h-px flex-1 bg-black/8" />
@@ -97,12 +97,12 @@ export default function Blog() {
                         </span>
                       </div>
                     </div>
-                    <div className="p-10 xl:p-16 flex flex-col justify-center">
+                    <div className="p-6 md:p-10 xl:p-16 flex flex-col justify-center">
                       <div className="flex items-center gap-6 text-xs text-slate-500 mb-6">
                         <span className="flex items-center gap-2"><Calendar className="w-3.5 h-3.5" /> {featuredPost.date}</span>
                         <span className="flex items-center gap-2"><Clock className="w-3.5 h-3.5" /> {featuredPost.readTime}</span>
                       </div>
-                      <h2 className="text-3xl xl:text-4xl font-display font-black text-[#1A1A1A] uppercase tracking-tight mb-6 leading-[0.95] group-hover:text-primary transition-colors">{featuredPost.title}</h2>
+                      <h2 className="text-2xl md:text-3xl xl:text-4xl font-display font-black text-[#1A1A1A] uppercase tracking-tight mb-4 md:mb-6 leading-[0.95] group-hover:text-primary transition-colors">{featuredPost.title}</h2>
                       <p className="text-slate-600 text-base font-light leading-relaxed mb-10 line-clamp-3">{featuredPost.excerpt}</p>
                       <div className="inline-flex items-center gap-2 text-primary font-bold uppercase tracking-widest text-sm group-hover:gap-4 transition-all">
                         Read Full Article <ArrowRight className="w-4 h-4" />
@@ -220,33 +220,33 @@ export default function Blog() {
         </section>
 
         {/* KNOWLEDGE CTA */}
-        <section className="py-32 bg-[#EDEAE4] border-t border-black/8 relative overflow-hidden">
+        <section className="py-16 md:py-32 bg-[#EDEAE4] border-t border-black/8 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/3 to-transparent" />
           <div className="container mx-auto px-4 relative z-10">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
               <div>
                 <span className="text-primary font-bold tracking-[0.3em] uppercase text-sm">Have a Question?</span>
-                <h2 className="text-5xl md:text-7xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4 mb-8 leading-[0.9]">Talk to Our<br />Engineers</h2>
-                <p className="text-slate-600 font-light text-lg leading-relaxed mb-10">Can't find the answer in our articles? Our experienced team is ready to discuss your specific fabrication challenge directly.</p>
-                <div className="flex flex-wrap gap-4">
-                  <Button size="lg" className="h-14 px-10 font-bold uppercase tracking-widest bg-primary hover:bg-primary/90 text-white shadow-[0_0_25px_rgba(172,60,60,0.3)] border-none" asChild>
+                <h2 className="text-4xl sm:text-5xl md:text-7xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4 mb-6 md:mb-8 leading-[0.9]">Talk to Our<br />Engineers</h2>
+                <p className="text-slate-600 font-light text-base md:text-lg leading-relaxed mb-8 md:mb-10">Can't find the answer in our articles? Our experienced team is ready to discuss your specific fabrication challenge directly.</p>
+                <div className="flex flex-col sm:flex-row flex-wrap gap-4">
+                  <Button size="lg" className="h-12 md:h-14 px-8 md:px-10 font-bold uppercase tracking-widest bg-primary hover:bg-primary/90 text-white shadow-[0_0_25px_rgba(172,60,60,0.3)] border-none" asChild>
                     <Link href="/contact">Ask Our Team</Link>
                   </Button>
-                  <Button size="lg" variant="outline" className="h-14 px-10 border-black/20 text-[#1A1A1A] hover:bg-black/5 font-bold uppercase tracking-widest" asChild>
+                  <Button size="lg" variant="outline" className="h-12 md:h-14 px-8 md:px-10 border-black/20 text-[#1A1A1A] hover:bg-black/5 font-bold uppercase tracking-widest" asChild>
                     <Link href="/services">View Services</Link>
                   </Button>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-5">
+              <div className="grid grid-cols-2 gap-4 md:gap-5">
                 {[
                   { icon: BookOpen, title: "Guides", value: `${blogPosts.filter(p => p.category === 'Guide').length} Articles` },
                   { icon: Zap, title: "Technical", value: `${blogPosts.filter(p => p.category === 'Technical').length} Articles` },
                   { icon: TrendingUp, title: "Industry", value: `${blogPosts.filter(p => p.category === 'Industry').length} Articles` },
                   { icon: Clock, title: "Avg Read Time", value: "6 Min" },
                 ].map((card, i) => (
-                  <div key={i} className="p-8 bg-[#F7F5F1] border border-black/8 rounded-2xl text-center group hover:border-primary/30 transition-colors">
-                    <card.icon className="w-7 h-7 text-primary mx-auto mb-4" />
-                    <div className="text-2xl font-display font-black text-[#1A1A1A] mb-1">{card.value}</div>
+                  <div key={i} className="p-6 md:p-8 bg-[#F7F5F1] border border-black/8 rounded-2xl text-center group hover:border-primary/30 transition-colors">
+                    <card.icon className="w-6 h-6 md:w-7 md:h-7 text-primary mx-auto mb-3 md:mb-4" />
+                    <div className="text-xl md:text-2xl font-display font-black text-[#1A1A1A] mb-1">{card.value}</div>
                     <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{card.title}</div>
                   </div>
                 ))}
