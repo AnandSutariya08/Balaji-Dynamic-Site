@@ -1,107 +1,158 @@
 import { Link } from "wouter";
-import { Phone, Mail, MapPin, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Phone, Mail, MapPin, ArrowRight, ArrowUpRight } from "lucide-react";
+
+const quickLinks = [
+  { name: "Home", path: "/" },
+  { name: "About Us", path: "/about" },
+  { name: "Services", path: "/services" },
+  { name: "Blog", path: "/blog" },
+  { name: "Contact", path: "/contact" },
+];
+
+const capabilities = [
+  "Sheet Metal Bending",
+  "CNC Laser Cutting",
+  "Plate Rolling",
+  "Heavy Fabrication",
+  "Profile Cutting",
+  "Steel Punching",
+];
 
 export function Footer() {
   return (
-    <footer className="bg-sidebar border-t border-sidebar-border text-sidebar-foreground pt-16 pb-8">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-          {/* Brand Info */}
-          <div className="space-y-4">
-            <Link href="/" className="flex items-center gap-3 inline-block">
-              <img
-                src="/logo.jpg"
-                alt="Balaji Engineering Works Logo"
-                className="h-10 w-auto object-contain rounded bg-white p-1"
-              />
-              <div className="flex flex-col">
-                <span className="font-display font-bold text-xl leading-none tracking-wide text-white">
-                  BALAJI ENGINEERING
-                </span>
-                <span className="text-[0.65rem] font-medium tracking-widest uppercase text-primary">
-                  Precision Works
-                </span>
+    <footer className="bg-[#0D0D0D] text-white relative overflow-hidden">
+      {/* Background grid texture */}
+      <div
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{ backgroundImage: "linear-gradient(rgba(172,60,60,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(172,60,60,0.8) 1px, transparent 1px)", backgroundSize: "60px 60px" }}
+      />
+
+      {/* Top red accent line */}
+      <div className="h-[3px] bg-gradient-to-r from-transparent via-primary to-transparent" />
+
+      {/* CTA Band */}
+      <div className="border-b border-white/6 relative">
+        <div className="container mx-auto px-4 md:px-8 py-12 md:py-16">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+            <div>
+              <p className="text-[10px] font-bold tracking-[0.4em] text-primary uppercase mb-3">Ready to Build?</p>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-black uppercase tracking-tighter leading-[0.9] text-white">
+                Let's forge your<br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#e05555]">next project</span>
+              </h2>
+            </div>
+            <Link href="/contact">
+              <div className="group flex items-center gap-3 px-7 py-4 rounded-xl border border-primary/40 bg-primary/10 hover:bg-primary hover:border-primary transition-all duration-300 shadow-[0_0_30px_rgba(172,60,60,0.15)] hover:shadow-[0_0_40px_rgba(172,60,60,0.4)] shrink-0">
+                <span className="font-black uppercase tracking-widest text-xs text-white">Request a Quote</span>
+                <ArrowUpRight className="w-4 h-4 text-primary group-hover:text-white transition-colors" />
               </div>
             </Link>
-            <p className="text-sm text-sidebar-foreground/70 mt-4 leading-relaxed">
-              A precision engineering powerhouse forged over two decades. Specializing in shearing, CNC cutting, bending, punching, rolling, and fabrication.
+          </div>
+        </div>
+      </div>
+
+      {/* Main Footer Grid */}
+      <div className="container mx-auto px-4 md:px-8 py-14 md:py-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12">
+
+          {/* Brand Column */}
+          <div className="sm:col-span-2 lg:col-span-1">
+            <Link href="/" className="flex items-center gap-3 mb-6 w-fit">
+              <img src="/logo.jpg" alt="Balaji Engineering Works" className="h-10 w-auto object-contain rounded bg-white/5 p-1 border border-white/8" />
+              <div>
+                <p className="font-display font-black text-sm tracking-wide text-white leading-none">BALAJI ENGINEERING</p>
+                <p className="text-[9px] font-bold tracking-[0.25em] uppercase text-primary mt-1">Precision Works</p>
+              </div>
+            </Link>
+            <p className="text-sm text-white/40 leading-relaxed mb-6 max-w-xs">
+              Two decades of precision metal fabrication from the heart of Gujarat. CNC cutting, bending, rolling, punching — all under one roof.
             </p>
-            <div className="text-sm text-sidebar-foreground/50 pt-2">
-              <p>GST: 24BCUPS8314Q1ZK</p>
-              <p>Est. 2001</p>
+            <div className="flex flex-col gap-1.5 text-xs text-white/30 font-mono">
+              <span>GST: 24BCUPS8314Q1ZK</span>
+              <span>Est. 2001 · Navagam, Surat</span>
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-display font-bold text-lg mb-4 text-white uppercase tracking-wider">Quick Links</h3>
+            <h4 className="text-[10px] font-black tracking-[0.35em] uppercase text-white/50 mb-6 flex items-center gap-2">
+              <span className="w-4 h-[2px] bg-primary rounded-full" />
+              Navigation
+            </h4>
             <ul className="space-y-3">
-              <li>
-                <Link href="/" className="text-sidebar-foreground/70 hover:text-primary transition-colors text-sm flex items-center gap-2">
-                  <ArrowRight size={14} className="text-primary" /> Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="text-sidebar-foreground/70 hover:text-primary transition-colors text-sm flex items-center gap-2">
-                  <ArrowRight size={14} className="text-primary" /> About Us
-                </Link>
-              </li>
-              <li>
-                <Link href="/services" className="text-sidebar-foreground/70 hover:text-primary transition-colors text-sm flex items-center gap-2">
-                  <ArrowRight size={14} className="text-primary" /> Services
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-sidebar-foreground/70 hover:text-primary transition-colors text-sm flex items-center gap-2">
-                  <ArrowRight size={14} className="text-primary" /> Contact
-                </Link>
-              </li>
+              {quickLinks.map((link) => (
+                <li key={link.path}>
+                  <Link
+                    href={link.path}
+                    className="group flex items-center gap-2.5 text-sm text-white/50 hover:text-white transition-colors duration-200"
+                  >
+                    <ArrowRight className="w-3 h-3 text-primary/60 group-hover:text-primary group-hover:translate-x-0.5 transition-all duration-200" />
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Capabilities */}
           <div>
-            <h3 className="font-display font-bold text-lg mb-4 text-white uppercase tracking-wider">Capabilities</h3>
+            <h4 className="text-[10px] font-black tracking-[0.35em] uppercase text-white/50 mb-6 flex items-center gap-2">
+              <span className="w-4 h-[2px] bg-primary rounded-full" />
+              Capabilities
+            </h4>
             <ul className="space-y-3">
-              <li className="text-sidebar-foreground/70 text-sm">Sheet Metal Bending</li>
-              <li className="text-sidebar-foreground/70 text-sm">CNC Laser Cutting</li>
-              <li className="text-sidebar-foreground/70 text-sm">Plate Rolling & Bending</li>
-              <li className="text-sidebar-foreground/70 text-sm">Heavy Steel Fabrication</li>
-              <li className="text-sidebar-foreground/70 text-sm">Profile Cutting</li>
+              {capabilities.map((cap) => (
+                <li key={cap} className="flex items-center gap-2.5 text-sm text-white/50">
+                  <span className="w-1 h-1 rounded-full bg-primary/50 shrink-0" />
+                  {cap}
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Contact */}
           <div>
-            <h3 className="font-display font-bold text-lg mb-4 text-white uppercase tracking-wider">Contact Us</h3>
+            <h4 className="text-[10px] font-black tracking-[0.35em] uppercase text-white/50 mb-6 flex items-center gap-2">
+              <span className="w-4 h-[2px] bg-primary rounded-full" />
+              Contact
+            </h4>
             <ul className="space-y-4">
-              <li className="flex items-start gap-3 text-sm text-sidebar-foreground/70">
-                <MapPin size={18} className="text-primary shrink-0 mt-0.5" />
-                <span>Navagam, Surat,<br />Gujarat, India</span>
+              <li className="flex items-start gap-3">
+                <div className="w-7 h-7 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0 mt-0.5">
+                  <MapPin className="w-3.5 h-3.5 text-primary" />
+                </div>
+                <span className="text-sm text-white/50 leading-relaxed">Navagam, Surat,<br />Gujarat – 395009, India</span>
               </li>
-              <li className="flex items-center gap-3 text-sm text-sidebar-foreground/70">
-                <Phone size={18} className="text-primary shrink-0" />
-                <a href="tel:+917942957640" className="hover:text-primary transition-colors">+91-7942957640</a>
+              <li className="flex items-center gap-3">
+                <div className="w-7 h-7 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                  <Phone className="w-3.5 h-3.5 text-primary" />
+                </div>
+                <a href="tel:+917942957640" className="text-sm text-white/50 hover:text-white transition-colors">+91-7942957640</a>
               </li>
-              <li className="flex items-center gap-3 text-sm text-sidebar-foreground/70">
-                <Mail size={18} className="text-primary shrink-0" />
-                <a href="mailto:info@balajiengineering.in" className="hover:text-primary transition-colors">info@balajiengineering.in</a>
+              <li className="flex items-center gap-3">
+                <div className="w-7 h-7 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                  <Mail className="w-3.5 h-3.5 text-primary" />
+                </div>
+                <a href="mailto:info@balajiengineering.in" className="text-sm text-white/50 hover:text-white transition-colors break-all">info@balajiengineering.in</a>
               </li>
             </ul>
-            <Button className="w-full mt-6" asChild>
-              <Link href="/contact">Request a Quote</Link>
-            </Button>
           </div>
         </div>
+      </div>
 
-        <div className="border-t border-sidebar-border/50 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-sidebar-foreground/50">
-            &copy; {new Date().getFullYear()} Balaji Engineering Works. All rights reserved.
+      {/* Bottom Bar */}
+      <div className="border-t border-white/6">
+        <div className="container mx-auto px-4 md:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-white/25 font-mono">
+            © {new Date().getFullYear()} Balaji Engineering Works. All rights reserved.
           </p>
-          <div className="flex gap-4">
-            <Link href="#" className="text-sidebar-foreground/50 hover:text-white text-sm">Privacy Policy</Link>
-            <Link href="#" className="text-sidebar-foreground/50 hover:text-white text-sm">Terms of Service</Link>
+          <div className="flex items-center gap-6">
+            <Link href="#" className="text-[10px] text-white/25 hover:text-white/60 uppercase tracking-widest transition-colors">Privacy</Link>
+            <Link href="#" className="text-[10px] text-white/25 hover:text-white/60 uppercase tracking-widest transition-colors">Terms</Link>
+            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/5">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+              <span className="text-[9px] font-bold tracking-[0.2em] uppercase text-primary/80">Active Since 2001</span>
+            </div>
           </div>
         </div>
       </div>

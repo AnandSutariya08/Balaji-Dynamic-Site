@@ -174,7 +174,7 @@ export default function Blog() {
         )}
 
         {/* FILTER BAR */}
-        <section className="py-4 md:py-10 border-b border-black/8 sticky top-[4rem] bg-[#F7F5F1]/95 backdrop-blur-xl z-40">
+        <section className="py-4 md:py-10 border-b border-black/8 bg-[#F7F5F1]">
           <div className="container mx-auto px-4">
             <div className="flex items-center gap-3 md:gap-4 overflow-x-auto no-scrollbar">
               <span className="text-xs font-bold tracking-[0.3em] text-slate-400 uppercase hidden sm:block shrink-0">Filter:</span>
