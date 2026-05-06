@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Counter } from "@/components/ui/counter";
 import { Link } from "wouter";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 import { ArrowRight, ChevronRight, ChevronLeft, Play, CheckCircle2, Factory, Zap, ShieldCheck, Target, Award, Users, TrendingUp } from "lucide-react";
 import { HeroScene } from "@/components/3d/HeroScene";
 import gsap from "gsap";
@@ -15,11 +15,58 @@ export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const aboutTextRef = useRef<HTMLDivElement>(null);
   const servicesScrollRef = useRef<HTMLDivElement>(null);
+  const [activeService, setActiveService] = useState(0);
+  const autoPlayRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const scrollServices = (dir: 'left' | 'right') => {
+  const services = [
+    { title: "Bending", image: "/service-bending.png", subs: ["Press Brake", "High Tonnage", "Complex Angles"] },
+    { title: "Sheet Bending", image: "/service-bending.png", subs: ["MS & SS", "Precision Bends", "Custom Profiles"] },
+    { title: "Steel Cutting", image: "/service-steel-cutting.png", subs: ["Plasma Cutting", "Gas Cutting", "High Accuracy"] },
+    { title: "Plate Bending", image: "/service-plate-bending.png", subs: ["Heavy Duty", "Structural Steel", "Custom Radii"] },
+    { title: "Cutting Services", image: "/service-cnc.png", subs: ["Laser Cutting", "Profile Cutting", "Nesting Optimization"] },
+    { title: "Base Plate", image: "/service-base-plates.png", subs: ["Industrial Base", "Machined Finish", "Standard Sizes"] },
+    { title: "Plate Profile Cutting", image: "/service-profile.png", subs: ["Intricate Designs", "Batch Production", "Material Saving"] },
+    { title: "Sheet Metal Cutting", image: "/service-cnc.png", subs: ["CNC Accuracy", "Thin & Thick Sheets", "Rapid Turnaround"] },
+  ];
+
+  const CARD_WIDTH = 240; // px — must match min-w below
+
+  const scrollToIndex = useCallback((index: number) => {
+    const clamped = Math.max(0, Math.min(index, services.length - 1));
+    setActiveService(clamped);
     if (servicesScrollRef.current) {
-      servicesScrollRef.current.scrollBy({ left: dir === 'right' ? 440 : -440, behavior: 'smooth' });
+      servicesScrollRef.current.scrollTo({ left: clamped * (CARD_WIDTH + 20), behavior: 'smooth' });
     }
+  }, [services.length]);
+
+  const resetAutoPlay = useCallback(() => {
+    if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+    autoPlayRef.current = setInterval(() => {
+      setActiveService((prev) => {
+        const next = (prev + 1) % services.length;
+        if (servicesScrollRef.current) {
+          servicesScrollRef.current.scrollTo({ left: next * (CARD_WIDTH + 20), behavior: 'smooth' });
+        }
+        return next;
+      });
+    }, 3000);
+  }, [services.length]);
+
+  useEffect(() => {
+    resetAutoPlay();
+    return () => { if (autoPlayRef.current) clearInterval(autoPlayRef.current); };
+  }, [resetAutoPlay]);
+
+  const handlePrev = () => {
+    const prev = (activeService - 1 + services.length) % services.length;
+    scrollToIndex(prev);
+    resetAutoPlay();
+  };
+
+  const handleNext = () => {
+    const next = (activeService + 1) % services.length;
+    scrollToIndex(next);
+    resetAutoPlay();
   };
 
   useEffect(() => {
@@ -43,17 +90,6 @@ export default function Home() {
       });
     }
   }, []);
-
-  const services = [
-    { title: "Bending", image: "/service-bending.png", subs: ["Press Brake", "High Tonnage", "Complex Angles"] },
-    { title: "Sheet Bending", image: "/service-bending.png", subs: ["MS & SS", "Precision Bends", "Custom Profiles"] },
-    { title: "Steel Cutting", image: "/service-steel-cutting.png", subs: ["Plasma Cutting", "Gas Cutting", "High Accuracy"] },
-    { title: "Plate Bending", image: "/service-plate-bending.png", subs: ["Heavy Duty", "Structural Steel", "Custom Radii"] },
-    { title: "Cutting Services", image: "/service-cnc.png", subs: ["Laser Cutting", "Profile Cutting", "Nesting Optimization"] },
-    { title: "Base Plate", image: "/service-base-plates.png", subs: ["Industrial Base", "Machined Finish", "Standard Sizes"] },
-    { title: "Plate Profile Cutting", image: "/service-profile.png", subs: ["Intricate Designs", "Batch Production", "Material Saving"] },
-    { title: "Sheet Metal Cutting", image: "/service-cnc.png", subs: ["CNC Accuracy", "Thin & Thick Sheets", "Rapid Turnaround"] },
-  ];
 
   return (
     <PageTransition>
@@ -194,43 +230,73 @@ export default function Home() {
 
         {/* Section 5: Services Showcase */}
         <section className="py-16 md:py-32 bg-[#F7F5F1] border-y border-black/8">
-          <div className="container mx-auto px-4 mb-8 md:mb-12">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 md:gap-8">
+          <div className="container mx-auto px-4 mb-6 md:mb-12">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 md:gap-8">
               <div>
-                <span className="text-primary font-bold tracking-[0.3em] uppercase">Capabilities</span>
-                <h2 className="text-4xl sm:text-5xl md:text-7xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4">Our Expertise</h2>
+                <span className="text-primary font-bold tracking-[0.3em] uppercase text-sm">Capabilities</span>
+                <h2 className="text-4xl sm:text-5xl md:text-7xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-3 md:mt-4">Our Expertise</h2>
               </div>
-              <Button variant="ghost" className="text-[#1A1A1A] hover:text-primary transition-colors font-bold uppercase tracking-widest" asChild>
+              <Button variant="ghost" className="text-[#1A1A1A] hover:text-primary transition-colors font-bold uppercase tracking-widest hidden md:flex" asChild>
                 <Link href="/services">View All Capabilities <ArrowRight className="ml-2 w-4 h-4" /></Link>
               </Button>
             </div>
-            <div className="flex items-center gap-3 mt-8 md:mt-10">
-              <button onClick={() => scrollServices('left')} data-testid="button-services-prev" className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-black/15 flex items-center justify-center text-[#1A1A1A] hover:border-primary hover:text-primary hover:bg-primary/10 transition-all duration-200">
-                <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
-              </button>
-              <button onClick={() => scrollServices('right')} data-testid="button-services-next" className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-black/15 flex items-center justify-center text-[#1A1A1A] hover:border-primary hover:text-primary hover:bg-primary/10 transition-all duration-200">
-                <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
-              </button>
+            <div className="flex items-center justify-between mt-6 md:mt-10">
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handlePrev}
+                  className="w-10 h-10 rounded-full border border-black/15 flex items-center justify-center text-[#1A1A1A] hover:border-primary hover:text-primary hover:bg-primary/10 transition-all duration-200"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={handleNext}
+                  className="w-10 h-10 rounded-full border border-black/15 flex items-center justify-center text-[#1A1A1A] hover:border-primary hover:text-primary hover:bg-primary/10 transition-all duration-200"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
+              {/* Dot indicators */}
+              <div className="flex items-center gap-1.5">
+                {services.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => { scrollToIndex(i); resetAutoPlay(); }}
+                    className={`rounded-full transition-all duration-300 ${
+                      i === activeService ? "w-5 h-2 bg-primary" : "w-2 h-2 bg-black/15 hover:bg-black/30"
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
-          <div ref={servicesScrollRef} className="flex gap-5 md:gap-8 overflow-x-auto pb-4 px-4 md:px-[5%] snap-x no-scrollbar">
+          <div ref={servicesScrollRef} className="flex gap-4 overflow-x-auto pb-4 px-4 md:px-[5%] snap-x no-scrollbar">
             {services.map((service, i) => (
-              <div key={i} className="min-w-[260px] sm:min-w-[340px] md:min-w-[400px] h-[380px] sm:h-[440px] md:h-[500px] relative rounded-2xl overflow-hidden snap-center group border border-black/8 flex-shrink-0">
+              <div
+                key={i}
+                className={`min-w-[200px] sm:min-w-[240px] md:min-w-[280px] h-[320px] sm:h-[380px] md:h-[440px] relative rounded-2xl overflow-hidden snap-center flex-shrink-0 border-2 transition-all duration-300 ${
+                  i === activeService ? "border-primary/60 shadow-[0_0_20px_rgba(172,60,60,0.2)]" : "border-transparent"
+                } group`}
+              >
                 <img src={service.image} alt={service.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-                <div className="absolute bottom-6 sm:bottom-10 left-6 sm:left-10 right-6 sm:right-10">
-                  <h3 className="text-2xl md:text-3xl font-display font-black text-white uppercase tracking-tight mb-4 md:mb-6">{service.title}</h3>
-                  <div className="space-y-2 md:space-y-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 translate-y-4 group-hover:translate-y-0">
+                <div className="absolute bottom-5 left-5 right-5">
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-display font-black text-white uppercase tracking-tight mb-3">{service.title}</h3>
+                  <div className="space-y-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 translate-y-3 group-hover:translate-y-0">
                     {service.subs.map((sub, j) => (
-                      <div key={j} className="flex items-center gap-3 text-zinc-300">
-                        <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                        <span className="text-xs sm:text-sm font-bold uppercase tracking-widest">{sub}</span>
+                      <div key={j} className="flex items-center gap-2 text-zinc-300">
+                        <div className="w-1 h-1 rounded-full bg-primary shrink-0" />
+                        <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest">{sub}</span>
                       </div>
                     ))}
                   </div>
                 </div>
               </div>
             ))}
+          </div>
+          <div className="container mx-auto px-4 mt-6 md:hidden">
+            <Button variant="outline" className="w-full font-bold uppercase tracking-widest border-black/15 text-[#1A1A1A]" asChild>
+              <Link href="/services">View All Capabilities <ArrowRight className="ml-2 w-4 h-4" /></Link>
+            </Button>
           </div>
         </section>
 
