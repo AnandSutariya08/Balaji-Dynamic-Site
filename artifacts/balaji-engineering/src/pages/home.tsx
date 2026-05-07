@@ -103,7 +103,7 @@ export default function Home() {
     <PageTransition>
       <div ref={containerRef} className="bg-[#F7F5F1]">
         {/* Section 1: Hero */}
-        <section className="relative min-h-screen flex items-start overflow-hidden">
+        <section className="relative min-h-screen flex items-center overflow-hidden">
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
             <img
@@ -118,29 +118,32 @@ export default function Home() {
             <div className="absolute bottom-0 left-0 w-[600px] h-[300px] bg-primary/15 blur-[100px] rounded-full" />
           </div>
 
-          <div className="container relative z-10 mx-auto px-4 pt-24 pb-16 md:pt-28 lg:pt-32">
+          <div className="container relative z-10 mx-auto px-4" style={{ paddingTop: 'max(5rem, 10vh)', paddingBottom: 'max(3rem, 6vh)' }}>
             <div className="max-w-3xl">
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
                 {/* Badge */}
                 <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1, duration: 0.7 }}
-                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 mb-4 md:mb-5 lg:mb-7">
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 mb-3 md:mb-4 lg:mb-5">
                   <span className="w-2 h-2 rounded-full bg-primary animate-pulse shrink-0" />
                   <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.25em] uppercase">EST. 2001 · NAVAGAM, SURAT · GUJARAT</span>
                 </motion.div>
 
-                {/* Headline */}
-                <h1 className="font-display font-black uppercase tracking-tighter leading-[0.88] text-white mb-4 md:mb-5 lg:mb-7">
+                {/* Headline — scales with both viewport width and height */}
+                <h1
+                  className="font-display font-black uppercase tracking-tighter leading-[0.88] text-white mb-3 md:mb-4 lg:mb-6"
+                  style={{ fontSize: 'min(11vw, 14vh, 7rem)' }}
+                >
                   <motion.span initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2, duration: 0.75, ease: "easeOut" }}
-                    className="block text-[11vw] sm:text-[9vw] md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl">STEEL</motion.span>
+                    className="block">STEEL</motion.span>
                   <motion.span initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.32, duration: 0.75, ease: "easeOut" }}
-                    className="block text-[11vw] sm:text-[9vw] md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-transparent bg-clip-text bg-gradient-to-r from-[#e05555] via-[#AC3C3C] to-[#c44040]">PRECISION</motion.span>
+                    className="block text-transparent bg-clip-text bg-gradient-to-r from-[#e05555] via-[#AC3C3C] to-[#c44040]">PRECISION</motion.span>
                   <motion.span initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.44, duration: 0.75, ease: "easeOut" }}
-                    className="block text-[11vw] sm:text-[9vw] md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-white">MASTERS.</motion.span>
+                    className="block text-white">MASTERS.</motion.span>
                 </h1>
 
                 {/* Sub-text */}
                 <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.65, duration: 0.7 }}
-                  className="text-sm sm:text-base md:text-lg text-zinc-300 font-light leading-relaxed max-w-xl mb-5 md:mb-6 lg:mb-8">
+                  className="text-sm sm:text-base md:text-lg text-zinc-300 font-light leading-relaxed max-w-xl mb-4 md:mb-5 lg:mb-6">
                   CNC laser cutting, press bending &amp; plate rolling — engineered to ±0.1mm. Trusted by India's top infrastructure firms since 2001.
                 </motion.p>
 
@@ -157,7 +160,7 @@ export default function Home() {
 
                 {/* Hero stats row */}
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1, duration: 0.7 }}
-                  className="flex items-center gap-5 sm:gap-8 mt-7 md:mt-8 lg:mt-12 pt-5 md:pt-6 lg:pt-8 border-t border-white/15">
+                  className="flex items-center gap-5 sm:gap-8 mt-5 md:mt-6 lg:mt-8 pt-4 md:pt-5 lg:pt-6 border-t border-white/15">
                   {[
                     { v: "20+", l: "Years" },
                     { v: "500+", l: "Projects" },
