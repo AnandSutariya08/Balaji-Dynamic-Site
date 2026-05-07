@@ -1,4 +1,4 @@
-import { Switch, Route, Router as WouterRouter } from "wouter";
+import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -13,14 +13,19 @@ import Services from "@/pages/services";
 import Contact from "@/pages/contact";
 import Blog from "@/pages/blog";
 import BlogPost from "@/pages/blog-post";
+import AdminLogin from "@/pages/admin/Login";
+import AdminInquiries from "@/pages/admin/Inquiries";
+import AdminBlogs from "@/pages/admin/Blogs";
+import AdminServices from "@/pages/admin/Services";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { AdminAuthProvider } from "@/lib/adminAuth";
 import { useEffect } from "react";
 import Lenis from "@studio-freight/lenis";
 
 const queryClient = new QueryClient();
 
-function Router() {
+function PublicRouter() {
   return (
     <AnimatePresence mode="wait">
       <Switch>
@@ -49,29 +54,56 @@ function FloatingCTA() {
   );
 }
 
-function App() {
+function AdminApp() {
+  return (
+    <AdminAuthProvider>
+      <Switch>
+        <Route path="/admin" component={AdminLogin} />
+        <Route path="/admin/inquiries" component={AdminInquiries} />
+        <Route path="/admin/blogs" component={AdminBlogs} />
+        <Route path="/admin/services" component={AdminServices} />
+      </Switch>
+    </AdminAuthProvider>
+  );
+}
+
+function AppShell() {
+  const [location] = useLocation();
+  const isAdmin = location.startsWith("/admin");
+
   useEffect(() => {
+    if (isAdmin) return;
     const lenis = new Lenis();
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
-    return () => lenis.destroy();
-  }, []);
+    const id = requestAnimationFrame(raf);
+    return () => { lenis.destroy(); };
+  }, [isAdmin]);
 
+  if (isAdmin) {
+    return <AdminApp />;
+  }
+
+  return (
+    <div className="min-h-screen flex flex-col bg-background font-sans selection:bg-primary/30">
+      <Navbar />
+      <main className="flex-grow">
+        <PublicRouter />
+      </main>
+      <Footer />
+      <FloatingCTA />
+    </div>
+  );
+}
+
+function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-          <div className="min-h-screen flex flex-col bg-background font-sans selection:bg-primary/30">
-            <Navbar />
-            <main className="flex-grow">
-              <Router />
-            </main>
-            <Footer />
-            <FloatingCTA />
-          </div>
+          <AppShell />
         </WouterRouter>
         <Toaster />
       </TooltipProvider>

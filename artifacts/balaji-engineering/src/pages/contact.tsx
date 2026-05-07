@@ -7,7 +7,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
 import { Mail, MapPin, Phone, Clock, CheckCircle2, ArrowRight, Zap } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { saveInquiry } from "@/lib/inquiries";
 
 const contactInfo = [
   { icon: MapPin, title: "Factory Address", lines: ["Navagam, Surat", "Gujarat – 395009", "India"], action: null },
@@ -29,14 +30,28 @@ export default function Contact() {
   const defaultService = searchParams.get("service") || "";
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const get = (id: string) => (form.querySelector(`#${id}`) as HTMLInputElement)?.value || "";
+    const getSelect = () => (form.querySelector("[data-radix-select-value]") as HTMLElement)?.textContent || get("service") || defaultService;
+
     setIsSubmitting(true);
     setTimeout(() => {
+      saveInquiry({
+        name: get("name"),
+        phone: get("phone"),
+        email: get("email"),
+        service: getSelect(),
+        quantity: get("quantity"),
+        material: get("material"),
+        message: get("message"),
+      });
       setIsSubmitting(false);
       toast({ title: "Inquiry Sent Successfully", description: "Our engineering team will contact you within 24 hours." });
-      (e.target as HTMLFormElement).reset();
+      form.reset();
     }, 1500);
   };
 
