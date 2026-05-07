@@ -118,7 +118,7 @@ export default function Home() {
             <div className="absolute bottom-0 left-0 w-[600px] h-[300px] bg-primary/15 blur-[100px] rounded-full" />
           </div>
 
-          <div className="container relative z-10 mx-auto px-4" style={{ paddingTop: 'max(5rem, 10vh)', paddingBottom: 'max(3rem, 6vh)' }}>
+          <div className="container relative z-10 mx-auto px-4 pt-28 pb-16 md:pt-32 md:pb-20">
             <div className="max-w-3xl">
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
                 {/* Badge */}
@@ -128,10 +128,10 @@ export default function Home() {
                   <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.25em] uppercase">EST. 2001 · NAVAGAM, SURAT · GUJARAT</span>
                 </motion.div>
 
-                {/* Headline — scales with both viewport width and height */}
+                {/* Headline */}
                 <h1
                   className="font-display font-black uppercase tracking-tighter leading-[0.88] text-white mb-3 md:mb-4 lg:mb-6"
-                  style={{ fontSize: 'min(11vw, 14vh, 7rem)' }}
+                  style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}
                 >
                   <motion.span initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2, duration: 0.75, ease: "easeOut" }}
                     className="block">STEEL</motion.span>
