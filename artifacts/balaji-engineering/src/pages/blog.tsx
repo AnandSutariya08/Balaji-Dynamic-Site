@@ -46,7 +46,7 @@ export default function Blog() {
             <div className="absolute bottom-0 left-0 w-[500px] h-[250px] bg-primary/20 blur-[80px] rounded-full" />
             <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "linear-gradient(rgba(172,60,60,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(172,60,60,0.3) 1px, transparent 1px)", backgroundSize: "80px 80px" }} />
           </div>
-          <div className="container relative z-10 mx-auto px-4 pt-28 md:pt-32">
+          <div className="container relative z-10 mx-auto px-4 pt-28 md:pt-36">
             <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }}>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-primary mb-6 md:mb-10">
                 <BookOpen className="w-3 h-3" />
