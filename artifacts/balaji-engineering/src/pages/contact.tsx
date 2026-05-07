@@ -8,7 +8,8 @@ import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
 import { Mail, MapPin, Phone, Clock, CheckCircle2, ArrowRight, Zap } from "lucide-react";
 import { useState, useRef } from "react";
-import { saveInquiry } from "@/lib/inquiries";
+import { addInquiry } from "@/lib/firestore/inquiries";
+import { isFirebaseConfigured } from "@/lib/firebase";
 
 const contactInfo = [
   { icon: MapPin, title: "Factory Address", lines: ["Navagam, Surat", "Gujarat – 395009", "India"], action: null },
@@ -32,15 +33,15 @@ export default function Contact() {
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     const get = (id: string) => (form.querySelector(`#${id}`) as HTMLInputElement)?.value || "";
     const getSelect = () => (form.querySelector("[data-radix-select-value]") as HTMLElement)?.textContent || get("service") || defaultService;
 
     setIsSubmitting(true);
-    setTimeout(() => {
-      saveInquiry({
+    try {
+      const data = {
         name: get("name"),
         phone: get("phone"),
         email: get("email"),
@@ -48,11 +49,17 @@ export default function Contact() {
         quantity: get("quantity"),
         material: get("material"),
         message: get("message"),
-      });
-      setIsSubmitting(false);
+      };
+      if (isFirebaseConfigured()) {
+        await addInquiry(data);
+      }
       toast({ title: "Inquiry Sent Successfully", description: "Our engineering team will contact you within 24 hours." });
       form.reset();
-    }, 1500);
+    } catch {
+      toast({ title: "Something went wrong", description: "Please try again or call us directly.", variant: "destructive" });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

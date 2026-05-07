@@ -1,12 +1,25 @@
 import { useState, useEffect } from "react";
 import AdminLayout from "./Layout";
-import {
-  getInquiries, updateInquiryStatus, Inquiry, InquiryStatus,
-  STATUS_LABELS, STATUS_COLORS
-} from "@/lib/inquiries";
-import { MessageSquare, Phone, Mail, ChevronDown, X, Inbox, RefreshCw } from "lucide-react";
+import { getInquiries, updateInquiryStatus } from "@/lib/firestore/inquiries";
+import { isFirebaseConfigured } from "@/lib/firebase";
+import type { Inquiry, InquiryStatus } from "@/lib/firestore/types";
+import { MessageSquare, Phone, Mail, ChevronDown, Inbox, RefreshCw, AlertCircle, Loader2 } from "lucide-react";
 
 const ALL_STATUSES: InquiryStatus[] = ["new", "in-progress", "replied", "closed"];
+
+const STATUS_LABELS: Record<InquiryStatus, string> = {
+  "new": "New",
+  "in-progress": "In Progress",
+  "replied": "Replied",
+  "closed": "Closed",
+};
+
+const STATUS_COLORS: Record<InquiryStatus, string> = {
+  "new": "bg-red-500/10 text-red-400 border-red-500/25",
+  "in-progress": "bg-yellow-500/10 text-yellow-400 border-yellow-500/25",
+  "replied": "bg-blue-500/10 text-blue-400 border-blue-500/25",
+  "closed": "bg-zinc-500/10 text-zinc-400 border-zinc-500/25",
+};
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleString("en-IN", {
@@ -23,14 +36,13 @@ function StatusBadge({ status }: { status: InquiryStatus }) {
   );
 }
 
-function InquiryCard({ inquiry, onStatusChange }: { inquiry: Inquiry; onStatusChange: () => void }) {
+function InquiryCard({ inquiry, onStatusChange }: { inquiry: Inquiry; onStatusChange: (id: string, s: InquiryStatus) => void }) {
   const [open, setOpen] = useState(false);
   const [updating, setUpdating] = useState(false);
 
-  const handleStatus = (status: InquiryStatus) => {
+  const handleStatus = async (status: InquiryStatus) => {
     setUpdating(true);
-    updateInquiryStatus(inquiry.id, status);
-    onStatusChange();
+    await onStatusChange(inquiry.id, status);
     setUpdating(false);
   };
 
@@ -104,14 +116,13 @@ function InquiryCard({ inquiry, onStatusChange }: { inquiry: Inquiry; onStatusCh
                 onClick={() => handleStatus(s)}
                 disabled={inquiry.status === s || updating}
                 className={`px-3 py-1 rounded-full text-xs font-semibold border transition-all disabled:opacity-40 disabled:cursor-default ${
-                  inquiry.status === s
-                    ? STATUS_COLORS[s]
-                    : "border-white/10 text-zinc-400 hover:border-white/20 hover:text-white"
+                  inquiry.status === s ? STATUS_COLORS[s] : "border-white/10 text-zinc-400 hover:border-white/20 hover:text-white"
                 }`}
               >
                 {STATUS_LABELS[s]}
               </button>
             ))}
+            {updating && <Loader2 className="w-3.5 h-3.5 text-zinc-500 animate-spin" />}
           </div>
         </div>
       )}
@@ -122,17 +133,34 @@ function InquiryCard({ inquiry, onStatusChange }: { inquiry: Inquiry; onStatusCh
 export default function AdminInquiries() {
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [filter, setFilter] = useState<InquiryStatus | "all">("all");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const load = () => setInquiries(getInquiries());
+  const configured = isFirebaseConfigured();
+
+  const load = async () => {
+    if (!configured) return;
+    setLoading(true);
+    setError("");
+    try {
+      const data = await getInquiries();
+      setInquiries(data);
+    } catch (e: any) {
+      setError(e.message || "Failed to load inquiries.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => { load(); }, []);
 
-  const filtered = filter === "all" ? inquiries : inquiries.filter((i) => i.status === filter);
+  const handleStatusChange = async (id: string, status: InquiryStatus) => {
+    await updateInquiryStatus(id, status);
+    setInquiries((prev) => prev.map((i) => i.id === id ? { ...i, status } : i));
+  };
 
-  const counts = ALL_STATUSES.reduce((acc, s) => {
-    acc[s] = inquiries.filter((i) => i.status === s).length;
-    return acc;
-  }, {} as Record<InquiryStatus, number>);
+  const filtered = filter === "all" ? inquiries : inquiries.filter((i) => i.status === filter);
+  const counts = ALL_STATUSES.reduce((acc, s) => { acc[s] = inquiries.filter((i) => i.status === s).length; return acc; }, {} as Record<InquiryStatus, number>);
 
   return (
     <AdminLayout>
@@ -142,10 +170,28 @@ export default function AdminInquiries() {
             <h1 className="text-xl font-bold text-white">Inquiries</h1>
             <p className="text-zinc-500 text-sm mt-0.5">{inquiries.length} total submissions</p>
           </div>
-          <button onClick={load} className="flex items-center gap-1.5 text-zinc-400 hover:text-white text-sm transition-colors">
-            <RefreshCw className="w-4 h-4" /> Refresh
-          </button>
+          {configured && (
+            <button onClick={load} disabled={loading} className="flex items-center gap-1.5 text-zinc-400 hover:text-white text-sm transition-colors disabled:opacity-50">
+              <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} /> Refresh
+            </button>
+          )}
         </div>
+
+        {!configured && (
+          <div className="flex items-start gap-3 bg-amber-500/10 border border-amber-500/25 rounded-xl p-4 mb-5 text-amber-400 text-sm">
+            <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+            <div>
+              <p className="font-semibold">Firebase not configured</p>
+              <p className="text-amber-400/80 mt-0.5">Add your <code className="font-mono bg-black/30 px-1 rounded">VITE_FIREBASE_*</code> secrets — inquiries submitted through the contact form will appear here automatically.</p>
+            </div>
+          </div>
+        )}
+
+        {error && (
+          <div className="flex items-center gap-2 bg-red-500/10 border border-red-500/25 rounded-xl p-4 mb-5 text-red-400 text-sm">
+            <AlertCircle className="w-4 h-4 shrink-0" />{error}
+          </div>
+        )}
 
         <div className="flex items-center gap-2 mb-5 flex-wrap">
           {([["all", "All"] as const, ...ALL_STATUSES.map(s => [s, STATUS_LABELS[s]] as const)]).map(([val, label]) => (
@@ -153,9 +199,7 @@ export default function AdminInquiries() {
               key={val}
               onClick={() => setFilter(val)}
               className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-all ${
-                filter === val
-                  ? "bg-[#AC3C3C] border-[#AC3C3C] text-white"
-                  : "border-white/10 text-zinc-400 hover:border-white/20 hover:text-white"
+                filter === val ? "bg-[#AC3C3C] border-[#AC3C3C] text-white" : "border-white/10 text-zinc-400 hover:border-white/20 hover:text-white"
               }`}
             >
               {label}
@@ -166,7 +210,11 @@ export default function AdminInquiries() {
           ))}
         </div>
 
-        {filtered.length === 0 ? (
+        {loading ? (
+          <div className="flex items-center justify-center py-24 text-zinc-500 gap-2">
+            <Loader2 className="w-5 h-5 animate-spin" /> Loading from Firestore...
+          </div>
+        ) : filtered.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-center">
             <Inbox className="w-10 h-10 text-zinc-700 mb-3" />
             <p className="text-zinc-500 font-medium">No inquiries yet</p>
@@ -175,7 +223,7 @@ export default function AdminInquiries() {
         ) : (
           <div className="space-y-3">
             {filtered.map((inq) => (
-              <InquiryCard key={inq.id} inquiry={inq} onStatusChange={load} />
+              <InquiryCard key={inq.id} inquiry={inq} onStatusChange={handleStatusChange} />
             ))}
           </div>
         )}
