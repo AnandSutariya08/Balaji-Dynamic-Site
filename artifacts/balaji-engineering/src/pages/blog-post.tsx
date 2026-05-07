@@ -41,35 +41,38 @@ export default function BlogPost() {
 
       <article className="bg-black min-h-screen">
         {/* Post Hero */}
-        <section className="relative h-[60vh] md:h-[70vh] flex items-end">
+        <section className="relative min-h-[88vh] flex flex-col justify-end overflow-hidden">
           <div className="absolute inset-0 z-0">
             <img 
               src={post.image} 
               alt={post.title}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/30" />
           </div>
           
-          <div className="container mx-auto px-4 relative z-10 pb-16">
+          <div className="container mx-auto px-4 relative z-10 pt-24 pb-12 md:pb-16">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               className="max-w-4xl"
             >
-              <div className="mb-6">
+              <div className="mb-4">
                 <Link href="/blog" className="inline-flex items-center gap-2 text-primary font-bold uppercase tracking-widest text-xs hover:gap-3 transition-all">
                   <ChevronLeft className="w-4 h-4" /> Back to Insights
                 </Link>
               </div>
-              <Badge className="mb-6 bg-primary text-white hover:bg-primary uppercase tracking-[0.2em] px-4 py-1">
+              <Badge className="mb-4 bg-primary text-white hover:bg-primary uppercase tracking-[0.2em] px-4 py-1">
                 {post.category}
               </Badge>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-white uppercase tracking-tight leading-[1.1]">
+              <h1
+                className="font-display font-bold text-white uppercase tracking-tight leading-[1.05] mb-6"
+                style={{ fontSize: 'clamp(1.75rem, min(6vw, 8vh), 4.5rem)' }}
+              >
                 {post.title}
               </h1>
-              <div className="flex flex-wrap items-center gap-6 mt-8 text-zinc-400 uppercase tracking-widest text-xs font-semibold">
+              <div className="flex flex-wrap items-center gap-6 text-zinc-400 uppercase tracking-widest text-xs font-semibold">
                 <span className="flex items-center gap-2"><Calendar className="w-4 h-4 text-primary" /> {post.date}</span>
                 <span className="flex items-center gap-2"><Clock className="w-4 h-4 text-primary" /> {post.readTime}</span>
               </div>
