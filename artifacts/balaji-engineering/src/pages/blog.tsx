@@ -158,17 +158,17 @@ export default function Blog() {
                   </Link>
                 ))}
               </div>
-              {/* Mobile horizontal scroll */}
-              <div className="flex md:hidden gap-4 overflow-x-auto pb-2 -mx-4 px-4 snap-x no-scrollbar">
+              {/* Mobile vertical list */}
+              <div className="flex flex-col md:hidden gap-3">
                 {recentPosts.map((post) => (
-                  <Link key={post.slug} href={`/blog/${post.slug}`} className="group block shrink-0 w-72 snap-start">
-                    <div className="flex gap-4 items-start p-4 rounded-xl border border-black/8 bg-[#EDEAE4]">
-                      <div className="w-14 h-14 rounded-xl overflow-hidden shrink-0 bg-[#D5D0C8]">
-                        <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
+                  <Link key={post.slug} href={`/blog/${post.slug}`} className="group block">
+                    <div className="flex gap-4 items-center p-4 rounded-xl border border-black/8 bg-[#EDEAE4] hover:border-primary/30 transition-colors">
+                      <div className="w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-[#D5D0C8]">
+                        <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                       </div>
-                      <div>
+                      <div className="flex-1 min-w-0">
                         <span className={`inline-flex px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest border mb-2 ${categoryColors[post.category]}`}>{post.category}</span>
-                        <h4 className="text-sm font-bold text-[#1A1A1A] uppercase tracking-tight line-clamp-2 leading-snug">{post.title}</h4>
+                        <h4 className="text-sm font-bold text-[#1A1A1A] uppercase tracking-tight group-hover:text-primary transition-colors line-clamp-2 leading-snug">{post.title}</h4>
                         <p className="text-[10px] text-slate-400 mt-1.5 font-bold uppercase tracking-widest">{post.readTime}</p>
                       </div>
                     </div>

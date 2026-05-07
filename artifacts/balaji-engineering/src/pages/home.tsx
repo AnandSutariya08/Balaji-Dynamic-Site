@@ -28,7 +28,7 @@ export default function Home() {
     { title: "Sheet Metal Cutting", image: "/service-cnc.png", subs: ["CNC Accuracy", "Thin & Thick Sheets", "Rapid Turnaround"] },
   ];
 
-  const CARD_WIDTH = 240; // px — must match min-w below
+  const CARD_WIDTH = 150; // px — must match min-w below
 
   const scrollToIndex = useCallback((index: number) => {
     const clamped = Math.max(0, Math.min(index, services.length - 1));
@@ -325,7 +325,7 @@ export default function Home() {
             {services.map((service, i) => (
               <div
                 key={i}
-                className={`min-w-[200px] sm:min-w-[240px] md:min-w-[280px] h-[320px] sm:h-[380px] md:h-[440px] relative rounded-2xl overflow-hidden snap-center flex-shrink-0 border-2 transition-all duration-300 ${
+                className={`min-w-[150px] sm:min-w-[185px] md:min-w-[210px] h-[260px] sm:h-[320px] md:h-[380px] relative rounded-2xl overflow-hidden snap-center flex-shrink-0 border-2 transition-all duration-300 ${
                   i === activeService ? "border-primary/60 shadow-[0_0_20px_rgba(172,60,60,0.2)]" : "border-transparent"
                 } group`}
               >
