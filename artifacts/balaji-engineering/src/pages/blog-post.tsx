@@ -58,9 +58,11 @@ export default function BlogPost() {
               transition={{ duration: 0.8 }}
               className="max-w-4xl"
             >
-              <Link href="/blog" className="inline-flex items-center gap-2 text-primary font-bold uppercase tracking-widest text-xs mb-8 hover:gap-3 transition-all">
-                <ChevronLeft className="w-4 h-4" /> Back to Insights
-              </Link>
+              <div className="mb-6">
+                <Link href="/blog" className="inline-flex items-center gap-2 text-primary font-bold uppercase tracking-widest text-xs hover:gap-3 transition-all">
+                  <ChevronLeft className="w-4 h-4" /> Back to Insights
+                </Link>
+              </div>
               <Badge className="mb-6 bg-primary text-white hover:bg-primary uppercase tracking-[0.2em] px-4 py-1">
                 {post.category}
               </Badge>
