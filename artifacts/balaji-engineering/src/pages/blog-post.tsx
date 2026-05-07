@@ -76,20 +76,20 @@ export default function BlogPost() {
         </section>
 
         {/* Post Content */}
-        <section className="py-20">
+        <section className="py-10 md:py-20">
           <div className="container mx-auto px-4">
-            <div className="grid lg:grid-cols-[1fr_300px] gap-16">
+            <div className="grid lg:grid-cols-[1fr_300px] gap-8 lg:gap-16">
               {/* Main Content */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="prose prose-invert prose-red max-w-none prose-headings:font-display prose-headings:uppercase prose-headings:tracking-tight prose-p:text-zinc-400 prose-p:leading-relaxed prose-li:text-zinc-400"
+                className="prose prose-invert prose-red max-w-none prose-headings:font-display prose-headings:uppercase prose-headings:tracking-tight prose-p:text-zinc-400 prose-p:leading-relaxed prose-li:text-zinc-400 prose-p:text-sm md:prose-p:text-base"
                 dangerouslySetInnerHTML={{ __html: post.content }}
               />
 
               {/* Sidebar */}
-              <aside className="space-y-12">
+              <aside className="space-y-8 md:space-y-12">
                 {/* Author Card */}
                 <div className="p-8 bg-zinc-900/50 rounded-2xl border border-white/5">
                   <h4 className="text-sm font-bold uppercase tracking-widest text-primary mb-4">The Author</h4>

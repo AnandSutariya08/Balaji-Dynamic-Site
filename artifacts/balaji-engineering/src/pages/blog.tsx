@@ -35,10 +35,16 @@ export default function Blog() {
       <div className="bg-[#F7F5F1]">
 
         {/* HERO */}
-        <section className="relative min-h-[70vh] flex items-end overflow-hidden pb-10 md:pb-24 bg-[#1C1C1C]">
+        <section className="relative min-h-[70vh] flex items-end overflow-hidden pb-10 md:pb-24">
           <div className="absolute inset-0">
+            {/* Real background image */}
+            <img src="/service-fabrication.png" alt="Fabrication Workshop" className="w-full h-full object-cover object-center" />
+            {/* Dark overlay so text is readable */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/75 to-black/50" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/40" />
+            {/* Subtle red accent */}
+            <div className="absolute bottom-0 left-0 w-[500px] h-[250px] bg-primary/20 blur-[80px] rounded-full" />
             <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "linear-gradient(rgba(172,60,60,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(172,60,60,0.3) 1px, transparent 1px)", backgroundSize: "80px 80px" }} />
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-white/5" />
           </div>
           <div className="container relative z-10 mx-auto px-4 pt-28 md:pt-40">
             <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }}>

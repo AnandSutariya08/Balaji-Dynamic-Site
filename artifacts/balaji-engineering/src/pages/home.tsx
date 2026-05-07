@@ -2,10 +2,9 @@ import { PageTransition } from "@/components/layout/PageTransition";
 import { Button } from "@/components/ui/button";
 import { Counter } from "@/components/ui/counter";
 import { Link } from "wouter";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { useRef, useEffect, useState, useCallback } from "react";
-import { ArrowRight, ChevronRight, ChevronLeft, Play, CheckCircle2, Factory, Zap, ShieldCheck, Target, Award, Users, TrendingUp } from "lucide-react";
-import { HeroScene } from "@/components/3d/HeroScene";
+import { ArrowRight, ChevronRight, ChevronLeft, CheckCircle2, Factory, Zap, ShieldCheck, Target, Award, Users, TrendingUp, BookOpen } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -102,33 +101,80 @@ export default function Home() {
       <div ref={containerRef} className="bg-[#F7F5F1]">
         {/* Section 1: Hero */}
         <section className="relative h-screen flex items-center overflow-hidden">
-          <HeroScene />
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent z-10" />
-          <div className="container relative z-20 mx-auto px-4">
-            <div className="max-w-4xl">
+          {/* Background Image */}
+          <div className="absolute inset-0 z-0">
+            <img
+              src="/hero-bg.png"
+              alt="Precision Metal Fabrication"
+              className="w-full h-full object-cover object-center"
+            />
+            {/* Cinematic gradient — dark left for text, reveal image on right */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/25" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
+            {/* Subtle red accent glow bottom-left */}
+            <div className="absolute bottom-0 left-0 w-[600px] h-[300px] bg-primary/15 blur-[100px] rounded-full" />
+          </div>
+
+          <div className="container relative z-10 mx-auto px-4 pt-20 md:pt-24">
+            <div className="max-w-3xl">
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/50 text-primary mb-6 md:mb-8">
-                  <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase">EST. 2001 • NAVAGAM, SURAT • GST: 24BCUPS8314Q1ZK</span>
-                </div>
-                <h1 className="flex flex-col text-5xl sm:text-7xl md:text-9xl font-display font-black leading-[0.9] text-white uppercase tracking-tighter mb-6 md:mb-8">
-                  <motion.span initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2, duration: 0.8 }}>FORGING</motion.span>
-                  <motion.span initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.3, duration: 0.8 }} className="text-transparent bg-clip-text bg-gradient-to-r from-[#AC3C3C] to-[#1a3a6a]">PRECISION</motion.span>
-                  <motion.span initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.4, duration: 0.8 }} className="text-lg sm:text-2xl font-bold tracking-[0.3em] sm:tracking-[0.5em] mt-3 md:mt-4 opacity-70">SINCE 2001</motion.span>
+                {/* Badge */}
+                <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1, duration: 0.7 }}
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 mb-6 md:mb-8">
+                  <span className="w-2 h-2 rounded-full bg-primary animate-pulse shrink-0" />
+                  <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.25em] uppercase">EST. 2001 · NAVAGAM, SURAT · GUJARAT</span>
+                </motion.div>
+
+                {/* Headline */}
+                <h1 className="font-display font-black uppercase tracking-tighter leading-[0.88] text-white mb-5 md:mb-7">
+                  <motion.span initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2, duration: 0.75, ease: "easeOut" }}
+                    className="block text-[13vw] sm:text-[11vw] md:text-8xl lg:text-9xl">STEEL</motion.span>
+                  <motion.span initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.32, duration: 0.75, ease: "easeOut" }}
+                    className="block text-[13vw] sm:text-[11vw] md:text-8xl lg:text-9xl text-transparent bg-clip-text bg-gradient-to-r from-[#e05555] via-[#AC3C3C] to-[#c44040]">PRECISION</motion.span>
+                  <motion.span initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.44, duration: 0.75, ease: "easeOut" }}
+                    className="block text-[13vw] sm:text-[11vw] md:text-8xl lg:text-9xl text-white">MASTERS.</motion.span>
                 </h1>
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-8 md:mt-12">
-                  <Button size="lg" className="h-12 sm:h-16 px-6 sm:px-10 text-sm sm:text-base font-bold uppercase tracking-widest bg-primary hover:bg-primary/90 text-white shadow-[0_0_30px_rgba(172,60,60,0.5)] border-none" asChild>
+
+                {/* Sub-text */}
+                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.65, duration: 0.7 }}
+                  className="text-base sm:text-lg md:text-xl text-zinc-300 font-light leading-relaxed max-w-xl mb-8 md:mb-10">
+                  CNC laser cutting, press bending &amp; plate rolling — engineered to ±0.1mm. Trusted by India's top infrastructure firms since 2001.
+                </motion.p>
+
+                {/* CTAs */}
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.6 }}
+                  className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                  <Button size="lg" className="h-13 sm:h-14 px-7 sm:px-10 text-sm font-black uppercase tracking-widest bg-primary hover:bg-[#c44040] text-white shadow-[0_0_40px_rgba(172,60,60,0.55)] border-none transition-all duration-300" asChild>
                     <Link href="/services">Explore Services</Link>
                   </Button>
-                  <Button size="lg" variant="outline" className="h-12 sm:h-16 px-6 sm:px-10 text-sm sm:text-base font-bold uppercase tracking-widest border-white/20 text-white hover:bg-white/10" asChild>
+                  <Button size="lg" variant="outline" className="h-13 sm:h-14 px-7 sm:px-10 text-sm font-black uppercase tracking-widest border-white/30 text-white hover:bg-white/10 hover:border-white/50 backdrop-blur-sm" asChild>
                     <Link href="/contact">Request Quote</Link>
                   </Button>
+                </motion.div>
+
+                {/* Hero stats row */}
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1, duration: 0.7 }}
+                  className="flex items-center gap-6 sm:gap-8 mt-10 md:mt-14 pt-8 md:pt-10 border-t border-white/15">
+                  {[
+                    { v: "20+", l: "Years" },
+                    { v: "500+", l: "Projects" },
+                    { v: "±0.1mm", l: "Accuracy" },
+                    { v: "800T", l: "Press Brake" },
+                  ].map((s, i) => (
+                    <div key={i} className="text-center">
+                      <div className="text-lg sm:text-2xl md:text-3xl font-display font-black text-white leading-none">{s.v}</div>
+                      <div className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] text-white/50 uppercase mt-1">{s.l}</div>
+                    </div>
+                  ))}
                 </motion.div>
               </motion.div>
             </div>
           </div>
-          <motion.div animate={{ y: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 2 }} className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20">
-            <div className="w-6 h-10 rounded-full border-2 border-white/20 flex justify-center p-1">
-              <div className="w-1 h-2 bg-primary rounded-full" />
+
+          {/* Scroll indicator */}
+          <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 2 }} className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 hidden sm:flex flex-col items-center gap-2">
+            <div className="w-5 h-8 rounded-full border-2 border-white/25 flex justify-center pt-1.5">
+              <div className="w-0.5 h-2 bg-primary rounded-full" />
             </div>
           </motion.div>
         </section>
@@ -435,7 +481,7 @@ export default function Home() {
                 <Link key={i} href={`/blog/${post.slug}`} className="group">
                   <div className="aspect-video bg-[#EDEAE4] rounded-xl overflow-hidden mb-6 md:mb-8 border border-black/8">
                     <div className="w-full h-full group-hover:bg-primary/10 transition-colors flex items-center justify-center">
-                      <Play className="w-10 h-10 md:w-12 md:h-12 text-black/20 group-hover:text-primary transition-colors" />
+                      <BookOpen className="w-10 h-10 md:w-12 md:h-12 text-black/20 group-hover:text-primary transition-colors" />
                     </div>
                   </div>
                   <span className="text-primary font-bold text-xs uppercase tracking-widest">{post.cat}</span>
