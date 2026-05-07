@@ -52,7 +52,7 @@ export default function Blog() {
                 <BookOpen className="w-3 h-3" />
                 <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase">{blogPosts.length} Articles · Engineering Intelligence</span>
               </div>
-              <h1 className="text-4xl sm:text-6xl md:text-[9rem] font-display font-black text-white uppercase tracking-tighter leading-[0.85] mb-6 md:mb-0">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-display font-black text-white uppercase tracking-tighter leading-[0.85] mb-6 md:mb-0">
                 Insights &<br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-[#AC3C3C] to-[#e05555]">Knowledge</span>
               </h1>
               <div className="hidden md:block max-w-md mt-8">

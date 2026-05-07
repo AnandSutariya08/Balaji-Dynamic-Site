@@ -58,7 +58,7 @@ export default function Contact() {
                 <Zap className="w-3 h-3" />
                 <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase">Response within 24 Hours</span>
               </div>
-              <h1 className="text-4xl sm:text-6xl md:text-[9rem] font-display font-black text-white uppercase tracking-tighter leading-[0.85] mb-6 md:mb-8">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-display font-black text-white uppercase tracking-tighter leading-[0.85] mb-6 md:mb-8">
                 Let's<br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-[#AC3C3C] to-[#e05555]">Talk Steel.</span>
               </h1>
               <p className="text-base sm:text-xl text-zinc-300 font-light leading-relaxed max-w-2xl">Tell us about your project — dimensions, material, quantity, timeline. Our engineering team will come back to you with a precise quote and a production plan.</p>

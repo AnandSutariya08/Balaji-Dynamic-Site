@@ -56,7 +56,7 @@ export default function About() {
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-primary mb-8 md:mb-10">
                 <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase">EST. 2001 · NAVAGAM, SURAT</span>
               </div>
-              <h1 className="text-5xl sm:text-7xl md:text-[10rem] font-display font-black text-white uppercase tracking-tighter leading-[0.85] mb-8 md:mb-10">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-display font-black text-white uppercase tracking-tighter leading-[0.85] mb-8 md:mb-10">
                 Built on<br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#AC3C3C] to-[#e05555]">Steel.</span>
               </h1>

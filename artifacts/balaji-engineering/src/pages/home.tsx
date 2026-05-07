@@ -103,7 +103,7 @@ export default function Home() {
     <PageTransition>
       <div ref={containerRef} className="bg-[#F7F5F1]">
         {/* Section 1: Hero */}
-        <section className="relative h-screen flex items-center overflow-hidden">
+        <section className="relative min-h-screen flex items-start overflow-hidden">
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
             <img
@@ -118,7 +118,7 @@ export default function Home() {
             <div className="absolute bottom-0 left-0 w-[600px] h-[300px] bg-primary/15 blur-[100px] rounded-full" />
           </div>
 
-          <div className="container relative z-10 mx-auto px-4 pt-20 md:pt-20 lg:pt-24">
+          <div className="container relative z-10 mx-auto px-4 pt-24 pb-16 md:pt-28 lg:pt-32">
             <div className="max-w-3xl">
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
                 {/* Badge */}
@@ -131,11 +131,11 @@ export default function Home() {
                 {/* Headline */}
                 <h1 className="font-display font-black uppercase tracking-tighter leading-[0.88] text-white mb-4 md:mb-5 lg:mb-7">
                   <motion.span initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2, duration: 0.75, ease: "easeOut" }}
-                    className="block text-[13vw] sm:text-[11vw] md:text-[8.5vw] lg:text-[7vw] 2xl:text-9xl">STEEL</motion.span>
+                    className="block text-[11vw] sm:text-[9vw] md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl">STEEL</motion.span>
                   <motion.span initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.32, duration: 0.75, ease: "easeOut" }}
-                    className="block text-[13vw] sm:text-[11vw] md:text-[8.5vw] lg:text-[7vw] 2xl:text-9xl text-transparent bg-clip-text bg-gradient-to-r from-[#e05555] via-[#AC3C3C] to-[#c44040]">PRECISION</motion.span>
+                    className="block text-[11vw] sm:text-[9vw] md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-transparent bg-clip-text bg-gradient-to-r from-[#e05555] via-[#AC3C3C] to-[#c44040]">PRECISION</motion.span>
                   <motion.span initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.44, duration: 0.75, ease: "easeOut" }}
-                    className="block text-[13vw] sm:text-[11vw] md:text-[8.5vw] lg:text-[7vw] 2xl:text-9xl text-white">MASTERS.</motion.span>
+                    className="block text-[11vw] sm:text-[9vw] md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-white">MASTERS.</motion.span>
                 </h1>
 
                 {/* Sub-text */}
@@ -175,11 +175,7 @@ export default function Home() {
           </div>
 
           {/* Scroll indicator */}
-          <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 2 }} className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 hidden sm:flex flex-col items-center gap-2">
-            <div className="w-5 h-8 rounded-full border-2 border-white/25 flex justify-center pt-1.5">
-              <div className="w-0.5 h-2 bg-primary rounded-full" />
-            </div>
-          </motion.div>
+          
         </section>
 
         {/* Section 2: Marquee Ticker */}
@@ -226,7 +222,7 @@ export default function Home() {
                 { value: 25, label: "Cr. Turnover", suffix: " Cr", prefix: "₹ 5-", icon: TrendingUp }
               ].map((stat, i) => (
                 <div key={i} className="flex flex-col items-center text-center">
-                  <div className="text-4xl sm:text-5xl md:text-7xl font-display font-black text-[#1A1A1A] mb-3 md:mb-4">
+                  <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-black text-[#1A1A1A] mb-3 md:mb-4">
                     <Counter value={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
                   </div>
                   <div className="h-1 w-10 md:w-12 bg-primary mb-4 md:mb-6" />
