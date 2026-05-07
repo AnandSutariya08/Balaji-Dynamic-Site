@@ -1,10 +1,10 @@
 import { PageTransition } from "@/components/layout/PageTransition";
-import { blogPosts } from "@/lib/blogData";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { Calendar, Clock, ArrowRight, BookOpen, TrendingUp, Zap } from "lucide-react";
+import { Calendar, Clock, ArrowRight, BookOpen, TrendingUp, Zap, Loader2 } from "lucide-react";
+import { useBlogs } from "@/hooks/useBlogs";
 
 const container = {
   hidden: { opacity: 0 },
@@ -25,6 +25,7 @@ const categoryColors: Record<string, string> = {
 export default function Blog() {
   const [filter, setFilter] = useState("All");
   const categories = ["All", "Technical", "Guide", "Industry"];
+  const { posts: blogPosts, loading } = useBlogs();
 
   const filteredPosts = filter === "All" ? blogPosts : blogPosts.filter(post => post.category === filter);
   const featuredPost = blogPosts[0];
@@ -37,12 +38,9 @@ export default function Blog() {
         {/* HERO */}
         <section className="relative min-h-[70vh] flex items-end overflow-hidden pb-10 md:pb-24">
           <div className="absolute inset-0">
-            {/* Real background image */}
             <img src="/service-fabrication.png" alt="Fabrication Workshop" className="w-full h-full object-cover object-center" />
-            {/* Dark overlay so text is readable */}
             <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/75 to-black/50" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/40" />
-            {/* Subtle red accent */}
             <div className="absolute bottom-0 left-0 w-[500px] h-[250px] bg-primary/20 blur-[80px] rounded-full" />
             <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "linear-gradient(rgba(172,60,60,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(172,60,60,0.3) 1px, transparent 1px)", backgroundSize: "80px 80px" }} />
           </div>
@@ -74,7 +72,6 @@ export default function Blog() {
                   </div>
                 </div>
               </div>
-              {/* Mobile stats row */}
               <div className="flex md:hidden items-center gap-5 mt-5 pb-2">
                 {[
                   { v: blogPosts.length.toString(), l: "Articles" },
@@ -94,8 +91,15 @@ export default function Blog() {
           </div>
         </section>
 
+        {/* Loading state */}
+        {loading && (
+          <div className="flex items-center justify-center gap-2 py-10 text-slate-400 text-sm bg-[#F7F5F1]">
+            <Loader2 className="w-4 h-4 animate-spin" /> Loading articles from Firestore…
+          </div>
+        )}
+
         {/* FEATURED POST */}
-        {filter === "All" && (
+        {!loading && filter === "All" && featuredPost && (
           <section className="py-10 md:py-20 border-b border-black/8 bg-[#F7F5F1]">
             <div className="container mx-auto px-4">
               <div className="flex items-center gap-4 mb-6 md:mb-12">
@@ -110,7 +114,7 @@ export default function Blog() {
                       <img src={featuredPost.image} alt={featuredPost.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                       <div className="absolute top-4 left-4 md:top-6 md:left-6">
-                        <span className={`inline-flex px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest border ${categoryColors[featuredPost.category]}`}>
+                        <span className={`inline-flex px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest border ${categoryColors[featuredPost.category] ?? "bg-slate-50 text-slate-700 border-slate-200"}`}>
                           {featuredPost.category}
                         </span>
                       </div>
@@ -134,14 +138,13 @@ export default function Blog() {
         )}
 
         {/* RECENT HIGHLIGHTS */}
-        {filter === "All" && (
+        {!loading && filter === "All" && recentPosts.length > 0 && (
           <section className="py-10 md:py-16 border-b border-black/8 bg-[#EDEAE4]">
             <div className="container mx-auto px-4">
               <div className="flex items-center gap-3 mb-6 md:mb-10">
                 <Zap className="w-4 h-4 text-primary" />
                 <span className="text-xs font-bold tracking-[0.3em] text-slate-500 uppercase">Latest Articles</span>
               </div>
-              {/* Desktop grid */}
               <div className="hidden md:grid md:grid-cols-3 gap-6">
                 {recentPosts.map((post) => (
                   <Link key={post.slug} href={`/blog/${post.slug}`} className="group block">
@@ -150,7 +153,7 @@ export default function Blog() {
                         <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                       </div>
                       <div>
-                        <span className={`inline-flex px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest border mb-2 ${categoryColors[post.category]}`}>{post.category}</span>
+                        <span className={`inline-flex px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest border mb-2 ${categoryColors[post.category] ?? "bg-slate-50 text-slate-600 border-slate-200"}`}>{post.category}</span>
                         <h4 className="text-sm font-bold text-[#1A1A1A] uppercase tracking-tight group-hover:text-primary transition-colors line-clamp-2 leading-snug">{post.title}</h4>
                         <p className="text-[10px] text-slate-400 mt-1.5 font-bold uppercase tracking-widest">{post.readTime}</p>
                       </div>
@@ -158,7 +161,6 @@ export default function Blog() {
                   </Link>
                 ))}
               </div>
-              {/* Mobile vertical list */}
               <div className="flex flex-col md:hidden gap-3">
                 {recentPosts.map((post) => (
                   <Link key={post.slug} href={`/blog/${post.slug}`} className="group block">
@@ -167,7 +169,7 @@ export default function Blog() {
                         <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <span className={`inline-flex px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest border mb-2 ${categoryColors[post.category]}`}>{post.category}</span>
+                        <span className={`inline-flex px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest border mb-2 ${categoryColors[post.category] ?? "bg-slate-50 text-slate-600 border-slate-200"}`}>{post.category}</span>
                         <h4 className="text-sm font-bold text-[#1A1A1A] uppercase tracking-tight group-hover:text-primary transition-colors line-clamp-2 leading-snug">{post.title}</h4>
                         <p className="text-[10px] text-slate-400 mt-1.5 font-bold uppercase tracking-widest">{post.readTime}</p>
                       </div>
@@ -209,44 +211,50 @@ export default function Blog() {
         {/* BLOG GRID */}
         <section className="py-10 md:py-20 bg-[#F7F5F1]">
           <div className="container mx-auto px-4">
-            <motion.div variants={container} initial="hidden" animate="show" key={filter} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-              {filteredPosts.map((post) => (
-                <motion.div
-                  key={post.slug}
-                  variants={item}
-                  className="group bg-[#EDEAE4] rounded-2xl overflow-hidden border border-black/8 flex flex-col h-full hover:border-primary/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-lg"
-                >
-                  <Link href={`/blog/${post.slug}`} className="block relative overflow-hidden aspect-video">
-                    <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                    <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-colors" />
-                    <div className="absolute top-3 left-3 md:top-4 md:left-4">
-                      <span className={`inline-flex px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest border backdrop-blur-sm ${categoryColors[post.category]}`}>{post.category}</span>
+            {loading ? (
+              <div className="flex items-center justify-center gap-2 py-24 text-slate-400 text-sm">
+                <Loader2 className="w-5 h-5 animate-spin" /> Loading…
+              </div>
+            ) : (
+              <motion.div variants={container} initial="hidden" animate="show" key={filter} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+                {filteredPosts.map((post) => (
+                  <motion.div
+                    key={post.slug}
+                    variants={item}
+                    className="group bg-[#EDEAE4] rounded-2xl overflow-hidden border border-black/8 flex flex-col h-full hover:border-primary/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-lg"
+                  >
+                    <Link href={`/blog/${post.slug}`} className="block relative overflow-hidden aspect-video">
+                      <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                      <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-colors" />
+                      <div className="absolute top-3 left-3 md:top-4 md:left-4">
+                        <span className={`inline-flex px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest border backdrop-blur-sm ${categoryColors[post.category] ?? "bg-slate-50 text-slate-600 border-slate-200"}`}>{post.category}</span>
+                      </div>
+                      <div className="absolute bottom-3 right-3 md:bottom-4 md:right-4 bg-[#F7F5F1]/90 backdrop-blur-sm border border-black/10 rounded-full px-2.5 py-1">
+                        <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest flex items-center gap-1"><Clock className="w-2 h-2" /> {post.readTime}</span>
+                      </div>
+                    </Link>
+                    <div className="p-5 md:p-7 flex flex-col flex-grow">
+                      <div className="flex items-center gap-2 mb-3 md:mb-5">
+                        <Calendar className="w-3 h-3 text-slate-400" />
+                        <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{post.date}</span>
+                      </div>
+                      <h3 className="text-base md:text-xl font-display font-black text-[#1A1A1A] uppercase tracking-tight mb-3 md:mb-4 leading-[1.1] group-hover:text-primary transition-colors flex-grow">
+                        <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                      </h3>
+                      <p className="text-slate-500 text-sm line-clamp-2 mb-4 md:mb-6 font-light leading-relaxed">{post.excerpt}</p>
+                      <div className="mt-auto pt-4 md:pt-5 border-t border-black/8 flex items-center justify-between">
+                        <span className="text-[9px] font-bold tracking-[0.3em] text-slate-400 uppercase">{post.author ?? "Balaji Engineering"}</span>
+                        <Link href={`/blog/${post.slug}`} className="inline-flex items-center gap-1.5 text-primary text-xs font-bold uppercase tracking-widest group-hover:gap-3 transition-all">
+                          Read <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                      </div>
                     </div>
-                    <div className="absolute bottom-3 right-3 md:bottom-4 md:right-4 bg-[#F7F5F1]/90 backdrop-blur-sm border border-black/10 rounded-full px-2.5 py-1">
-                      <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest flex items-center gap-1"><Clock className="w-2 h-2" /> {post.readTime}</span>
-                    </div>
-                  </Link>
-                  <div className="p-5 md:p-7 flex flex-col flex-grow">
-                    <div className="flex items-center gap-2 mb-3 md:mb-5">
-                      <Calendar className="w-3 h-3 text-slate-400" />
-                      <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{post.date}</span>
-                    </div>
-                    <h3 className="text-base md:text-xl font-display font-black text-[#1A1A1A] uppercase tracking-tight mb-3 md:mb-4 leading-[1.1] group-hover:text-primary transition-colors flex-grow">
-                      <Link href={`/blog/${post.slug}`}>{post.title}</Link>
-                    </h3>
-                    <p className="text-slate-500 text-sm line-clamp-2 mb-4 md:mb-6 font-light leading-relaxed">{post.excerpt}</p>
-                    <div className="mt-auto pt-4 md:pt-5 border-t border-black/8 flex items-center justify-between">
-                      <span className="text-[9px] font-bold tracking-[0.3em] text-slate-400 uppercase">Balaji Engineering</span>
-                      <Link href={`/blog/${post.slug}`} className="inline-flex items-center gap-1.5 text-primary text-xs font-bold uppercase tracking-widest group-hover:gap-3 transition-all">
-                        Read <ArrowRight className="w-3.5 h-3.5" />
-                      </Link>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
 
-            {filteredPosts.length === 0 && (
+            {!loading && filteredPosts.length === 0 && (
               <div className="text-center py-20 md:py-32">
                 <div className="text-6xl font-display font-black text-black/5 mb-4">0</div>
                 <p className="text-slate-400 font-bold uppercase tracking-widest">No articles in this category yet</p>

@@ -1,15 +1,14 @@
 import { PageTransition } from "@/components/layout/PageTransition";
-import { getBlogPost, getRelatedPosts } from "@/lib/blogData";
+import { useBlogPost } from "@/hooks/useBlogs";
 import { useRoute, Link } from "wouter";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Calendar, Clock, ChevronLeft, ArrowRight, Share2, Linkedin, Twitter } from "lucide-react";
+import { Calendar, Clock, ChevronLeft, ArrowRight, Share2, Linkedin, Twitter, Loader2 } from "lucide-react";
 
 export default function BlogPost() {
   const [, params] = useRoute("/blog/:slug");
-  const post = params ? getBlogPost(params.slug) : null;
-  const relatedPosts = post ? getRelatedPosts(post.slug, post.category) : [];
+  const { post, related, loading } = useBlogPost(params?.slug);
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -17,6 +16,17 @@ export default function BlogPost() {
     damping: 30,
     restDelta: 0.001
   });
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-black">
+        <div className="flex flex-col items-center gap-4 text-zinc-400">
+          <Loader2 className="w-8 h-8 animate-spin text-primary" />
+          <p className="text-sm uppercase tracking-widest font-bold">Loading article…</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!post) {
     return (
@@ -43,14 +53,14 @@ export default function BlogPost() {
         {/* Post Hero */}
         <section className="relative min-h-[88vh] flex flex-col justify-end overflow-hidden">
           <div className="absolute inset-0 z-0">
-            <img 
-              src={post.image} 
+            <img
+              src={post.image}
               alt={post.title}
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/30" />
           </div>
-          
+
           <div className="container mx-auto px-4 relative z-10 pt-24 pb-12 md:pb-16">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -75,6 +85,7 @@ export default function BlogPost() {
               <div className="flex flex-wrap items-center gap-6 text-zinc-400 uppercase tracking-widest text-xs font-semibold">
                 <span className="flex items-center gap-2"><Calendar className="w-4 h-4 text-primary" /> {post.date}</span>
                 <span className="flex items-center gap-2"><Clock className="w-4 h-4 text-primary" /> {post.readTime}</span>
+                {post.author && <span className="flex items-center gap-2">By {post.author}</span>}
               </div>
             </motion.div>
           </div>
@@ -103,7 +114,7 @@ export default function BlogPost() {
                       BE
                     </div>
                     <div>
-                      <div className="text-white font-bold uppercase tracking-tight">Balaji Engineering</div>
+                      <div className="text-white font-bold uppercase tracking-tight">{post.author ?? "Balaji Engineering"}</div>
                       <div className="text-zinc-500 text-xs uppercase tracking-widest">Precision Works</div>
                     </div>
                   </div>
@@ -118,11 +129,11 @@ export default function BlogPost() {
                 </div>
 
                 {/* Related Posts */}
-                {relatedPosts.length > 0 && (
+                {related.length > 0 && (
                   <div>
                     <h4 className="text-sm font-bold uppercase tracking-widest text-white mb-6 border-l-2 border-primary pl-4">Related Articles</h4>
                     <div className="space-y-6">
-                      {relatedPosts.map(rp => (
+                      {related.map(rp => (
                         <Link key={rp.slug} href={`/blog/${rp.slug}`} className="group block">
                           <div className="aspect-video rounded-lg overflow-hidden mb-3 border border-white/5">
                             <img src={rp.image} alt={rp.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
