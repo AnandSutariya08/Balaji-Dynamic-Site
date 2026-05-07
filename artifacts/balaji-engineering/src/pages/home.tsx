@@ -118,46 +118,46 @@ export default function Home() {
             <div className="absolute bottom-0 left-0 w-[600px] h-[300px] bg-primary/15 blur-[100px] rounded-full" />
           </div>
 
-          <div className="container relative z-10 mx-auto px-4 pt-20 md:pt-24">
+          <div className="container relative z-10 mx-auto px-4 pt-20 md:pt-20 lg:pt-24">
             <div className="max-w-3xl">
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
                 {/* Badge */}
                 <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1, duration: 0.7 }}
-                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 mb-6 md:mb-8">
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 mb-4 md:mb-5 lg:mb-7">
                   <span className="w-2 h-2 rounded-full bg-primary animate-pulse shrink-0" />
                   <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.25em] uppercase">EST. 2001 · NAVAGAM, SURAT · GUJARAT</span>
                 </motion.div>
 
                 {/* Headline */}
-                <h1 className="font-display font-black uppercase tracking-tighter leading-[0.88] text-white mb-5 md:mb-7">
+                <h1 className="font-display font-black uppercase tracking-tighter leading-[0.88] text-white mb-4 md:mb-5 lg:mb-7">
                   <motion.span initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2, duration: 0.75, ease: "easeOut" }}
-                    className="block text-[13vw] sm:text-[11vw] md:text-8xl lg:text-9xl">STEEL</motion.span>
+                    className="block text-[13vw] sm:text-[11vw] md:text-[8.5vw] lg:text-[7vw] 2xl:text-9xl">STEEL</motion.span>
                   <motion.span initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.32, duration: 0.75, ease: "easeOut" }}
-                    className="block text-[13vw] sm:text-[11vw] md:text-8xl lg:text-9xl text-transparent bg-clip-text bg-gradient-to-r from-[#e05555] via-[#AC3C3C] to-[#c44040]">PRECISION</motion.span>
+                    className="block text-[13vw] sm:text-[11vw] md:text-[8.5vw] lg:text-[7vw] 2xl:text-9xl text-transparent bg-clip-text bg-gradient-to-r from-[#e05555] via-[#AC3C3C] to-[#c44040]">PRECISION</motion.span>
                   <motion.span initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.44, duration: 0.75, ease: "easeOut" }}
-                    className="block text-[13vw] sm:text-[11vw] md:text-8xl lg:text-9xl text-white">MASTERS.</motion.span>
+                    className="block text-[13vw] sm:text-[11vw] md:text-[8.5vw] lg:text-[7vw] 2xl:text-9xl text-white">MASTERS.</motion.span>
                 </h1>
 
                 {/* Sub-text */}
                 <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.65, duration: 0.7 }}
-                  className="text-base sm:text-lg md:text-xl text-zinc-300 font-light leading-relaxed max-w-xl mb-8 md:mb-10">
+                  className="text-sm sm:text-base md:text-lg text-zinc-300 font-light leading-relaxed max-w-xl mb-5 md:mb-6 lg:mb-8">
                   CNC laser cutting, press bending &amp; plate rolling — engineered to ±0.1mm. Trusted by India's top infrastructure firms since 2001.
                 </motion.p>
 
                 {/* CTAs */}
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.6 }}
-                  className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                  <Button size="lg" className="h-13 sm:h-14 px-7 sm:px-10 text-sm font-black uppercase tracking-widest bg-primary hover:bg-[#c44040] text-white shadow-[0_0_40px_rgba(172,60,60,0.55)] border-none transition-all duration-300" asChild>
+                  className="flex flex-col sm:flex-row gap-3">
+                  <Button size="lg" className="h-11 sm:h-12 px-6 sm:px-8 text-xs sm:text-sm font-black uppercase tracking-widest bg-primary hover:bg-[#c44040] text-white shadow-[0_0_40px_rgba(172,60,60,0.55)] border-none transition-all duration-300" asChild>
                     <Link href="/services">Explore Services</Link>
                   </Button>
-                  <Button size="lg" variant="outline" className="h-13 sm:h-14 px-7 sm:px-10 text-sm font-black uppercase tracking-widest border-white/30 text-white hover:bg-white/10 hover:border-white/50 backdrop-blur-sm" asChild>
+                  <Button size="lg" variant="outline" className="h-11 sm:h-12 px-6 sm:px-8 text-xs sm:text-sm font-black uppercase tracking-widest border-white/30 text-white hover:bg-white/10 hover:border-white/50 backdrop-blur-sm" asChild>
                     <Link href="/contact">Request Quote</Link>
                   </Button>
                 </motion.div>
 
                 {/* Hero stats row */}
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1, duration: 0.7 }}
-                  className="flex items-center gap-6 sm:gap-8 mt-10 md:mt-14 pt-8 md:pt-10 border-t border-white/15">
+                  className="flex items-center gap-5 sm:gap-8 mt-7 md:mt-8 lg:mt-12 pt-5 md:pt-6 lg:pt-8 border-t border-white/15">
                   {[
                     { v: "20+", l: "Years" },
                     { v: "500+", l: "Projects" },
@@ -165,8 +165,8 @@ export default function Home() {
                     { v: "800T", l: "Press Brake" },
                   ].map((s, i) => (
                     <div key={i} className="text-center">
-                      <div className="text-lg sm:text-2xl md:text-3xl font-display font-black text-white leading-none">{s.v}</div>
-                      <div className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] text-white/50 uppercase mt-1">{s.l}</div>
+                      <div className="text-base sm:text-2xl md:text-2xl lg:text-3xl font-display font-black text-white leading-none">{s.v}</div>
+                      <div className="text-[8px] sm:text-[10px] font-bold tracking-[0.2em] text-white/50 uppercase mt-1">{s.l}</div>
                     </div>
                   ))}
                 </motion.div>
