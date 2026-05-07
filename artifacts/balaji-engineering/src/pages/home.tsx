@@ -334,13 +334,13 @@ export default function Home() {
               >
                 <img src={service.image} alt={service.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-                <div className="absolute bottom-5 left-5 right-5">
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-display font-black text-white uppercase tracking-tight mb-3">{service.title}</h3>
-                  <div className="space-y-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 translate-y-3 group-hover:translate-y-0">
+                <div className="absolute bottom-0 left-0 right-0 px-3 py-4">
+                  <h3 className="text-[11px] sm:text-sm md:text-base font-display font-black text-white uppercase tracking-tight line-clamp-1 mb-2">{service.title}</h3>
+                  <div className="space-y-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500 translate-y-2 group-hover:translate-y-0">
                     {service.subs.map((sub, j) => (
-                      <div key={j} className="flex items-center gap-2 text-zinc-300">
+                      <div key={j} className="flex items-center gap-1.5 text-zinc-300">
                         <div className="w-1 h-1 rounded-full bg-primary shrink-0" />
-                        <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest">{sub}</span>
+                        <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest line-clamp-1">{sub}</span>
                       </div>
                     ))}
                   </div>
