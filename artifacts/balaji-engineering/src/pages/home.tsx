@@ -222,7 +222,7 @@ export default function Home() {
                 { value: 25, label: "Cr. Turnover", suffix: " Cr", prefix: "₹ 5-", icon: TrendingUp }
               ].map((stat, i) => (
                 <div key={i} className="flex flex-col items-center text-center">
-                  <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-black text-[#1A1A1A] mb-3 md:mb-4">
+                  <div className="text-2xl sm:text-3xl md:text-4xl xl:text-4xl font-display font-black text-[#1A1A1A] mb-3 md:mb-4 whitespace-nowrap">
                     <Counter value={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
                   </div>
                   <div className="h-1 w-10 md:w-12 bg-primary mb-4 md:mb-6" />
