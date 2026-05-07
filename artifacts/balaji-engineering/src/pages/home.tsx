@@ -29,10 +29,12 @@ export default function Home() {
   ];
 
   const scrollCardIntoView = useCallback((index: number) => {
-    if (servicesScrollRef.current) {
-      const card = servicesScrollRef.current.children[index] as HTMLElement | undefined;
-      if (card) card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-    }
+    const container = servicesScrollRef.current;
+    if (!container) return;
+    const card = container.children[index] as HTMLElement | undefined;
+    if (!card) return;
+    const scrollLeft = card.offsetLeft - (container.clientWidth - card.offsetWidth) / 2;
+    container.scrollTo({ left: Math.max(0, scrollLeft), behavior: 'smooth' });
   }, []);
 
   const scrollToIndex = useCallback((index: number) => {
