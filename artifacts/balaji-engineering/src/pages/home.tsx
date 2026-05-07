@@ -238,9 +238,10 @@ export default function Home() {
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-10 lg:gap-24 items-center">
               <motion.div
-                initial={{ clipPath: 'inset(100% 0 0 0)' }}
-                whileInView={{ clipPath: 'inset(0% 0 0 0)' }}
-                transition={{ duration: 1.2, ease: "easeInOut" }}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
                 className="relative aspect-square rounded-2xl overflow-hidden group"
               >
                 <img src="/service-fabrication.png" alt="Fabrication Excellence" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="eager" fetchPriority="high" />
@@ -251,7 +252,7 @@ export default function Home() {
               <div ref={aboutTextRef} className="space-y-8 md:space-y-12">
                 <div className="reveal-line">
                   <span className="text-primary font-bold tracking-[0.3em] uppercase">Who We Are</span>
-                  <h2 className="text-4xl sm:text-5xl md:text-7xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4">
+                  <h2 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4">
                     Two Decades of<br />Steel & Precision
                   </h2>
                 </div>
