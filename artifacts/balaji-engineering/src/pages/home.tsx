@@ -328,7 +328,7 @@ export default function Home() {
             {services.map((service, i) => (
               <div
                 key={i}
-                className={`min-w-[180px] sm:min-w-[210px] md:min-w-[240px] h-[290px] sm:h-[340px] md:h-[400px] relative rounded-2xl overflow-hidden snap-center flex-shrink-0 border-2 transition-all duration-300 ${
+                className={`w-[160px] sm:w-[200px] md:w-[240px] min-w-0 h-[260px] sm:h-[320px] md:h-[400px] relative rounded-2xl overflow-hidden snap-center flex-shrink-0 border-2 transition-all duration-300 ${
                   i === activeService ? "border-primary/60 shadow-[0_0_20px_rgba(172,60,60,0.2)]" : "border-transparent"
                 } group`}
               >
