@@ -28,28 +28,29 @@ export default function Home() {
     { title: "Sheet Metal Cutting", image: "/service-cnc.png", subs: ["CNC Accuracy", "Thin & Thick Sheets", "Rapid Turnaround"] },
   ];
 
-  const CARD_WIDTH = 150; // px — must match min-w below
+  const scrollCardIntoView = useCallback((index: number) => {
+    if (servicesScrollRef.current) {
+      const card = servicesScrollRef.current.children[index] as HTMLElement | undefined;
+      if (card) card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+  }, []);
 
   const scrollToIndex = useCallback((index: number) => {
     const clamped = Math.max(0, Math.min(index, services.length - 1));
     setActiveService(clamped);
-    if (servicesScrollRef.current) {
-      servicesScrollRef.current.scrollTo({ left: clamped * (CARD_WIDTH + 20), behavior: 'smooth' });
-    }
-  }, [services.length]);
+    scrollCardIntoView(clamped);
+  }, [services.length, scrollCardIntoView]);
 
   const resetAutoPlay = useCallback(() => {
     if (autoPlayRef.current) clearInterval(autoPlayRef.current);
     autoPlayRef.current = setInterval(() => {
       setActiveService((prev) => {
         const next = (prev + 1) % services.length;
-        if (servicesScrollRef.current) {
-          servicesScrollRef.current.scrollTo({ left: next * (CARD_WIDTH + 20), behavior: 'smooth' });
-        }
+        scrollCardIntoView(next);
         return next;
       });
     }, 3000);
-  }, [services.length]);
+  }, [services.length, scrollCardIntoView]);
 
   useEffect(() => {
     resetAutoPlay();
@@ -325,7 +326,7 @@ export default function Home() {
             {services.map((service, i) => (
               <div
                 key={i}
-                className={`min-w-[150px] sm:min-w-[185px] md:min-w-[210px] h-[260px] sm:h-[320px] md:h-[380px] relative rounded-2xl overflow-hidden snap-center flex-shrink-0 border-2 transition-all duration-300 ${
+                className={`min-w-[180px] sm:min-w-[210px] md:min-w-[240px] h-[290px] sm:h-[340px] md:h-[400px] relative rounded-2xl overflow-hidden snap-center flex-shrink-0 border-2 transition-all duration-300 ${
                   i === activeService ? "border-primary/60 shadow-[0_0_20px_rgba(172,60,60,0.2)]" : "border-transparent"
                 } group`}
               >
