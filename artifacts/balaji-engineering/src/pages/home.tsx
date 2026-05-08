@@ -7,6 +7,7 @@ import { useRef, useEffect, useState, useCallback } from "react";
 import { ArrowRight, ChevronRight, ChevronLeft, CheckCircle2, Factory, Zap, ShieldCheck, Target, Award, Users, TrendingUp, BookOpen } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useBlogs } from "@/hooks/useBlogs";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,6 +17,8 @@ export default function Home() {
   const servicesScrollRef = useRef<HTMLDivElement>(null);
   const [activeService, setActiveService] = useState(0);
   const autoPlayRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const { posts: blogPosts } = useBlogs();
+  const previewPosts = blogPosts.slice(0, 3);
 
   const services = [
     { title: "Bending", image: "/service-bending.png", subs: ["Press Brake", "High Tonnage", "Complex Angles"] },
@@ -476,18 +479,22 @@ export default function Home() {
               </Button>
             </div>
             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12">
-              {[
-                { title: "Understanding CNC Laser Cutting Tolerances", cat: "Technical", slug: "cnc-laser-cutting-tolerances" },
-                { title: "How to Choose the Right Steel Grade for Bending", cat: "Guide", slug: "choosing-steel-grade-bending" },
-                { title: "Sheet Metal Fabrication Cost Factors in 2024", cat: "Industry", slug: "sheet-metal-fabrication-costs" }
-              ].map((post, i) => (
-                <Link key={i} href={`/blog/${post.slug}`} className="group">
+              {previewPosts.map((post, i) => (
+                <Link key={post.slug ?? i} href={`/blog/${post.slug}`} className="group">
                   <div className="aspect-video bg-[#EDEAE4] rounded-xl overflow-hidden mb-6 md:mb-8 border border-black/8">
-                    <div className="w-full h-full group-hover:bg-primary/10 transition-colors flex items-center justify-center">
-                      <BookOpen className="w-10 h-10 md:w-12 md:h-12 text-black/20 group-hover:text-primary transition-colors" />
-                    </div>
+                    {post.image ? (
+                      <img
+                        src={post.image}
+                        alt={post.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                    ) : (
+                      <div className="w-full h-full group-hover:bg-primary/10 transition-colors flex items-center justify-center">
+                        <BookOpen className="w-10 h-10 md:w-12 md:h-12 text-black/20 group-hover:text-primary transition-colors" />
+                      </div>
+                    )}
                   </div>
-                  <span className="text-primary font-bold text-xs uppercase tracking-widest">{post.cat}</span>
+                  <span className="text-primary font-bold text-xs uppercase tracking-widest">{post.category}</span>
                   <h4 className="text-xl md:text-2xl font-display font-black text-[#1A1A1A] uppercase tracking-tight mt-3 md:mt-4 group-hover:text-primary transition-colors">{post.title}</h4>
                 </Link>
               ))}
