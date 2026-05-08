@@ -3,6 +3,7 @@ import AdminLayout from "./Layout";
 import BlogForm from "./BlogForm";
 import { getBlogs, deleteBlog } from "@/lib/firestore/blogs";
 import { isFirebaseConfigured } from "@/lib/firebase";
+import { triggerCacheRefresh } from "@/lib/apiCache";
 import type { BlogPost } from "@/lib/firestore/types";
 import {
   BookOpen, Plus, Pencil, Trash2, ExternalLink,
@@ -47,6 +48,7 @@ export default function AdminBlogs() {
     try {
       await deleteBlog(id);
       setPosts((p) => p.filter((b) => b.id !== id));
+      triggerCacheRefresh();
     } catch (e: any) {
       setError(e.message || "Failed to delete.");
     } finally {
@@ -57,6 +59,7 @@ export default function AdminBlogs() {
   const openEdit = (post: BlogPost) => { setEditing(post); setShowForm(true); };
   const openAdd = () => { setEditing(null); setShowForm(true); };
   const closeForm = () => { setShowForm(false); setEditing(null); };
+  const handleSaved = () => { load(); triggerCacheRefresh(); };
 
   return (
     <AdminLayout>
@@ -156,7 +159,7 @@ export default function AdminBlogs() {
         <BlogForm
           post={editing}
           onClose={closeForm}
-          onSaved={load}
+          onSaved={handleSaved}
         />
       )}
     </AdminLayout>

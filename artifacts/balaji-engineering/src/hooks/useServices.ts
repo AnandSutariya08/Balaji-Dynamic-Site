@@ -1,21 +1,27 @@
 import { useState, useEffect } from "react";
-import { getServices } from "@/lib/firestore/services";
 import { staticServices } from "@/lib/servicesData";
-import { isFirebaseConfigured } from "@/lib/firebase";
 import type { Service } from "@/lib/firestore/types";
+
+async function fetchFromApi(): Promise<Service[] | null> {
+  try {
+    const res = await fetch("/api/services");
+    if (!res.ok) return null;
+    const data = await res.json();
+    return Array.isArray(data) && data.length > 0 ? data : null;
+  } catch {
+    return null;
+  }
+}
 
 export function useServices() {
   const [services, setServices] = useState<Service[]>(staticServices);
-  const [loading, setLoading] = useState(isFirebaseConfigured());
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!isFirebaseConfigured()) return;
-    setLoading(true);
-    getServices()
+    fetchFromApi()
       .then((data) => {
-        if (data.length > 0) setServices(data);
+        if (data) setServices(data);
       })
-      .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
 

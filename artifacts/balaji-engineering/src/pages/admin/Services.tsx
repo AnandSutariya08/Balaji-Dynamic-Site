@@ -3,6 +3,7 @@ import AdminLayout from "./Layout";
 import ServiceForm from "./ServiceForm";
 import { getServices, deleteService } from "@/lib/firestore/services";
 import { isFirebaseConfigured } from "@/lib/firebase";
+import { triggerCacheRefresh } from "@/lib/apiCache";
 import type { Service } from "@/lib/firestore/types";
 import {
   Settings, Plus, Pencil, Trash2, ExternalLink,
@@ -41,6 +42,7 @@ export default function AdminServices() {
     try {
       await deleteService(id);
       setServices((s) => s.filter((svc) => svc.id !== id));
+      triggerCacheRefresh();
     } catch (e: any) {
       setError(e.message || "Failed to delete.");
     } finally {
@@ -51,6 +53,7 @@ export default function AdminServices() {
   const openEdit = (svc: Service) => { setEditing(svc); setShowForm(true); };
   const openAdd = () => { setEditing(null); setShowForm(true); };
   const closeForm = () => { setShowForm(false); setEditing(null); };
+  const handleSaved = () => { load(); triggerCacheRefresh(); };
 
   return (
     <AdminLayout>
@@ -161,7 +164,7 @@ export default function AdminServices() {
         <ServiceForm
           service={editing}
           onClose={closeForm}
-          onSaved={load}
+          onSaved={handleSaved}
         />
       )}
     </AdminLayout>
