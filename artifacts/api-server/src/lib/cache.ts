@@ -1,5 +1,5 @@
-import { fetchCollection, isFirebaseConfigured } from "./firebase.js";
-import { logger } from "./logger.js";
+import { fetchCollection, isFirebaseConfigured } from "./firebase";
+import { logger } from "./logger";
 
 export interface BlogPost {
   id: string;
