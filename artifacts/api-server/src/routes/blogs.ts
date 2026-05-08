@@ -1,5 +1,5 @@
 import { Router, type IRouter } from "express";
-import { getBlogs } from "../lib/cache.js";
+import { getBlogs } from "../lib/cache";
 
 const router: IRouter = Router();
 

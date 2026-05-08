@@ -1,6 +1,6 @@
 import { Router, type IRouter } from "express";
-import { refreshCache, getCacheStatus } from "../lib/cache.js";
-import { logger } from "../lib/logger.js";
+import { refreshCache, getCacheStatus } from "../lib/cache";
+import { logger } from "../lib/logger";
 
 const router: IRouter = Router();
 
