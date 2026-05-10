@@ -13,11 +13,12 @@ import type { FormEvent } from "react";
 import { useState } from "react";
 import { addInquiry } from "@/lib/firestore/inquiries";
 import { isFirebaseConfigured } from "@/lib/firebase";
+import { siteConfig } from "@/lib/site";
 
 const contactInfo = [
-  { icon: MapPin, title: "Factory Address", lines: ["Navagam, Surat", "Gujarat – 395009", "India"], action: null },
-  { icon: Phone, title: "Direct Line", lines: ["+91-7942957640"], action: { href: "tel:+917942957640", label: "Call Now" } },
-  { icon: Mail, title: "Email Us", lines: ["info@balajiengineering.in"], action: { href: "mailto:info@balajiengineering.in", label: "Send Email" } },
+  { icon: MapPin, title: "Factory Address", lines: ["Plot No. 11, 12, Soham Industrial Estate", "NH 8 Kamrej, Navagam, Surat - 394185", "Gujarat, India"], action: null },
+  { icon: Phone, title: "Direct Line", lines: [siteConfig.phoneDisplay], action: { href: `tel:${siteConfig.phone}`, label: "Call Now" } },
+  { icon: Mail, title: "Email Us", lines: [siteConfig.email], action: { href: `mailto:${siteConfig.email}`, label: "Send Email" } },
   { icon: Clock, title: "Working Hours", lines: ["Mon – Sat: 9:00 AM – 7:00 PM", "Sunday: Closed"], action: null },
 ];
 
@@ -174,8 +175,8 @@ export default function ContactPage({
                 <div className="p-6 md:p-8 bg-primary/8 border border-primary/20 rounded-2xl">
                   <h4 className="text-base md:text-lg font-display font-black text-[#1A1A1A] uppercase tracking-tight mb-2">Prefer to call directly?</h4>
                   <p className="text-slate-500 text-sm mb-5 md:mb-6 font-light">Speak to our engineering team right now.</p>
-                  <a href="tel:+917942957640" className="flex items-center gap-3 text-xl md:text-2xl font-display font-black text-primary hover:text-[#1A1A1A] transition-colors">
-                    <Phone className="w-5 h-5 md:w-6 md:h-6" />+91-7942957640
+                  <a href={`tel:${siteConfig.phone}`} className="flex items-center gap-3 text-xl md:text-2xl font-display font-black text-primary hover:text-[#1A1A1A] transition-colors">
+                    <Phone className="w-5 h-5 md:w-6 md:h-6" />{siteConfig.phoneDisplay}
                   </a>
                 </div>
               </div>
@@ -267,7 +268,7 @@ export default function ContactPage({
                   <div className="text-[#1A1A1A] font-bold text-sm">Navagam, Surat</div>
                 </div>
               </div>
-              <a href="https://maps.google.com/?q=Navagam+Surat+Gujarat" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-primary text-xs font-bold uppercase tracking-widest hover:gap-3 transition-all">
+              <a href={siteConfig.mapUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-primary text-xs font-bold uppercase tracking-widest hover:gap-3 transition-all">
                 Get Directions <ArrowRight className="w-3 h-3" />
               </a>
             </div>
@@ -309,8 +310,8 @@ export default function ContactPage({
             <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7 }}>
               <h2 className="text-4xl sm:text-5xl md:text-7xl font-display font-black text-white uppercase tracking-tighter mb-5 md:mb-6 leading-[0.9]">Still Have<br />Questions?</h2>
               <p className="text-zinc-400 font-light text-base md:text-lg max-w-lg mx-auto mb-10 md:mb-12">Our team is available 6 days a week. Pick up the phone — we love talking shop.</p>
-              <a href="tel:+917942957640" className="inline-flex items-center gap-3 md:gap-4 text-3xl sm:text-4xl md:text-5xl font-display font-black text-white hover:text-primary transition-colors">
-                <Phone className="w-8 h-8 md:w-10 md:h-10 text-primary" />+91-7942957640
+              <a href={`tel:${siteConfig.phone}`} className="inline-flex items-center gap-3 md:gap-4 text-3xl sm:text-4xl md:text-5xl font-display font-black text-white hover:text-primary transition-colors">
+                <Phone className="w-8 h-8 md:w-10 md:h-10 text-primary" />{siteConfig.phoneDisplay}
               </a>
             </motion.div>
           </div>

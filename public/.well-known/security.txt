@@ -1,4 +1,4 @@
 Contact: mailto:info@balajiengineering.in
 Expires: 2027-05-10T00:00:00.000Z
 Preferred-Languages: en, hi, gu
-Canonical: https://sheetmetalbendingworks.com/.well-known/security.txt
+Canonical: https://sheetmetallasercutting.com/.well-known/security.txt

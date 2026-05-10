@@ -54,12 +54,18 @@ Summary: ${body}`;
 - Alternate name: ${siteConfig.alternateName}
 - Founded: ${siteConfig.foundingDate}
 - Type: ${siteConfig.businessType}
+- Legal status: ${siteConfig.legalStatusOfFirm}
+- Contact person: ${siteConfig.contactPerson}
 - GST: ${siteConfig.gstNumber}
+- Annual turnover: ${siteConfig.annualTurnover}
+- Employee range: ${siteConfig.employeeRange}
 - Phone: ${siteConfig.phoneDisplay}
 - Email: ${siteConfig.email}
 - Address: ${siteConfig.address.streetAddress}, ${siteConfig.address.locality}, ${siteConfig.address.region}, ${siteConfig.address.postalCode}, ${siteConfig.address.country}
 - Service areas: ${siteConfig.serviceAreas.join(", ")}
 - Industries: ${siteConfig.industries.join(", ")}
+- Capabilities: ${siteConfig.capabilities.join(", ")}
+- Featured clients: ${siteConfig.featuredClients.join(", ")}
 
 ## Services
 

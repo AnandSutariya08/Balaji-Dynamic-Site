@@ -9,16 +9,16 @@ import {
 
 const title = "Contact Balaji Engineering Works";
 const description =
-  "Contact Balaji Engineering Works for quotes, fabrication inquiries, sheet metal bending, laser cutting, and steel fabrication projects in Surat, Gujarat.";
+  "Contact Balaji Engineering Works in Navagam, Surat for sheet metal bending, CNC laser cutting, plasma cutting, fabrication, and industrial quote requests.";
 
 export const metadata = buildMetadata({
   title,
   description,
   path: "/contact",
   keywords: [
-    "contact sheet metal bending works",
+    "contact Balaji Engineering Works Surat",
     "request fabrication quote Surat",
-    "contact steel fabrication company Gujarat",
+    "contact laser cutting company Gujarat",
   ],
 });
 

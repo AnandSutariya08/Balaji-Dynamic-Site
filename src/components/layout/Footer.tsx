@@ -13,8 +13,8 @@ const quickLinks = [
 const capabilities = [
   "Sheet Metal Bending",
   "CNC Laser Cutting",
+  "CNC Plasma Cutting",
   "Plate Rolling",
-  "Heavy Fabrication",
   "Profile Cutting",
   "Steel Punching",
 ];
@@ -80,12 +80,13 @@ export function Footer() {
               </div>
             </Link>
             <p className="mb-6 max-w-xs text-sm leading-relaxed text-white/40">
-              Two decades of precision metal fabrication from the heart of Gujarat.
-              CNC cutting, bending, rolling, punching - all under one roof.
+              Manufacturer and service provider of sheet metal bending, CNC laser
+              cutting, plasma cutting, rolling, punching, and fabrication from
+              Surat, Gujarat.
             </p>
             <div className="flex flex-col gap-1.5 font-mono text-xs text-white/30">
-              <span>GST: 24BCUPS8314Q1ZK</span>
-              <span>Est. 2001 · Navagam, Surat</span>
+              <span>GST: {siteConfig.gstNumber}</span>
+              <span>Est. {siteConfig.foundingDate} · {siteConfig.address.locality}</span>
             </div>
           </div>
 
@@ -135,9 +136,9 @@ export function Footer() {
                   <MapPin className="h-3.5 w-3.5 text-primary" />
                 </div>
                 <span className="text-sm leading-relaxed text-white/50">
-                  Navagam, Surat,
+                  Plot No. 11, 12 Soham Industrial Estate,
                   <br />
-                  Gujarat - 395009, India
+                  NH 8 Kamrej, Navagam, Surat - {siteConfig.address.postalCode}
                 </span>
               </li>
               <li className="flex items-center gap-3">
@@ -188,7 +189,7 @@ export function Footer() {
             <div className="flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
               <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-primary/80">
-                Active Since 2001
+                Active Since {siteConfig.foundingDate}
               </span>
             </div>
           </div>

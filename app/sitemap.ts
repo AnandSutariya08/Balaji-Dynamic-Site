@@ -92,5 +92,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       images: post.image ? uniqueImages([absoluteUrl(post.image)]) : undefined,
     }));
 
-  return [...staticEntries, ...blogEntries];
+  const serviceEntries = services.map((service) => ({
+    url: `${siteConfig.url}/services/${service.id}`,
+    lastModified: toDate(service.updatedAt ?? service.createdAt),
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+    images: service.image ? uniqueImages([absoluteUrl(service.image)]) : undefined,
+  }));
+
+  return [...staticEntries, ...serviceEntries, ...blogEntries];
 }

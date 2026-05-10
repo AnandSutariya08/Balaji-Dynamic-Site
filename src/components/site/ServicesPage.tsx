@@ -119,9 +119,14 @@ export default function ServicesPage({
                       </div>
                     ))}
                   </div>
-                  <Button className="w-full sm:w-fit h-12 md:h-14 px-6 md:px-8 font-bold uppercase tracking-widest bg-primary hover:bg-primary/90 text-white shadow-[0_0_20px_rgba(172,60,60,0.25)] border-none text-sm" asChild>
-                    <Link href={`/contact?service=${service.id}`}>Request Quote <ArrowRight className="ml-2 w-4 h-4" /></Link>
-                  </Button>
+                  <div className="flex flex-col gap-3 sm:flex-row">
+                    <Button variant="outline" className="w-full sm:w-fit h-12 md:h-14 px-6 md:px-8 font-bold uppercase tracking-widest border-black/15 text-[#1A1A1A] hover:bg-black/5 text-sm" asChild>
+                      <Link href={`/services/${service.id}`}>Learn More <ArrowRight className="ml-2 w-4 h-4" /></Link>
+                    </Button>
+                    <Button className="w-full sm:w-fit h-12 md:h-14 px-6 md:px-8 font-bold uppercase tracking-widest bg-primary hover:bg-primary/90 text-white shadow-[0_0_20px_rgba(172,60,60,0.25)] border-none text-sm" asChild>
+                      <Link href={`/contact?service=${service.id}`}>Request Quote <ArrowRight className="ml-2 w-4 h-4" /></Link>
+                    </Button>
+                  </div>
                 </div>
               </motion.div>
             ))

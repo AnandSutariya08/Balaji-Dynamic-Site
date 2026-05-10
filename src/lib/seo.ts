@@ -132,14 +132,31 @@ export function createOrganizationJsonLd(): SchemaObject {
     "@id": `${siteConfig.url}#organization`,
     name: siteConfig.legalName,
     alternateName: siteConfig.alternateName,
+    slogan: siteConfig.slogan,
     url: siteConfig.url,
     logo: absoluteUrl("/logo.svg"),
     image: absoluteUrl(siteConfig.ogImage),
     email: siteConfig.email,
     telephone: siteConfig.phone,
     foundingDate: siteConfig.foundingDate,
+    taxID: siteConfig.gstNumber,
     address: getAddressSchema(),
     knowsAbout: siteConfig.industries,
+    numberOfEmployees: {
+      "@type": "QuantitativeValue",
+      name: siteConfig.employeeRange,
+    },
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "sales",
+        name: siteConfig.contactPerson,
+        telephone: siteConfig.phone,
+        email: siteConfig.email,
+        areaServed: "IN",
+        availableLanguage: ["English", "Hindi", "Gujarati"],
+      },
+    ],
   };
 }
 
@@ -159,12 +176,18 @@ export function createLocalBusinessJsonLd(): SchemaObject {
     email: siteConfig.email,
     foundingDate: siteConfig.foundingDate,
     priceRange: siteConfig.priceRange,
+    taxID: siteConfig.gstNumber,
     address: getAddressSchema(),
     hasMap: siteConfig.mapUrl,
     areaServed: siteConfig.serviceAreas.map((name) => ({
       "@type": "AdministrativeArea",
       name,
     })),
+    knowsAbout: [...siteConfig.industries, ...siteConfig.capabilities],
+    numberOfEmployees: {
+      "@type": "QuantitativeValue",
+      name: siteConfig.employeeRange,
+    },
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
@@ -177,12 +200,16 @@ export function createLocalBusinessJsonLd(): SchemaObject {
       {
         "@type": "ContactPoint",
         contactType: "sales",
+        name: siteConfig.contactPerson,
         telephone: siteConfig.phone,
         email: siteConfig.email,
         areaServed: "IN",
         availableLanguage: ["English", "Hindi", "Gujarati"],
       },
     ],
+    hasOfferCatalog: {
+      "@id": `${siteConfig.url}#offer-catalog`,
+    },
   };
 }
 
@@ -194,16 +221,15 @@ export function createOfferCatalogJsonLd(services: Service[]): SchemaObject {
     name: "Sheet Metal Fabrication Services",
     url: absoluteUrl("/services"),
     itemListElement: services.map((service, index) => ({
-      "@type": "OfferCatalog",
-      "@id": `${absoluteUrl(`/services#${service.id}`)}#catalog-item`,
+      "@type": "ListItem",
       position: index + 1,
-      name: service.title,
-      description: service.description,
-      itemListElement: service.features.map((feature, featureIndex) => ({
-        "@type": "ListItem",
-        position: featureIndex + 1,
-        name: feature,
-      })),
+      itemOffered: {
+        "@type": "Service",
+        name: service.title,
+        description: service.description,
+        url: absoluteUrl(`/services/${service.id}`),
+        areaServed: siteConfig.serviceAreas,
+      },
     })),
   };
 }
@@ -293,7 +319,7 @@ export function createServicesItemListJsonLd(services: Service[]): SchemaObject 
     itemListElement: services.map((service, index) => ({
       "@type": "ListItem",
       position: index + 1,
-      url: absoluteUrl(`/services#${service.id}`),
+      url: absoluteUrl(`/services/${service.id}`),
       name: service.title,
       description: service.description,
     })),
@@ -312,7 +338,7 @@ export function createServiceJsonLd(service: Service): SchemaObject {
     },
     areaServed: siteConfig.serviceAreas,
     image: absoluteUrl(service.image),
-    url: absoluteUrl(`/services#${service.id}`),
+    url: absoluteUrl(`/services/${service.id}`),
     brand: {
       "@type": "Brand",
       name: siteConfig.name,

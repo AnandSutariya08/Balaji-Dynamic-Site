@@ -1,8 +1,8 @@
 /* TEAM */
 Company: Balaji Engineering Works
-Website: https://sheetmetalbendingworks.com
-Location: Navagam, Surat, Gujarat, India
+Website: https://sheetmetallasercutting.com
+Location: Plot No. 11, 12, Soham Industrial Estate, NH 8 Kamrej, Navagam, Surat - 394185, Gujarat, India
 
 /* SITE */
 Stack: Next.js, TypeScript, Tailwind CSS
-Primary focus: Sheet metal bending, CNC laser cutting, plate rolling, steel fabrication
+Primary focus: Sheet metal forming, CNC laser cutting, CNC plasma cutting, sheet bending, plate rolling, profile cutting, and steel fabrication

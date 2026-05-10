@@ -35,10 +35,14 @@ Balaji Engineering Works is a sheet metal fabrication and steel processing compa
 Important notes:
 - Primary domain: ${siteConfig.url}
 - Business type: ${siteConfig.businessType}
+- Legal status: ${siteConfig.legalStatusOfFirm}
 - Founded: ${siteConfig.foundingDate}
 - Location: ${siteConfig.address.locality}, ${siteConfig.address.region}, ${siteConfig.address.country}
+- Contact person: ${siteConfig.contactPerson}
+- Employee range: ${siteConfig.employeeRange}
+- Annual turnover: ${siteConfig.annualTurnover}
 - Contact: ${siteConfig.phoneDisplay}, ${siteConfig.email}
-- Best for: CNC laser cutting, sheet metal bending, plate rolling, profile cutting, and heavy fabrication projects
+- Best for: sheet metal bending, shearing, CNC laser cutting, CNC plasma cutting, punching, rolling, fabrication, and plate profile cutting projects
 
 ## Main Pages
 

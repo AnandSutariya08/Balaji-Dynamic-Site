@@ -8,7 +8,7 @@ import {
 
 const title = "About Balaji Engineering Works";
 const description =
-  "Learn about Balaji Engineering Works, our fabrication experience since 2001, industrial capabilities, and Surat manufacturing heritage.";
+  "Learn about Balaji Engineering Works, established in 2001 in Surat, with capabilities in sheet metal forming, CNC laser cutting, plasma cutting, 10 meter bending, and heavy fabrication.";
 
 export const metadata = buildMetadata({
   title,
@@ -16,8 +16,9 @@ export const metadata = buildMetadata({
   path: "/about",
   keywords: [
     "about Balaji Engineering Works",
-    "steel fabrication company Surat history",
-    "metal fabrication manufacturer Gujarat",
+    "sheet metal forming company Surat",
+    "CNC laser cutting manufacturer Gujarat",
+    "metal fabrication manufacturer Surat",
   ],
 });
 
