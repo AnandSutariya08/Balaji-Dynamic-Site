@@ -9,12 +9,12 @@ import { useServices } from "@/hooks/useServices";
 import type { Service } from "@/lib/firestore/types";
 
 const capabilities = [
-  { label: "CNC Press Brakes", value: "5 machines, up to 800T" },
-  { label: "Fiber Laser Cutters", value: "3000 × 6000mm bed" },
-  { label: "Plate Rolling Machines", value: "4-roll, up to 60mm" },
+  { label: "CNC Press Brakes", value: "Multiple machines for sheet and plate bending" },
+  { label: "Fiber Laser Cutting", value: "8000 x 2500 mm bed, 6 kW source" },
+  { label: "Plate Rolling Machines", value: "Up to 2500 mm x 16 mm jobs" },
   { label: "CNC Profile Cutters", value: "Oxy + Plasma" },
-  { label: "Hydraulic Shears", value: "Up to 4000mm width" },
-  { label: "Quality Lab", value: "CMM + Optical Inspection" },
+  { label: "Hydraulic Shears", value: "Up to 5000 mm cutting length" },
+  { label: "Fabrication Setup", value: "Welding, assembly, and production support" },
 ];
 
 const materials = [
@@ -47,12 +47,12 @@ export default function ServicesPage({
           <div className="container relative z-10 mx-auto px-4 pt-28 pb-16 md:pt-32 md:pb-24">
             <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }} className="max-w-4xl">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-primary mb-8 md:mb-10">
-                <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase">{services.length} Core Capabilities · Heavy Fabrication · Gujarat</span>
+                <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase">{services.length} Core Capabilities · Surat Manufacturer · Gujarat</span>
               </div>
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-display font-black text-white uppercase tracking-tighter leading-[0.85] mb-6 md:mb-8">
-                Our<br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-[#AC3C3C] to-[#e05555]">Capabilities</span>
+                Sheet Metal<br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-[#AC3C3C] to-[#e05555]">Services</span>
               </h1>
-              <p className="text-base sm:text-xl text-zinc-300 font-light leading-relaxed max-w-2xl">Advanced CNC machinery. 20 years of expertise. End-to-end fabrication from raw plate to finished component — all under one roof in Surat, Gujarat.</p>
+              <p className="text-base sm:text-xl text-zinc-300 font-light leading-relaxed max-w-2xl">Explore sheet metal bending, CNC laser cutting, steel cutting, profile cutting, plate rolling, base plates, and heavy fabrication services delivered from our Surat facility.</p>
             </motion.div>
           </div>
         </section>
@@ -84,6 +84,7 @@ export default function ServicesPage({
             services.map((service, i) => (
               <motion.div
                 key={service.id}
+                id={service.id}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.6 }}
@@ -119,9 +120,14 @@ export default function ServicesPage({
                       </div>
                     ))}
                   </div>
-                  <Button className="w-full sm:w-fit h-12 md:h-14 px-6 md:px-8 font-bold uppercase tracking-widest bg-primary hover:bg-primary/90 text-white shadow-[0_0_20px_rgba(172,60,60,0.25)] border-none text-sm" asChild>
-                    <Link href={`/contact?service=${service.id}`}>Request Quote <ArrowRight className="ml-2 w-4 h-4" /></Link>
-                  </Button>
+                  <div className="flex flex-col gap-3 sm:flex-row">
+                    <Button className="w-full sm:w-fit h-12 md:h-14 px-6 md:px-8 font-bold uppercase tracking-widest bg-primary hover:bg-primary/90 text-white shadow-[0_0_20px_rgba(172,60,60,0.25)] border-none text-sm" asChild>
+                      <Link href={`/services/${service.id}`}>View Details <ArrowRight className="ml-2 w-4 h-4" /></Link>
+                    </Button>
+                    <Button variant="outline" className="w-full sm:w-fit h-12 md:h-14 px-6 md:px-8 font-bold uppercase tracking-widest border-black/15 text-[#1A1A1A] hover:bg-black/5 text-sm" asChild>
+                      <Link href={`/contact?service=${service.id}`}>Request Quote</Link>
+                    </Button>
+                  </div>
                 </div>
               </motion.div>
             ))

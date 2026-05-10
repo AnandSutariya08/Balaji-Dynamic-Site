@@ -23,7 +23,6 @@ export function SiteSmoothScroll() {
     const lenis = new Lenis({
       duration: 1,
       smoothWheel: true,
-      smoothTouch: false,
       wheelMultiplier: 0.9,
       touchMultiplier: 1,
       lerp: 0.08,

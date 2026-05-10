@@ -42,7 +42,13 @@ export async function generateMetadata({
     modifiedTime: post.updatedAt ?? post.createdAt ?? post.date,
     authors: [post.author || "Balaji Engineering Works"],
     section: post.category,
-    keywords: [post.category, post.title, "sheet metal fabrication blog"],
+    keywords: [
+      post.category,
+      post.title,
+      "sheet metal fabrication blog",
+      "Balaji Engineering Works",
+      "Surat fabrication guide",
+    ],
   });
 }
 

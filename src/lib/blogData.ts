@@ -11,6 +11,101 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "sheet-metal-bending-service-surat-guide",
+    title: "How to Choose a Sheet Metal Bending Service in Surat",
+    category: "Guide",
+    date: "April 25, 2025",
+    readTime: "6 min read",
+    excerpt:
+      "A practical guide for buyers comparing sheet metal bending service providers in Surat for quality, quotation speed, machine capability, and delivery support.",
+    content: `
+      <h2>What Buyers Should Check Before Finalizing a Bending Vendor</h2>
+      <p>If you are searching for a sheet metal bending service in Surat, price alone should not decide the vendor. The right partner should understand your drawing, confirm bending feasibility, and deliver parts that fit the next fabrication stage without rework.</p>
+
+      <h3>1. Confirm Machine Capability Against Your Job</h3>
+      <p>Ask whether the supplier can handle your material thickness, bend length, and quantity. A shop that works well for light sheet jobs may not be suitable for heavier plate bending or structural work.</p>
+
+      <h3>2. Check Whether They Review Drawings Properly</h3>
+      <p>A serious fabrication company will review DXF, DWG, STEP, or PDF drawings before quoting. This helps catch bend sequence issues, inside radius problems, and material limitations early.</p>
+
+      <h3>3. Look for Combined Processing Support</h3>
+      <p>Many projects move faster when the same vendor can coordinate laser cutting, sheet bending, plate rolling, and fabrication. This reduces transport, handoff mistakes, and lead time.</p>
+
+      <h3>4. Ask About Quotation and Delivery Discipline</h3>
+      <p>Fast commercial response matters. If a vendor takes too long to quote, production often moves slowly too. Buyers usually benefit from a supplier who can review drawings quickly and communicate clearly about capacity.</p>
+
+      <h3>5. Evaluate Local Advantage</h3>
+      <p>For buyers in Surat and Gujarat, local supply helps with site visits, urgent follow-ups, and faster logistics. This becomes especially valuable for repeat fabrication work and schedule-sensitive jobs.</p>
+
+      <p>At Balaji Engineering Works, we support buyers looking for practical sheet metal bending service with drawing review, fabrication coordination, and quick response from our Surat facility.</p>
+    `,
+    image: "/service-bending.png"
+  },
+  {
+    slug: "cnc-laser-cutting-vs-plasma-cutting",
+    title: "CNC Laser Cutting vs Plasma Cutting: Which One Should You Choose?",
+    category: "Guide",
+    date: "April 10, 2025",
+    readTime: "7 min read",
+    excerpt:
+      "Understand when CNC laser cutting is better than plasma cutting and how buyers can choose the right process for cost, speed, thickness, and profile quality.",
+    content: `
+      <h2>Two Popular Cutting Processes, Different Use Cases</h2>
+      <p>Industrial buyers often compare CNC laser cutting and plasma cutting when planning a fabrication job. Both processes are useful, but they solve different problems depending on thickness, edge finish, tolerance, and budget.</p>
+
+      <h3>Where CNC Laser Cutting Performs Better</h3>
+      <p>Laser cutting is often preferred for thinner sheets, cleaner profile quality, and parts that need tighter dimensional control. It is especially useful when the component later goes for bending, assembly, or direct fit-up.</p>
+
+      <h3>Where Plasma Cutting Makes More Sense</h3>
+      <p>Plasma cutting is widely used for thicker industrial plate jobs and custom profile work where productivity and cost efficiency matter more than fine edge quality. It is a practical choice for structural and heavy fabrication components.</p>
+
+      <h3>Questions Buyers Should Ask</h3>
+      <ul>
+        <li><strong>What is the material and thickness?</strong> This usually decides the process first.</li>
+        <li><strong>Does the part need cleaner edge quality?</strong> Laser cutting often wins here.</li>
+        <li><strong>Is this for thick plate fabrication?</strong> Plasma or oxy-fuel may be more practical.</li>
+        <li><strong>Will the part be bent later?</strong> More accurate cut quality can help downstream operations.</li>
+      </ul>
+
+      <h3>Best Result: Let the Vendor Recommend the Process</h3>
+      <p>Instead of selecting a process only by name, send the drawing and application. A fabrication company with both cutting knowledge and downstream manufacturing understanding can suggest the best option for performance and cost.</p>
+
+      <p>Balaji Engineering Works supports both fabrication planning and production-oriented cutting discussions for buyers in Surat, Gujarat, and nearby industrial regions.</p>
+    `,
+    image: "/service-cnc.png"
+  },
+  {
+    slug: "fabrication-quote-checklist-india",
+    title: "What to Send for a Faster Fabrication Quote",
+    category: "Technical",
+    date: "March 30, 2025",
+    readTime: "5 min read",
+    excerpt:
+      "Send the right files and production details the first time to get a faster, more accurate quote for bending, laser cutting, profile cutting, or heavy fabrication work.",
+    content: `
+      <h2>Why Some Fabrication Quotes Move Faster Than Others</h2>
+      <p>Many quotation delays happen because the supplier has to ask for missing technical details. If you send the right data from the start, a fabrication company can review the job faster and quote with fewer revisions.</p>
+
+      <h3>1. Drawing File</h3>
+      <p>Share DXF, DWG, STEP, or a clear PDF drawing. If the job includes cutting and bending, make sure the flat pattern and formed dimensions are both understandable.</p>
+
+      <h3>2. Material Grade and Thickness</h3>
+      <p>Mild steel, stainless steel, and structural plate all affect process choice, machine setup, and pricing. Mention the exact thickness wherever possible.</p>
+
+      <h3>3. Quantity and Repeat Requirement</h3>
+      <p>Quoting one sample piece is different from quoting a repeat batch. Clarify whether the job is a prototype, trial lot, or regular production requirement.</p>
+
+      <h3>4. Process Scope</h3>
+      <p>Specify whether you need only laser cutting, only bending, only profile cutting, or combined processing. Clear scope helps reduce confusion and speeds up costing.</p>
+
+      <h3>5. Delivery Timeline</h3>
+      <p>If the job is urgent, say so early. A supplier can often respond better when timeline expectations are known before planning starts.</p>
+
+      <p>For buyers working with Balaji Engineering Works, sharing drawing, material, thickness, quantity, and delivery target together usually leads to the fastest commercial response.</p>
+    `,
+    image: "/service-fabrication.png"
+  },
+  {
     slug: "cnc-laser-cutting-tolerances",
     title: "Understanding CNC Laser Cutting Tolerances",
     category: "Technical",

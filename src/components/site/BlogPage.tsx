@@ -98,6 +98,46 @@ export default function BlogPage({
           </div>
         </section>
 
+        <section className="border-y border-black/8 bg-[#EDEAE4] py-12 md:py-16">
+          <div className="container mx-auto px-4">
+            <div className="grid gap-4 md:grid-cols-3">
+              {[
+                {
+                  title: "Sheet Bending Guides",
+                  desc: "Learn what buyers should check before choosing a bending vendor in Surat.",
+                  href: "/services/sheet-bending",
+                },
+                {
+                  title: "CNC Laser Cutting Knowledge",
+                  desc: "Compare laser cutting, profile cutting, and fabrication process choices.",
+                  href: "/services/laser-cutting",
+                },
+                {
+                  title: "Profile and Plate Cutting",
+                  desc: "Find the right process for thick plate, flanges, and custom shapes.",
+                  href: "/services/profile-cutting",
+                },
+              ].map((card) => (
+                <Link
+                  key={card.href}
+                  href={card.href}
+                  className="rounded-2xl border border-black/8 bg-[#F7F5F1] p-6 transition-colors hover:border-primary/40 hover:bg-white"
+                >
+                  <h2 className="text-xl font-display font-black uppercase tracking-tight text-[#1A1A1A]">
+                    {card.title}
+                  </h2>
+                  <p className="mt-3 text-sm font-light leading-relaxed text-slate-500">
+                    {card.desc}
+                  </p>
+                  <span className="mt-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary">
+                    Explore Service <ArrowRight className="w-3.5 h-3.5" />
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Loading state */}
         {loading && (
           <div className="flex items-center justify-center gap-2 py-10 text-slate-400 text-sm bg-[#F7F5F1]">

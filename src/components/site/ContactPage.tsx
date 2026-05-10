@@ -9,23 +9,24 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { Mail, MapPin, Phone, Clock, CheckCircle2, ArrowRight, Zap } from "lucide-react";
+import Link from "next/link";
 import type { FormEvent } from "react";
 import { useState } from "react";
 import { addInquiry } from "@/lib/firestore/inquiries";
 import { isFirebaseConfigured } from "@/lib/firebase";
 
 const contactInfo = [
-  { icon: MapPin, title: "Factory Address", lines: ["Navagam, Surat", "Gujarat – 395009", "India"], action: null },
+  { icon: MapPin, title: "Factory Address", lines: ["Plot No. 11, 12, Soham Industrial Estate", "NH 8, Kamrej, Navagam, Surat - 394185", "Gujarat, India"], action: null },
   { icon: Phone, title: "Direct Line", lines: ["+91-7942957640"], action: { href: "tel:+917942957640", label: "Call Now" } },
   { icon: Mail, title: "Email Us", lines: ["info@balajiengineering.in"], action: { href: "mailto:info@balajiengineering.in", label: "Send Email" } },
-  { icon: Clock, title: "Working Hours", lines: ["Mon – Sat: 9:00 AM – 7:00 PM", "Sunday: Closed"], action: null },
+  { icon: Clock, title: "Response Support", lines: ["Mon - Sat project assistance", "Share drawings for faster quotes"], action: null },
 ];
 
 const faqs = [
   { q: "How fast can you deliver a quote?", a: "We aim to provide quotes within 4–8 business hours for standard jobs. Send us your DXF/DWG files and material specs for the fastest response." },
   { q: "What file formats do you accept?", a: "We accept DXF, DWG, STEP, IGES, PDF drawings, and sketched dimensions. Our engineers will review every submission for manufacturability." },
   { q: "What is your minimum order quantity?", a: "We accept orders from 1 piece to full production runs. No minimum order restriction — we serve both prototypes and large batch contracts." },
-  { q: "Do you offer on-site pickup?", a: "Yes. You can arrange collection directly from our Navagam facility. We also provide logistics coordination for delivery across Gujarat and pan-India." },
+  { q: "Do you offer on-site pickup?", a: "Yes. You can arrange collection directly from our Kamrej, Navagam facility in Surat. We also provide logistics coordination for delivery across Gujarat and pan-India." },
 ];
 
 export default function ContactPage({
@@ -88,9 +89,9 @@ export default function ContactPage({
                 <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase">Response within 24 Hours</span>
               </div>
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-display font-black text-white uppercase tracking-tighter leading-[0.85] mb-6 md:mb-8">
-                Let's<br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-[#AC3C3C] to-[#e05555]">Talk Steel.</span>
+                Contact<br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-[#AC3C3C] to-[#e05555]">Balaji.</span>
               </h1>
-              <p className="text-base sm:text-xl text-zinc-300 font-light leading-relaxed max-w-2xl">Tell us about your project — dimensions, material, quantity, timeline. Our engineering team will come back to you with a precise quote and a production plan.</p>
+              <p className="text-base sm:text-xl text-zinc-300 font-light leading-relaxed max-w-2xl">Tell us about your bending, laser cutting, rolling, fabrication, or steel processing requirement. Our Surat team will respond with a clear quote and production guidance.</p>
             </motion.div>
           </div>
         </section>
@@ -165,7 +166,7 @@ export default function ContactPage({
                     </div>
                     <div>
                       <div className="text-[10px] font-bold tracking-widest text-slate-400 uppercase mb-1">Established</div>
-                      <div className="text-[#1A1A1A] font-bold text-sm">2001 · Navagam, Surat</div>
+                      <div className="text-[#1A1A1A] font-bold text-sm">2001 · Kamrej, Navagam, Surat</div>
                     </div>
                   </div>
                 </div>
@@ -251,7 +252,7 @@ export default function ContactPage({
         <section className="relative overflow-hidden border-y border-black/8">
           <div className="h-[350px] sm:h-[500px] w-full bg-[#EDEAE4] relative">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3720.999999!2d72.85!3d21.18!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sNavagam%2C+Surat%2C+Gujarat!5e0!3m2!1sen!2sin!4v1000000000000"
+              src="https://www.google.com/maps?q=Balaji+Engineering+Works+Plot+No.+11+12+Soham+Industrial+Estate+NH+8+Kamrej+Navagam+Surat+394185&output=embed"
               width="100%" height="100%"
               style={{ border: 0, filter: "saturate(0.4) contrast(0.9) brightness(1.05)" }}
               allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"
@@ -264,10 +265,10 @@ export default function ContactPage({
                 </div>
                 <div>
                   <div className="text-[10px] font-bold tracking-widest text-slate-500 uppercase">Location</div>
-                  <div className="text-[#1A1A1A] font-bold text-sm">Navagam, Surat</div>
+                  <div className="text-[#1A1A1A] font-bold text-sm">Kamrej, Navagam, Surat</div>
                 </div>
               </div>
-              <a href="https://maps.google.com/?q=Navagam+Surat+Gujarat" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-primary text-xs font-bold uppercase tracking-widest hover:gap-3 transition-all">
+              <a href="https://maps.google.com/?q=Balaji+Engineering+Works+Plot+No.+11+12+Soham+Industrial+Estate+NH+8+Kamrej+Navagam+Surat+394185" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-primary text-xs font-bold uppercase tracking-widest hover:gap-3 transition-all">
                 Get Directions <ArrowRight className="w-3 h-3" />
               </a>
             </div>
@@ -299,6 +300,38 @@ export default function ContactPage({
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16 md:py-24 bg-[#F7F5F1] border-t border-black/8">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-10 md:mb-14">
+              <span className="text-primary font-bold tracking-[0.3em] uppercase text-sm">Popular Inquiries</span>
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4">
+                Choose a Service Before You Contact Us
+              </h2>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+              {[
+                { title: "Sheet Bending Service", href: "/services/sheet-bending" },
+                { title: "CNC Laser Cutting", href: "/services/laser-cutting" },
+                { title: "Steel Cutting Services", href: "/services/steel-cutting" },
+                { title: "Plate Profile Cutting", href: "/services/profile-cutting" },
+              ].map((service) => (
+                <Link
+                  key={service.href}
+                  href={service.href}
+                  className="rounded-2xl border border-black/8 bg-[#EDEAE4] p-5 transition-colors hover:border-primary/40 hover:bg-white"
+                >
+                  <h3 className="text-lg font-display font-black uppercase tracking-tight text-[#1A1A1A]">
+                    {service.title}
+                  </h3>
+                  <span className="mt-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary">
+                    View Service <ArrowRight className="w-3.5 h-3.5" />
+                  </span>
+                </Link>
+              ))}
             </div>
           </div>
         </section>

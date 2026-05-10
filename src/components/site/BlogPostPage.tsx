@@ -163,6 +163,30 @@ export default function BlogPostPage({
                     </div>
                   </div>
                 )}
+
+                <div>
+                  <h4 className="text-sm font-bold uppercase tracking-widest text-white mb-6 border-l-2 border-primary pl-4">Related Services</h4>
+                  <div className="space-y-3">
+                    {[
+                      { title: "Sheet Bending Service", href: "/services/sheet-bending" },
+                      { title: "CNC Laser Cutting", href: "/services/laser-cutting" },
+                      { title: "Plate Profile Cutting", href: "/services/profile-cutting" },
+                    ].map((service) => (
+                      <Link
+                        key={service.href}
+                        href={service.href}
+                        className="block rounded-xl border border-white/8 bg-zinc-900/50 p-4 transition-colors hover:border-primary/40 hover:bg-zinc-900"
+                      >
+                        <h5 className="text-sm font-display font-black uppercase tracking-tight text-white">
+                          {service.title}
+                        </h5>
+                        <span className="mt-3 inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-primary">
+                          View Service <ArrowRight className="w-3 h-3" />
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
               </aside>
             </div>
           </div>

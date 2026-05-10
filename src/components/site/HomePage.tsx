@@ -30,14 +30,14 @@ export default function HomePage({
   const previewPosts = blogPosts.slice(0, 3);
 
   const services = [
-    { title: "Bending", image: "/service-bending.png", subs: ["Press Brake", "High Tonnage", "Complex Angles"] },
-    { title: "Sheet Bending", image: "/service-bending.png", subs: ["MS & SS", "Precision Bends", "Custom Profiles"] },
-    { title: "Steel Cutting", image: "/service-steel-cutting.png", subs: ["Plasma Cutting", "Gas Cutting", "High Accuracy"] },
-    { title: "Plate Bending", image: "/service-plate-bending.png", subs: ["Heavy Duty", "Structural Steel", "Custom Radii"] },
-    { title: "Cutting Services", image: "/service-cnc.png", subs: ["Laser Cutting", "Profile Cutting", "Nesting Optimization"] },
-    { title: "Base Plate", image: "/service-base-plates.png", subs: ["Industrial Base", "Machined Finish", "Standard Sizes"] },
-    { title: "Plate Profile Cutting", image: "/service-profile.png", subs: ["Intricate Designs", "Batch Production", "Material Saving"] },
-    { title: "Sheet Metal Cutting", image: "/service-cnc.png", subs: ["CNC Accuracy", "Thin & Thick Sheets", "Rapid Turnaround"] },
+    { id: "bending-services", title: "Plate Bending Service", image: "/service-bending.png", subs: ["Press Brake", "Heavy Plate", "Complex Angles"] },
+    { id: "sheet-bending", title: "Sheet Bending Service", image: "/service-bending.png", subs: ["MS & SS", "Precision Bends", "Custom Profiles"] },
+    { id: "steel-cutting", title: "Steel Cutting", image: "/service-steel-cutting.png", subs: ["Plasma Cutting", "Gas Cutting", "High Accuracy"] },
+    { id: "plate-bending", title: "Plate Rolling", image: "/service-plate-bending.png", subs: ["Heavy Duty", "Structural Steel", "Custom Radii"] },
+    { id: "laser-cutting", title: "CNC Laser Cutting", image: "/service-cnc.png", subs: ["Laser Cutting", "Profile Cutting", "Nesting Optimization"] },
+    { id: "base-plate", title: "Base Plates", image: "/service-base-plates.png", subs: ["Industrial Base", "Machined Finish", "Standard Sizes"] },
+    { id: "profile-cutting", title: "Profile Cutting", image: "/service-profile.png", subs: ["Intricate Designs", "Batch Production", "Material Saving"] },
+    { id: "sheet-cutting", title: "Sheet Metal Cutting", image: "/service-cnc.png", subs: ["Cut to Size", "Thin & Thick Sheets", "Rapid Turnaround"] },
   ];
 
   const scrollCardIntoView = useCallback((index: number) => {
@@ -160,17 +160,17 @@ export default function HomePage({
                   style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}
                 >
                   <motion.span initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2, duration: 0.75, ease: "easeOut" }}
-                    className="block">STEEL</motion.span>
+                    className="block">SHEET METAL</motion.span>
                   <motion.span initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.32, duration: 0.75, ease: "easeOut" }}
-                    className="block text-transparent bg-clip-text bg-gradient-to-r from-[#e05555] via-[#AC3C3C] to-[#c44040]">PRECISION</motion.span>
+                    className="block text-transparent bg-clip-text bg-gradient-to-r from-[#e05555] via-[#AC3C3C] to-[#c44040]">FABRICATION</motion.span>
                   <motion.span initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.44, duration: 0.75, ease: "easeOut" }}
-                    className="block text-white">MASTERS.</motion.span>
+                    className="block text-white">IN SURAT.</motion.span>
                 </h1>
 
                 {/* Sub-text */}
                 <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.65, duration: 0.7 }}
                   className="text-sm sm:text-base md:text-lg text-zinc-300 font-light leading-relaxed max-w-xl mb-4 md:mb-5 lg:mb-6">
-                  CNC laser cutting, press bending &amp; plate rolling — engineered to ±0.1mm. Trusted by India's top infrastructure firms since 2001.
+                  Balaji Engineering Works delivers CNC laser cutting, sheet metal bending, plate rolling, steel cutting, punching, and heavy fabrication from Navagam, Surat for industrial clients across Gujarat and India.
                 </motion.p>
 
                 {/* CTAs */}
@@ -190,8 +190,8 @@ export default function HomePage({
                   {[
                     { v: "20+", l: "Years" },
                     { v: "500+", l: "Projects" },
-                    { v: "±0.1mm", l: "Accuracy" },
-                    { v: "800T", l: "Press Brake" },
+                    { v: "25+", l: "Team" },
+                    { v: "6 Days", l: "Working Week" },
                   ].map((s, i) => (
                     <div key={i} className="text-center">
                       <div className="text-base sm:text-2xl md:text-2xl lg:text-3xl font-display font-black text-white leading-none">{s.v}</div>
@@ -262,6 +262,78 @@ export default function HomePage({
           </div>
         </section>
 
+        <section className="border-y border-black/8 bg-[#EDEAE4] py-14 md:py-20">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl">
+              <span className="text-primary font-bold tracking-[0.3em] uppercase text-sm">Search Focus</span>
+              <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter">
+                Sheet Metal Bending Works in Surat, Gujarat
+              </h2>
+              <div className="mt-6 space-y-4 text-base md:text-lg text-slate-600 font-light leading-relaxed">
+                <p>
+                  SheetMetalBendingWorks.com is built to help buyers searching for sheet metal bending works, CNC laser cutting, plate rolling, steel cutting, and fabrication services in Surat reach Balaji Engineering Works directly.
+                </p>
+                <p>
+                  If your requirement includes press brake bending, profile cutting, custom steel parts, base plates, or heavy fabrication job work, our team in Kamrej, Navagam can review drawings, recommend the right process, and share a fast commercial quote.
+                </p>
+              </div>
+              <div className="mt-8 flex flex-wrap gap-3">
+                {[
+                  { href: "/services/sheet-bending", label: "Sheet Metal Bending Services" },
+                  { href: "/services/laser-cutting", label: "CNC Laser Cutting" },
+                  { href: "/services/plate-bending", label: "Plate Rolling" },
+                  { href: "/contact", label: "Request Fabrication Quote" },
+                ].map((item) => (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    className="rounded-full border border-black/10 bg-[#F7F5F1] px-4 py-2 text-xs font-bold uppercase tracking-widest text-[#1A1A1A] transition-colors hover:border-primary hover:text-primary"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+              <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                {[
+                  {
+                    title: "Sheet Bending Service",
+                    href: "/services/sheet-bending",
+                    desc: "MS and SS bending for industrial components",
+                  },
+                  {
+                    title: "CNC Laser Cutting",
+                    href: "/services/laser-cutting",
+                    desc: "Production blanks and profile parts",
+                  },
+                  {
+                    title: "Plate Profile Cutting",
+                    href: "/services/profile-cutting",
+                    desc: "Plasma and oxy-fuel profile cutting",
+                  },
+                  {
+                    title: "Steel Cutting Services",
+                    href: "/services/steel-cutting",
+                    desc: "Hydraulic shearing and plate cutting work",
+                  },
+                ].map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="rounded-2xl border border-black/8 bg-[#F7F5F1] p-4 transition-colors hover:border-primary/40 hover:bg-white"
+                  >
+                    <h3 className="text-sm font-display font-black uppercase tracking-tight text-[#1A1A1A]">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-xs font-light leading-relaxed text-slate-500">
+                      {item.desc}
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Section 4: About Teaser */}
         <section className="py-16 md:py-32 bg-[#EDEAE4]">
           <div className="container mx-auto px-4">
@@ -286,11 +358,11 @@ export default function HomePage({
                   </h2>
                 </div>
                 <div className="space-y-5 text-lg md:text-xl text-slate-600 font-light leading-relaxed reveal-line">
-                  <p>Established in 2001, Balaji Engineering Works has evolved from a small workshop into a premier industrial power-house in Surat, Gujarat.</p>
-                  <p>We specialize in heavy-duty shearing, CNC laser cutting, and complex plate fabrication. Our commitment to accuracy and turnaround time has made us the trusted partner for India's leading infrastructure and automotive firms.</p>
+                  <p>Established in 2001, Balaji Engineering Works is a manufacturer and service provider based at Plot No. 11, 12, Soham Industrial Estate, NH 8, Kamrej, Navagam, Surat.</p>
+                  <p>We specialize in shearing, CNC laser cutting, sheet metal bending, plate rolling, profile cutting, punching, base plates, and heavy fabrication with fast quotations and dispatch support across India.</p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-8 reveal-line">
-                  {["ISO Certified Standards", "Advanced CNC Tech", "Expert Engineering", "End-to-End Solutions"].map((fact, i) => (
+                  {["Established Since 2001", "Advanced CNC Setup", "Experienced Engineering Team", "End-to-End Job Work"].map((fact, i) => (
                     <div key={i} className="flex items-center gap-3">
                       <div className="w-6 h-6 rounded-full bg-primary/15 flex items-center justify-center shrink-0">
                         <CheckCircle2 className="w-4 h-4 text-primary" />
@@ -352,8 +424,9 @@ export default function HomePage({
           </div>
           <div ref={servicesScrollRef} className="flex gap-4 overflow-x-auto pb-4 px-4 md:px-[5%] snap-x no-scrollbar">
             {services.map((service, i) => (
-              <div
+              <Link
                 key={i}
+                href={`/services/${service.id}`}
                 className={`w-[160px] sm:w-[200px] md:w-[240px] min-w-0 h-[260px] sm:h-[320px] md:h-[400px] relative rounded-2xl overflow-hidden snap-center flex-shrink-0 border-2 transition-all duration-300 ${
                   i === activeService ? "border-primary/60 shadow-[0_0_20px_rgba(172,60,60,0.2)]" : "border-transparent"
                 } group`}
@@ -371,7 +444,7 @@ export default function HomePage({
                     ))}
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
           <div className="container mx-auto px-4 mt-6 md:hidden">
@@ -465,11 +538,11 @@ export default function HomePage({
                 <div className="grid sm:grid-cols-2 gap-7 md:gap-10">
                   {[
                     { title: "20+ Years Experience", icon: Award },
-                    { title: "Advanced CNC Tech", icon: Zap },
+                    { title: "Advanced CNC Technology", icon: Zap },
                     { title: "End-to-End Fabrication", icon: Factory },
                     { title: "Competitive Pricing", icon: TrendingUp },
                     { title: "Fast Turnaround", icon: Target },
-                    { title: "Quality Certified", icon: ShieldCheck }
+                    { title: "Reliable Production Support", icon: ShieldCheck }
                   ].map((item, i) => (
                     <div key={i} className="flex gap-4">
                       <item.icon className="w-5 h-5 md:w-6 md:h-6 text-primary shrink-0 mt-0.5" />

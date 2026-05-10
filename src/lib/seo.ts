@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { BlogPost, Service } from "@/lib/firestore/types";
 import { contactFaqs, siteConfig } from "@/lib/site";
+import type { ServiceFaq } from "@/lib/serviceSeo";
 
 type SchemaObject = Record<string, unknown>;
 
@@ -50,11 +51,14 @@ export function buildMetadata({
 }: MetadataOptions): Metadata {
   const canonical = ensureLeadingSlash(path);
   const imageUrl = absoluteUrl(image);
+  const metadataTitle = title.includes(siteConfig.name)
+    ? title
+    : `${title} | ${siteConfig.name}`;
 
   return {
     title,
     description,
-    keywords: [...siteConfig.keywords, ...keywords],
+    keywords: Array.from(new Set([...siteConfig.keywords, ...keywords])),
     authors: (authors ?? [siteConfig.legalName]).map((name) => ({ name })),
     alternates: {
       canonical,
@@ -64,7 +68,7 @@ export function buildMetadata({
       type,
       locale: siteConfig.locale,
       url: absoluteUrl(canonical),
-      title,
+      title: metadataTitle,
       description,
       siteName: siteConfig.name,
       images: [
@@ -81,7 +85,7 @@ export function buildMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: metadataTitle,
       description,
       images: [imageUrl],
     },
@@ -138,7 +142,19 @@ export function createOrganizationJsonLd(): SchemaObject {
     email: siteConfig.email,
     telephone: siteConfig.phone,
     foundingDate: siteConfig.foundingDate,
+    taxID: siteConfig.gstNumber,
     address: getAddressSchema(),
+    sameAs: [siteConfig.indiaMartProfile],
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "customer support",
+        telephone: siteConfig.phone,
+        email: siteConfig.email,
+        areaServed: "IN",
+        availableLanguage: ["English", "Hindi", "Gujarati"],
+      },
+    ],
     knowsAbout: siteConfig.industries,
   };
 }
@@ -159,20 +175,14 @@ export function createLocalBusinessJsonLd(): SchemaObject {
     email: siteConfig.email,
     foundingDate: siteConfig.foundingDate,
     priceRange: siteConfig.priceRange,
+    taxID: siteConfig.gstNumber,
     address: getAddressSchema(),
     hasMap: siteConfig.mapUrl,
+    sameAs: [siteConfig.indiaMartProfile],
     areaServed: siteConfig.serviceAreas.map((name) => ({
       "@type": "AdministrativeArea",
       name,
     })),
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-        opens: "09:00",
-        closes: "19:00",
-      },
-    ],
     contactPoint: [
       {
         "@type": "ContactPoint",
@@ -191,7 +201,7 @@ export function createOfferCatalogJsonLd(services: Service[]): SchemaObject {
     "@context": "https://schema.org",
     "@type": "OfferCatalog",
     "@id": `${siteConfig.url}#offer-catalog`,
-    name: "Sheet Metal Fabrication Services",
+    name: "Sheet Metal Fabrication, Cutting and Bending Services",
     url: absoluteUrl("/services"),
     itemListElement: services.map((service, index) => ({
       "@type": "OfferCatalog",
@@ -288,7 +298,7 @@ export function createServicesItemListJsonLd(services: Service[]): SchemaObject 
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "Sheet Metal Fabrication Services",
+    name: "Balaji Engineering Works Services",
     numberOfItems: services.length,
     itemListElement: services.map((service, index) => ({
       "@type": "ListItem",
@@ -304,6 +314,7 @@ export function createServiceJsonLd(service: Service): SchemaObject {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": `${absoluteUrl(`/services#${service.id}`)}#service`,
     serviceType: service.title,
     name: service.title,
     description: service.description,
@@ -373,10 +384,16 @@ export function createBlogPostingJsonLd(post: BlogPost): SchemaObject {
 }
 
 export function createFaqJsonLd() {
+  return createGenericFaqJsonLd(contactFaqs);
+}
+
+export function createGenericFaqJsonLd(
+  faqs: ReadonlyArray<ServiceFaq | (typeof contactFaqs)[number]>,
+) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: contactFaqs.map((faq) => ({
+    mainEntity: faqs.map((faq) => ({
       "@type": "Question",
       name: faq.question,
       acceptedAnswer: {

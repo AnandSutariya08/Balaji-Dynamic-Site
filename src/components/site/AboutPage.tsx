@@ -17,14 +17,14 @@ const timeline = [
   { year: "2010", title: "Heavy Plate Division", desc: "Expanded into heavy-duty plate rolling and profile cutting, catering to the energy and marine sectors across Western India." },
   { year: "2015", title: "Laser Cutting Launch", desc: "Installed state-of-the-art fiber laser cutting systems capable of ±0.1mm tolerances, unlocking complex geometry manufacturing." },
   { year: "2020", title: "₹5-25 Cr Turnover Milestone", desc: "Crossed a landmark turnover milestone, growing our workforce to 25+ specialists serving India's biggest infrastructure firms." },
-  { year: "2025", title: "Industry 4.0 Expansion", desc: "Integrating smart manufacturing processes, digital quality control, and capacity expansion to double our output by 2027." },
+  { year: "2025", title: "Capacity Expansion", desc: "Expanded fabrication capacity and strengthened production support for larger industrial and infrastructure requirements." },
 ];
 
 const certifications = [
-  { title: "ISO 9001:2015", desc: "Quality Management Systems", icon: ShieldCheck },
   { title: "GST Registered", desc: "24BCUPS8314Q1ZK", icon: FileText },
-  { title: "MSME Certified", desc: "Recognized Manufacturer", icon: Award },
-  { title: "20+ Year Track Record", desc: "Proven Industrial Heritage", icon: Calendar },
+  { title: "Manufacturer", desc: "Industrial Job Work and Supply", icon: Award },
+  { title: "20+ Year Track Record", desc: "Established in 2001", icon: Calendar },
+  { title: "Surat Facility", desc: "Kamrej, Navagam, Gujarat", icon: ShieldCheck },
 ];
 
 const values = [
@@ -59,11 +59,11 @@ export default function AboutPage() {
                 <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase">EST. 2001 · NAVAGAM, SURAT</span>
               </div>
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-display font-black text-white uppercase tracking-tighter leading-[0.85] mb-8 md:mb-10">
-                Built on<br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#AC3C3C] to-[#e05555]">Steel.</span>
+                About<br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#AC3C3C] to-[#e05555]">Balaji Engineering Works</span>
               </h1>
               <p className="text-lg sm:text-xl md:text-2xl text-zinc-300 font-light leading-relaxed max-w-2xl mb-10 md:mb-14">
-                Two decades of precision. Hundreds of industrial clients. One relentless commitment — delivering metal fabrication excellence from the heart of Gujarat.
+                Learn how Balaji Engineering Works grew into a trusted Surat manufacturer for CNC laser cutting, sheet metal bending, plate rolling, steel cutting, and heavy fabrication.
               </p>
               <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6">
                 <Button size="lg" className="h-12 sm:h-16 px-8 sm:px-10 text-sm sm:text-base font-bold uppercase tracking-widest bg-primary hover:bg-primary/90 text-white shadow-[0_0_30px_rgba(172,60,60,0.5)] border-none" asChild>
@@ -93,7 +93,7 @@ export default function AboutPage() {
                 <span>PRECISION ENGINEERING</span><span className="w-2 h-2 rounded-full bg-primary inline-block" />
                 <span>20+ YEARS LEGACY</span><span className="w-2 h-2 rounded-full bg-white/30 inline-block" />
                 <span>SURAT, GUJARAT</span><span className="w-2 h-2 rounded-full bg-primary inline-block" />
-                <span>ISO CERTIFIED</span><span className="w-2 h-2 rounded-full bg-white/30 inline-block" />
+                <span>GST REGISTERED</span><span className="w-2 h-2 rounded-full bg-white/30 inline-block" />
                 <span>HEAVY FABRICATION</span><span className="w-2 h-2 rounded-full bg-primary inline-block" />
               </div>
             ))}
@@ -112,7 +112,7 @@ export default function AboutPage() {
                 { value: 20, suffix: "+", label: "Years of Excellence", icon: Award },
                 { value: 500, suffix: "+", label: "Projects Delivered", icon: Factory },
                 { value: 25, suffix: "+", label: "Skilled Professionals", icon: Users },
-                { value: 98, suffix: "%", label: "Client Retention Rate", icon: TrendingUp },
+                { value: 25, suffix: " Cr", prefix: "5-", label: "Annual Turnover Range", icon: TrendingUp },
               ].map((stat, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} className="flex flex-col items-center text-center group">
                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-4 md:mb-6 group-hover:bg-primary/20 transition-colors">
@@ -139,12 +139,12 @@ export default function AboutPage() {
                   From Workshop<br />to Powerhouse
                 </h2>
                 <div className="space-y-5 text-base md:text-lg text-slate-600 font-light leading-relaxed">
-                  <p>Balaji Engineering Works began in 2001 with a single shearing machine and a founder's obsession with precision. Located in the industrial heartland of Navagam, Surat — Gujarat's manufacturing backbone — we grew by doing one thing exceptionally well: delivering exactly what we promised.</p>
-                  <p>Today our 25,000 sq. ft. facility houses heavy-duty CNC press brakes capable of 800-tonne force, fiber laser cutters with ±0.1mm accuracy, and plate rolling machines that handle steel up to 60mm thick. Our 25+ specialists bring decades of collective knowledge to projects across industries.</p>
-                  <p>With an annual turnover of ₹5–25 Crore, we serve clients across automotive, construction, energy, marine, and HVAC sectors — providing the critical components that keep India's infrastructure running.</p>
+                  <p>Balaji Engineering Works began in 2001 and operates from Plot No. 11, 12, Soham Industrial Estate, NH 8, Kamrej, Navagam, Surat, Gujarat. We have grown by staying focused on dependable fabrication quality, delivery discipline, and practical engineering support.</p>
+                  <p>Our infrastructure includes hydraulic shearing, CNC fiber laser cutting, CNC plasma and oxy-fuel profile cutting, press brake bending, plate rolling, punching, and fabrication capabilities that support both custom jobs and repeat production orders.</p>
+                  <p>With GST registration 24BCUPS8314Q1ZK and a strong presence across Gujarat and Western India, we serve industries such as automotive, construction, energy, marine, HVAC, and general industrial manufacturing.</p>
                 </div>
                 <div className="mt-10 md:mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-                  {["CNC Press Brakes up to 800T", "Fiber Laser ±0.1mm Accuracy", "Plate Rolling up to 60mm", "25,000 sq.ft. Facility", "Full CAD/CAM Integration", "Same-Day Quotation"].map((fact, i) => (
+                  {["Hydraulic and CNC Bending", "Fiber Laser Cutting Support", "Plate Rolling and Profile Cutting", "25,000 sq.ft. Unit", "Fabrication and Welding Setup", "Fast Quotation Response"].map((fact, i) => (
                     <div key={i} className="flex items-center gap-3">
                       <div className="w-6 h-6 rounded-full bg-primary/15 flex items-center justify-center shrink-0">
                         <CheckCircle2 className="w-3.5 h-3.5 text-primary" />
@@ -160,14 +160,14 @@ export default function AboutPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute inset-0 bg-primary/10 mix-blend-multiply" />
                   <div className="absolute bottom-6 left-6 right-6">
-                    <div className="text-xs font-bold tracking-[0.3em] text-zinc-300 uppercase">Navagam Facility · Surat, Gujarat</div>
+                    <div className="text-xs font-bold tracking-[0.3em] text-zinc-300 uppercase">Soham Industrial Estate · Surat, Gujarat</div>
                   </div>
                 </motion.div>
                 <div className="grid grid-cols-2 gap-3 md:gap-4">
                   {[
                     { label: "Nature", value: "Manufacturer & Service Provider" },
                     { label: "GST No.", value: "24BCUPS8314Q1ZK" },
-                    { label: "Location", value: "Navagam, Surat, Gujarat" },
+                    { label: "Location", value: "Kamrej, Navagam, Surat, Gujarat" },
                     { label: "Established", value: "2001" },
                   ].map((item, i) => (
                     <div key={i} className="p-4 md:p-5 bg-[#F7F5F1] border border-black/8 rounded-xl">
@@ -286,6 +286,43 @@ export default function AboutPage() {
                   <h4 className="text-base md:text-xl font-display font-black text-[#1A1A1A] uppercase tracking-tight mb-2">{cert.title}</h4>
                   <p className="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-widest">{cert.desc}</p>
                 </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16 md:py-24 bg-[#F7F5F1] border-t border-black/8">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+              <div>
+                <span className="text-primary font-bold tracking-[0.3em] uppercase text-sm">Popular Services</span>
+                <h2 className="text-4xl sm:text-5xl md:text-6xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4">
+                  Explore What We Manufacture
+                </h2>
+              </div>
+              <Button variant="outline" className="border-black/20 text-[#1A1A1A] hover:bg-black/5 font-bold uppercase tracking-widest w-full md:w-auto" asChild>
+                <Link href="/services">View All Services</Link>
+              </Button>
+            </div>
+            <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              {[
+                { title: "Sheet Bending Service", href: "/services/sheet-bending" },
+                { title: "CNC Laser Cutting", href: "/services/laser-cutting" },
+                { title: "Plate Rolling", href: "/services/plate-bending" },
+                { title: "Profile Cutting", href: "/services/profile-cutting" },
+              ].map((service) => (
+                <Link
+                  key={service.href}
+                  href={service.href}
+                  className="rounded-2xl border border-black/8 bg-[#EDEAE4] p-6 transition-colors hover:border-primary/40 hover:bg-white"
+                >
+                  <h3 className="text-lg font-display font-black uppercase tracking-tight text-[#1A1A1A]">
+                    {service.title}
+                  </h3>
+                  <span className="mt-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary">
+                    View Details <ArrowRight className="w-3.5 h-3.5" />
+                  </span>
+                </Link>
               ))}
             </div>
           </div>

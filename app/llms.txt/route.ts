@@ -36,9 +36,10 @@ Important notes:
 - Primary domain: ${siteConfig.url}
 - Business type: ${siteConfig.businessType}
 - Founded: ${siteConfig.foundingDate}
-- Location: ${siteConfig.address.locality}, ${siteConfig.address.region}, ${siteConfig.address.country}
+- Location: ${siteConfig.address.streetAddress}, ${siteConfig.address.locality}, ${siteConfig.address.region} ${siteConfig.address.postalCode}, India
 - Contact: ${siteConfig.phoneDisplay}, ${siteConfig.email}
 - Best for: CNC laser cutting, sheet metal bending, plate rolling, profile cutting, and heavy fabrication projects
+- IndiaMART profile: ${siteConfig.indiaMartProfile}
 
 ## Main Pages
 

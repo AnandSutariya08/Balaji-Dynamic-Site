@@ -44,36 +44,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: siteConfig.url,
       lastModified: homeLastModified,
-      changeFrequency: "weekly",
-      priority: 1,
       images: [absoluteUrl(siteConfig.ogImage)],
     },
     {
       url: `${siteConfig.url}/about`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
+      lastModified: homeLastModified,
       images: [absoluteUrl("/service-fabrication.png")],
     },
     {
       url: `${siteConfig.url}/services`,
       lastModified: serviceLastModified,
-      changeFrequency: "weekly",
-      priority: 0.95,
       images: services.map((service) => absoluteUrl(service.image)),
     },
     {
       url: `${siteConfig.url}/blog`,
       lastModified: blogLastModified,
-      changeFrequency: "weekly",
-      priority: 0.85,
       images: [absoluteUrl("/service-fabrication.png")],
     },
     {
       url: `${siteConfig.url}/contact`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.9,
+      lastModified: homeLastModified,
       images: [absoluteUrl("/service-cnc.png")],
     },
   ];
@@ -87,10 +77,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .map((post) => ({
       url: `${siteConfig.url}/blog/${post.slug}`,
       lastModified: toDate(post.updatedAt ?? post.createdAt ?? post.date),
-      changeFrequency: "monthly" as const,
-      priority: 0.75,
       images: post.image ? uniqueImages([absoluteUrl(post.image)]) : undefined,
     }));
 
-  return [...staticEntries, ...blogEntries];
+  const serviceEntries = [...services].map((service) => ({
+    url: `${siteConfig.url}/services/${service.id}`,
+    lastModified: toDate(service.updatedAt ?? service.createdAt),
+    images: uniqueImages([absoluteUrl(service.image)]),
+  }));
+
+  return [...staticEntries, ...serviceEntries, ...blogEntries];
 }

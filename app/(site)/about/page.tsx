@@ -6,9 +6,9 @@ import {
   createWebPageJsonLd,
 } from "@/lib/seo";
 
-const title = "About Balaji Engineering Works";
+const title = "About Balaji Engineering Works in Surat";
 const description =
-  "Learn about Balaji Engineering Works, our fabrication experience since 2001, industrial capabilities, and Surat manufacturing heritage.";
+  "Learn about Balaji Engineering Works, the Surat-based manufacturing company behind SheetMetalBendingWorks.com, established in 2001 for bending, cutting, fabrication, and heavy engineering work.";
 
 export const metadata = buildMetadata({
   title,
@@ -16,6 +16,8 @@ export const metadata = buildMetadata({
   path: "/about",
   keywords: [
     "about Balaji Engineering Works",
+    "about sheetmetalbendingworks.com",
+    "Balaji Engineering Works manufacturer Surat",
     "steel fabrication company Surat history",
     "metal fabrication manufacturer Gujarat",
   ],

@@ -24,13 +24,15 @@ function toRssDate(value?: string) {
 
 export async function GET() {
   const posts = await getPublicBlogs();
+  const sortedPosts = [...posts].sort(
+    (a, b) =>
+      new Date(b.updatedAt ?? b.createdAt ?? b.date).getTime() -
+      new Date(a.updatedAt ?? a.createdAt ?? a.date).getTime(),
+  );
+  const latestPostDate =
+    sortedPosts[0]?.updatedAt ?? sortedPosts[0]?.createdAt ?? sortedPosts[0]?.date;
 
-  const items = posts
-    .sort(
-      (a, b) =>
-        new Date(b.updatedAt ?? b.createdAt ?? b.date).getTime() -
-        new Date(a.updatedAt ?? a.createdAt ?? a.date).getTime(),
-    )
+  const items = sortedPosts
     .map((post) => {
       const link = absoluteUrl(`/blog/${post.slug}`);
 
@@ -48,14 +50,20 @@ export async function GET() {
     .join("");
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>${escapeXml(siteConfig.name)}</title>
     <link>${siteConfig.url}</link>
     <description>${escapeXml(siteConfig.description)}</description>
     <language>en-in</language>
-    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
-    <atom:link href="${absoluteUrl("/rss.xml")}" rel="self" type="application/rss+xml" xmlns:atom="http://www.w3.org/2005/Atom" />
+    <lastBuildDate>${toRssDate(latestPostDate)}</lastBuildDate>
+    <managingEditor>${siteConfig.email} (${escapeXml(siteConfig.legalName)})</managingEditor>
+    <image>
+      <url>${absoluteUrl(siteConfig.ogImage)}</url>
+      <title>${escapeXml(siteConfig.name)}</title>
+      <link>${siteConfig.url}</link>
+    </image>
+    <atom:link href="${absoluteUrl("/rss.xml")}" rel="self" type="application/rss+xml" />
     ${items}
   </channel>
 </rss>`;

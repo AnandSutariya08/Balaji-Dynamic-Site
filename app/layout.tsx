@@ -32,6 +32,15 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "/",
+    types: {
+      "application/rss+xml": "/rss.xml",
+    },
+  },
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION,
+    other: {
+      "msvalidate.01": process.env.BING_SITE_VERIFICATION ?? "",
+    },
   },
   robots: {
     index: true,
@@ -76,7 +85,7 @@ export const metadata: Metadata = {
     apple: ["/logo.svg"],
   },
   other: {
-    "geo.region": `${siteConfig.address.country}-${siteConfig.address.region}`,
+    "geo.region": "IN-GJ",
     "geo.placename": `${siteConfig.address.locality}, ${siteConfig.address.region}`,
     "contact:phone_number": siteConfig.phone,
     "contact:email": siteConfig.email,

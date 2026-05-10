@@ -8,15 +8,16 @@ import {
   createWebPageJsonLd,
 } from "@/lib/seo";
 
-const title = "Blog, Guides & Fabrication Insights";
+const title = "Sheet Metal Fabrication Blog & Guides";
 const description =
-  "Read fabrication guides, technical insights, and industry updates from Balaji Engineering Works on sheet metal bending, laser cutting, and steel fabrication.";
+  "Read fabrication guides, technical insights, and manufacturing articles from Balaji Engineering Works on sheet metal bending, laser cutting, plate rolling, and steel fabrication.";
 
 export const metadata = buildMetadata({
   title,
   description,
   path: "/blog",
   keywords: [
+    "Balaji Engineering Works blog",
     "sheet metal fabrication blog",
     "laser cutting guides",
     "steel bending articles",

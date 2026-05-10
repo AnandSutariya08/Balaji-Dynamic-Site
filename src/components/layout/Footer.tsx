@@ -11,12 +11,12 @@ const quickLinks = [
 ];
 
 const capabilities = [
-  "Sheet Metal Bending",
-  "CNC Laser Cutting",
-  "Plate Rolling",
-  "Heavy Fabrication",
-  "Profile Cutting",
-  "Steel Punching",
+  { name: "Sheet Metal Bending", path: "/services/sheet-bending" },
+  { name: "CNC Laser Cutting", path: "/services/laser-cutting" },
+  { name: "Plate Rolling", path: "/services/plate-bending" },
+  { name: "Heavy Fabrication", path: "/services/bending-services" },
+  { name: "Profile Cutting", path: "/services/profile-cutting" },
+  { name: "Steel Cutting", path: "/services/steel-cutting" },
 ];
 
 export function Footer() {
@@ -80,12 +80,12 @@ export function Footer() {
               </div>
             </Link>
             <p className="mb-6 max-w-xs text-sm leading-relaxed text-white/40">
-              Two decades of precision metal fabrication from the heart of Gujarat.
-              CNC cutting, bending, rolling, punching - all under one roof.
+              Surat-based manufacturer and service provider for CNC laser cutting,
+              sheet metal bending, plate rolling, profile cutting, and heavy fabrication.
             </p>
             <div className="flex flex-col gap-1.5 font-mono text-xs text-white/30">
               <span>GST: 24BCUPS8314Q1ZK</span>
-              <span>Est. 2001 · Navagam, Surat</span>
+              <span>Est. 2001 · Kamrej, Navagam, Surat</span>
             </div>
           </div>
 
@@ -116,9 +116,14 @@ export function Footer() {
             </h4>
             <ul className="space-y-3">
               {capabilities.map((capability) => (
-                <li key={capability} className="flex items-center gap-2.5 text-sm text-white/50">
-                  <span className="h-1 w-1 shrink-0 rounded-full bg-primary/50" />
-                  {capability}
+                <li key={capability.path}>
+                  <Link
+                    href={capability.path}
+                    className="flex items-center gap-2.5 text-sm text-white/50 transition-colors hover:text-white"
+                  >
+                    <span className="h-1 w-1 shrink-0 rounded-full bg-primary/50" />
+                    {capability.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -135,9 +140,9 @@ export function Footer() {
                   <MapPin className="h-3.5 w-3.5 text-primary" />
                 </div>
                 <span className="text-sm leading-relaxed text-white/50">
-                  Navagam, Surat,
+                  Plot No. 11, 12, Soham Industrial Estate,
                   <br />
-                  Gujarat - 395009, India
+                  NH 8, Kamrej, Navagam, Surat - 394185, India
                 </span>
               </li>
               <li className="flex items-center gap-3">

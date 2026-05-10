@@ -7,15 +7,17 @@ import {
   createWebPageJsonLd,
 } from "@/lib/seo";
 
-const title = "Contact Balaji Engineering Works";
+const title = "Contact Balaji Engineering Works, Surat";
 const description =
-  "Contact Balaji Engineering Works for quotes, fabrication inquiries, sheet metal bending, laser cutting, and steel fabrication projects in Surat, Gujarat.";
+  "Contact Balaji Engineering Works in Surat through SheetMetalBendingWorks.com for sheet metal bending, CNC laser cutting, plate rolling, steel cutting, and fabrication quotes.";
 
 export const metadata = buildMetadata({
   title,
   description,
   path: "/contact",
   keywords: [
+    "contact Balaji Engineering Works Surat",
+    "contact sheetmetalbendingworks.com",
     "contact sheet metal bending works",
     "request fabrication quote Surat",
     "contact steel fabrication company Gujarat",
