@@ -11,6 +11,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useBlogs } from "@/hooks/useBlogs";
 import type { BlogPost } from "@/lib/firestore/types";
+import { siteConfig } from "@/lib/site";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,14 +31,14 @@ export default function HomePage({
   const previewPosts = blogPosts.slice(0, 3);
 
   const services = [
-    { title: "Bending", image: "/service-bending.png", subs: ["Press Brake", "High Tonnage", "Complex Angles"] },
-    { title: "Sheet Bending", image: "/service-bending.png", subs: ["MS & SS", "Precision Bends", "Custom Profiles"] },
-    { title: "Steel Cutting", image: "/service-steel-cutting.png", subs: ["Plasma Cutting", "Gas Cutting", "High Accuracy"] },
-    { title: "Plate Bending", image: "/service-plate-bending.png", subs: ["Heavy Duty", "Structural Steel", "Custom Radii"] },
-    { title: "Cutting Services", image: "/service-cnc.png", subs: ["Laser Cutting", "Profile Cutting", "Nesting Optimization"] },
-    { title: "Base Plate", image: "/service-base-plates.png", subs: ["Industrial Base", "Machined Finish", "Standard Sizes"] },
-    { title: "Plate Profile Cutting", image: "/service-profile.png", subs: ["Intricate Designs", "Batch Production", "Material Saving"] },
-    { title: "Sheet Metal Cutting", image: "/service-cnc.png", subs: ["CNC Accuracy", "Thin & Thick Sheets", "Rapid Turnaround"] },
+    { id: "bending-services", title: "Bending", image: "/service-bending.png", subs: ["Press Brake", "High Tonnage", "Complex Angles"] },
+    { id: "sheet-bending", title: "Sheet Bending", image: "/service-bending.png", subs: ["MS & SS", "Precision Bends", "Custom Profiles"] },
+    { id: "steel-cutting", title: "Steel Cutting", image: "/service-steel-cutting.png", subs: ["Plasma Cutting", "Gas Cutting", "High Accuracy"] },
+    { id: "plate-bending", title: "Plate Bending", image: "/service-plate-bending.png", subs: ["Heavy Duty", "Structural Steel", "Custom Radii"] },
+    { id: "laser-cutting", title: "Cutting Services", image: "/service-cnc.png", subs: ["Laser Cutting", "Profile Cutting", "Nesting Optimization"] },
+    { id: "base-plate", title: "Base Plate", image: "/service-base-plates.png", subs: ["Industrial Base", "Machined Finish", "Standard Sizes"] },
+    { id: "profile-cutting", title: "Plate Profile Cutting", image: "/service-profile.png", subs: ["Intricate Designs", "Batch Production", "Material Saving"] },
+    { id: "sheet-cutting", title: "Sheet Metal Cutting", image: "/service-cnc.png", subs: ["CNC Accuracy", "Thin & Thick Sheets", "Rapid Turnaround"] },
   ];
 
   const scrollCardIntoView = useCallback((index: number) => {
@@ -338,9 +339,9 @@ export default function HomePage({
               </div>
               {/* Dot indicators */}
               <div className="flex items-center gap-1.5">
-                {services.map((_, i) => (
+                {services.map((service, i) => (
                   <button
-                    key={i}
+                    key={service.id}
                     onClick={() => { scrollToIndex(i); resetAutoPlay(); }}
                     className={`rounded-full transition-all duration-300 ${
                       i === activeService ? "w-5 h-2 bg-primary" : "w-2 h-2 bg-black/15 hover:bg-black/30"
@@ -353,7 +354,7 @@ export default function HomePage({
           <div ref={servicesScrollRef} className="flex gap-4 overflow-x-auto pb-4 px-4 md:px-[5%] snap-x no-scrollbar">
             {services.map((service, i) => (
               <div
-                key={i}
+                key={service.id}
                 className={`w-[160px] sm:w-[200px] md:w-[240px] min-w-0 h-[260px] sm:h-[320px] md:h-[400px] relative rounded-2xl overflow-hidden snap-center flex-shrink-0 border-2 transition-all duration-300 ${
                   i === activeService ? "border-primary/60 shadow-[0_0_20px_rgba(172,60,60,0.2)]" : "border-transparent"
                 } group`}
@@ -370,6 +371,12 @@ export default function HomePage({
                       </div>
                     ))}
                   </div>
+                  <Link
+                    href={`/services/${service.id}`}
+                    className="mt-3 inline-flex items-center gap-1 text-[9px] font-bold uppercase tracking-widest text-white/90 transition-colors hover:text-primary"
+                  >
+                    Explore Service <ArrowRight className="h-3 w-3" />
+                  </Link>
                 </div>
               </div>
             ))}
@@ -541,7 +548,7 @@ export default function HomePage({
                   <Link href="/contact">Get A Quote Now</Link>
                 </Button>
                 <div className="text-2xl sm:text-3xl md:text-4xl font-display font-black text-white mt-6 md:mt-12">
-                  <a href="tel:+917942957640" className="hover:text-primary transition-colors">+91-7942957640</a>
+                  <a href={`tel:${siteConfig.phone}`} className="hover:text-primary transition-colors">{siteConfig.phoneDisplay}</a>
                 </div>
               </div>
             </motion.div>

@@ -1,0 +1,12 @@
+import OpenGraphImage, {
+  alt,
+  contentType,
+  size,
+} from "./opengraph-image";
+
+export const runtime = "edge";
+export { alt, contentType, size };
+
+export default function TwitterImage() {
+  return OpenGraphImage();
+}

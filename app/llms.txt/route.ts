@@ -13,8 +13,8 @@ export async function GET() {
     .map(
       (service) =>
         `- [${service.title}](${absoluteUrl(
-          "/services",
-        )}#${service.id}): ${service.description}`,
+          `/services/${service.id}`,
+        )}): ${service.description}`,
     )
     .join("\n");
 
@@ -43,6 +43,7 @@ Important notes:
 - Annual turnover: ${siteConfig.annualTurnover}
 - Contact: ${siteConfig.phoneDisplay}, ${siteConfig.email}
 - Best for: sheet metal bending, shearing, CNC laser cutting, CNC plasma cutting, punching, rolling, fabrication, and plate profile cutting projects
+- Related business profile: ${siteConfig.liveBusinessSite}
 
 ## Main Pages
 

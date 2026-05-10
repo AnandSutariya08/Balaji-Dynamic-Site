@@ -26,9 +26,15 @@ export const siteConfig = {
   legalName: "Balaji Engineering Works",
   shortName: "Balaji Engineering",
   alternateName: "Balaji Engineering Works Sheet Metal Laser Cutting",
+  alternateNames: [
+    "Balaji Engineering Works",
+    "Balaji Engineering",
+    "Balaji Engineering Works Sheet Metal Laser Cutting",
+  ],
   slogan: "Precision sheet metal forming, cutting, bending and fabrication in Surat",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://sheetmetallasercutting.com",
-  ogImage: "/opengraph.jpg",
+  liveBusinessSite: "https://www.balajiengineeringworks.in/",
+  ogImage: "/opengraph-image",
   description:
     "Balaji Engineering Works is a Surat-based manufacturer and service provider of sheet metal bending, shearing, CNC laser cutting, CNC plasma cutting, punching, rolling, fabrication, and plate profile cutting services.",
   phone: "+91-7942957640",
@@ -108,4 +114,8 @@ export const siteConfig = {
   },
   mapUrl:
     "https://maps.google.com/?q=Balaji+Engineering+Works+Plot+No.+11+12+Soham+Industrial+Estate+NH+8+Kamrej+Navagam+Surat+394185",
+  sameAs: [
+    "https://www.balajiengineeringworks.in/",
+    "https://maps.google.com/?q=Balaji+Engineering+Works+Plot+No.+11+12+Soham+Industrial+Estate+NH+8+Kamrej+Navagam+Surat+394185",
+  ],
 } as const;

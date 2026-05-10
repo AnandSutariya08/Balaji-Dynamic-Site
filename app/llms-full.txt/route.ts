@@ -20,7 +20,7 @@ export async function GET() {
         .join("\n");
 
       return `### ${service.title}
-URL: ${absoluteUrl("/services")}#${service.id}
+URL: ${absoluteUrl(`/services/${service.id}`)}
 Tagline: ${service.tagline}
 Description: ${service.description}
 Features:
@@ -62,6 +62,7 @@ Summary: ${body}`;
 - Phone: ${siteConfig.phoneDisplay}
 - Email: ${siteConfig.email}
 - Address: ${siteConfig.address.streetAddress}, ${siteConfig.address.locality}, ${siteConfig.address.region}, ${siteConfig.address.postalCode}, ${siteConfig.address.country}
+- Related business profile: ${siteConfig.liveBusinessSite}
 - Service areas: ${siteConfig.serviceAreas.join(", ")}
 - Industries: ${siteConfig.industries.join(", ")}
 - Capabilities: ${siteConfig.capabilities.join(", ")}

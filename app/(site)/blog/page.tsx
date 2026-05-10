@@ -12,17 +12,25 @@ const title = "Blog, Guides & Fabrication Insights";
 const description =
   "Read fabrication guides, technical insights, and industry updates from Balaji Engineering Works on sheet metal bending, laser cutting, and steel fabrication.";
 
-export const metadata = buildMetadata({
-  title,
-  description,
-  path: "/blog",
-  keywords: [
-    "sheet metal fabrication blog",
-    "laser cutting guides",
-    "steel bending articles",
-    "industrial fabrication insights",
-  ],
-});
+export const metadata = {
+  ...buildMetadata({
+    title,
+    description,
+    path: "/blog",
+    keywords: [
+      "sheet metal fabrication blog",
+      "laser cutting guides",
+      "steel bending articles",
+      "industrial fabrication insights",
+    ],
+  }),
+  alternates: {
+    canonical: "/blog",
+    types: {
+      "application/rss+xml": "/rss.xml",
+    },
+  },
+};
 
 export default async function Page() {
   const posts = await getPublicBlogs();

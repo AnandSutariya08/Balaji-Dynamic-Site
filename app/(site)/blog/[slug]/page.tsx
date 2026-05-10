@@ -32,7 +32,7 @@ export async function generateMetadata({
     });
   }
 
-  return buildMetadata({
+  const metadata = buildMetadata({
     title: post.title,
     description: post.excerpt,
     path: `/blog/${post.slug}`,
@@ -44,6 +44,16 @@ export async function generateMetadata({
     section: post.category,
     keywords: [post.category, post.title, "sheet metal fabrication blog"],
   });
+
+  return {
+    ...metadata,
+    alternates: {
+      canonical: `/blog/${post.slug}`,
+      types: {
+        "application/rss+xml": "/rss.xml",
+      },
+    },
+  };
 }
 
 export default async function Page({

@@ -125,26 +125,37 @@ function getAddressSchema() {
   };
 }
 
+function getLogoSchema() {
+  return {
+    "@type": "ImageObject",
+    url: absoluteUrl("/logo.svg"),
+  };
+}
+
 export function createOrganizationJsonLd(): SchemaObject {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": `${siteConfig.url}#organization`,
     name: siteConfig.legalName,
-    alternateName: siteConfig.alternateName,
+    alternateName: siteConfig.alternateNames,
     slogan: siteConfig.slogan,
     url: siteConfig.url,
-    logo: absoluteUrl("/logo.svg"),
-    image: absoluteUrl(siteConfig.ogImage),
+    description: siteConfig.description,
+    logo: getLogoSchema(),
+    image: [absoluteUrl(siteConfig.ogImage)],
     email: siteConfig.email,
     telephone: siteConfig.phone,
     foundingDate: siteConfig.foundingDate,
     taxID: siteConfig.gstNumber,
     address: getAddressSchema(),
     knowsAbout: siteConfig.industries,
+    sameAs: siteConfig.sameAs,
     numberOfEmployees: {
       "@type": "QuantitativeValue",
       name: siteConfig.employeeRange,
+      minValue: 11,
+      maxValue: 25,
     },
     contactPoint: [
       {
@@ -167,11 +178,12 @@ export function createLocalBusinessJsonLd(): SchemaObject {
     "@id": `${siteConfig.url}#local-business`,
     additionalType: "https://schema.org/IndustrialEstablishment",
     name: siteConfig.legalName,
-    alternateName: siteConfig.alternateName,
+    alternateName: siteConfig.alternateNames,
     description: siteConfig.description,
     url: siteConfig.url,
-    image: absoluteUrl(siteConfig.ogImage),
-    logo: absoluteUrl("/logo.svg"),
+    mainEntityOfPage: siteConfig.url,
+    image: [absoluteUrl(siteConfig.ogImage)],
+    logo: getLogoSchema(),
     telephone: siteConfig.phone,
     email: siteConfig.email,
     foundingDate: siteConfig.foundingDate,
@@ -179,6 +191,7 @@ export function createLocalBusinessJsonLd(): SchemaObject {
     taxID: siteConfig.gstNumber,
     address: getAddressSchema(),
     hasMap: siteConfig.mapUrl,
+    sameAs: siteConfig.sameAs,
     areaServed: siteConfig.serviceAreas.map((name) => ({
       "@type": "AdministrativeArea",
       name,
@@ -187,6 +200,8 @@ export function createLocalBusinessJsonLd(): SchemaObject {
     numberOfEmployees: {
       "@type": "QuantitativeValue",
       name: siteConfig.employeeRange,
+      minValue: 11,
+      maxValue: 25,
     },
     openingHoursSpecification: [
       {
@@ -260,7 +275,7 @@ export function createWebsiteJsonLd(): SchemaObject {
     "@type": "WebSite",
     "@id": `${siteConfig.url}#website`,
     name: siteConfig.name,
-    alternateName: siteConfig.alternateName,
+    alternateName: siteConfig.alternateNames,
     url: siteConfig.url,
     description: siteConfig.description,
     inLanguage: siteConfig.language,
@@ -330,6 +345,7 @@ export function createServiceJsonLd(service: Service): SchemaObject {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": `${absoluteUrl(`/services/${service.id}`)}#service`,
     serviceType: service.title,
     name: service.title,
     description: service.description,
@@ -376,6 +392,7 @@ export function createBlogPostingJsonLd(post: BlogPost): SchemaObject {
   return {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
+    "@id": `${absoluteUrl(`/blog/${post.slug}`)}#article`,
     mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),
     headline: post.title,
     description: post.excerpt,
@@ -389,6 +406,7 @@ export function createBlogPostingJsonLd(post: BlogPost): SchemaObject {
     },
     publisher: {
       "@type": "Organization",
+      "@id": `${siteConfig.url}#organization`,
       name: siteConfig.name,
       logo: {
         "@type": "ImageObject",

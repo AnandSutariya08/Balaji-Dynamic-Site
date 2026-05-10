@@ -50,7 +50,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${siteConfig.url}/about`,
-      lastModified: new Date(),
+      lastModified: homeLastModified,
       changeFrequency: "monthly",
       priority: 0.8,
       images: [absoluteUrl("/service-fabrication.png")],
@@ -71,7 +71,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${siteConfig.url}/contact`,
-      lastModified: new Date(),
+      lastModified: homeLastModified,
       changeFrequency: "monthly",
       priority: 0.9,
       images: [absoluteUrl("/service-cnc.png")],
