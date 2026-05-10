@@ -1,0 +1,8 @@
+/* TEAM */
+Company: Balaji Engineering Works
+Website: https://sheetmetalbendingworks.com
+Location: Navagam, Surat, Gujarat, India
+
+/* SITE */
+Stack: Next.js, TypeScript, Tailwind CSS
+Primary focus: Sheet metal bending, CNC laser cutting, plate rolling, steel fabrication
