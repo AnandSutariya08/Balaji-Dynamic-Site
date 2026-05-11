@@ -3,6 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { FloatingCta } from "@/components/site/FloatingCta";
 import { SiteSmoothScroll } from "@/components/site/SiteSmoothScroll";
+import { QuoteDialogProvider } from "@/components/site/QuoteDialogProvider";
 
 export default function SiteLayout({
   children,
@@ -10,12 +11,14 @@ export default function SiteLayout({
   children: ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-background font-sans selection:bg-primary/30">
-      <SiteSmoothScroll />
-      <Navbar />
-      <main>{children}</main>
-      <Footer />
-      <FloatingCta />
-    </div>
+    <QuoteDialogProvider>
+      <div className="min-h-screen bg-background font-sans selection:bg-primary/30">
+        <SiteSmoothScroll />
+        <Navbar />
+        <main>{children}</main>
+        <Footer />
+        <FloatingCta />
+      </div>
+    </QuoteDialogProvider>
   );
 }

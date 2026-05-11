@@ -262,7 +262,7 @@ export default function HomePage({
           </div>
         </section>
 
-        <section className="border-y border-black/8 bg-[#EDEAE4] py-14 md:py-20">
+        {/* <section className="border-y border-black/8 bg-[#EDEAE4] py-14 md:py-20">
           <div className="container mx-auto px-4">
             <div className="max-w-5xl">
               <span className="text-primary font-bold tracking-[0.3em] uppercase text-sm">Search Focus</span>
@@ -332,7 +332,7 @@ export default function HomePage({
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Section 4: About Teaser */}
         <section className="py-16 md:py-32 bg-[#EDEAE4]">

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import { useQuoteDialog } from "@/components/site/QuoteDialogProvider";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -17,6 +18,7 @@ export function Navbar() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { openQuoteDialog } = useQuoteDialog();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 80);
@@ -92,16 +94,17 @@ export function Navbar() {
                   />
                 </Link>
               ))}
-              <Link
-                href="/contact"
+              <button
+                type="button"
                 className={`ml-3 rounded-xl px-5 py-2.5 text-[11px] font-black uppercase tracking-[0.15em] text-white transition-all duration-300 ${
                   isScrolled
                     ? "bg-primary shadow-[0_0_20px_rgba(172,60,60,0.4)] hover:bg-primary/90"
                     : "border border-primary/50 bg-primary/90 shadow-[0_0_20px_rgba(172,60,60,0.3)] backdrop-blur-sm hover:bg-primary"
                 }`}
+                onClick={() => openQuoteDialog()}
               >
                 Get Quote
-              </Link>
+              </button>
             </nav>
 
             <button
@@ -143,12 +146,16 @@ export function Navbar() {
             ))}
           </nav>
           <div className="border-t border-white/8 p-4">
-            <Link
-              href="/contact"
-              className="block rounded-xl bg-primary py-3.5 text-center text-xs font-black uppercase tracking-widest text-white shadow-[0_0_20px_rgba(172,60,60,0.3)] transition-all hover:bg-primary/90"
+            <button
+              type="button"
+              className="block w-full rounded-xl bg-primary py-3.5 text-center text-xs font-black uppercase tracking-widest text-white shadow-[0_0_20px_rgba(172,60,60,0.3)] transition-all hover:bg-primary/90"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                openQuoteDialog();
+              }}
             >
               Get Quote Now
-            </Link>
+            </button>
           </div>
         </div>
       </div>

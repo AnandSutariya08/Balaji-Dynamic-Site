@@ -26,13 +26,15 @@ async function fetchFromFirestore(): Promise<BlogPost[] | null> {
   try {
     const posts = await getBlogs();
     return posts.length > 0 ? posts : null;
-  } catch {
+  } catch (error) {
+    console.warn("Failed to fetch blogs from Firestore; falling back to static posts.", error);
     return null;
   }
 }
 
 export function useBlogs(initialPosts: BlogPost[] = STATIC_POSTS) {
-  const [posts, setPosts] = useState<BlogPost[]>(initialPosts);
+  const fallbackPosts = initialPosts.length > 0 ? initialPosts : STATIC_POSTS;
+  const [posts, setPosts] = useState<BlogPost[]>(fallbackPosts);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -40,10 +42,10 @@ export function useBlogs(initialPosts: BlogPost[] = STATIC_POSTS) {
     fetchFromFirestore()
       .then((data) => {
         if (data) setPosts(data);
-        else setPosts(initialPosts);
+        else setPosts(fallbackPosts);
       })
       .finally(() => setLoading(false));
-  }, [initialPosts]);
+  }, [fallbackPosts]);
 
   return { posts, loading };
 }
@@ -54,7 +56,7 @@ export function useBlogPost(
   initialPost?: BlogPost | null,
   initialRelated: BlogPost[] = [],
 ) {
-  const { posts, loading } = useBlogs(initialPosts);
+  const { posts, loading } = useBlogs(initialPosts.length > 0 ? initialPosts : STATIC_POSTS);
   const post = slug
     ? initialPost ?? posts.find((item) => item.slug === slug) ?? null
     : null;
