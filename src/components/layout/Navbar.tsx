@@ -51,7 +51,7 @@ export function Navbar() {
           <div className="flex items-center justify-between">
             <Link href="/" className="z-50 flex items-center gap-3">
               <img
-                src="/logo.svg"
+                src="/logo.png"
                 alt="Balaji Engineering Works Logo"
                 className={`w-auto rounded object-contain transition-all duration-300 ${
                   isScrolled ? "h-8" : "h-9"

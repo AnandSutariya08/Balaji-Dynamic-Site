@@ -8,7 +8,7 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "Googlebot",
         allow: [
           "/",
-          "/favicon.svg",
+          "/logo.png",
           "/favicon.jpg",
           "/opengraph.jpg",
           "/manifest.webmanifest",
@@ -24,7 +24,7 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "Bingbot",
         allow: [
           "/",
-          "/favicon.svg",
+          "/logo.png",
           "/favicon.jpg",
           "/opengraph.jpg",
           "/manifest.webmanifest",
@@ -40,7 +40,7 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "*",
         allow: [
           "/",
-          "/favicon.svg",
+          "/logo.png",
           "/favicon.jpg",
           "/opengraph.jpg",
           "/manifest.webmanifest",

@@ -137,7 +137,7 @@ export function createOrganizationJsonLd(): SchemaObject {
     name: siteConfig.legalName,
     alternateName: siteConfig.alternateName,
     url: siteConfig.url,
-    logo: absoluteUrl("/logo.svg"),
+    logo: absoluteUrl("/logo.png"),
     image: absoluteUrl(siteConfig.ogImage),
     email: siteConfig.email,
     telephone: siteConfig.phone,
@@ -170,7 +170,7 @@ export function createLocalBusinessJsonLd(): SchemaObject {
     description: siteConfig.description,
     url: siteConfig.url,
     image: absoluteUrl(siteConfig.ogImage),
-    logo: absoluteUrl("/logo.svg"),
+    logo: absoluteUrl("/logo.png"),
     telephone: siteConfig.phone,
     email: siteConfig.email,
     foundingDate: siteConfig.foundingDate,
@@ -377,7 +377,7 @@ export function createBlogPostingJsonLd(post: BlogPost): SchemaObject {
       name: siteConfig.name,
       logo: {
         "@type": "ImageObject",
-        url: absoluteUrl("/logo.svg"),
+        url: absoluteUrl("/logo.png"),
       },
     },
   };

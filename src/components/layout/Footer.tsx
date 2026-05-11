@@ -66,7 +66,7 @@ export function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <Link href="/" className="mb-6 flex w-fit items-center gap-3">
               <img
-                src="/logo.svg"
+                src="/logo.png"
                 alt="Balaji Engineering Works"
                 className="h-10 w-auto rounded border border-white/8 bg-white/5 p-1 object-contain"
               />
