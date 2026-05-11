@@ -1,6 +1,6 @@
 import ServicesPage from "@/components/site/ServicesPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { getPublicServices } from "@/lib/public-data";
+import { staticServices } from "@/lib/servicesData";
 import {
   buildMetadata,
   createBreadcrumbJsonLd,
@@ -30,7 +30,7 @@ export const metadata = buildMetadata({
 });
 
 export default async function Page() {
-  const services = await getPublicServices();
+  const services = staticServices;
   const schemas = [
     createWebPageJsonLd({
       title,

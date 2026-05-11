@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { blogPosts as staticPosts } from "@/lib/blogData";
 import type { BlogPost } from "@/lib/firestore/types";
+import { isFirebaseConfigured } from "@/lib/firebase";
+import { getBlogs } from "@/lib/firestore/blogs";
 
 function mapStatic(p: any): BlogPost {
   return {
@@ -19,12 +21,11 @@ function mapStatic(p: any): BlogPost {
 
 const STATIC_POSTS: BlogPost[] = staticPosts.map(mapStatic);
 
-async function fetchFromApi(): Promise<BlogPost[] | null> {
+async function fetchFromFirestore(): Promise<BlogPost[] | null> {
+  if (!isFirebaseConfigured()) return null;
   try {
-    const res = await fetch("/api/blogs");
-    if (!res.ok) return null;
-    const data = await res.json();
-    return Array.isArray(data) && data.length > 0 ? data : null;
+    const posts = await getBlogs();
+    return posts.length > 0 ? posts : null;
   } catch {
     return null;
   }
@@ -35,12 +36,14 @@ export function useBlogs(initialPosts: BlogPost[] = STATIC_POSTS) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchFromApi()
+    setLoading(true);
+    fetchFromFirestore()
       .then((data) => {
         if (data) setPosts(data);
+        else setPosts(initialPosts);
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, [initialPosts]);
 
   return { posts, loading };
 }

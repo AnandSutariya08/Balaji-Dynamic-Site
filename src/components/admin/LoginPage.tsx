@@ -5,6 +5,10 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { AlertCircle, Eye, EyeOff, Lock, User } from "lucide-react";
 
+const ADMIN_USERNAME = "admin";
+const ADMIN_PASSWORD = "admin123";
+const ADMIN_SESSION_KEY = "balaji_admin_authed";
+
 export function LoginPage() {
   const router = useRouter();
   const [username, setUsername] = useState("");
@@ -19,18 +23,12 @@ export function LoginPage() {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/admin/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
-
-      if (!response.ok) {
-        const data = (await response.json()) as { message?: string };
-        setError(data.message || "Invalid username or password.");
+      if (username !== ADMIN_USERNAME || password !== ADMIN_PASSWORD) {
+        setError("Invalid username or password.");
         return;
       }
 
+      window.localStorage.setItem(ADMIN_SESSION_KEY, "1");
       router.push("/admin/inquiries");
       router.refresh();
     } catch {

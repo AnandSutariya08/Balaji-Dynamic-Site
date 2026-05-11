@@ -22,5 +22,5 @@ export const isFirebaseConfigured = (): boolean => {
 
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 
-export const db = getFirestore(app, "webapp");
+export const db = getFirestore(app);
 export const storage = getStorage(app);

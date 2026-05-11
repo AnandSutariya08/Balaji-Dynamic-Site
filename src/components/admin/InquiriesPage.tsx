@@ -9,7 +9,6 @@ import {
   Mail,
   MessageSquare,
   Phone,
-  RefreshCw,
 } from "lucide-react";
 import { getInquiries, updateInquiryStatus } from "@/lib/firestore/inquiries";
 import { isFirebaseConfigured } from "@/lib/firebase";
@@ -234,23 +233,12 @@ export function InquiriesPage() {
   );
 
   return (
-    <div className="mx-auto max-w-4xl p-6">
+    <div className="w-full p-4 md:p-6">
       <div className="mb-6 flex items-center justify-between">
         <div>
           <h1 className="text-xl font-bold text-white">Inquiries</h1>
           <p className="mt-0.5 text-sm text-zinc-500">{inquiries.length} total submissions</p>
         </div>
-        {configured && (
-          <button
-            type="button"
-            onClick={() => void load()}
-            disabled={loading}
-            className="flex items-center gap-1.5 text-sm text-zinc-400 transition-colors hover:text-white disabled:opacity-50"
-          >
-            <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />
-            Refresh
-          </button>
-        )}
       </div>
 
       {!configured && (

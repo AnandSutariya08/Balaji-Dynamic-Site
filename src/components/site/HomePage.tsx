@@ -576,7 +576,7 @@ export default function HomePage({
             </div>
             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12">
               {previewPosts.map((post, i) => (
-                <Link key={post.slug ?? i} href={`/blog/${post.slug}`} className="group">
+                <Link key={post.slug ?? i} href={`/blog/${encodeURIComponent(post.slug)}`} className="group">
                   <div className="aspect-video bg-[#EDEAE4] rounded-xl overflow-hidden mb-6 md:mb-8 border border-black/8">
                     {post.image ? (
                       <img

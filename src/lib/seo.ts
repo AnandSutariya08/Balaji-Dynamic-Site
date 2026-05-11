@@ -56,7 +56,7 @@ export function buildMetadata({
     : `${title} | ${siteConfig.name}`;
 
   return {
-    title,
+    title: metadataTitle,
     description,
     keywords: Array.from(new Set([...siteConfig.keywords, ...keywords])),
     authors: (authors ?? [siteConfig.legalName]).map((name) => ({ name })),

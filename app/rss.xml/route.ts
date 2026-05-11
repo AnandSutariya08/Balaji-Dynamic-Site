@@ -1,4 +1,4 @@
-import { getPublicBlogs } from "@/lib/public-data";
+import { getPublicBlogsFromFirestore } from "@/lib/firestore/publicBlogsServer";
 import { absoluteUrl } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
@@ -23,14 +23,13 @@ function toRssDate(value?: string) {
 }
 
 export async function GET() {
-  const posts = await getPublicBlogs();
+  const posts = await getPublicBlogsFromFirestore();
   const sortedPosts = [...posts].sort(
     (a, b) =>
-      new Date(b.updatedAt ?? b.createdAt ?? b.date).getTime() -
-      new Date(a.updatedAt ?? a.createdAt ?? a.date).getTime(),
+      new Date(b.date).getTime() -
+      new Date(a.date).getTime(),
   );
-  const latestPostDate =
-    sortedPosts[0]?.updatedAt ?? sortedPosts[0]?.createdAt ?? sortedPosts[0]?.date;
+  const latestPostDate = sortedPosts[0]?.date;
 
   const items = sortedPosts
     .map((post) => {
@@ -42,7 +41,7 @@ export async function GET() {
           <link>${link}</link>
           <guid>${link}</guid>
           <description>${escapeXml(post.excerpt)}</description>
-          <pubDate>${toRssDate(post.updatedAt ?? post.createdAt ?? post.date)}</pubDate>
+          <pubDate>${toRssDate(post.date)}</pubDate>
           <category>${escapeXml(post.category)}</category>
         </item>
       `.trim();
@@ -55,7 +54,7 @@ export async function GET() {
     <title>${escapeXml(siteConfig.name)}</title>
     <link>${siteConfig.url}</link>
     <description>${escapeXml(siteConfig.description)}</description>
-    <language>en-in</language>
+    <language>en-IN</language>
     <lastBuildDate>${toRssDate(latestPostDate)}</lastBuildDate>
     <managingEditor>${siteConfig.email} (${escapeXml(siteConfig.legalName)})</managingEditor>
     <image>

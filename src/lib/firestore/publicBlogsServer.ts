@@ -1,27 +1,18 @@
 import "server-only";
 
-import { revalidateTag } from "next/cache";
-import { blogPosts } from "@/lib/blogData";
-import { staticServices } from "@/lib/servicesData";
-import type { BlogPost as StaticBlogPost } from "@/lib/blogData";
-import type { BlogPost, Service } from "@/lib/firestore/types";
-
-const BLOGS_TAG = "public-blogs";
-const SERVICES_TAG = "public-services";
-
-function isPublicFirebaseConfigured() {
-  return Boolean(
-    process.env.NEXT_PUBLIC_FIREBASE_API_KEY &&
-      process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  );
-}
+import type { BlogPost } from "@/lib/firestore/types";
+import { blogPosts as staticPosts } from "@/lib/blogData";
 
 function projectId() {
-  return process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID!;
+  return process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
 }
 
 function apiKey() {
-  return process.env.NEXT_PUBLIC_FIREBASE_API_KEY!;
+  return process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
+}
+
+function isConfigured() {
+  return Boolean(projectId() && apiKey());
 }
 
 function baseUrl() {
@@ -70,7 +61,26 @@ function parseDoc(document: Record<string, unknown>) {
   };
 }
 
-function mapStaticPost(post: StaticBlogPost): BlogPost {
+function toPost(raw: Record<string, unknown>): BlogPost {
+  const category = (raw.category ?? "Technical") as BlogPost["category"];
+
+  return {
+    id: String(raw.id ?? ""),
+    slug: String(raw.slug ?? ""),
+    title: String(raw.title ?? ""),
+    excerpt: String(raw.excerpt ?? ""),
+    content: String(raw.content ?? ""),
+    image: String(raw.image ?? ""),
+    category,
+    readTime: String(raw.readTime ?? ""),
+    date: String(raw.date ?? ""),
+    author: String(raw.author ?? "Balaji Engineering Works"),
+    createdAt: typeof raw.createdAt === "string" ? raw.createdAt : undefined,
+    updatedAt: typeof raw.updatedAt === "string" ? raw.updatedAt : undefined,
+  };
+}
+
+function mapStatic(post: (typeof staticPosts)[number]): BlogPost {
   return {
     id: post.slug,
     slug: post.slug,
@@ -85,48 +95,24 @@ function mapStaticPost(post: StaticBlogPost): BlogPost {
   };
 }
 
-async function fetchCollection<T>(collectionId: string, tag: string): Promise<T[] | null> {
-  if (!isPublicFirebaseConfigured()) {
-    return null;
-  }
+export async function getPublicBlogsFromFirestore(): Promise<BlogPost[]> {
+  if (!isConfigured()) return staticPosts.map(mapStatic);
 
   const response = await fetch(
-    `${baseUrl()}/${collectionId}?key=${apiKey()}&pageSize=100`,
-    {
-      next: {
-        revalidate: 300,
-        tags: [tag],
-      },
-    },
+    `${baseUrl()}/blog-posts?key=${apiKey()}&pageSize=250`,
+    { next: { revalidate: 300 } },
   );
 
-  if (!response.ok) {
-    return null;
-  }
+  if (!response.ok) return staticPosts.map(mapStatic);
 
-  const data = (await response.json()) as {
-    documents?: Record<string, unknown>[];
-  };
-
-  return (data.documents ?? []).map((document) => parseDoc(document) as T);
+  const data = (await response.json()) as { documents?: Record<string, unknown>[] };
+  const posts = (data.documents ?? []).map((doc) =>
+    toPost(parseDoc(doc) as Record<string, unknown>),
+  );
+  return posts.length > 0 ? posts : staticPosts.map(mapStatic);
 }
 
-export async function getPublicBlogs(): Promise<BlogPost[]> {
-  const posts = await fetchCollection<BlogPost>("blog-posts", BLOGS_TAG);
-  return posts && posts.length > 0 ? posts : blogPosts.map(mapStaticPost);
-}
-
-export async function getPublicBlogBySlug(slug: string): Promise<BlogPost | null> {
-  const posts = await getPublicBlogs();
+export async function getPublicBlogBySlugFromFirestore(slug: string): Promise<BlogPost | null> {
+  const posts = await getPublicBlogsFromFirestore();
   return posts.find((post) => post.slug === slug) ?? null;
-}
-
-export async function getPublicServices(): Promise<Service[]> {
-  const services = await fetchCollection<Service>("services", SERVICES_TAG);
-  return services && services.length > 0 ? services : staticServices;
-}
-
-export function refreshPublicCache() {
-  revalidateTag(BLOGS_TAG);
-  revalidateTag(SERVICES_TAG);
 }

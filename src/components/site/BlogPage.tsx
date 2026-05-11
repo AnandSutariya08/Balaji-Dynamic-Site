@@ -37,6 +37,7 @@ export default function BlogPage({
   const filteredPosts = filter === "All" ? blogPosts : blogPosts.filter(post => post.category === filter);
   const featuredPost = blogPosts[0];
   const recentPosts = blogPosts.slice(1, 4);
+  const postHref = (slug: string) => `/blog/${encodeURIComponent(slug)}`;
 
   return (
     <PageTransition>
@@ -155,7 +156,7 @@ export default function BlogPage({
                 <div className="h-px flex-1 bg-black/8" />
               </div>
               <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="group">
-                <Link href={`/blog/${featuredPost.slug}`} className="block">
+              <Link href={postHref(featuredPost.slug)} className="block">
                   <div className="grid lg:grid-cols-2 rounded-2xl overflow-hidden border border-black/8 hover:border-primary/30 transition-colors bg-[#EDEAE4]">
                     <div className="relative aspect-video lg:aspect-auto overflow-hidden">
                       <img src={featuredPost.image} alt={featuredPost.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
@@ -194,7 +195,7 @@ export default function BlogPage({
               </div>
               <div className="hidden md:grid md:grid-cols-3 gap-6">
                 {recentPosts.map((post) => (
-                  <Link key={post.slug} href={`/blog/${post.slug}`} className="group block">
+                  <Link key={post.slug} href={postHref(post.slug)} className="group block">
                     <div className="flex gap-4 items-start p-5 rounded-xl border border-black/8 hover:border-primary/30 hover:bg-[#F7F5F1] transition-all bg-[#EDEAE4]">
                       <div className="w-14 h-14 rounded-xl overflow-hidden shrink-0 bg-[#D5D0C8]">
                         <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
@@ -210,7 +211,7 @@ export default function BlogPage({
               </div>
               <div className="flex flex-col md:hidden gap-3">
                 {recentPosts.map((post) => (
-                  <Link key={post.slug} href={`/blog/${post.slug}`} className="group block">
+                  <Link key={post.slug} href={postHref(post.slug)} className="group block">
                     <div className="flex gap-4 items-center p-4 rounded-xl border border-black/8 bg-[#EDEAE4] hover:border-primary/30 transition-colors">
                       <div className="w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-[#D5D0C8]">
                         <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
@@ -270,7 +271,7 @@ export default function BlogPage({
                     variants={item}
                     className="group bg-[#EDEAE4] rounded-2xl overflow-hidden border border-black/8 flex flex-col h-full hover:border-primary/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-lg"
                   >
-                    <Link href={`/blog/${post.slug}`} className="block relative overflow-hidden aspect-video">
+                    <Link href={postHref(post.slug)} className="block relative overflow-hidden aspect-video">
                       <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                       <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-colors" />
                       <div className="absolute top-3 left-3 md:top-4 md:left-4">
@@ -286,12 +287,12 @@ export default function BlogPage({
                         <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{post.date}</span>
                       </div>
                       <h3 className="text-base md:text-xl font-display font-black text-[#1A1A1A] uppercase tracking-tight mb-3 md:mb-4 leading-[1.1] group-hover:text-primary transition-colors flex-grow">
-                        <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                        <Link href={postHref(post.slug)}>{post.title}</Link>
                       </h3>
                       <p className="text-slate-500 text-sm line-clamp-2 mb-4 md:mb-6 font-light leading-relaxed">{post.excerpt}</p>
                       <div className="mt-auto pt-4 md:pt-5 border-t border-black/8 flex items-center justify-between">
                         <span className="text-[9px] font-bold tracking-[0.3em] text-slate-400 uppercase">{post.author ?? "Balaji Engineering"}</span>
-                        <Link href={`/blog/${post.slug}`} className="inline-flex items-center gap-1.5 text-primary text-xs font-bold uppercase tracking-widest group-hover:gap-3 transition-all">
+                        <Link href={postHref(post.slug)} className="inline-flex items-center gap-1.5 text-primary text-xs font-bold uppercase tracking-widest group-hover:gap-3 transition-all">
                           Read <ArrowRight className="w-3.5 h-3.5" />
                         </Link>
                       </div>

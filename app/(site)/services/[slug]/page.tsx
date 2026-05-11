@@ -3,7 +3,8 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2, ChevronLeft } from "lucide-react";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Button } from "@/components/ui/button";
-import { getPublicBlogs, getPublicServices } from "@/lib/public-data";
+import { blogPosts } from "@/lib/blogData";
+import { staticServices } from "@/lib/servicesData";
 import {
   buildMetadata,
   createBreadcrumbJsonLd,
@@ -14,8 +15,7 @@ import {
 import { getServiceSeoContent } from "@/lib/serviceSeo";
 
 export async function generateStaticParams() {
-  const services = await getPublicServices();
-  return services.map((service) => ({
+  return staticServices.map((service) => ({
     slug: service.id,
   }));
 }
@@ -26,8 +26,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const services = await getPublicServices();
-  const service = services.find((item) => item.id === slug);
+  const service = staticServices.find((item) => item.id === slug);
 
   if (!service) {
     return buildMetadata({
@@ -55,11 +54,9 @@ export default async function Page({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const [services, posts] = await Promise.all([
-    getPublicServices(),
-    getPublicBlogs(),
-  ]);
-  const service = services.find((item) => item.id === slug);
+  const services = staticServices;
+  const posts = blogPosts;
+  const service = staticServices.find((item) => item.id === slug);
 
   if (!service) {
     notFound();

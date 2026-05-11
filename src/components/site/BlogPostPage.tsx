@@ -150,8 +150,8 @@ export default function BlogPostPage({
                   <div>
                     <h4 className="text-sm font-bold uppercase tracking-widest text-white mb-6 border-l-2 border-primary pl-4">Related Articles</h4>
                     <div className="space-y-6">
-                      {related.map(rp => (
-                        <Link key={rp.slug} href={`/blog/${rp.slug}`} className="group block">
+                {related.map(rp => (
+                        <Link key={rp.slug} href={`/blog/${encodeURIComponent(rp.slug)}`} className="group block">
                           <div className="aspect-video rounded-lg overflow-hidden mb-3 border border-white/5">
                             <img src={rp.image} alt={rp.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                           </div>

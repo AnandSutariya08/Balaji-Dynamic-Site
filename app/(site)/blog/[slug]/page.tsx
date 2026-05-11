@@ -1,19 +1,8 @@
 import { notFound } from "next/navigation";
 import BlogPostPage from "@/components/site/BlogPostPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { getPublicBlogBySlug, getPublicBlogs } from "@/lib/public-data";
-import {
-  buildMetadata,
-  createBlogPostingJsonLd,
-  createBreadcrumbJsonLd,
-} from "@/lib/seo";
-
-export async function generateStaticParams() {
-  const posts = await getPublicBlogs();
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
-}
+import { getPublicBlogBySlugFromFirestore } from "@/lib/firestore/publicBlogsServer";
+import { buildMetadata, createBlogPostingJsonLd, createBreadcrumbJsonLd } from "@/lib/seo";
 
 export async function generateMetadata({
   params,
@@ -21,7 +10,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = await getPublicBlogBySlug(slug);
+  const post = await getPublicBlogBySlugFromFirestore(slug);
 
   if (!post) {
     return buildMetadata({
@@ -58,18 +47,10 @@ export default async function Page({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const [post, posts] = await Promise.all([
-    getPublicBlogBySlug(slug),
-    getPublicBlogs(),
-  ]);
+  if (!slug) notFound();
 
-  if (!post) {
-    notFound();
-  }
-
-  const related = posts
-    .filter((item) => item.slug !== post.slug && item.category === post.category)
-    .slice(0, 3);
+  const post = await getPublicBlogBySlugFromFirestore(slug);
+  if (!post) notFound();
 
   const schemas = [
     createBreadcrumbJsonLd([
@@ -85,12 +66,7 @@ export default async function Page({
       {schemas.map((schema, index) => (
         <JsonLd key={index} data={schema} />
       ))}
-      <BlogPostPage
-        slug={slug}
-        initialPost={post}
-        initialRelated={related}
-        initialPosts={posts}
-      />
+      <BlogPostPage slug={slug} />
     </>
   );
 }

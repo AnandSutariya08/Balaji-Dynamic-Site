@@ -1,6 +1,6 @@
 import BlogPage from "@/components/site/BlogPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { getPublicBlogs } from "@/lib/public-data";
+import { getPublicBlogsFromFirestore } from "@/lib/firestore/publicBlogsServer";
 import {
   buildMetadata,
   createBlogJsonLd,
@@ -26,7 +26,7 @@ export const metadata = buildMetadata({
 });
 
 export default async function Page() {
-  const posts = await getPublicBlogs();
+  const posts = await getPublicBlogsFromFirestore();
   const schemas = [
     createWebPageJsonLd({
       title,
@@ -46,7 +46,7 @@ export default async function Page() {
       {schemas.map((schema, index) => (
         <JsonLd key={index} data={schema} />
       ))}
-      <BlogPage initialPosts={posts} />
+      <BlogPage />
     </>
   );
 }

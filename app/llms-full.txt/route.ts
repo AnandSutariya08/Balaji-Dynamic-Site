@@ -1,4 +1,5 @@
-import { getPublicBlogs, getPublicServices } from "@/lib/public-data";
+import { staticServices } from "@/lib/servicesData";
+import { getPublicBlogsFromFirestore } from "@/lib/firestore/publicBlogsServer";
 import { absoluteUrl } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
@@ -7,10 +8,8 @@ function stripHtml(html: string) {
 }
 
 export async function GET() {
-  const [services, posts] = await Promise.all([
-    getPublicServices(),
-    getPublicBlogs(),
-  ]);
+  const services = staticServices;
+  const posts = await getPublicBlogsFromFirestore();
 
   const serviceBlocks = services
     .map((service) => {

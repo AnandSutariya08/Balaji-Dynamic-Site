@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
-import { getPublicBlogs, getPublicServices } from "@/lib/public-data";
+import { staticServices } from "@/lib/servicesData";
 import { absoluteUrl } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
+import { getPublicBlogsFromFirestore } from "@/lib/firestore/publicBlogsServer";
 
 function toDate(value?: string) {
   if (!value) {
@@ -21,10 +22,8 @@ function uniqueImages(images: Array<string | undefined>) {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [posts, services] = await Promise.all([
-    getPublicBlogs(),
-    getPublicServices(),
-  ]);
+  const posts = await getPublicBlogsFromFirestore();
+  const services = staticServices;
 
   const serviceLastModified = services.length
     ? maxDate(
@@ -33,9 +32,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     : new Date();
 
   const blogLastModified = posts.length
-    ? maxDate(
-        posts.map((post) => toDate(post.updatedAt ?? post.createdAt ?? post.date)),
-      )
+    ? maxDate(posts.map((post) => toDate(post.date)))
     : new Date();
 
   const homeLastModified = maxDate([serviceLastModified, blogLastModified]);
@@ -71,12 +68,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const blogEntries = [...posts]
     .sort(
       (a, b) =>
-        toDate(b.updatedAt ?? b.createdAt ?? b.date).getTime() -
-        toDate(a.updatedAt ?? a.createdAt ?? a.date).getTime(),
+        toDate(b.date).getTime() -
+        toDate(a.date).getTime(),
     )
     .map((post) => ({
       url: `${siteConfig.url}/blog/${post.slug}`,
-      lastModified: toDate(post.updatedAt ?? post.createdAt ?? post.date),
+      lastModified: toDate(post.date),
       images: post.image ? uniqueImages([absoluteUrl(post.image)]) : undefined,
     }));
 

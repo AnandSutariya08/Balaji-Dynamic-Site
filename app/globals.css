@@ -202,5 +202,5 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .container {
-  width: min(100%, 1280px);
+  width: min(100%, 1920px);
 }

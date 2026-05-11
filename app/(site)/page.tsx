@@ -1,6 +1,6 @@
 import HomePage from "@/components/site/HomePage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { getPublicBlogs, getPublicServices } from "@/lib/public-data";
+import { staticServices } from "@/lib/servicesData";
 import {
   buildMetadata,
   createOfferCatalogJsonLd,
@@ -31,10 +31,7 @@ export const metadata = buildMetadata({
 });
 
 export default async function Page() {
-  const [posts, services] = await Promise.all([
-    getPublicBlogs(),
-    getPublicServices(),
-  ]);
+  const services = staticServices;
 
   const schemas = [
     createWebPageJsonLd({
@@ -52,7 +49,7 @@ export default async function Page() {
       {schemas.map((schema, index) => (
         <JsonLd key={index} data={schema} />
       ))}
-      <HomePage initialPosts={posts.slice(0, 3)} />
+      <HomePage />
     </>
   );
 }
