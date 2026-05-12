@@ -168,9 +168,9 @@ export default function BlogPostPage({
                   <h4 className="text-sm font-bold uppercase tracking-widest text-white mb-6 border-l-2 border-primary pl-4">Related Services</h4>
                   <div className="space-y-3">
                     {[
-                      { title: "Sheet Bending Service", href: "/services/sheet-bending" },
-                      { title: "CNC Laser Cutting", href: "/services/laser-cutting" },
-                      { title: "Plate Profile Cutting", href: "/services/profile-cutting" },
+                      { title: "CNC Plate Bending", href: "/services/cnc-plate-bending" },
+                      { title: "CNC Laser Cutting", href: "/services/cnc-laser-cutting" },
+                      { title: "Plate Rolling", href: "/services/plate-rolling" },
                     ].map((service) => (
                       <Link
                         key={service.href}

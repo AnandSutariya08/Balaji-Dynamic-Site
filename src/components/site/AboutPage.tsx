@@ -10,6 +10,7 @@ import {
   CheckCircle2, Factory, Target, Users, Award, ShieldCheck,
   Zap, TrendingUp, ArrowRight, Calendar, FileText
 } from "lucide-react";
+import { PartnersClientsSection } from "@/components/site/PartnersClientsSection";
 
 const timeline = [
   { year: "2001", title: "Founded in Navagam", desc: "Balaji Engineering Works is established with a single shearing machine and a vision to serve Surat's growing industrial corridor." },
@@ -250,8 +251,8 @@ export default function AboutPage() {
           <div className="container mx-auto px-4 relative z-10">
             <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-12 md:mb-16">
               {[
-                { label: "Mission", text: "To deliver precision-engineered fabrication solutions that empower industrial growth — maintaining the highest standards of quality, safety, and operational excellence in every project we undertake." },
-                { label: "Vision", text: "To be India's most trusted technologically advanced metal fabrication partner — known for resolving the most complex engineering challenges through innovation, speed, and uncompromising craftsmanship." }
+                { label: "Mission", text: "Our mission is to deliver high-quality, precision-engineered sheet metal forming products and services that exceed customer expectations. Through continuous improvement, cutting-edge technology, and a commitment to sustainability, we aim to enhance the efficiency and competitiveness of industries worldwide." },
+                { label: "Vision", text: "To be the global leader in innovative and sustainable sheet metal forming solutions, driving progress in industries through precision, efficiency, and technological advancement." }
               ].map((card, i) => (
                 <motion.div
                   key={i}
@@ -291,6 +292,8 @@ export default function AboutPage() {
           </div>
         </section>
 
+        <PartnersClientsSection variant="full" />
+
         <section className="py-16 md:py-24 bg-[#F7F5F1] border-t border-black/8">
           <div className="container mx-auto px-4">
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
@@ -306,10 +309,10 @@ export default function AboutPage() {
             </div>
             <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
               {[
-                { title: "Sheet Bending Service", href: "/services/sheet-bending" },
-                { title: "CNC Laser Cutting", href: "/services/laser-cutting" },
-                { title: "Plate Rolling", href: "/services/plate-bending" },
-                { title: "Profile Cutting", href: "/services/profile-cutting" },
+                { title: "CNC Plate Bending", href: "/services/cnc-plate-bending" },
+                { title: "CNC Laser Cutting", href: "/services/cnc-laser-cutting" },
+                { title: "Plate Rolling", href: "/services/plate-rolling" },
+                { title: "Punching", href: "/services/punching" },
               ].map((service) => (
                 <Link
                   key={service.href}
@@ -353,3 +356,5 @@ export default function AboutPage() {
     </PageTransition>
   );
 }
+
+

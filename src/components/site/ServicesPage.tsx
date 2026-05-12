@@ -96,20 +96,20 @@ export default function ServicesPage({
                   <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute top-4 left-4 md:top-8 md:left-8 text-[3rem] md:text-[5rem] font-display font-black text-white/5 leading-none">{String(i + 1).padStart(2, "0")}</div>
-                  <div className="absolute bottom-0 left-0 right-0 p-4 md:p-8 grid grid-cols-2 sm:grid-cols-4 gap-2 md:gap-3">
-                    {service.specs.map((spec, j) => (
-                      <div key={j} className="bg-black/60 backdrop-blur-sm border border-white/10 rounded-lg md:rounded-xl p-2 md:p-3 text-center">
-                        <div className="text-sm md:text-lg font-display font-black text-primary">{spec.value}</div>
-                        <div className="text-[8px] md:text-[9px] font-bold text-zinc-400 uppercase tracking-widest mt-0.5 md:mt-1">{spec.label}</div>
-                      </div>
-                    ))}
-                  </div>
                 </div>
                 {/* Content */}
                 <div className={`p-6 sm:p-10 md:p-12 xl:p-16 flex flex-col justify-center bg-[#F7F5F1] ${i % 2 !== 0 ? 'lg:order-1' : ''}`}>
                   <span className="text-primary font-bold tracking-[0.3em] uppercase text-xs mb-3 md:mb-4">{service.tagline}</span>
                   <h2 className="text-3xl sm:text-4xl xl:text-5xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mb-4 md:mb-6 leading-[0.9]">{service.title}</h2>
                   <p className="text-slate-600 font-light leading-relaxed mb-6 md:mb-8 text-sm md:text-base">{service.description}</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 md:gap-3 mb-6 md:mb-8">
+                    {service.specs.map((spec, j) => (
+                      <div key={j} className="bg-[#EDEAE4] border border-black/8 rounded-lg md:rounded-xl p-3 md:p-4 text-center">
+                        <div className="text-sm md:text-lg font-display font-black text-primary">{spec.value}</div>
+                        <div className="text-[9px] md:text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">{spec.label}</div>
+                      </div>
+                    ))}
+                  </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 md:gap-3 mb-8 md:mb-10">
                     {service.features.map((f, j) => (
                       <div key={j} className="flex items-center gap-2.5">

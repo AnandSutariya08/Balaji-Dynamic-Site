@@ -104,19 +104,19 @@ export default function BlogPage({
             <div className="grid gap-4 md:grid-cols-3">
               {[
                 {
-                  title: "Sheet Bending Guides",
+                  title: "CNC Plate Bending Guides",
                   desc: "Learn what buyers should check before choosing a bending vendor in Surat.",
-                  href: "/services/sheet-bending",
+                  href: "/services/cnc-plate-bending",
                 },
                 {
                   title: "CNC Laser Cutting Knowledge",
                   desc: "Compare laser cutting, profile cutting, and fabrication process choices.",
-                  href: "/services/laser-cutting",
+                  href: "/services/cnc-laser-cutting",
                 },
                 {
-                  title: "Profile and Plate Cutting",
-                  desc: "Find the right process for thick plate, flanges, and custom shapes.",
-                  href: "/services/profile-cutting",
+                  title: "Plate Rolling and Forming",
+                  desc: "Find the right process for rolled and curved industrial plate shapes.",
+                  href: "/services/plate-rolling",
                 },
               ].map((card) => (
                 <Link

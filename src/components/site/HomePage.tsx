@@ -11,6 +11,9 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useBlogs } from "@/hooks/useBlogs";
 import type { BlogPost } from "@/lib/firestore/types";
+import { staticServices } from "@/lib/servicesData";
+import { SectorsSection } from "@/components/site/SectorsSection";
+import { PartnersClientsSection } from "@/components/site/PartnersClientsSection";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -29,16 +32,12 @@ export default function HomePage({
   const { posts: blogPosts } = useBlogs(initialPosts);
   const previewPosts = blogPosts.slice(0, 3);
 
-  const services = [
-    { id: "bending-services", title: "Plate Bending Service", image: "/service-bending.png", subs: ["Press Brake", "Heavy Plate", "Complex Angles"] },
-    { id: "sheet-bending", title: "Sheet Bending Service", image: "/service-bending.png", subs: ["MS & SS", "Precision Bends", "Custom Profiles"] },
-    { id: "steel-cutting", title: "Steel Cutting", image: "/service-steel-cutting.png", subs: ["Plasma Cutting", "Gas Cutting", "High Accuracy"] },
-    { id: "plate-bending", title: "Plate Rolling", image: "/service-plate-bending.png", subs: ["Heavy Duty", "Structural Steel", "Custom Radii"] },
-    { id: "laser-cutting", title: "CNC Laser Cutting", image: "/service-cnc.png", subs: ["Laser Cutting", "Profile Cutting", "Nesting Optimization"] },
-    { id: "base-plate", title: "Base Plates", image: "/service-base-plates.png", subs: ["Industrial Base", "Machined Finish", "Standard Sizes"] },
-    { id: "profile-cutting", title: "Profile Cutting", image: "/service-profile.png", subs: ["Intricate Designs", "Batch Production", "Material Saving"] },
-    { id: "sheet-cutting", title: "Sheet Metal Cutting", image: "/service-cnc.png", subs: ["Cut to Size", "Thin & Thick Sheets", "Rapid Turnaround"] },
-  ];
+  const services = staticServices.map((service) => ({
+    id: service.id,
+    title: service.title,
+    image: service.image,
+    subs: service.features.slice(0, 3),
+  }));
 
   const scrollCardIntoView = useCallback((index: number) => {
     const container = servicesScrollRef.current;
@@ -279,9 +278,9 @@ export default function HomePage({
               </div>
               <div className="mt-8 flex flex-wrap gap-3">
                 {[
-                  { href: "/services/sheet-bending", label: "Sheet Metal Bending Services" },
-                  { href: "/services/laser-cutting", label: "CNC Laser Cutting" },
-                  { href: "/services/plate-bending", label: "Plate Rolling" },
+                  { href: "/services/cnc-plate-bending", label: "CNC Plate Bending" },
+                  { href: "/services/cnc-laser-cutting", label: "CNC Laser Cutting" },
+                  { href: "/services/plate-rolling", label: "Plate Rolling" },
                   { href: "/contact", label: "Request Fabrication Quote" },
                 ].map((item) => (
                   <Link
@@ -297,23 +296,23 @@ export default function HomePage({
                 {[
                   {
                     title: "Sheet Bending Service",
-                    href: "/services/sheet-bending",
+                    href: "/services/cnc-plate-bending",
                     desc: "MS and SS bending for industrial components",
                   },
                   {
                     title: "CNC Laser Cutting",
-                    href: "/services/laser-cutting",
+                    href: "/services/cnc-laser-cutting",
                     desc: "Production blanks and profile parts",
                   },
                   {
-                    title: "Plate Profile Cutting",
-                    href: "/services/profile-cutting",
-                    desc: "Plasma and oxy-fuel profile cutting",
+                    title: "Plate Rolling",
+                    href: "/services/plate-rolling",
+                    desc: "Rolled and curved industrial plate components",
                   },
                   {
-                    title: "Steel Cutting Services",
-                    href: "/services/steel-cutting",
-                    desc: "Hydraulic shearing and plate cutting work",
+                    title: "Punching",
+                    href: "/services/punching",
+                    desc: "Punch press hole and shape creation for production work",
                   },
                 ].map((item) => (
                   <Link
@@ -493,38 +492,7 @@ export default function HomePage({
         </section>
 
         {/* Section 7: Industry Sectors */}
-        <section className="py-16 md:py-32 bg-[#F7F5F1]">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-14 md:mb-24">
-              <span className="text-primary font-bold tracking-[0.3em] uppercase">Markets</span>
-              <h2 className="text-4xl sm:text-5xl md:text-7xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4">Industries We Serve</h2>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
-              {[
-                { name: "Automotive", desc: "Precision components for heavy vehicles and assemblies." },
-                { name: "Construction", desc: "Structural steel and architectural metalwork." },
-                { name: "Power & Energy", desc: "Enclosures and heavy-duty parts for energy sectors." },
-                { name: "Marine", desc: "Corrosion-resistant components for maritime apps." },
-                { name: "HVAC", desc: "Ventilation ducting and equipment housing." },
-                { name: "Mining", desc: "Heavy-duty parts for extreme durability." }
-              ].map((sector, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: i * 0.1 }}
-                  className="p-7 md:p-12 bg-[#EDEAE4] rounded-2xl border border-black/8 hover:border-primary/50 transition-colors group"
-                >
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6 md:mb-8 group-hover:bg-primary transition-colors">
-                    <Factory className="w-5 h-5 md:w-6 md:h-6 text-primary group-hover:text-white" />
-                  </div>
-                  <h4 className="text-xl md:text-2xl font-display font-black text-[#1A1A1A] uppercase tracking-tight mb-3 md:mb-4">{sector.name}</h4>
-                  <p className="text-slate-500 font-light text-sm md:text-base">{sector.desc}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <SectorsSection compact title="Industries We Serve" />
 
         {/* Section 8: Why Choose Us */}
         <section className="py-16 md:py-32 bg-[#EDEAE4] relative overflow-hidden">
@@ -561,6 +529,8 @@ export default function HomePage({
             </div>
           </div>
         </section>
+
+        <PartnersClientsSection variant="compact" />
 
         {/* Section 9: Blog Preview */}
         <section className="py-16 md:py-32 bg-[#F7F5F1]">

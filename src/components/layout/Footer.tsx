@@ -6,17 +6,18 @@ const quickLinks = [
   { name: "Home", path: "/" },
   { name: "About Us", path: "/about" },
   { name: "Services", path: "/services" },
+  { name: "Sectors", path: "/sectors" },
   { name: "Blog", path: "/blog" },
   { name: "Contact", path: "/contact" },
 ];
 
 const capabilities = [
-  { name: "Sheet Metal Bending", path: "/services/sheet-bending" },
-  { name: "CNC Laser Cutting", path: "/services/laser-cutting" },
-  { name: "Plate Rolling", path: "/services/plate-bending" },
-  { name: "Heavy Fabrication", path: "/services/bending-services" },
-  { name: "Profile Cutting", path: "/services/profile-cutting" },
-  { name: "Steel Cutting", path: "/services/steel-cutting" },
+  { name: "CNC Plate Bending", path: "/services/cnc-plate-bending" },
+  { name: "CNC Laser Cutting", path: "/services/cnc-laser-cutting" },
+  { name: "Plate Rolling", path: "/services/plate-rolling" },
+  { name: "Assembly", path: "/services/assembly" },
+  { name: "Welding", path: "/services/welding" },
+  { name: "Punching", path: "/services/punching" },
 ];
 
 export function Footer() {

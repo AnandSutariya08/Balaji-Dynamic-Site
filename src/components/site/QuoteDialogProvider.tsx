@@ -200,14 +200,15 @@ export function QuoteDialogProvider({ children }: { children: ReactNode }) {
                         <SelectValue placeholder="Select a service" />
                       </SelectTrigger>
                       <SelectContent className="z-[90]">
-                        <SelectItem value="bending-services">Bending Services</SelectItem>
-                        <SelectItem value="sheet-bending">Sheet Bending Service</SelectItem>
-                        <SelectItem value="steel-cutting">Steel Cutting Services</SelectItem>
-                        <SelectItem value="plate-bending">Plate Bending & Rolling</SelectItem>
-                        <SelectItem value="laser-cutting">CNC Laser Cutting</SelectItem>
-                        <SelectItem value="base-plate">Base Plates & Fasteners</SelectItem>
-                        <SelectItem value="profile-cutting">Plate Profile Cutting</SelectItem>
-                        <SelectItem value="sheet-cutting">Sheet Metal Cutting</SelectItem>
+                        <SelectItem value="cnc-plate-bending">CNC Plate Bending</SelectItem>
+                        <SelectItem value="cnc-laser-cutting">CNC Laser Cutting</SelectItem>
+                        <SelectItem value="plate-rolling">Plate Rolling</SelectItem>
+                        <SelectItem value="assembly">Assembly</SelectItem>
+                        <SelectItem value="welding">Welding</SelectItem>
+                        <SelectItem value="deep-drawing">Deep Drawing</SelectItem>
+                        <SelectItem value="finishing">Finishing</SelectItem>
+                        <SelectItem value="stamping">Stamping</SelectItem>
+                        <SelectItem value="punching">Punching</SelectItem>
                         <SelectItem value="other">Other / Custom Fabrication</SelectItem>
                       </SelectContent>
                     </Select>

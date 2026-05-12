@@ -16,10 +16,11 @@ import { addInquiry } from "@/lib/firestore/inquiries";
 import { isFirebaseConfigured } from "@/lib/firebase";
 
 const contactInfo = [
-  { icon: MapPin, title: "Factory Address", lines: ["Plot No. 11, 12, Soham Industrial Estate", "NH 8, Kamrej, Navagam, Surat - 394185", "Gujarat, India"], action: null },
-  { icon: Phone, title: "Direct Line", lines: ["+91-7942957640"], action: { href: "tel:+917942957640", label: "Call Now" } },
-  { icon: Mail, title: "Email Us", lines: ["info@balajiengineering.in"], action: { href: "mailto:info@balajiengineering.in", label: "Send Email" } },
+  { icon: Phone, title: "Managing Director", lines: ["Nikunj Sakariya", "+91 99787 53398"], action: { href: "tel:+919978753398", label: "Call Now" } },
+  { icon: Mail, title: "Email Us", lines: ["info@balajiengineering.in", "nikunj.balajiengineeringworks@gmail.com"], action: { href: "mailto:nikunj.balajiengineeringworks@gmail.com", label: "Send Email" } },
   { icon: Clock, title: "Response Support", lines: ["Mon - Sat project assistance", "Share drawings for faster quotes"], action: null },
+  { icon: MapPin, title: "Unit 1 Address", lines: ["Block no. 334/3, Vav-Jokha Road", "Village Jokha, Kamrej, Surat", "Gujarat - 394180"], action: null },
+  { icon: MapPin, title: "Unit 2 Address", lines: ["Plot no. 11,12, Soham Industrial Estate", "Opp. Hero Showroom, NH-8", "Kamrej, Surat, Gujarat - 394185"], action: null },
 ];
 
 const faqs = [
@@ -99,9 +100,15 @@ export default function ContactPage({
         {/* CONTACT CARDS ROW */}
         <section className="py-10 md:py-16 bg-[#EDEAE4] border-y border-black/8">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-black/8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-px bg-black/8">
               {contactInfo.map((info, i) => (
-                <motion.div key={i} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} className="bg-[#EDEAE4] p-6 md:p-10 group hover:bg-[#F7F5F1] transition-colors">
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.08 }}
+                  className={`bg-[#EDEAE4] p-6 md:p-8 group hover:bg-[#F7F5F1] hover:shadow-[inset_0_0_0_1px_rgba(0,0,0,0.18)] transition-all duration-200 rounded-none xl:col-span-2 ${i === 3 ? "xl:col-start-2" : ""} ${i === 4 ? "xl:col-start-4" : ""}`}
+                >
                   <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-4 md:mb-6 group-hover:bg-primary group-hover:border-primary transition-all duration-500">
                     <info.icon className="w-4 h-4 md:w-5 md:h-5 text-primary group-hover:text-white transition-colors duration-500" />
                   </div>
@@ -175,8 +182,8 @@ export default function ContactPage({
                 <div className="p-6 md:p-8 bg-primary/8 border border-primary/20 rounded-2xl">
                   <h4 className="text-base md:text-lg font-display font-black text-[#1A1A1A] uppercase tracking-tight mb-2">Prefer to call directly?</h4>
                   <p className="text-slate-500 text-sm mb-5 md:mb-6 font-light">Speak to our engineering team right now.</p>
-                  <a href="tel:+917942957640" className="flex items-center gap-3 text-xl md:text-2xl font-display font-black text-primary hover:text-[#1A1A1A] transition-colors">
-                    <Phone className="w-5 h-5 md:w-6 md:h-6" />+91-7942957640
+                  <a href="tel:+919978753398" className="flex items-center gap-3 text-xl md:text-2xl font-display font-black text-primary hover:text-[#1A1A1A] transition-colors">
+                    <Phone className="w-5 h-5 md:w-6 md:h-6" />+91 99787 53398
                   </a>
                 </div>
               </div>
@@ -209,14 +216,15 @@ export default function ContactPage({
                             <SelectValue placeholder="Select a service" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="bending-services">Bending Services</SelectItem>
-                            <SelectItem value="sheet-bending">Sheet Bending Service</SelectItem>
-                            <SelectItem value="steel-cutting">Steel Cutting Services</SelectItem>
-                            <SelectItem value="plate-bending">Plate Bending & Rolling</SelectItem>
-                            <SelectItem value="laser-cutting">CNC Laser Cutting</SelectItem>
-                            <SelectItem value="base-plate">Base Plates & Fasteners</SelectItem>
-                            <SelectItem value="profile-cutting">Plate Profile Cutting</SelectItem>
-                            <SelectItem value="sheet-cutting">Sheet Metal Cutting</SelectItem>
+                            <SelectItem value="cnc-plate-bending">CNC Plate Bending</SelectItem>
+                            <SelectItem value="cnc-laser-cutting">CNC Laser Cutting</SelectItem>
+                            <SelectItem value="plate-rolling">Plate Rolling</SelectItem>
+                            <SelectItem value="assembly">Assembly</SelectItem>
+                            <SelectItem value="welding">Welding</SelectItem>
+                            <SelectItem value="deep-drawing">Deep Drawing</SelectItem>
+                            <SelectItem value="finishing">Finishing</SelectItem>
+                            <SelectItem value="stamping">Stamping</SelectItem>
+                            <SelectItem value="punching">Punching</SelectItem>
                             <SelectItem value="other">Other / Custom Fabrication</SelectItem>
                           </SelectContent>
                         </Select>
@@ -314,10 +322,10 @@ export default function ContactPage({
             </div>
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
               {[
-                { title: "Sheet Bending Service", href: "/services/sheet-bending" },
-                { title: "CNC Laser Cutting", href: "/services/laser-cutting" },
-                { title: "Steel Cutting Services", href: "/services/steel-cutting" },
-                { title: "Plate Profile Cutting", href: "/services/profile-cutting" },
+                { title: "CNC Plate Bending", href: "/services/cnc-plate-bending" },
+                { title: "CNC Laser Cutting", href: "/services/cnc-laser-cutting" },
+                { title: "Plate Rolling", href: "/services/plate-rolling" },
+                { title: "Punching", href: "/services/punching" },
               ].map((service) => (
                 <Link
                   key={service.href}
