@@ -14,6 +14,7 @@ import type { FormEvent } from "react";
 import { useState } from "react";
 import { addInquiry } from "@/lib/firestore/inquiries";
 import { isFirebaseConfigured } from "@/lib/firebase";
+import { PageHero } from "@/components/site/PageHero";
 
 const contactInfo = [
   { icon: Phone, title: "Managing Director", lines: ["Nikunj Sakariya", "+91 99787 53398"], action: { href: "tel:+919978753398", label: "Call Now" } },
@@ -76,26 +77,38 @@ export default function ContactPage({
       <div className="bg-[#F7F5F1]">
 
         {/* HERO */}
-        <section className="relative min-h-[75vh] flex items-center overflow-hidden">
-          <div className="absolute inset-0">
-            <div className="w-full h-full bg-cover bg-center opacity-25" style={{ backgroundImage: "url('/service-cnc.png')" }} />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A] via-[#1A1A1A]/70 to-[#1A1A1A]/30" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-transparent to-transparent" />
-            <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "linear-gradient(rgba(0,0,0,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.5) 1px, transparent 1px)", backgroundSize: "70px 70px" }} />
-          </div>
-          <div className="container relative z-10 mx-auto px-4 pt-28 pb-16 md:pt-32 md:pb-24">
-            <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }} className="max-w-4xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-primary mb-8 md:mb-10">
-                <Zap className="w-3 h-3" />
-                <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase">Response within 24 Hours</span>
-              </div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-display font-black text-white uppercase tracking-tighter leading-[0.85] mb-6 md:mb-8">
-                Contact<br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-[#AC3C3C] to-[#e05555]">Balaji.</span>
-              </h1>
-              <p className="text-base sm:text-xl text-zinc-300 font-light leading-relaxed max-w-2xl">Tell us about your bending, laser cutting, rolling, fabrication, or steel processing requirement. Our Surat team will respond with a clear quote and production guidance.</p>
-            </motion.div>
-          </div>
-        </section>
+        <PageHero
+          imageSrc="/service-cnc.png"
+          imageAlt="Contact Balaji Engineering Works"
+          pill={(
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-primary">
+              <Zap className="w-3 h-3" />
+              <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase">
+                Response within 24 Hours
+              </span>
+            </div>
+          )}
+          title={(
+            <>
+              Contact
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#AC3C3C] to-[#e05555]">
+                Balaji.
+              </span>
+            </>
+          )}
+          description={(
+            <>
+              Tell us about your bending, laser cutting, rolling, fabrication, or steel processing requirement.
+              Our Surat team will respond with a clear quote and production guidance.
+            </>
+          )}
+          stats={[
+            { v: "24H", l: "Response" },
+            { v: "20+", l: "Years" },
+            { v: "Surat", l: "Plant" },
+          ]}
+        />
 
         {/* CONTACT CARDS ROW */}
         <section className="py-10 md:py-16 bg-[#EDEAE4] border-y border-black/8">
@@ -138,7 +151,9 @@ export default function ContactPage({
               <div className="lg:col-span-2 space-y-8 md:space-y-12">
                 <div>
                   <span className="text-primary font-bold tracking-[0.3em] uppercase text-sm">Our Promise</span>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4 mb-6 md:mb-8 leading-[0.9]">What to Expect</h2>
+                  <h2 className="text-[clamp(1.55rem,4.4vw,3.2rem)] font-display font-black text-[#1A1A1A] uppercase tracking-tighter leading-[0.92] mt-4 mb-5 md:mb-8">
+                    What to Expect
+                  </h2>
                   <div className="space-y-5 md:space-y-6">
                     {[
                       { title: "4–8 Hour Quote", desc: "Send files now — get a detailed quote today." },
@@ -289,7 +304,9 @@ export default function ContactPage({
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-14 md:mb-20">
                 <span className="text-primary font-bold tracking-[0.3em] uppercase text-sm">Common Questions</span>
-                <h2 className="text-4xl sm:text-5xl md:text-6xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4">FAQ</h2>
+                <h2 className="text-[clamp(1.75rem,4.8vw,3.6rem)] font-display font-black text-[#1A1A1A] uppercase tracking-tighter leading-[0.92] mt-4">
+                  FAQ
+                </h2>
               </div>
               <div className="space-y-3">
                 {faqs.map((faq, i) => (
@@ -348,7 +365,9 @@ export default function ContactPage({
         <section className="py-16 md:py-32 bg-[#1C1C1C]">
           <div className="container mx-auto px-4 text-center">
             <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7 }}>
-              <h2 className="text-4xl sm:text-5xl md:text-7xl font-display font-black text-white uppercase tracking-tighter mb-5 md:mb-6 leading-[0.9]">Still Have<br />Questions?</h2>
+              <h2 className="text-[clamp(2.0rem,6.2vw,5.0rem)] font-display font-black text-white uppercase tracking-tighter leading-[0.9] mb-4 md:mb-6">
+                Still Have<br />Questions?
+              </h2>
               <p className="text-zinc-400 font-light text-base md:text-lg max-w-lg mx-auto mb-10 md:mb-12">Our team is available 6 days a week. Pick up the phone — we love talking shop.</p>
               <a href="tel:+917942957640" className="inline-flex items-center gap-3 md:gap-4 text-3xl sm:text-4xl md:text-5xl font-display font-black text-white hover:text-primary transition-colors">
                 <Phone className="w-8 h-8 md:w-10 md:h-10 text-primary" />+91-7942957640

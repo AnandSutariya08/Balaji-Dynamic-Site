@@ -11,6 +11,7 @@ import {
   Zap, TrendingUp, ArrowRight, Calendar, FileText
 } from "lucide-react";
 import { PartnersClientsSection } from "@/components/site/PartnersClientsSection";
+import { PageHero } from "@/components/site/PageHero";
 
 const timeline = [
   { year: "2001", title: "Founded in Navagam", desc: "Balaji Engineering Works is established with a single shearing machine and a vision to serve Surat's growing industrial corridor." },
@@ -47,44 +48,57 @@ export default function AboutPage() {
       <div className="bg-[#F7F5F1]">
 
         {/* HERO */}
-        <section className="relative min-h-screen flex items-center overflow-hidden">
-          <div className="absolute inset-0">
-            <div className="w-full h-full bg-cover bg-center opacity-30" style={{ backgroundImage: "url('/service-fabrication.png')" }} />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A] via-[#1A1A1A]/70 to-[#1A1A1A]/20" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-transparent to-transparent" />
-            <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "linear-gradient(rgba(0,0,0,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.4) 1px, transparent 1px)", backgroundSize: "80px 80px" }} />
+        <PageHero
+          imageSrc="/service-fabrication.png"
+          imageAlt="Balaji Engineering Works fabrication facility"
+          pill={(
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-primary">
+              <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase">
+                EST. 2001 · NAVAGAM, SURAT
+              </span>
+            </div>
+          )}
+          title={(
+            <>
+              About
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#AC3C3C] to-[#e05555]">
+                Balaji Engineering Works
+              </span>
+            </>
+          )}
+          description={(
+            <>
+              Learn how Balaji Engineering Works grew into a trusted Surat manufacturer for CNC laser
+              cutting, sheet metal bending, plate rolling, steel cutting, and heavy fabrication.
+            </>
+          )}
+          stats={[
+            { v: "20+", l: "Years" },
+            { v: "500+", l: "Projects" },
+            { v: "25+", l: "Experts" },
+          ]}
+        >
+          <div className="mt-8 flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6">
+            <Button
+              size="lg"
+              className="h-12 sm:h-16 px-8 sm:px-10 text-sm sm:text-base font-bold uppercase tracking-widest bg-primary hover:bg-primary/90 text-white shadow-[0_0_30px_rgba(172,60,60,0.5)] border-none"
+              asChild
+            >
+              <Link href="/contact">Work With Us</Link>
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="h-12 sm:h-16 px-8 sm:px-10 text-sm sm:text-base font-bold uppercase tracking-widest border-white/20 text-white hover:bg-white/10"
+              asChild
+            >
+              <Link href="/services">
+                Our Capabilities <ArrowRight className="ml-2 w-4 h-4" />
+              </Link>
+            </Button>
           </div>
-          <div className="container relative z-10 mx-auto px-4 pt-28 pb-20 md:pt-32 md:pb-24">
-            <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }} className="max-w-5xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-primary mb-8 md:mb-10">
-                <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase">EST. 2001 · NAVAGAM, SURAT</span>
-              </div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-display font-black text-white uppercase tracking-tighter leading-[0.85] mb-8 md:mb-10">
-                About<br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#AC3C3C] to-[#e05555]">Balaji Engineering Works</span>
-              </h1>
-              <p className="text-lg sm:text-xl md:text-2xl text-zinc-300 font-light leading-relaxed max-w-2xl mb-10 md:mb-14">
-                Learn how Balaji Engineering Works grew into a trusted Surat manufacturer for CNC laser cutting, sheet metal bending, plate rolling, steel cutting, and heavy fabrication.
-              </p>
-              <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6">
-                <Button size="lg" className="h-12 sm:h-16 px-8 sm:px-10 text-sm sm:text-base font-bold uppercase tracking-widest bg-primary hover:bg-primary/90 text-white shadow-[0_0_30px_rgba(172,60,60,0.5)] border-none" asChild>
-                  <Link href="/contact">Work With Us</Link>
-                </Button>
-                <Button size="lg" variant="outline" className="h-12 sm:h-16 px-8 sm:px-10 text-sm sm:text-base font-bold uppercase tracking-widest border-white/20 text-white hover:bg-white/10" asChild>
-                  <Link href="/services">Our Capabilities <ArrowRight className="ml-2 w-4 h-4" /></Link>
-                </Button>
-              </div>
-            </motion.div>
-          </div>
-          <div className="absolute right-8 top-1/2 -translate-y-1/2 hidden xl:flex flex-col gap-8 z-20">
-            {[{ v: "20+", l: "Years" }, { v: "500+", l: "Projects" }, { v: "25+", l: "Experts" }].map((s, i) => (
-              <div key={i} className="text-right">
-                <div className="text-4xl font-display font-black text-white">{s.v}</div>
-                <div className="text-[10px] font-bold tracking-[0.3em] text-zinc-400 uppercase">{s.l}</div>
-              </div>
-            ))}
-          </div>
-        </section>
+        </PageHero>
 
         {/* MARQUEE */}
         <section className="py-8 bg-[#1C1C1C] overflow-hidden">
@@ -136,7 +150,7 @@ export default function AboutPage() {
             <div className="grid lg:grid-cols-2 gap-10 lg:gap-24 items-start">
               <div>
                 <span className="text-primary font-bold tracking-[0.3em] uppercase text-sm">Origin Story</span>
-                <h2 className="text-4xl sm:text-5xl md:text-7xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4 mb-8 md:mb-12 leading-[0.9]">
+                <h2 className="text-[clamp(1.9rem,5.8vw,4.8rem)] font-display font-black text-[#1A1A1A] uppercase tracking-tighter leading-[0.9] mt-4 mb-6 md:mb-12">
                   From Workshop<br />to Powerhouse
                 </h2>
                 <div className="space-y-5 text-base md:text-lg text-slate-600 font-light leading-relaxed">
@@ -187,7 +201,9 @@ export default function AboutPage() {
           <div className="container mx-auto px-4">
             <div className="text-center mb-14 md:mb-24">
               <span className="text-primary font-bold tracking-[0.3em] uppercase text-sm">Our Journey</span>
-              <h2 className="text-4xl sm:text-5xl md:text-7xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4">24 Years in the Making</h2>
+              <h2 className="text-[clamp(1.85rem,5.4vw,4.6rem)] font-display font-black text-[#1A1A1A] uppercase tracking-tighter leading-[0.92] mt-4">
+                24 Years in the Making
+              </h2>
             </div>
             <div className="relative">
               <div className="absolute left-1/2 top-0 bottom-0 w-px bg-black/8 hidden lg:block" />
@@ -223,7 +239,9 @@ export default function AboutPage() {
           <div className="container mx-auto px-4">
             <div className="text-center mb-14 md:mb-24">
               <span className="text-primary font-bold tracking-[0.3em] uppercase text-sm">Core Philosophy</span>
-              <h2 className="text-4xl sm:text-5xl md:text-7xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4">What Drives Us</h2>
+              <h2 className="text-[clamp(1.85rem,5.4vw,4.6rem)] font-display font-black text-[#1A1A1A] uppercase tracking-tighter leading-[0.92] mt-4">
+                What Drives Us
+              </h2>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
               {values.map((v, i) => (
@@ -276,7 +294,9 @@ export default function AboutPage() {
           <div className="container mx-auto px-4">
             <div className="text-center mb-14 md:mb-20">
               <span className="text-primary font-bold tracking-[0.3em] uppercase text-sm">Credentials</span>
-              <h2 className="text-4xl sm:text-5xl md:text-6xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4">Trust & Compliance</h2>
+              <h2 className="text-[clamp(1.75rem,4.8vw,3.8rem)] font-display font-black text-[#1A1A1A] uppercase tracking-tighter leading-[0.92] mt-4">
+                Trust & Compliance
+              </h2>
             </div>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
               {certifications.map((cert, i) => (
@@ -299,7 +319,7 @@ export default function AboutPage() {
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div>
                 <span className="text-primary font-bold tracking-[0.3em] uppercase text-sm">Popular Services</span>
-                <h2 className="text-4xl sm:text-5xl md:text-6xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4">
+                <h2 className="text-[clamp(1.75rem,4.8vw,3.8rem)] font-display font-black text-[#1A1A1A] uppercase tracking-tighter leading-[0.92] mt-4">
                   Explore What We Manufacture
                 </h2>
               </div>
@@ -336,7 +356,7 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/8 to-transparent" />
           <div className="container mx-auto px-4 text-center relative z-10">
             <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }}>
-              <h2 className="text-4xl sm:text-6xl md:text-8xl font-display font-black text-white uppercase tracking-tighter mb-6 md:mb-8 leading-[0.9]">
+              <h2 className="text-[clamp(2.1rem,6.6vw,5.6rem)] font-display font-black text-white uppercase tracking-tighter leading-[0.9] mb-5 md:mb-8">
                 Let's Build<br />Something Massive
               </h2>
               <p className="text-lg md:text-xl text-zinc-400 font-light max-w-xl mx-auto mb-10 md:mb-14">Our engineering team is ready to take on your most complex fabrication challenges.</p>
@@ -356,5 +376,3 @@ export default function AboutPage() {
     </PageTransition>
   );
 }
-
-

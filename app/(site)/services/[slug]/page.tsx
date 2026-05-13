@@ -5,6 +5,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { Button } from "@/components/ui/button";
 import { blogPosts } from "@/lib/blogData";
 import { staticServices } from "@/lib/servicesData";
+import { PageHero } from "@/components/site/PageHero";
 import {
   buildMetadata,
   createBreadcrumbJsonLd,
@@ -98,18 +99,25 @@ export default async function Page({
       ))}
 
       <div className="bg-[#F7F5F1]">
-        <section className="relative min-h-[72vh] overflow-hidden">
-          <div className="absolute inset-0">
-            <img
-              src={service.image}
-              alt={service.title}
-              className="h-full w-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/40" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30" />
-          </div>
-
-          <div className="container relative z-10 mx-auto px-4 pb-16 pt-28 md:pb-24 md:pt-32">
+        <PageHero
+          imageSrc={service.image}
+          imageAlt={service.title}
+          pill={(
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-primary">
+              <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase">
+                Surat Manufacturing Service
+              </span>
+            </div>
+          )}
+          title={<span className="text-white">{service.title}</span>}
+          description={<>{seo.metaDescription}</>}
+          stats={[
+            { v: "20+", l: "Years" },
+            { v: "Surat", l: "Plant" },
+            { v: "Fast", l: "Quotes" },
+          ]}
+        >
+          <div className="mt-6">
             <Link
               href="/services"
               className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary transition-all hover:gap-3"
@@ -117,38 +125,26 @@ export default async function Page({
               <ChevronLeft className="h-4 w-4" />
               Back to Services
             </Link>
-
-            <div className="mt-8 max-w-4xl">
-              <p className="mb-5 inline-flex rounded-full border border-primary/40 bg-primary/15 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.3em] text-primary">
-                Surat Manufacturing Service
-              </p>
-              <h1 className="text-4xl font-display font-black uppercase leading-[0.9] tracking-tighter text-white sm:text-5xl md:text-6xl lg:text-7xl">
-                {service.title}
-              </h1>
-              <p className="mt-5 max-w-3xl text-base font-light leading-relaxed text-zinc-300 md:text-xl">
-                {seo.metaDescription}
-              </p>
-
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                <Button
-                  size="lg"
-                  className="h-12 px-8 text-sm font-bold uppercase tracking-widest bg-primary text-white hover:bg-primary/90"
-                  asChild
-                >
-                  <Link href={`/contact?service=${service.id}`}>Request Quote</Link>
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="h-12 border-white/20 px-8 text-sm font-bold uppercase tracking-widest text-white hover:bg-white/10"
-                  asChild
-                >
-                  <Link href="/contact">Talk to Engineering Team</Link>
-                </Button>
-              </div>
-            </div>
           </div>
-        </section>
+
+          <div className="mt-6 flex flex-col gap-4 sm:flex-row">
+            <Button
+              size="lg"
+              className="h-12 px-8 text-sm font-bold uppercase tracking-widest bg-primary text-white hover:bg-primary/90"
+              asChild
+            >
+              <Link href={`/contact?service=${service.id}`}>Request Quote</Link>
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="h-12 border-white/20 px-8 text-sm font-bold uppercase tracking-widest text-white hover:bg-white/10"
+              asChild
+            >
+              <Link href="/contact">Talk to Engineering Team</Link>
+            </Button>
+          </div>
+        </PageHero>
 
         <section className="border-y border-black/8 bg-[#EDEAE4] py-14 md:py-20">
           <div className="container mx-auto px-4">

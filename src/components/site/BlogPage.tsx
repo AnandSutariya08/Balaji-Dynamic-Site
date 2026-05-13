@@ -44,7 +44,7 @@ export default function BlogPage({
       <div className="bg-[#F7F5F1]">
 
         {/* HERO */}
-        <section className="relative min-h-[70vh] flex items-end overflow-hidden pb-10 md:pb-24">
+        <section className="relative min-h-[80vh] flex items-center overflow-hidden">
           <div className="absolute inset-0">
             <img src="/service-fabrication.png" alt="Fabrication Workshop" className="w-full h-full object-cover object-center" />
             <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/75 to-black/50" />
@@ -52,13 +52,13 @@ export default function BlogPage({
             <div className="absolute bottom-0 left-0 w-[500px] h-[250px] bg-primary/20 blur-[80px] rounded-full" />
             <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "linear-gradient(rgba(172,60,60,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(172,60,60,0.3) 1px, transparent 1px)", backgroundSize: "80px 80px" }} />
           </div>
-          <div className="container relative z-10 mx-auto px-4 pt-28 md:pt-36">
+          <div className="container relative z-10 mx-auto px-4 pt-28 pb-16 md:pt-32 md:pb-24">
             <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }}>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-primary mb-6 md:mb-10">
                 <BookOpen className="w-3 h-3" />
                 <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase">{blogPosts.length} Articles · Engineering Intelligence</span>
               </div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-display font-black text-white uppercase tracking-tighter leading-[0.85] mb-6 md:mb-0">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-display font-black text-white uppercase tracking-tighter leading-[0.85] mb-6 md:mb-8">
                 Insights &<br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-[#AC3C3C] to-[#e05555]">Knowledge</span>
               </h1>
               <div className="hidden md:block max-w-md mt-8">
@@ -318,7 +318,9 @@ export default function BlogPage({
             <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
               <div>
                 <span className="text-primary font-bold tracking-[0.3em] uppercase text-sm">Have a Question?</span>
-                <h2 className="text-4xl sm:text-5xl md:text-7xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4 mb-6 md:mb-8 leading-[0.9]">Talk to Our<br />Engineers</h2>
+                <h2 className="text-[clamp(1.85rem,5.6vw,4.6rem)] font-display font-black text-[#1A1A1A] uppercase tracking-tighter leading-[0.9] mt-4 mb-5 md:mb-8">
+                  Talk to Our<br />Engineers
+                </h2>
                 <p className="text-slate-600 font-light text-base md:text-lg leading-relaxed mb-8 md:mb-10">Can't find the answer in our articles? Our experienced team is ready to discuss your specific fabrication challenge directly.</p>
                 <div className="flex flex-col sm:flex-row flex-wrap gap-4">
                   <Button size="lg" className="h-12 md:h-14 px-8 md:px-10 font-bold uppercase tracking-widest bg-primary hover:bg-primary/90 text-white shadow-[0_0_25px_rgba(172,60,60,0.3)] border-none" asChild>

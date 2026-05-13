@@ -7,6 +7,7 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2, Zap, Shield, Clock, Layers, Settings, Loader2 } from "lucide-react";
 import { useServices } from "@/hooks/useServices";
 import type { Service } from "@/lib/firestore/types";
+import { PageHero } from "@/components/site/PageHero";
 
 const capabilities = [
   { label: "CNC Press Brakes", value: "Multiple machines for sheet and plate bending" },
@@ -37,25 +38,37 @@ export default function ServicesPage({
       <div className="bg-[#F7F5F1]">
 
         {/* HERO */}
-        <section className="relative min-h-[80vh] flex items-center overflow-hidden">
-          <div className="absolute inset-0">
-            <div className="w-full h-full bg-cover bg-center opacity-25" style={{ backgroundImage: "url('/service-cnc.png')" }} />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A] via-[#1A1A1A]/60 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-transparent to-transparent" />
-            <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "linear-gradient(rgba(0,0,0,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.5) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
-          </div>
-          <div className="container relative z-10 mx-auto px-4 pt-28 pb-16 md:pt-32 md:pb-24">
-            <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }} className="max-w-4xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-primary mb-8 md:mb-10">
-                <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase">{services.length} Core Capabilities · Surat Manufacturer · Gujarat</span>
-              </div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-display font-black text-white uppercase tracking-tighter leading-[0.85] mb-6 md:mb-8">
-                Sheet Metal<br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-[#AC3C3C] to-[#e05555]">Services</span>
-              </h1>
-              <p className="text-base sm:text-xl text-zinc-300 font-light leading-relaxed max-w-2xl">Explore sheet metal bending, CNC laser cutting, steel cutting, profile cutting, plate rolling, base plates, and heavy fabrication services delivered from our Surat facility.</p>
-            </motion.div>
-          </div>
-        </section>
+        <PageHero
+          imageSrc="/service-cnc.png"
+          imageAlt="Sheet metal services at Balaji Engineering Works"
+          pill={(
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-primary">
+              <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase">
+                {services.length} Core Capabilities · Surat Manufacturer · Gujarat
+              </span>
+            </div>
+          )}
+          title={(
+            <>
+              Sheet Metal
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#AC3C3C] to-[#e05555]">
+                Services
+              </span>
+            </>
+          )}
+          description={(
+            <>
+              Explore sheet metal bending, CNC laser cutting, steel cutting, profile cutting, plate rolling,
+              base plates, and heavy fabrication services delivered from our Surat facility.
+            </>
+          )}
+          stats={[
+            { v: services.length.toString(), l: "Capabilities" },
+            { v: "20+", l: "Years" },
+            { v: "Surat", l: "Facility" },
+          ]}
+        />
 
         {/* MARQUEE — red strip */}
         <section className="py-5 md:py-6 bg-primary overflow-hidden">
@@ -100,7 +113,9 @@ export default function ServicesPage({
                 {/* Content */}
                 <div className={`p-6 sm:p-10 md:p-12 xl:p-16 flex flex-col justify-center bg-[#F7F5F1] ${i % 2 !== 0 ? 'lg:order-1' : ''}`}>
                   <span className="text-primary font-bold tracking-[0.3em] uppercase text-xs mb-3 md:mb-4">{service.tagline}</span>
-                  <h2 className="text-3xl sm:text-4xl xl:text-5xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mb-4 md:mb-6 leading-[0.9]">{service.title}</h2>
+                  <h2 className="text-[clamp(1.6rem,4.6vw,3.2rem)] font-display font-black text-[#1A1A1A] uppercase tracking-tighter mb-4 md:mb-6 leading-[0.92]">
+                    {service.title}
+                  </h2>
                   <p className="text-slate-600 font-light leading-relaxed mb-6 md:mb-8 text-sm md:text-base">{service.description}</p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 md:gap-3 mb-6 md:mb-8">
                     {service.specs.map((spec, j) => (
@@ -139,7 +154,9 @@ export default function ServicesPage({
           <div className="container mx-auto px-4">
             <div className="text-center mb-14 md:mb-20">
               <span className="text-primary font-bold tracking-[0.3em] uppercase text-sm">Infrastructure</span>
-              <h2 className="text-4xl sm:text-5xl md:text-7xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4">Our Machinery</h2>
+              <h2 className="text-[clamp(1.85rem,5.2vw,4.4rem)] font-display font-black text-[#1A1A1A] uppercase tracking-tighter leading-[0.92] mt-4">
+                Our Machinery
+              </h2>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-black/8">
               {capabilities.map((cap, i) => (
@@ -159,7 +176,9 @@ export default function ServicesPage({
             <div className="grid lg:grid-cols-2 gap-10 lg:gap-24 items-center">
               <div>
                 <span className="text-primary font-bold tracking-[0.3em] uppercase text-sm">Material Expertise</span>
-                <h2 className="text-4xl sm:text-5xl md:text-7xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4 mb-6 md:mb-8 leading-[0.9]">What We<br />Process</h2>
+                <h2 className="text-[clamp(1.85rem,5.5vw,4.6rem)] font-display font-black text-[#1A1A1A] uppercase tracking-tighter leading-[0.9] mt-4 mb-5 md:mb-8">
+                  What We<br />Process
+                </h2>
                 <p className="text-slate-600 text-base md:text-lg font-light leading-relaxed mb-10 md:mb-12">We work with a comprehensive range of ferrous metals and structural steels, covering the full spectrum of industrial fabrication needs.</p>
                 <Button size="lg" className="h-12 md:h-14 px-8 md:px-10 font-bold uppercase tracking-widest bg-primary hover:bg-primary/90 text-white shadow-[0_0_25px_rgba(172,60,60,0.3)] border-none w-full sm:w-auto" asChild>
                   <Link href="/contact">Discuss Your Material</Link>
@@ -214,7 +233,9 @@ export default function ServicesPage({
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-primary/8 to-transparent" />
           <div className="container relative z-10 mx-auto px-4 text-center">
             <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }}>
-              <h2 className="text-4xl sm:text-6xl md:text-8xl font-display font-black text-white uppercase tracking-tighter mb-6 md:mb-8 leading-[0.9]">Ready to<br />Get Fabricating?</h2>
+              <h2 className="text-[clamp(2.0rem,6.4vw,5.4rem)] font-display font-black text-white uppercase tracking-tighter leading-[0.9] mb-5 md:mb-8">
+                Ready to<br />Get Fabricating?
+              </h2>
               <p className="text-lg md:text-xl text-zinc-400 font-light max-w-xl mx-auto mb-10 md:mb-14">Upload your drawings or describe your requirements. We respond within hours.</p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
                 <Button size="lg" className="h-12 sm:h-16 px-10 sm:px-12 text-sm sm:text-base font-bold uppercase tracking-widest bg-primary hover:bg-primary/90 text-white shadow-[0_0_40px_rgba(172,60,60,0.4)] border-none w-full sm:w-auto" asChild>

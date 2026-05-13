@@ -352,7 +352,7 @@ export default function HomePage({
               <div ref={aboutTextRef} className="space-y-8 md:space-y-12">
                 <div className="reveal-line">
                   <span className="text-primary font-bold tracking-[0.3em] uppercase">Who We Are</span>
-                  <h2 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4">
+                  <h2 className="text-[clamp(1.9rem,5.6vw,4.6rem)] font-display font-black text-[#1A1A1A] uppercase tracking-tighter leading-[0.9] mt-4">
                     Two Decades of<br />Steel & Precision
                   </h2>
                 </div>
@@ -386,7 +386,9 @@ export default function HomePage({
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 md:gap-8">
               <div>
                 <span className="text-primary font-bold tracking-[0.3em] uppercase text-sm">Capabilities</span>
-                <h2 className="text-4xl sm:text-5xl md:text-7xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-3 md:mt-4">Our Expertise</h2>
+                <h2 className="text-[clamp(1.9rem,5.4vw,4.4rem)] font-display font-black text-[#1A1A1A] uppercase tracking-tighter leading-[0.92] mt-3 md:mt-4">
+                  Our Expertise
+                </h2>
               </div>
               <Button variant="ghost" className="text-[#1A1A1A] hover:text-primary transition-colors font-bold uppercase tracking-widest hidden md:flex" asChild>
                 <Link href="/services">View All Capabilities <ArrowRight className="ml-2 w-4 h-4" /></Link>
@@ -458,7 +460,9 @@ export default function HomePage({
           <div className="container mx-auto px-4">
             <div className="text-center max-w-3xl mx-auto mb-14 md:mb-24">
               <span className="text-primary font-bold tracking-[0.3em] uppercase">Methodology</span>
-              <h2 className="text-4xl sm:text-5xl md:text-6xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4">How We Work</h2>
+              <h2 className="text-[clamp(1.85rem,5.0vw,4.0rem)] font-display font-black text-[#1A1A1A] uppercase tracking-tighter leading-[0.92] mt-4">
+                How We Work
+              </h2>
             </div>
             <div className="relative">
               <motion.div
@@ -500,7 +504,7 @@ export default function HomePage({
             <div className="grid lg:grid-cols-2 gap-10 lg:gap-24 items-center">
               <div>
                 <span className="text-primary font-bold tracking-[0.3em] uppercase">The Advantage</span>
-                <h2 className="text-4xl sm:text-5xl md:text-7xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4 mb-10 md:mb-12">
+                <h2 className="text-[clamp(1.9rem,5.8vw,4.6rem)] font-display font-black text-[#1A1A1A] uppercase tracking-tighter leading-[0.9] mt-4 mb-8 md:mb-12">
                   Why Partners<br />Choose Balaji
                 </h2>
                 <div className="grid sm:grid-cols-2 gap-7 md:gap-10">
@@ -538,7 +542,9 @@ export default function HomePage({
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mb-12 md:mb-24">
               <div>
                 <span className="text-primary font-bold tracking-[0.3em] uppercase">Intelligence</span>
-                <h2 className="text-4xl sm:text-5xl md:text-6xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4">Insights & Knowledge</h2>
+                <h2 className="text-[clamp(1.85rem,5.0vw,4.0rem)] font-display font-black text-[#1A1A1A] uppercase tracking-tighter leading-[0.92] mt-4">
+                  Insights & Knowledge
+                </h2>
               </div>
               <Button variant="ghost" className="text-[#1A1A1A] hover:text-primary transition-colors font-bold uppercase tracking-widest shrink-0" asChild>
                 <Link href="/blog">View All Posts <ArrowRight className="ml-2 w-4 h-4" /></Link>
@@ -573,7 +579,7 @@ export default function HomePage({
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-primary/10 to-transparent" />
           <div className="container relative z-10 mx-auto px-4 text-center">
             <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }}>
-              <h2 className="text-4xl sm:text-6xl md:text-8xl font-display font-black text-white uppercase tracking-tighter mb-6 md:mb-8">
+              <h2 className="text-[clamp(2.1rem,6.6vw,5.6rem)] font-display font-black text-white uppercase tracking-tighter leading-[0.9] mb-5 md:mb-8">
                 Start Your<br />Project Today
               </h2>
               <p className="text-lg md:text-2xl text-zinc-400 font-light max-w-2xl mx-auto mb-10 md:mb-16 leading-relaxed">

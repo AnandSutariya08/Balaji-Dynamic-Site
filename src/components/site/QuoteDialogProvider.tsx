@@ -133,7 +133,7 @@ export function QuoteDialogProvider({ children }: { children: ReactNode }) {
                 <div className="sticky top-0 z-10 border-b border-white/10 bg-[#111]/95 px-5 py-4 backdrop-blur sm:px-8 sm:py-6">
                   <div className="flex items-start justify-between gap-6">
                     <div>
-                      <h2 className="text-white font-display font-black uppercase tracking-tight text-2xl sm:text-3xl">
+                      <h2 className="text-white font-display font-black uppercase tracking-tight leading-[0.95] text-[clamp(1.35rem,4.2vw,2.1rem)]">
                         Get a Quote
                       </h2>
                       <p className="mt-1.5 text-sm text-white/60">

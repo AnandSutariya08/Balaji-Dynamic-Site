@@ -34,7 +34,7 @@ export function SectorsSection({
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12 md:mb-20">
           <div>
             <span className="text-primary font-bold tracking-[0.3em] uppercase text-sm">Sectors</span>
-            <h2 className="text-4xl sm:text-5xl md:text-7xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4">
+            <h2 className="text-[clamp(1.85rem,5.2vw,4.4rem)] font-display font-black text-[#1A1A1A] uppercase tracking-tighter leading-[0.92] mt-4">
               {title}
             </h2>
           </div>

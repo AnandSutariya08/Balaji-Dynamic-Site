@@ -1,14 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import {
   AlertCircle,
-  ChevronDown,
   Inbox,
   Loader2,
   Mail,
   MessageSquare,
   Phone,
+  RefreshCw,
+  Search,
+  X,
 } from "lucide-react";
 import { getInquiries, updateInquiryStatus } from "@/lib/firestore/inquiries";
 import { isFirebaseConfigured } from "@/lib/firebase";
@@ -50,140 +52,264 @@ function StatusBadge({ status }: { status: InquiryStatus }) {
   );
 }
 
-function InquiryCard({
+function MobileInquiryRow({ inquiry, onOpen }: { inquiry: Inquiry; onOpen: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      className="w-full rounded-2xl border border-white/6 bg-[#141414] px-4 py-3 text-left transition-colors hover:bg-white/3"
+    >
+      <div className="flex items-start gap-3">
+        <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/5">
+          <MessageSquare className="h-4 w-4 text-zinc-400" />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="truncate text-sm font-semibold text-white">{inquiry.name}</div>
+            <StatusBadge status={inquiry.status} />
+          </div>
+          <div className="mt-0.5 truncate text-xs text-zinc-500">
+            {inquiry.service} · {formatDate(inquiry.createdAt)}
+          </div>
+          {inquiry.message && (
+            <div className="mt-2 line-clamp-2 text-xs leading-relaxed text-zinc-400">
+              {inquiry.message}
+            </div>
+          )}
+        </div>
+      </div>
+    </button>
+  );
+}
+
+function DetailField({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <div>
+      <div className="mb-1 text-[10px] font-semibold uppercase tracking-widest text-zinc-500">
+        {label}
+      </div>
+      {children}
+    </div>
+  );
+}
+
+function InquiryDetail({
   inquiry,
+  onCloseMobile,
   onStatusChange,
 }: {
   inquiry: Inquiry;
+  onCloseMobile: () => void;
   onStatusChange: (id: string, status: InquiryStatus) => Promise<void>;
 }) {
-  const [open, setOpen] = useState(false);
   const [updating, setUpdating] = useState(false);
 
   const handleStatus = async (status: InquiryStatus) => {
     setUpdating(true);
-    await onStatusChange(inquiry.id, status);
-    setUpdating(false);
+    try {
+      await onStatusChange(inquiry.id, status);
+    } finally {
+      setUpdating(false);
+    }
   };
 
   return (
-    <div
-      className={`overflow-hidden rounded-xl border bg-[#1a1a1a] transition-all ${
-        inquiry.status === "new" ? "border-[#AC3C3C]/30" : "border-white/6"
-      }`}
-    >
-      <button
-        type="button"
-        onClick={() => setOpen((value) => !value)}
-        className="flex w-full items-center gap-4 p-4 text-left transition-colors hover:bg-white/3"
-      >
-        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/5">
-          <MessageSquare className="h-4 w-4 text-zinc-400" />
-        </div>
-        <div className="min-w-0 flex-1">
-          <div className="mb-0.5 flex flex-wrap items-center gap-2">
-            <span className="truncate text-sm font-semibold text-white">{inquiry.name}</span>
+    <div className="rounded-2xl border border-white/6 bg-[#141414]">
+      <div className="flex items-start justify-between gap-3 border-b border-white/6 px-5 py-4">
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="truncate text-sm font-bold text-white">{inquiry.name}</div>
             <StatusBadge status={inquiry.status} />
           </div>
-          <div className="truncate text-xs text-zinc-500">
+          <div className="mt-0.5 text-xs text-zinc-500">
             {inquiry.service} · {formatDate(inquiry.createdAt)}
           </div>
         </div>
-        <ChevronDown
-          className={`h-4 w-4 shrink-0 text-zinc-500 transition-transform ${
-            open ? "rotate-180" : ""
-          }`}
-        />
-      </button>
+        <button
+          type="button"
+          onClick={onCloseMobile}
+          className="rounded-lg border border-white/10 bg-white/5 p-2 text-zinc-400 transition-colors hover:bg-white/10 hover:text-white"
+          aria-label="Close inquiry details"
+        >
+          <X className="h-4 w-4" />
+        </button>
+      </div>
 
-      {open && (
-        <div className="space-y-4 border-t border-white/6 p-4">
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-            <div>
-              <div className="mb-1 text-[10px] font-semibold uppercase tracking-widest text-zinc-500">
-                Phone
-              </div>
-              <a
-                href={`tel:${inquiry.phone}`}
-                className="flex items-center gap-1.5 text-sm text-white transition-colors hover:text-[#e05555]"
-              >
-                <Phone className="h-3.5 w-3.5" />
-                {inquiry.phone}
-              </a>
-            </div>
-            <div>
-              <div className="mb-1 text-[10px] font-semibold uppercase tracking-widest text-zinc-500">
-                Email
-              </div>
-              <a
-                href={`mailto:${inquiry.email}`}
-                className="flex items-center gap-1.5 truncate text-sm text-white transition-colors hover:text-[#e05555]"
-              >
-                <Mail className="h-3.5 w-3.5 shrink-0" />
-                {inquiry.email}
-              </a>
-            </div>
-            <div>
-              <div className="mb-1 text-[10px] font-semibold uppercase tracking-widest text-zinc-500">
-                Service
-              </div>
-              <div className="text-sm text-white">{inquiry.service}</div>
-            </div>
+      <div className="space-y-5 px-5 py-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <DetailField label="Phone">
+            <a
+              href={`tel:${inquiry.phone}`}
+              className="flex items-center gap-1.5 text-sm text-white transition-colors hover:text-[#e05555]"
+            >
+              <Phone className="h-3.5 w-3.5" />
+              {inquiry.phone}
+            </a>
+          </DetailField>
+          <DetailField label="Email">
+            <a
+              href={`mailto:${inquiry.email}`}
+              className="flex items-center gap-1.5 truncate text-sm text-white transition-colors hover:text-[#e05555]"
+            >
+              <Mail className="h-3.5 w-3.5 shrink-0" />
+              {inquiry.email}
+            </a>
+          </DetailField>
+          <DetailField label="Service">
+            <div className="text-sm text-white">{inquiry.service}</div>
+          </DetailField>
+        </div>
+
+        {(inquiry.quantity || inquiry.material) && (
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {inquiry.quantity && (
+              <DetailField label="Quantity">
+                <div className="text-sm text-white">{inquiry.quantity}</div>
+              </DetailField>
+            )}
+            {inquiry.material && (
+              <DetailField label="Material">
+                <div className="text-sm text-white">{inquiry.material}</div>
+              </DetailField>
+            )}
           </div>
+        )}
 
-          {(inquiry.quantity || inquiry.material) && (
-            <div className="grid grid-cols-2 gap-3">
-              {inquiry.quantity && (
-                <div>
-                  <div className="mb-1 text-[10px] font-semibold uppercase tracking-widest text-zinc-500">
-                    Quantity
-                  </div>
-                  <div className="text-sm text-white">{inquiry.quantity}</div>
-                </div>
-              )}
-              {inquiry.material && (
-                <div>
-                  <div className="mb-1 text-[10px] font-semibold uppercase tracking-widest text-zinc-500">
-                    Material
-                  </div>
-                  <div className="text-sm text-white">{inquiry.material}</div>
-                </div>
-              )}
-            </div>
-          )}
-
-          <div>
-            <div className="mb-1 text-[10px] font-semibold uppercase tracking-widest text-zinc-500">
-              Project Details
-            </div>
-            <p className="whitespace-pre-wrap text-sm leading-relaxed text-zinc-300">
+        {inquiry.message && (
+          <DetailField label="Project Details">
+            <div className="whitespace-pre-line rounded-xl border border-white/10 bg-black/20 p-4 text-sm leading-relaxed text-zinc-200">
               {inquiry.message}
-            </p>
-          </div>
+            </div>
+          </DetailField>
+        )}
 
-          <div className="flex flex-wrap items-center gap-2 pt-1">
-            <span className="text-[10px] font-semibold uppercase tracking-widest text-zinc-500">
-              Update Status:
-            </span>
+        <div className="border-t border-white/6 pt-4">
+          <div className="mb-2 text-[10px] font-semibold uppercase tracking-widest text-zinc-500">
+            Update Status
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
             {ALL_STATUSES.map((status) => (
               <button
                 key={status}
                 type="button"
                 onClick={() => handleStatus(status)}
                 disabled={inquiry.status === status || updating}
-                className={`rounded-full border px-3 py-1 text-xs font-semibold transition-all disabled:cursor-default disabled:opacity-40 ${
+                className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition-all disabled:cursor-default disabled:opacity-40 ${
                   inquiry.status === status
                     ? STATUS_COLORS[status]
-                    : "border-white/10 text-zinc-400 hover:border-white/20 hover:text-white"
+                    : "border-white/10 text-zinc-300 hover:border-white/20 hover:bg-white/5 hover:text-white"
                 }`}
               >
                 {STATUS_LABELS[status]}
               </button>
             ))}
-            {updating && <Loader2 className="h-3.5 w-3.5 animate-spin text-zinc-500" />}
+            {updating && <Loader2 className="h-4 w-4 animate-spin text-zinc-500" />}
           </div>
         </div>
-      )}
+      </div>
+    </div>
+  );
+}
+
+function InquiriesTable({
+  inquiries,
+  onOpen,
+}: {
+  inquiries: Inquiry[];
+  onOpen: (inquiry: Inquiry) => void;
+}) {
+  return (
+    <div className="overflow-hidden rounded-2xl border border-white/6 bg-[#141414]">
+      <div className="overflow-x-auto">
+        <table className="min-w-full text-left text-sm">
+          <thead className="bg-black/25">
+            <tr className="text-[11px] font-bold uppercase tracking-widest text-zinc-500">
+              <th className="px-4 py-3">From</th>
+              <th className="px-4 py-3">Service</th>
+              <th className="px-4 py-3">Received</th>
+              <th className="px-4 py-3">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {inquiries.map((inquiry) => (
+              <tr
+                key={inquiry.id}
+                className="border-t border-white/6 hover:bg-white/3 transition-colors cursor-pointer"
+                onClick={() => onOpen(inquiry)}
+              >
+                <td className="px-4 py-3">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/5">
+                      <MessageSquare className="h-4 w-4 text-zinc-400" />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="truncate font-semibold text-white">{inquiry.name}</div>
+                      <div className="mt-0.5 flex items-center gap-3 text-xs text-zinc-500">
+                        <span className="inline-flex items-center gap-1.5">
+                          <Phone className="h-3.5 w-3.5" />
+                          {inquiry.phone}
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 truncate">
+                          <Mail className="h-3.5 w-3.5 shrink-0" />
+                          <span className="truncate max-w-[220px]">{inquiry.email}</span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td className="px-4 py-3 text-zinc-200">
+                  <div className="max-w-[240px] truncate">{inquiry.service}</div>
+                </td>
+                <td className="px-4 py-3 text-zinc-400">{formatDate(inquiry.createdAt)}</td>
+                <td className="px-4 py-3">
+                  <StatusBadge status={inquiry.status} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function InquiryDrawer({
+  open,
+  inquiry,
+  onClose,
+  onStatusChange,
+}: {
+  open: boolean;
+  inquiry: Inquiry | null;
+  onClose: () => void;
+  onStatusChange: (id: string, status: InquiryStatus) => Promise<void>;
+}) {
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open, onClose]);
+
+  if (!open || !inquiry) return null;
+
+  return (
+    <div className="fixed inset-0 z-50">
+      <button
+        type="button"
+        className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+        onClick={onClose}
+        aria-label="Close inquiry drawer"
+      />
+      <div className="absolute inset-y-0 right-0 w-full max-w-[560px] p-3 sm:p-4">
+        <div className="h-full overflow-hidden rounded-3xl border border-white/10 bg-[#0f0f0f] shadow-[0_30px_120px_rgba(0,0,0,0.65)]">
+          <div className="h-full overflow-y-auto p-3 sm:p-4">
+            <InquiryDetail inquiry={inquiry} onCloseMobile={onClose} onStatusChange={onStatusChange} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -191,8 +317,11 @@ function InquiryCard({
 export function InquiriesPage() {
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [filter, setFilter] = useState<InquiryStatus | "all">("all");
+  const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const configured = isFirebaseConfigured();
 
@@ -222,22 +351,88 @@ export function InquiriesPage() {
     );
   };
 
-  const filtered =
-    filter === "all" ? inquiries : inquiries.filter((inquiry) => inquiry.status === filter);
-  const counts = ALL_STATUSES.reduce(
-    (accumulator, status) => {
-      accumulator[status] = inquiries.filter((inquiry) => inquiry.status === status).length;
-      return accumulator;
-    },
-    {} as Record<InquiryStatus, number>,
+  const counts = useMemo(
+    () =>
+      ALL_STATUSES.reduce(
+        (accumulator, status) => {
+          accumulator[status] = inquiries.filter((inquiry) => inquiry.status === status).length;
+          return accumulator;
+        },
+        {} as Record<InquiryStatus, number>,
+      ),
+    [inquiries],
   );
+
+  const filtered = useMemo(() => {
+    const normalized = query.trim().toLowerCase();
+    const statusFiltered =
+      filter === "all" ? inquiries : inquiries.filter((inquiry) => inquiry.status === filter);
+    if (!normalized) return statusFiltered;
+    return statusFiltered.filter((inquiry) => {
+      const haystack = [
+        inquiry.name,
+        inquiry.email,
+        inquiry.phone,
+        inquiry.service,
+        inquiry.material ?? "",
+        inquiry.quantity ?? "",
+        inquiry.message ?? "",
+      ]
+        .join(" ")
+        .toLowerCase();
+      return haystack.includes(normalized);
+    });
+  }, [filter, inquiries, query]);
+
+  const selected = useMemo(
+    () => filtered.find((inquiry) => inquiry.id === selectedId) ?? filtered[0] ?? null,
+    [filtered, selectedId],
+  );
+
+  useEffect(() => {
+    if (!selected && filtered.length === 0) setSelectedId(null);
+  }, [filtered, selected]);
 
   return (
     <div className="w-full p-4 md:p-6">
-      <div className="mb-6 flex items-center justify-between">
+      <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
           <h1 className="text-xl font-bold text-white">Inquiries</h1>
-          <p className="mt-0.5 text-sm text-zinc-500">{inquiries.length} total submissions</p>
+          <p className="mt-0.5 text-sm text-zinc-500">
+            {inquiries.length} total submissions
+          </p>
+        </div>
+
+        <div className="flex w-full flex-col gap-2 sm:flex-row md:w-auto md:items-center">
+          <div className="relative w-full sm:w-[340px]">
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-600" />
+            <input
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Search name, phone, email, service..."
+              className="h-10 w-full rounded-xl border border-white/8 bg-[#141414] pl-9 pr-9 text-sm text-white placeholder:text-zinc-600 outline-none transition-colors focus:border-[#AC3C3C]/40 focus:ring-2 focus:ring-[#AC3C3C]/15"
+            />
+            {query && (
+              <button
+                type="button"
+                onClick={() => setQuery("")}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 rounded-md p-1 text-zinc-500 hover:bg-white/5 hover:text-zinc-300"
+                aria-label="Clear search"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            )}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => void load()}
+            disabled={!configured || loading}
+            className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 text-xs font-bold uppercase tracking-widest text-zinc-300 transition-colors hover:bg-white/10 disabled:cursor-default disabled:opacity-60"
+          >
+            <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />
+            Refresh
+          </button>
         </div>
       </div>
 
@@ -300,15 +495,37 @@ export function InquiriesPage() {
           </p>
         </div>
       ) : (
-        <div className="space-y-3">
-          {filtered.map((inquiry) => (
-            <InquiryCard
-              key={inquiry.id}
-              inquiry={inquiry}
-              onStatusChange={handleStatusChange}
+        <>
+          <div className="hidden md:block">
+            <InquiriesTable
+              inquiries={filtered}
+              onOpen={(inquiry) => {
+                setSelectedId(inquiry.id);
+                setDrawerOpen(true);
+              }}
             />
-          ))}
-        </div>
+          </div>
+
+          <div className="space-y-3 md:hidden">
+            {filtered.map((inquiry) => (
+              <MobileInquiryRow
+                key={inquiry.id}
+                inquiry={inquiry}
+                onOpen={() => {
+                  setSelectedId(inquiry.id);
+                  setDrawerOpen(true);
+                }}
+              />
+            ))}
+          </div>
+
+          <InquiryDrawer
+            open={drawerOpen}
+            inquiry={selected}
+            onClose={() => setDrawerOpen(false)}
+            onStatusChange={handleStatusChange}
+          />
+        </>
       )}
     </div>
   );

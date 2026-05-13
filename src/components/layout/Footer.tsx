@@ -146,6 +146,16 @@ export function Footer() {
                   NH 8, Kamrej, Navagam, Surat - 394185, India
                 </span>
               </li>
+              <li className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-primary/20 bg-primary/10">
+                  <MapPin className="h-3.5 w-3.5 text-primary" />
+                </div>
+                <span className="text-sm leading-relaxed text-white/50">
+                  Block No. 334/3, Vav-Jokha Road,
+                  <br />
+                  Village Jokha, Kamrej, Surat - 394180, India
+                </span>
+              </li>
               <li className="flex items-center gap-3">
                 <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-primary/20 bg-primary/10">
                   <Phone className="h-3.5 w-3.5 text-primary" />
