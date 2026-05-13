@@ -5,6 +5,7 @@ import { DevtoolsGuard } from "@/components/security/DevtoolsGuard";
 import { FloatingCta } from "@/components/site/FloatingCta";
 import { SiteSmoothScroll } from "@/components/site/SiteSmoothScroll";
 import { QuoteDialogProvider } from "@/components/site/QuoteDialogProvider";
+import { ScrollToTop } from "@/components/layout/ScrollToTop";
 
 export default function SiteLayout({
   children,
@@ -16,6 +17,7 @@ export default function SiteLayout({
       <div className="min-h-screen bg-background font-sans selection:bg-primary/30">
         <DevtoolsGuard />
         <SiteSmoothScroll />
+        <ScrollToTop />
         <Navbar />
         <main>{children}</main>
         <Footer />
