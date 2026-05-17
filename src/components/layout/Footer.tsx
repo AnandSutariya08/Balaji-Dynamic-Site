@@ -13,6 +13,7 @@ const quickLinks = [
 
 const capabilities = [
   { name: "CNC Plate Bending", path: "/services/cnc-plate-bending" },
+  { name: "Sheet Metal Shearing Cutting", path: "/services/sheet-metal-shearing-cutting" },
   { name: "CNC Laser Cutting", path: "/services/cnc-laser-cutting" },
   { name: "CNC Plasma Cutting", path: "/services/cnc-plasma-cutting" },
   { name: "Plate Rolling", path: "/services/plate-rolling" },
@@ -51,7 +52,7 @@ export function Footer() {
               </h2>
             </div>
             <Link
-              href="/privacy"
+              href="/contact"
               className="group flex shrink-0 items-center gap-3 rounded-xl border border-primary/40 bg-primary/10 px-7 py-4 shadow-[0_0_30px_rgba(172,60,60,0.15)] transition-all duration-300 hover:border-primary hover:bg-primary hover:shadow-[0_0_40px_rgba(172,60,60,0.4)]"
             >
               <span className="text-xs font-black uppercase tracking-widest text-white">
@@ -83,11 +84,11 @@ export function Footer() {
             </Link>
             <p className="mb-6 max-w-xs text-sm leading-relaxed text-white/40">
               Surat-based manufacturer and service provider for CNC laser cutting,
-              CNC plasma cutting, sheet metal bending, plate rolling, profile cutting, and heavy fabrication.
+              CNC plasma cutting, CNC press brake bending, sheet metal shearing cutting, plate rolling, profile cutting, and heavy fabrication.
             </p>
             <div className="flex flex-col gap-1.5 font-mono text-xs text-white/30">
               <span>GST: 24BCUPS8314Q1ZK</span>
-              <span>Est. 2001 · Kamrej,navagam Surat, Gujarat</span>
+              <span>Est. 2001 · Kamrej, Surat, Gujarat</span>
             </div>
           </div>
 
@@ -144,7 +145,7 @@ export function Footer() {
                 <span className="text-sm leading-relaxed text-white/50">
                   Plot No. 11, 12, Soham Industrial Estate,
                   <br />
-                  NH 8, Kamrej, Surat, Gujarat - 394185, India
+                  NH 8, Kamrej,Navagam Surat, Gujarat - 394185, India
                 </span>
               </li>
               <li className="flex items-start gap-3">

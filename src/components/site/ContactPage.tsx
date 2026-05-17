@@ -20,7 +20,7 @@ const contactInfo = [
   { icon: Mail, title: "Email Us", lines: ["balajieng.works12@gmail.com"], action: { href: "mailto:balajieng.works12@gmail.com", label: "Send Email" } },
   { icon: Clock, title: "Response Support", lines: ["Mon - Sat project assistance", "Share drawings for faster quotes"], action: null },
   { icon: MapPin, title: "Unit 1 Address", lines: ["Block no. 334/3, Vav-Jokha Road", "Village Jokha, Kamrej, Surat", "Gujarat - 394180"], action: null },
-  { icon: MapPin, title: "Unit 2 Address", lines: ["Plot no. 11,12, Soham Industrial Estate", "Opp. Hero Showroom, NH-8", "Kamrej,navagam Surat, Gujarat - 394185"], action: null },
+  { icon: MapPin, title: "Unit 2 Address", lines: ["Plot no. 11,12, Soham Industrial Estate", "Opp. Hero Showroom, NH-8", "Kamrej,Navagam, Surat, Gujarat - 394185"], action: null },
   { icon: MapPin, title: "Unit 3 Address", lines: ["Block No. 109,", "Vav-Jokha Canal Road, Village Vav, Tal. Kamrej,", "Dist. Surat - 394185, Gujarat, India"], action: null },
 ];
 
@@ -99,13 +99,13 @@ export default function ContactPage({
           )}
           description={(
             <>
-              Tell us about your bending, laser cutting, rolling, fabrication, or steel processing requirement.
+              Tell us about your CNC press brake bending, laser cutting, shearing cutting, rolling, fabrication, or steel processing requirement.
               Our Surat team will respond with a clear quote and production guidance.
             </>
           )}
           stats={[
             { v: "24H", l: "Response" },
-            { v: "20+", l: "Years" },
+            { v: "25+", l: "Years" },
             { v: "Surat", l: "Plant" },
           ]}
         />
@@ -232,6 +232,7 @@ export default function ContactPage({
                           </SelectTrigger>
                           <SelectContent>
                             <SelectItem value="cnc-plate-bending">CNC Plate Bending</SelectItem>
+                            <SelectItem value="sheet-metal-shearing-cutting">Sheet Metal Shearing Cutting</SelectItem>
                             <SelectItem value="cnc-laser-cutting">CNC Laser Cutting</SelectItem>
                             <SelectItem value="cnc-plasma-cutting">CNC Plasma Cutting</SelectItem>
                             <SelectItem value="plate-rolling">Plate Rolling</SelectItem>
@@ -341,8 +342,8 @@ export default function ContactPage({
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
               {[
                 { title: "CNC Plate Bending", href: "/services/cnc-plate-bending" },
+                { title: "Sheet Metal Shearing Cutting", href: "/services/sheet-metal-shearing-cutting" },
                 { title: "CNC Laser Cutting", href: "/services/cnc-laser-cutting" },
-                { title: "Plate Rolling", href: "/services/plate-rolling" },
                 { title: "CNC Plasma Cutting", href: "/services/cnc-plasma-cutting" },
               ].map((service) => (
                 <Link

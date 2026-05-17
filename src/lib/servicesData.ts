@@ -4,9 +4,9 @@ export const staticServices: Service[] = [
   {
     id: "cnc-plate-bending",
     title: "CNC Plate Bending",
-    tagline: "CNC press brake bending for heavy-duty plate applications",
+    tagline: "CNC press brake bending and CNC bending for heavy-duty plate applications",
     description:
-      "CNC plate bending uses press brakes to bend metal sheets into specific angles. CNC-controlled bending ensures accurate angles and uniform results, suitable for large-scale and heavy-duty industrial applications.",
+      "CNC plate bending uses press brakes to bend metal sheets into specific angles. CNC press brake bending ensures accurate angles, uniform results, and dependable CNC bending support for large-scale and heavy-duty industrial applications.",
     image: "/service-bending.png",
     features: [
       "Press brake based bending process",
@@ -21,6 +21,28 @@ export const staticServices: Service[] = [
       { label: "Capacity", value: "Up to 6 m length at 25 mm thickness" },
       { label: "Control", value: "CNC press brake" },
       { label: "Use Cases", value: "Large-scale heavy-duty industrial applications" },
+    ],
+  },
+  {
+    id: "sheet-metal-shearing-cutting",
+    title: "Sheet Metal Shearing Cutting",
+    tagline: "Hydraulic shearing for long-length and thicker plate cutting jobs",
+    description:
+      "Sheet metal shearing cutting service for accurate straight-line cutting of sheets and plates. Ideal for production blanks, strip cutting, and fabrication-ready material preparation with dependable batch consistency.",
+    image: "/service-steel-cutting.png",
+    features: [
+      "Straight-line hydraulic shearing process",
+      "Suitable for sheet and plate job work",
+      "Batch cutting for fabrication and production support",
+      "Fast processing for cut-to-size material requirements",
+      "Clean and repeatable shearing output",
+      "Useful for downstream bending and fabrication operations",
+    ],
+    specs: [
+      { label: "Thickness", value: "Up to 32 mm" },
+      { label: "Length", value: "Up to 5 meter" },
+      { label: "Process", value: "Hydraulic shearing cutting" },
+      { label: "Use Cases", value: "Cut-to-size sheets, plate blanks, strips, fabrication jobs" },
     ],
   },
   {

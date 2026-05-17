@@ -18,14 +18,14 @@ const timeline = [
   { year: "2007", title: "First CNC Investment", desc: "Commissioned our first CNC press brake — a pivotal leap that enabled us to serve automotive and infrastructure clients with repeatable precision." },
   { year: "2011", title: "Heavy Plate Division", desc: "Expanded into heavy-duty plate rolling and profile cutting, catering to the energy and marine sectors across Western India." },
   { year: "2017", title: "Laser Cutting Launch", desc: "Installed state-of-the-art fiber laser cutting systems capable of ±0.1mm tolerances, unlocking complex geometry manufacturing." },
-  { year: "2021", title: "₹25+ Cr Turnover Milestone", desc: "Crossed a landmark turnover milestone, growing our workforce to 25+ specialists serving India's biggest infrastructure firms." },
+  { year: "2021", title: "₹25+ Cr Turnover Milestone", desc: "Crossed a landmark turnover milestone, growing our workforce to 50+ specialists serving India's biggest infrastructure and industrial clients." },
   { year: "2025", title: "Capacity Expansion", desc: "Expanded fabrication capacity and strengthened production support for larger industrial and infrastructure requirements." },
 ];
 
 const certifications = [
   { title: "GST Registered", desc: "24BCUPS8314Q1ZK", icon: FileText },
   { title: "Manufacturer", desc: "Industrial Job Work and Supply", icon: Award },
-  { title: "20+ Year Track Record", desc: "Established in 2001", icon: Calendar },
+  { title: "25+ Year Track Record", desc: "Established in 2001", icon: Calendar },
   { title: "Surat Facility", desc: "Kamrej, Surat, Gujarat", icon: ShieldCheck },
 ];
 
@@ -78,12 +78,12 @@ export default function AboutPage() {
           )}
           description={(
             <>
-              Learn how Balaji Engineering Works grew into a trusted Surat manufacturer for CNC laser
-              cutting, CNC plasma cutting, sheet metal bending, plate rolling, steel cutting, and heavy fabrication.
+              Learn how Balaji Engineering Works grew into a trusted Surat manufacturer for CNC press brake
+              bending, CNC laser cutting, CNC plasma cutting, sheet metal shearing cutting, plate rolling, and heavy fabrication.
             </>
           )}
           stats={[
-            { v: "20+", l: "Years" },
+            { v: "25+", l: "Years" },
             { v: "500+", l: "Projects" },
             { v: "50+", l: "Experts" },
           ]}
@@ -115,7 +115,7 @@ export default function AboutPage() {
             {Array.from({ length: 2 }).map((_, i) => (
               <div key={i} className="flex items-center gap-6 md:gap-8 px-4 text-2xl sm:text-3xl md:text-5xl font-display font-black text-white/15 uppercase">
                 <span>PRECISION ENGINEERING</span><span className="w-2 h-2 rounded-full bg-primary inline-block" />
-                <span>20+ YEARS LEGACY</span><span className="w-2 h-2 rounded-full bg-white/30 inline-block" />
+                <span>25+ YEARS LEGACY</span><span className="w-2 h-2 rounded-full bg-white/30 inline-block" />
                 <span>SURAT, GUJARAT</span><span className="w-2 h-2 rounded-full bg-primary inline-block" />
                 <span>GST REGISTERED</span><span className="w-2 h-2 rounded-full bg-white/30 inline-block" />
                 <span>HEAVY FABRICATION</span><span className="w-2 h-2 rounded-full bg-primary inline-block" />
@@ -128,12 +128,12 @@ export default function AboutPage() {
         {/* STATS ROW */}
         <section className="py-16 md:py-28 bg-[#F7F5F1] relative overflow-hidden">
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03]">
-            <span className="text-[15rem] md:text-[30rem] font-display font-black text-[#1A1A1A]">24</span>
+            <span className="text-[15rem] md:text-[30rem] font-display font-black text-[#1A1A1A]">25</span>
           </div>
           <div className="container mx-auto px-4 relative z-10">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-12">
               {[
-                { value: 20, suffix: "+", label: "Years of Excellence", icon: Award },
+                { value: 25, suffix: "+", label: "Years of Excellence", icon: Award },
                 { value: 500, suffix: "+", label: "Projects Delivered", icon: Factory },
                 { value: 50, suffix: "+", label: "Skilled Professionals", icon: Users },
                 { value: 25, suffix: " Cr+", prefix: "₹ ", label: "Annual Turnover Range", icon: TrendingUp },
@@ -163,12 +163,12 @@ export default function AboutPage() {
                   From Workshop<br />to Powerhouse
                 </h2>
                 <div className="space-y-5 text-base md:text-lg text-slate-600 font-light leading-relaxed">
-                  <p>Balaji Engineering Works began in 2001 and operates from  Kamrej, Surat, Gujarat. We have grown by staying focused on dependable fabrication quality, delivery discipline, and practical engineering support.</p>
-                  <p>Our infrastructure includes hydraulic shearing, CNC fiber laser cutting, CNC plasma and oxy-fuel profile cutting, press brake bending, plate rolling, punching, and fabrication capabilities that support both custom jobs and repeat production orders.</p>
+                  <p>Balaji Engineering Works began in 2001 and operates from Kamrej, Surat, Gujarat. We have grown across 25+ years by staying focused on dependable fabrication quality, delivery discipline, and practical engineering support.</p>
+                  <p>Our infrastructure includes hydraulic shearing, hydraulic press for deep drawing process, mechanical press for small parts, ironworker for heavy structure cutting, CNC fiber laser cutting, CNC plasma and oxy-fuel profile cutting, CNC press brake bending, plate rolling, punching, and fabrication capabilities that support both custom jobs and repeat production orders.</p>
                   <p>With GST registration 24BCUPS8314Q1ZK and a strong presence across India, we serve industries such as automotive, construction, energy, marine, HVAC, and general industrial manufacturing.</p>
                 </div>
                 <div className="mt-10 md:mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-                  {["Hydraulic and CNC Bending", "Fiber Laser Cutting Support", "Plate Rolling and Profile Cutting", "25,000 sq.ft. Unit", "Fabrication and Welding Setup", "Fast Quotation Response"].map((fact, i) => (
+                  {["Hydraulic Press for Deep Drawing", "Mechanical Press for Small Parts", "Ironworker for Heavy Structure Cutting", "Fiber Laser Cutting Support", "CNC Press Brake Bending", "Plate Rolling and Profile Cutting"].map((fact, i) => (
                     <div key={i} className="flex items-center gap-3">
                       <div className="w-6 h-6 rounded-full bg-primary/15 flex items-center justify-center shrink-0">
                         <CheckCircle2 className="w-3.5 h-3.5 text-primary" />
@@ -211,7 +211,7 @@ export default function AboutPage() {
             <div className="text-center mb-14 md:mb-24">
               <span className="text-primary font-bold tracking-[0.3em] uppercase text-sm">Our Journey</span>
               <h2 className="text-[clamp(1.85rem,5.4vw,4.6rem)] font-display font-black text-[#1A1A1A] uppercase tracking-tighter leading-[0.92] mt-4">
-                24 Years in the Making
+                25 Years in the Making
               </h2>
             </div>
             <div className="relative">
@@ -339,8 +339,8 @@ export default function AboutPage() {
             <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
               {[
                 { title: "CNC Plate Bending", href: "/services/cnc-plate-bending" },
+                { title: "Sheet Metal Shearing Cutting", href: "/services/sheet-metal-shearing-cutting" },
                 { title: "CNC Laser Cutting", href: "/services/cnc-laser-cutting" },
-                { title: "Plate Rolling", href: "/services/plate-rolling" },
                 { title: "CNC Plasma Cutting", href: "/services/cnc-plasma-cutting" },
               ].map((service) => (
                 <Link

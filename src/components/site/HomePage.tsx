@@ -169,7 +169,7 @@ export default function HomePage({
                 {/* Sub-text */}
                 <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.65, duration: 0.7 }}
                   className="text-sm sm:text-base md:text-lg text-zinc-300 font-light leading-relaxed max-w-xl mb-4 md:mb-5 lg:mb-6">
-                  Balaji Engineering Works delivers CNC laser cutting, CNC plasma cutting, sheet metal bending, plate rolling, steel cutting, and heavy fabrication from Kamrej, Surat, Gujarat for industrial clients across India.
+                  Balaji Engineering Works delivers CNC press brake bending, CNC bending, CNC laser cutting, CNC plasma cutting, sheet metal shearing cutting, plate rolling, and heavy fabrication from Kamrej, Surat, Gujarat for industrial clients across India.
                 </motion.p>
 
                 {/* CTAs */}
@@ -187,7 +187,7 @@ export default function HomePage({
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1, duration: 0.7 }}
                   className="flex items-center gap-5 sm:gap-8 mt-5 md:mt-6 lg:mt-8 pt-4 md:pt-5 lg:pt-6 border-t border-white/15">
                   {[
-                    { v: "20+", l: "Years" },
+                    { v: "25+", l: "Years" },
                     { v: "500+", l: "Projects" },
                     { v: "50+", l: "Team" },
                     { v: "6 Days", l: "Working Week" },
@@ -244,7 +244,7 @@ export default function HomePage({
           <div className="container mx-auto px-4 relative z-10">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-16">
               {[
-                { value: 20, label: "Years Experience", suffix: "+", icon: Target },
+                { value: 25, label: "Years Experience", suffix: "+", icon: Target },
                 { value: 500, label: "Projects Completed", suffix: "+", icon: Factory },
                 { value: 50, label: "Skilled Employees", suffix: "+", icon: Users },
                 { value: 25, label: "Cr. Turnover", suffix: " Cr", prefix: "₹ 5-", icon: TrendingUp }
@@ -353,12 +353,12 @@ export default function HomePage({
                 <div className="reveal-line">
                   <span className="text-primary font-bold tracking-[0.3em] uppercase">Who We Are</span>
                   <h2 className="text-[clamp(1.9rem,5.6vw,4.6rem)] font-display font-black text-[#1A1A1A] uppercase tracking-tighter leading-[0.9] mt-4">
-                    Two Decades of<br />Steel & Precision
+                    25+ Years of<br />Steel & Precision
                   </h2>
                 </div>
                 <div className="space-y-5 text-lg md:text-xl text-slate-600 font-light leading-relaxed reveal-line">
-                  <p>Established in 2001, Balaji Engineering Works is a manufacturer and service provider based at  Kamrej, Surat, Gujarat.</p>
-                  <p>We specialize in shearing, CNC laser cutting, CNC plasma cutting, sheet metal bending, plate rolling, profile cutting, base plates, and heavy fabrication with fast quotations and dispatch support across India.</p>
+                  <p>Established in 2001, Balaji Engineering Works is a manufacturer and service provider based at Kamrej, Surat, Gujarat with 25+ years of experience.</p>
+                  <p>We specialize in sheet metal forming industries in Surat with CNC press brake bending, CNC laser cutting, CNC plasma cutting, sheet metal shearing cutting, plate rolling, profile cutting, base plates, and heavy fabrication with fast quotations and dispatch support across India.</p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-8 reveal-line">
                   {["Established Since 2001", "Advanced CNC Setup", "Experienced Engineering Team", "End-to-End Job Work"].map((fact, i) => (
@@ -473,7 +473,7 @@ export default function HomePage({
                 {[
                   { num: "01", title: "Consultation & Design", desc: "We review your CAD files and engineering requirements for manufacturability." },
                   { num: "02", title: "Material Selection", desc: "Selecting optimal steel grades and preparing sheets for precision processing." },
-                  { num: "03", title: "CNC Execution", desc: "High-speed laser cutting, bending, and rolling on automated machinery." },
+                  { num: "03", title: "CNC Execution", desc: "High-speed laser cutting, CNC press brake bending, shearing, and rolling on advanced machinery." },
                   { num: "04", title: "Quality & Delivery", desc: "Rigorous inspection followed by logistics to your facility." }
                 ].map((step, i) => (
                   <motion.div
@@ -507,7 +507,7 @@ export default function HomePage({
                 </h2>
                 <div className="grid sm:grid-cols-2 gap-7 md:gap-10">
                   {[
-                    { title: "20+ Years Experience", icon: Award },
+                    { title: "25+ Years Experience", icon: Award },
                     { title: "Advanced CNC Technology", icon: Zap },
                     { title: "End-to-End Fabrication", icon: Factory },
                     { title: "Competitive Pricing", icon: TrendingUp },

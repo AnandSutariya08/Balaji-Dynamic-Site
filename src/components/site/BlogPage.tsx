@@ -75,7 +75,7 @@ export default function BlogPage({
                   </div>
                   <div className="w-px h-10 bg-white/10" />
                   <div>
-                    <div className="text-3xl font-display font-black text-white">20+</div>
+                    <div className="text-3xl font-display font-black text-white">25+</div>
                     <div className="text-xs font-bold tracking-widest text-zinc-500 uppercase">Yrs Experience</div>
                   </div>
                 </div>
@@ -84,7 +84,7 @@ export default function BlogPage({
                 {[
                   { v: blogPosts.length.toString(), l: "Articles" },
                   { v: "3", l: "Categories" },
-                  { v: "20+", l: "Yrs Exp" },
+                  { v: "25+", l: "Yrs Exp" },
                 ].map((s, i) => (
                   <div key={i} className="flex items-center gap-5">
                     {i > 0 && <div className="w-px h-7 bg-white/10" />}

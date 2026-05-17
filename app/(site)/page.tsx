@@ -13,7 +13,7 @@ import {
 const title =
   "Sheet Metal Bending Works in Surat | CNC Laser Cutting & Fabrication";
 const description =
-  "SheetMetalBendingWorks.com connects industrial buyers with Balaji Engineering Works for sheet metal bending, CNC laser cutting, plate rolling, profile cutting, steel cutting, and heavy fabrication in Surat.";
+  "SheetMetalBendingWorks.com connects industrial buyers with Balaji Engineering Works for CNC press brake bending, sheet metal shearing cutting, CNC laser cutting, plate rolling, profile cutting, and heavy fabrication in Surat.";
 
 export const metadata = buildMetadata({
   title,
@@ -24,6 +24,8 @@ export const metadata = buildMetadata({
     "Balaji Engineering Works Surat",
     "sheet metal fabrication Surat",
     "sheet metal bending works",
+    "sheet metal shearing cutting Surat",
+    "cnc press brake bending surat",
     "laser cutting services Surat",
     "steel fabrication company Surat",
     "plate rolling Gujarat",

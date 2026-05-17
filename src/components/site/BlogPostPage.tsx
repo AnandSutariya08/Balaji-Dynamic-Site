@@ -136,7 +136,7 @@ export default function BlogPostPage({
                     </div>
                   </div>
                   <p className="text-sm text-zinc-400 leading-relaxed mb-6">
-                    Our engineering team brings 20+ years of industrial experience to every insight we share.
+                    Our engineering team brings 25+ years of industrial experience to every insight we share.
                   </p>
                   <div className="flex gap-4">
                     <button className="text-zinc-500 hover:text-white transition-colors"><Twitter className="w-5 h-5" /></button>

@@ -34,7 +34,7 @@ export default function SectorsPage() {
             </>
           )}
           stats={[
-            { v: "20+", l: "Years" },
+            { v: "25+", l: "Years" },
             { v: "500+", l: "Projects" },
             { v: "India", l: "Coverage" },
           ]}

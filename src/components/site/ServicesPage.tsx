@@ -14,7 +14,10 @@ const capabilities = [
   { label: "Fiber Laser Cutting", value: "8000 x 2500 mm bed, 6 kW source" },
   { label: "Plate Rolling Machines", value: "Up to 2500 mm x 16 mm jobs" },
   { label: "CNC Profile Cutters", value: "Oxy + Plasma" },
-  { label: "Hydraulic Shears", value: "Up to 5000 mm cutting length" },
+  { label: "Hydraulic Shears", value: "Up to 32 mm thickness at 5 meter length" },
+  { label: "Hydraulic Press", value: "For deep drawing process" },
+  { label: "Mechanical Press", value: "For small parts" },
+  { label: "Ironworker", value: "For heavy structure cutting" },
   { label: "Fabrication Setup", value: "Welding, assembly, and production support" },
 ];
 
@@ -59,13 +62,13 @@ export default function ServicesPage({
           )}
           description={(
             <>
-              Explore sheet metal bending, CNC laser cutting, CNC plasma cutting, steel cutting, profile cutting, plate rolling,
+              Explore CNC press brake bending, CNC laser cutting, CNC plasma cutting, sheet metal shearing cutting, profile cutting, plate rolling,
               base plates, and heavy fabrication services delivered from our Surat facility.
             </>
           )}
           stats={[
             { v: services.length.toString(), l: "Capabilities" },
-            { v: "20+", l: "Years" },
+            { v: "25+", l: "Years" },
             { v: "Surat", l: "Facility" },
           ]}
         />

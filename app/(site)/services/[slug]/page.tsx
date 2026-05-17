@@ -112,7 +112,7 @@ export default async function Page({
           title={<span className="text-white">{service.title}</span>}
           description={<>{seo.metaDescription}</>}
           stats={[
-            { v: "20+", l: "Years" },
+            { v: "25+", l: "Years" },
             { v: "Surat", l: "Plant" },
             { v: "Fast", l: "Quotes" },
           ]}

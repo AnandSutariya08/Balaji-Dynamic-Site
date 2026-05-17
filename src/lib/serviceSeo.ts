@@ -394,6 +394,48 @@ const serviceSeoMap: Record<string, ServiceSeoEntry> = {
       },
     ],
   },
+  "sheet-metal-shearing-cutting": {
+    metaTitle: "Sheet Metal Shearing Cutting Service in Surat",
+    metaDescription:
+      "Sheet metal shearing cutting service in Surat with hydraulic shearing capacity up to 32 mm thickness and 5 meter length for fabrication and production jobs.",
+    intro:
+      "Our sheet metal shearing cutting service supports buyers who need straight-line cutting, repeatable production blanks, and fabrication-ready material processing from a Surat-based manufacturer.",
+    applications: [
+      "Cut-to-size sheet and plate blanks",
+      "Material preparation for CNC bending and fabrication",
+      "Strip cutting for repeat production jobs",
+      "Heavy fabrication support for industrial projects",
+    ],
+    process: [
+      "Drawing, size, and thickness review",
+      "Hydraulic shearing setup for job length and material",
+      "Batch cutting with size control",
+      "Inspection, stacking, and dispatch preparation",
+    ],
+    keywords: [
+      "sheet metal shearing cutting surat",
+      "hydraulic shearing service surat",
+      "plate shearing cutting gujarat",
+      "cut to size sheet metal service surat",
+    ],
+    faqs: [
+      {
+        question: "What is your shearing cutting capacity?",
+        answer:
+          "We provide sheet metal shearing cutting up to 32 mm thickness and up to 5 meter length depending on the material and job requirement.",
+      },
+      {
+        question: "Is shearing suitable for fabrication-ready blanks?",
+        answer:
+          "Yes. Shearing is widely used for straight-line blanks, strips, and production-ready material preparation before bending, welding, or assembly.",
+      },
+      {
+        question: "Can shearing jobs be combined with bending or fabrication?",
+        answer:
+          "Yes. Many customers combine shearing cutting with CNC bending, welding, and fabrication to reduce lead time and simplify coordination.",
+      },
+    ],
+  },
 };
 
 export function getServiceSeoContent(service: Service): ServiceSeoEntry {

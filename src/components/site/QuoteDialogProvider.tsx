@@ -200,6 +200,7 @@ export function QuoteDialogProvider({ children }: { children: ReactNode }) {
                       </SelectTrigger>
                       <SelectContent className="z-[90]">
                         <SelectItem value="cnc-plate-bending">CNC Plate Bending</SelectItem>
+                        <SelectItem value="sheet-metal-shearing-cutting">Sheet Metal Shearing Cutting</SelectItem>
                         <SelectItem value="cnc-laser-cutting">CNC Laser Cutting</SelectItem>
                         <SelectItem value="cnc-plasma-cutting">CNC Plasma Cutting</SelectItem>
                         <SelectItem value="plate-rolling">Plate Rolling</SelectItem>
