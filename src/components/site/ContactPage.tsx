@@ -398,7 +398,7 @@ export default function ContactPage({
               <h2 className="text-[clamp(2.0rem,6.2vw,5.0rem)] font-display font-black text-white uppercase tracking-tighter leading-[0.9] mb-4 md:mb-6">
                 Still Have<br />Questions?
               </h2>
-              <p className="text-zinc-400 font-light text-base md:text-lg max-w-lg mx-auto mb-10 md:mb-12">Our team is available 6 days a week. Pick up the phone — we love talking shop.</p>
+              <p className="text-zinc-400 font-light text-base md:text-lg max-w-lg mx-auto mb-10 md:mb-12">Our team is available 7 days a week. Pick up the phone — we love talking shop.</p>
               <a href="tel:+919978753398" className="inline-flex items-center gap-3 md:gap-4 text-3xl sm:text-4xl md:text-5xl font-display font-black text-white hover:text-primary transition-colors">
                 <Phone className="w-8 h-8 md:w-10 md:h-10 text-primary" />+91 99787 53398
               </a>

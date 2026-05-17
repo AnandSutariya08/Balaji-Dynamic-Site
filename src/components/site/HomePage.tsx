@@ -161,7 +161,7 @@ export default function HomePage({
                   <motion.span initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2, duration: 0.75, ease: "easeOut" }}
                     className="block">SHEET METAL</motion.span>
                   <motion.span initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.32, duration: 0.75, ease: "easeOut" }}
-                    className="block text-transparent bg-clip-text bg-gradient-to-r from-[#e05555] via-[#AC3C3C] to-[#c44040]">FABRICATION</motion.span>
+                    className="block text-transparent bg-clip-text bg-gradient-to-r from-[#e05555] via-[#AC3C3C] to-[#c44040]">FORMING</motion.span>
                   <motion.span initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.44, duration: 0.75, ease: "easeOut" }}
                     className="block text-white">IN SURAT.</motion.span>
                 </h1>
@@ -190,7 +190,7 @@ export default function HomePage({
                     { v: "25+", l: "Years" },
                     { v: "500+", l: "Projects" },
                     { v: "50+", l: "Team" },
-                    { v: "6 Days", l: "Working Week" },
+                    { v: "7 Days", l: "Working Week" },
                   ].map((s, i) => (
                     <div key={i} className="text-center">
                       <div className="text-base sm:text-2xl md:text-2xl lg:text-3xl font-display font-black text-white leading-none">{s.v}</div>
