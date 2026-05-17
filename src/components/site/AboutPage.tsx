@@ -14,11 +14,11 @@ import { PartnersClientsSection } from "@/components/site/PartnersClientsSection
 import { PageHero } from "@/components/site/PageHero";
 
 const timeline = [
-  { year: "2001", title: "Founded in Navagam", desc: "Balaji Engineering Works is established with a single shearing machine and a vision to serve Surat's growing industrial corridor." },
-  { year: "2005", title: "First CNC Investment", desc: "Commissioned our first CNC press brake — a pivotal leap that enabled us to serve automotive and infrastructure clients with repeatable precision." },
-  { year: "2010", title: "Heavy Plate Division", desc: "Expanded into heavy-duty plate rolling and profile cutting, catering to the energy and marine sectors across Western India." },
-  { year: "2015", title: "Laser Cutting Launch", desc: "Installed state-of-the-art fiber laser cutting systems capable of ±0.1mm tolerances, unlocking complex geometry manufacturing." },
-  { year: "2020", title: "₹5-25 Cr Turnover Milestone", desc: "Crossed a landmark turnover milestone, growing our workforce to 25+ specialists serving India's biggest infrastructure firms." },
+  { year: "2001", title: "Founded in Kamrej", desc: "Balaji Engineering Works is established with a single shearing machine and a vision to serve Surat's growing industrial corridor." },
+  { year: "2007", title: "First CNC Investment", desc: "Commissioned our first CNC press brake — a pivotal leap that enabled us to serve automotive and infrastructure clients with repeatable precision." },
+  { year: "2011", title: "Heavy Plate Division", desc: "Expanded into heavy-duty plate rolling and profile cutting, catering to the energy and marine sectors across Western India." },
+  { year: "2017", title: "Laser Cutting Launch", desc: "Installed state-of-the-art fiber laser cutting systems capable of ±0.1mm tolerances, unlocking complex geometry manufacturing." },
+  { year: "2021", title: "₹25+ Cr Turnover Milestone", desc: "Crossed a landmark turnover milestone, growing our workforce to 25+ specialists serving India's biggest infrastructure firms." },
   { year: "2025", title: "Capacity Expansion", desc: "Expanded fabrication capacity and strengthened production support for larger industrial and infrastructure requirements." },
 ];
 
@@ -26,7 +26,16 @@ const certifications = [
   { title: "GST Registered", desc: "24BCUPS8314Q1ZK", icon: FileText },
   { title: "Manufacturer", desc: "Industrial Job Work and Supply", icon: Award },
   { title: "20+ Year Track Record", desc: "Established in 2001", icon: Calendar },
-  { title: "Surat Facility", desc: "Kamrej, Navagam, Gujarat", icon: ShieldCheck },
+  { title: "Surat Facility", desc: "Kamrej, Surat, Gujarat", icon: ShieldCheck },
+];
+
+const companyTimeline = [
+  { year: "2001", title: "Founded in Kamrej", desc: "Balaji Engineering Works is established with a single shearing machine and a vision to serve Surat's growing industrial corridor." },
+  { year: "2007", title: "First CNC Investment", desc: "Commissioned our first CNC press brake and expanded our ability to serve automotive and infrastructure clients with repeatable precision." },
+  { year: "2011", title: "Heavy Plate Division", desc: "Expanded into heavy-duty plate rolling and profile cutting, catering to the energy and marine sectors across Western India." },
+  { year: "2017", title: "Laser Cutting Launch", desc: "Installed advanced fiber laser cutting systems to support complex geometry manufacturing with reliable precision." },
+  { year: "2021", title: "₹25+ Cr Turnover Milestone", desc: "Crossed a landmark turnover milestone, growing our workforce to 50+ specialists serving major infrastructure and industrial clients." },
+  { year: "2025", title: "Capacity Expansion", desc: "Expanded fabrication capacity and strengthened production support for larger industrial and infrastructure requirements." },
 ];
 
 const values = [
@@ -54,7 +63,7 @@ export default function AboutPage() {
           pill={(
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-primary">
               <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase">
-                EST. 2001 · NAVAGAM, SURAT
+                EST. 2001 · KAMREJ, SURAT
               </span>
             </div>
           )}
@@ -70,13 +79,13 @@ export default function AboutPage() {
           description={(
             <>
               Learn how Balaji Engineering Works grew into a trusted Surat manufacturer for CNC laser
-              cutting, sheet metal bending, plate rolling, steel cutting, and heavy fabrication.
+              cutting, CNC plasma cutting, sheet metal bending, plate rolling, steel cutting, and heavy fabrication.
             </>
           )}
           stats={[
             { v: "20+", l: "Years" },
             { v: "500+", l: "Projects" },
-            { v: "25+", l: "Experts" },
+            { v: "50+", l: "Experts" },
           ]}
         >
           <div className="mt-8 flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6">
@@ -126,15 +135,15 @@ export default function AboutPage() {
               {[
                 { value: 20, suffix: "+", label: "Years of Excellence", icon: Award },
                 { value: 500, suffix: "+", label: "Projects Delivered", icon: Factory },
-                { value: 25, suffix: "+", label: "Skilled Professionals", icon: Users },
-                { value: 25, suffix: " Cr", prefix: "5-", label: "Annual Turnover Range", icon: TrendingUp },
+                { value: 50, suffix: "+", label: "Skilled Professionals", icon: Users },
+                { value: 25, suffix: " Cr+", prefix: "₹ ", label: "Annual Turnover Range", icon: TrendingUp },
               ].map((stat, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} className="flex flex-col items-center text-center group">
                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-4 md:mb-6 group-hover:bg-primary/20 transition-colors">
                     <stat.icon className="w-5 h-5 md:w-7 md:h-7 text-primary" />
                   </div>
                   <div className="text-4xl sm:text-5xl md:text-8xl font-display font-black text-[#1A1A1A] mb-2 md:mb-3">
-                    <Counter value={stat.value} suffix={stat.suffix} />
+                    <Counter value={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
                   </div>
                   <div className="h-0.5 w-8 md:w-10 bg-primary mb-3 md:mb-4" />
                   <div className="text-[10px] sm:text-xs font-bold tracking-[0.2em] sm:tracking-[0.25em] text-slate-500 uppercase">{stat.label}</div>
@@ -154,9 +163,9 @@ export default function AboutPage() {
                   From Workshop<br />to Powerhouse
                 </h2>
                 <div className="space-y-5 text-base md:text-lg text-slate-600 font-light leading-relaxed">
-                  <p>Balaji Engineering Works began in 2001 and operates from Plot No. 11, 12, Soham Industrial Estate, NH 8, Kamrej, Navagam, Surat, Gujarat. We have grown by staying focused on dependable fabrication quality, delivery discipline, and practical engineering support.</p>
+                  <p>Balaji Engineering Works began in 2001 and operates from  Kamrej, Surat, Gujarat. We have grown by staying focused on dependable fabrication quality, delivery discipline, and practical engineering support.</p>
                   <p>Our infrastructure includes hydraulic shearing, CNC fiber laser cutting, CNC plasma and oxy-fuel profile cutting, press brake bending, plate rolling, punching, and fabrication capabilities that support both custom jobs and repeat production orders.</p>
-                  <p>With GST registration 24BCUPS8314Q1ZK and a strong presence across Gujarat and Western India, we serve industries such as automotive, construction, energy, marine, HVAC, and general industrial manufacturing.</p>
+                  <p>With GST registration 24BCUPS8314Q1ZK and a strong presence across India, we serve industries such as automotive, construction, energy, marine, HVAC, and general industrial manufacturing.</p>
                 </div>
                 <div className="mt-10 md:mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                   {["Hydraulic and CNC Bending", "Fiber Laser Cutting Support", "Plate Rolling and Profile Cutting", "25,000 sq.ft. Unit", "Fabrication and Welding Setup", "Fast Quotation Response"].map((fact, i) => (
@@ -182,7 +191,7 @@ export default function AboutPage() {
                   {[
                     { label: "Nature", value: "Manufacturer & Service Provider" },
                     { label: "GST No.", value: "24BCUPS8314Q1ZK" },
-                    { label: "Location", value: "Kamrej, Navagam, Surat, Gujarat" },
+                    { label: "Location", value: "Kamrej, Surat, Gujarat" },
                     { label: "Established", value: "2001" },
                   ].map((item, i) => (
                     <div key={i} className="p-4 md:p-5 bg-[#F7F5F1] border border-black/8 rounded-xl">
@@ -208,7 +217,7 @@ export default function AboutPage() {
             <div className="relative">
               <div className="absolute left-1/2 top-0 bottom-0 w-px bg-black/8 hidden lg:block" />
               <div className="space-y-0">
-                {timeline.map((item, i) => (
+                {companyTimeline.map((item, i) => (
                   <motion.div
                     key={i}
                     initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
@@ -332,7 +341,7 @@ export default function AboutPage() {
                 { title: "CNC Plate Bending", href: "/services/cnc-plate-bending" },
                 { title: "CNC Laser Cutting", href: "/services/cnc-laser-cutting" },
                 { title: "Plate Rolling", href: "/services/plate-rolling" },
-                { title: "Punching", href: "/services/punching" },
+                { title: "CNC Plasma Cutting", href: "/services/cnc-plasma-cutting" },
               ].map((service) => (
                 <Link
                   key={service.href}

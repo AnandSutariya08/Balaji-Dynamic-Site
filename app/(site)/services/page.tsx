@@ -13,7 +13,7 @@ import {
 const title =
   "Sheet Metal Bending, Cutting & Fabrication Services in Surat";
 const description =
-  "Explore sheet metal bending, CNC laser cutting, plate rolling, steel cutting, profile cutting, base plates, and custom fabrication services from Balaji Engineering Works through SheetMetalBendingWorks.com.";
+  "Explore sheet metal bending, CNC laser cutting, CNC plasma cutting, plate rolling, steel cutting, profile cutting, base plates, and custom fabrication services from Balaji Engineering Works through SheetMetalBendingWorks.com.";
 
 export const metadata = buildMetadata({
   title,

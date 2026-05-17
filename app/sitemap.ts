@@ -63,6 +63,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: homeLastModified,
       images: [absoluteUrl("/service-cnc.png")],
     },
+    {
+      url: `${siteConfig.url}/privacy`,
+      lastModified: homeLastModified,
+      images: [absoluteUrl(siteConfig.ogImage)],
+    },
+    {
+      url: `${siteConfig.url}/terms`,
+      lastModified: homeLastModified,
+      images: [absoluteUrl(siteConfig.ogImage)],
+    },
   ];
 
   const blogEntries = [...posts]

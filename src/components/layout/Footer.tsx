@@ -14,6 +14,7 @@ const quickLinks = [
 const capabilities = [
   { name: "CNC Plate Bending", path: "/services/cnc-plate-bending" },
   { name: "CNC Laser Cutting", path: "/services/cnc-laser-cutting" },
+  { name: "CNC Plasma Cutting", path: "/services/cnc-plasma-cutting" },
   { name: "Plate Rolling", path: "/services/plate-rolling" },
   { name: "Assembly", path: "/services/assembly" },
   { name: "Welding", path: "/services/welding" },
@@ -50,7 +51,7 @@ export function Footer() {
               </h2>
             </div>
             <Link
-              href="/contact"
+              href="/privacy"
               className="group flex shrink-0 items-center gap-3 rounded-xl border border-primary/40 bg-primary/10 px-7 py-4 shadow-[0_0_30px_rgba(172,60,60,0.15)] transition-all duration-300 hover:border-primary hover:bg-primary hover:shadow-[0_0_40px_rgba(172,60,60,0.4)]"
             >
               <span className="text-xs font-black uppercase tracking-widest text-white">
@@ -73,20 +74,20 @@ export function Footer() {
               />
               <div>
                 <p className="font-display text-sm font-black leading-none tracking-wide text-white">
-                  BALAJI ENGINEERING
+                  BALAJI ENGINEERING WORKS
                 </p>
                 <p className="mt-1 text-[9px] font-bold uppercase tracking-[0.25em] text-primary">
-                  Precision Works
+                  it's all about engineering....
                 </p>
               </div>
             </Link>
             <p className="mb-6 max-w-xs text-sm leading-relaxed text-white/40">
               Surat-based manufacturer and service provider for CNC laser cutting,
-              sheet metal bending, plate rolling, profile cutting, and heavy fabrication.
+              CNC plasma cutting, sheet metal bending, plate rolling, profile cutting, and heavy fabrication.
             </p>
             <div className="flex flex-col gap-1.5 font-mono text-xs text-white/30">
               <span>GST: 24BCUPS8314Q1ZK</span>
-              <span>Est. 2001 · Kamrej, Navagam, Surat</span>
+              <span>Est. 2001 · Kamrej,navagam Surat, Gujarat</span>
             </div>
           </div>
 
@@ -143,7 +144,7 @@ export function Footer() {
                 <span className="text-sm leading-relaxed text-white/50">
                   Plot No. 11, 12, Soham Industrial Estate,
                   <br />
-                  NH 8, Kamrej, Navagam, Surat - 394185, India
+                  NH 8, Kamrej, Surat, Gujarat - 394185, India
                 </span>
               </li>
               <li className="flex items-start gap-3">
@@ -154,6 +155,18 @@ export function Footer() {
                   Block No. 334/3, Vav-Jokha Road,
                   <br />
                   Village Jokha, Kamrej, Surat - 394180, India
+                </span>
+              </li>
+              <li className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-primary/20 bg-primary/10">
+                  <MapPin className="h-3.5 w-3.5 text-primary" />
+                </div>
+                <span className="text-sm leading-relaxed text-white/50">
+                  Block No. 109,
+                  <br />
+                  Vav-Jokha Canal Road, Village Vav, Tal. Kamrej,
+                  <br />
+                  Dist. Surat - 394185, Gujarat, India
                 </span>
               </li>
               <li className="flex items-center gap-3">
@@ -190,13 +203,13 @@ export function Footer() {
           </p>
           <div className="flex items-center gap-6">
             <Link
-              href="/contact"
+              href="/privacy"
               className="text-[10px] uppercase tracking-widest text-white/25 transition-colors hover:text-white/60"
             >
               Privacy
             </Link>
             <Link
-              href="/contact"
+              href="/terms"
               className="text-[10px] uppercase tracking-widest text-white/25 transition-colors hover:text-white/60"
             >
               Terms

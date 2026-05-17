@@ -12,23 +12,23 @@ import { Mail, MapPin, Phone, Clock, CheckCircle2, ArrowRight, Zap } from "lucid
 import Link from "next/link";
 import type { FormEvent } from "react";
 import { useState } from "react";
-import { addInquiry } from "@/lib/firestore/inquiries";
-import { isFirebaseConfigured } from "@/lib/firebase";
 import { PageHero } from "@/components/site/PageHero";
+import { submitInquiryLead } from "@/lib/inquirySubmission";
 
 const contactInfo = [
   { icon: Phone, title: "Managing Director", lines: ["Nikunj Sakariya", "+91 99787 53398"], action: { href: "tel:+919978753398", label: "Call Now" } },
-  { icon: Mail, title: "Email Us", lines: ["info@balajiengineering.in", "nikunj.balajiengineeringworks@gmail.com"], action: { href: "mailto:nikunj.balajiengineeringworks@gmail.com", label: "Send Email" } },
+  { icon: Mail, title: "Email Us", lines: ["balajieng.works12@gmail.com"], action: { href: "mailto:balajieng.works12@gmail.com", label: "Send Email" } },
   { icon: Clock, title: "Response Support", lines: ["Mon - Sat project assistance", "Share drawings for faster quotes"], action: null },
   { icon: MapPin, title: "Unit 1 Address", lines: ["Block no. 334/3, Vav-Jokha Road", "Village Jokha, Kamrej, Surat", "Gujarat - 394180"], action: null },
-  { icon: MapPin, title: "Unit 2 Address", lines: ["Plot no. 11,12, Soham Industrial Estate", "Opp. Hero Showroom, NH-8", "Kamrej, Surat, Gujarat - 394185"], action: null },
+  { icon: MapPin, title: "Unit 2 Address", lines: ["Plot no. 11,12, Soham Industrial Estate", "Opp. Hero Showroom, NH-8", "Kamrej,navagam Surat, Gujarat - 394185"], action: null },
+  { icon: MapPin, title: "Unit 3 Address", lines: ["Block No. 109,", "Vav-Jokha Canal Road, Village Vav, Tal. Kamrej,", "Dist. Surat - 394185, Gujarat, India"], action: null },
 ];
 
 const faqs = [
   { q: "How fast can you deliver a quote?", a: "We aim to provide quotes within 4–8 business hours for standard jobs. Send us your DXF/DWG files and material specs for the fastest response." },
   { q: "What file formats do you accept?", a: "We accept DXF, DWG, STEP, IGES, PDF drawings, and sketched dimensions. Our engineers will review every submission for manufacturability." },
   { q: "What is your minimum order quantity?", a: "We accept orders from 1 piece to full production runs. No minimum order restriction — we serve both prototypes and large batch contracts." },
-  { q: "Do you offer on-site pickup?", a: "Yes. You can arrange collection directly from our Kamrej, Navagam facility in Surat. We also provide logistics coordination for delivery across Gujarat and pan-India." },
+  { q: "Do you offer on-site pickup?", a: "Yes. You can arrange collection directly from our Kamrej, Surat, Gujarat facility. We also provide logistics coordination for delivery across pan-India." },
 ];
 
 export default function ContactPage({
@@ -56,11 +56,11 @@ export default function ContactPage({
         material: get("material"),
         message: get("message"),
       };
-      if (isFirebaseConfigured()) {
-        await addInquiry(data);
-      }
+      const result = await submitInquiryLead(data, "contact-form");
       toast.success("Inquiry Sent Successfully", {
-        description: "Our engineering team will contact you within 24 hours.",
+        description: result.emailSent
+          ? "Our engineering team will contact you within 24 hours."
+          : "Inquiry saved successfully. Our team will review it from admin and contact you soon.",
       });
       form.reset();
     } catch {
@@ -113,14 +113,14 @@ export default function ContactPage({
         {/* CONTACT CARDS ROW */}
         <section className="py-10 md:py-16 bg-[#EDEAE4] border-y border-black/8">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-px bg-black/8">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-px bg-black/8">
               {contactInfo.map((info, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.08 }}
-                  className={`bg-[#EDEAE4] p-6 md:p-8 group hover:bg-[#F7F5F1] hover:shadow-[inset_0_0_0_1px_rgba(0,0,0,0.18)] transition-all duration-200 rounded-none xl:col-span-2 ${i === 3 ? "xl:col-start-2" : ""} ${i === 4 ? "xl:col-start-4" : ""}`}
+                  className="bg-[#EDEAE4] p-6 md:p-8 group hover:bg-[#F7F5F1] hover:shadow-[inset_0_0_0_1px_rgba(0,0,0,0.18)] transition-all duration-200 rounded-none"
                 >
                   <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-4 md:mb-6 group-hover:bg-primary group-hover:border-primary transition-all duration-500">
                     <info.icon className="w-4 h-4 md:w-5 md:h-5 text-primary group-hover:text-white transition-colors duration-500" />
@@ -188,7 +188,7 @@ export default function ContactPage({
                     </div>
                     <div>
                       <div className="text-[10px] font-bold tracking-widest text-slate-400 uppercase mb-1">Established</div>
-                      <div className="text-[#1A1A1A] font-bold text-sm">2001 · Kamrej, Navagam, Surat</div>
+                      <div className="text-[#1A1A1A] font-bold text-sm">2001 · Kamrej, Surat, Gujarat</div>
                     </div>
                   </div>
                 </div>
@@ -233,6 +233,7 @@ export default function ContactPage({
                           <SelectContent>
                             <SelectItem value="cnc-plate-bending">CNC Plate Bending</SelectItem>
                             <SelectItem value="cnc-laser-cutting">CNC Laser Cutting</SelectItem>
+                            <SelectItem value="cnc-plasma-cutting">CNC Plasma Cutting</SelectItem>
                             <SelectItem value="plate-rolling">Plate Rolling</SelectItem>
                             <SelectItem value="assembly">Assembly</SelectItem>
                             <SelectItem value="welding">Welding</SelectItem>
@@ -275,7 +276,7 @@ export default function ContactPage({
         <section className="relative overflow-hidden border-y border-black/8">
           <div className="h-[350px] sm:h-[500px] w-full bg-[#EDEAE4] relative">
             <iframe
-              src="https://www.google.com/maps?q=Balaji+Engineering+Works+Plot+No.+11+12+Soham+Industrial+Estate+NH+8+Kamrej+Navagam+Surat+394185&output=embed"
+              src="https://www.google.com/maps?q=Balaji+Engineering+Works+Plot+No.+11+12+Soham+Industrial+Estate+NH+8+Kamrej+Surat+Gujarat+394185&output=embed"
               width="100%" height="100%"
               style={{ border: 0, filter: "saturate(0.4) contrast(0.9) brightness(1.05)" }}
               allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"
@@ -288,10 +289,10 @@ export default function ContactPage({
                 </div>
                 <div>
                   <div className="text-[10px] font-bold tracking-widest text-slate-500 uppercase">Location</div>
-                  <div className="text-[#1A1A1A] font-bold text-sm">Kamrej, Navagam, Surat</div>
+                  <div className="text-[#1A1A1A] font-bold text-sm">Kamrej, Surat, Gujarat</div>
                 </div>
               </div>
-              <a href="https://maps.google.com/?q=Balaji+Engineering+Works+Plot+No.+11+12+Soham+Industrial+Estate+NH+8+Kamrej+Navagam+Surat+394185" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-primary text-xs font-bold uppercase tracking-widest hover:gap-3 transition-all">
+              <a href="https://maps.google.com/?q=Balaji+Engineering+Works+Plot+No.+11+12+Soham+Industrial+Estate+NH+8+Kamrej+Surat+Gujarat+394185" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-primary text-xs font-bold uppercase tracking-widest hover:gap-3 transition-all">
                 Get Directions <ArrowRight className="w-3 h-3" />
               </a>
             </div>
@@ -342,7 +343,7 @@ export default function ContactPage({
                 { title: "CNC Plate Bending", href: "/services/cnc-plate-bending" },
                 { title: "CNC Laser Cutting", href: "/services/cnc-laser-cutting" },
                 { title: "Plate Rolling", href: "/services/plate-rolling" },
-                { title: "Punching", href: "/services/punching" },
+                { title: "CNC Plasma Cutting", href: "/services/cnc-plasma-cutting" },
               ].map((service) => (
                 <Link
                   key={service.href}
@@ -369,8 +370,8 @@ export default function ContactPage({
                 Still Have<br />Questions?
               </h2>
               <p className="text-zinc-400 font-light text-base md:text-lg max-w-lg mx-auto mb-10 md:mb-12">Our team is available 6 days a week. Pick up the phone — we love talking shop.</p>
-              <a href="tel:+917942957640" className="inline-flex items-center gap-3 md:gap-4 text-3xl sm:text-4xl md:text-5xl font-display font-black text-white hover:text-primary transition-colors">
-                <Phone className="w-8 h-8 md:w-10 md:h-10 text-primary" />+91-7942957640
+              <a href="tel:+919978753398" className="inline-flex items-center gap-3 md:gap-4 text-3xl sm:text-4xl md:text-5xl font-display font-black text-white hover:text-primary transition-colors">
+                <Phone className="w-8 h-8 md:w-10 md:h-10 text-primary" />+91 99787 53398
               </a>
             </motion.div>
           </div>

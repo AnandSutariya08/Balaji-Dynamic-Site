@@ -59,7 +59,7 @@ export default function ServicesPage({
           )}
           description={(
             <>
-              Explore sheet metal bending, CNC laser cutting, steel cutting, profile cutting, plate rolling,
+              Explore sheet metal bending, CNC laser cutting, CNC plasma cutting, steel cutting, profile cutting, plate rolling,
               base plates, and heavy fabrication services delivered from our Surat facility.
             </>
           )}
@@ -76,6 +76,7 @@ export default function ServicesPage({
             {Array.from({ length: 3 }).map((_, i) => (
               <div key={i} className="flex items-center gap-4 md:gap-6 px-4 text-xs sm:text-sm font-bold text-white/80 uppercase tracking-widest">
                 <span>CNC LASER CUTTING</span><span className="w-1.5 h-1.5 rounded-full bg-white/50 inline-block" />
+                <span>CNC PLASMA CUTTING</span><span className="w-1.5 h-1.5 rounded-full bg-white/50 inline-block" />
                 <span>PLATE BENDING</span><span className="w-1.5 h-1.5 rounded-full bg-white/50 inline-block" />
                 <span>SHEET ROLLING</span><span className="w-1.5 h-1.5 rounded-full bg-white/50 inline-block" />
                 <span>PROFILE CUTTING</span><span className="w-1.5 h-1.5 rounded-full bg-white/50 inline-block" />
@@ -241,7 +242,7 @@ export default function ServicesPage({
                 <Button size="lg" className="h-12 sm:h-16 px-10 sm:px-12 text-sm sm:text-base font-bold uppercase tracking-widest bg-primary hover:bg-primary/90 text-white shadow-[0_0_40px_rgba(172,60,60,0.4)] border-none w-full sm:w-auto" asChild>
                   <Link href="/contact">Request a Quote</Link>
                 </Button>
-                <a href="tel:+917942957640" className="text-xl md:text-2xl font-display font-black text-white hover:text-primary transition-colors">+91-7942957640</a>
+                <a href="tel:+919978753398" className="text-xl md:text-2xl font-display font-black text-white hover:text-primary transition-colors">+91 99787 53398</a>
               </div>
             </motion.div>
           </div>

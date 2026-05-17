@@ -45,6 +45,7 @@ export interface Inquiry {
   quantity: string;
   material: string;
   message: string;
+  source?: string;
   status: InquiryStatus;
   createdAt: string;
 }

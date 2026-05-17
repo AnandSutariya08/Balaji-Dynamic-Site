@@ -7,6 +7,7 @@ import {
   createSiteNavigationJsonLd,
   createServicesItemListJsonLd,
   createWebPageJsonLd,
+  createWebsiteJsonLd,
 } from "@/lib/seo";
 
 const title =
@@ -34,6 +35,7 @@ export default async function Page() {
   const services = staticServices;
 
   const schemas = [
+    createWebsiteJsonLd(),
     createWebPageJsonLd({
       title,
       description,

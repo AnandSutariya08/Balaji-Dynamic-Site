@@ -10,8 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { addInquiry } from "@/lib/firestore/inquiries";
-import { isFirebaseConfigured } from "@/lib/firebase";
+import { submitInquiryLead } from "@/lib/inquirySubmission";
 
 type QuoteDialogContextValue = {
   openQuoteDialog: (options?: { service?: string }) => void;
@@ -89,11 +88,11 @@ export function QuoteDialogProvider({ children }: { children: ReactNode }) {
         material: get("quote-material"),
         message: get("quote-message"),
       };
-      if (isFirebaseConfigured()) {
-        await addInquiry(data);
-      }
+      const result = await submitInquiryLead(data, "quote-dialog");
       toast.success("Inquiry Sent Successfully", {
-        description: "Our engineering team will contact you within 24 hours.",
+        description: result.emailSent
+          ? "Our engineering team will contact you within 24 hours."
+          : "Inquiry saved successfully. Our team will review it from admin and contact you soon.",
       });
       form.reset();
       closeQuoteDialog();
@@ -202,6 +201,7 @@ export function QuoteDialogProvider({ children }: { children: ReactNode }) {
                       <SelectContent className="z-[90]">
                         <SelectItem value="cnc-plate-bending">CNC Plate Bending</SelectItem>
                         <SelectItem value="cnc-laser-cutting">CNC Laser Cutting</SelectItem>
+                        <SelectItem value="cnc-plasma-cutting">CNC Plasma Cutting</SelectItem>
                         <SelectItem value="plate-rolling">Plate Rolling</SelectItem>
                         <SelectItem value="assembly">Assembly</SelectItem>
                         <SelectItem value="welding">Welding</SelectItem>

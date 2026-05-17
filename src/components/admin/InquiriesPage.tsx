@@ -93,6 +93,12 @@ function DetailField({ label, children }: { label: string; children: ReactNode }
   );
 }
 
+function formatSource(source?: string) {
+  if (source === "quote-dialog") return "Quote Dialog";
+  if (source === "contact-form") return "Contact Form";
+  return "Website";
+}
+
 function InquiryDetail({
   inquiry,
   onCloseMobile,
@@ -159,6 +165,10 @@ function InquiryDetail({
             <div className="text-sm text-white">{inquiry.service}</div>
           </DetailField>
         </div>
+
+        <DetailField label="Source">
+          <div className="text-sm text-white">{formatSource(inquiry.source)}</div>
+        </DetailField>
 
         {(inquiry.quantity || inquiry.material) && (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -374,6 +384,7 @@ export function InquiriesPage() {
         inquiry.email,
         inquiry.phone,
         inquiry.service,
+        inquiry.source ?? "",
         inquiry.material ?? "",
         inquiry.quantity ?? "",
         inquiry.message ?? "",

@@ -18,7 +18,7 @@ export const staticServices: Service[] = [
     ],
     specs: [
       { label: "Capacity", value: "Up to 10 m length at 12 mm thickness" },
-      { label: "Capacity", value: "Up to 5 m length at 20 mm thickness" },
+      { label: "Capacity", value: "Up to 6 m length at 25 mm thickness" },
       { label: "Control", value: "CNC press brake" },
       { label: "Use Cases", value: "Large-scale heavy-duty industrial applications" },
     ],
@@ -65,6 +65,28 @@ export const staticServices: Service[] = [
       { label: "Focus", value: "Industrial applications" },
       { label: "Output", value: "Rolled curved plate parts" },
       { label: "Process", value: "Plate rolling" },
+    ],
+  },
+  {
+    id: "cnc-plasma-cutting",
+    title: "CNC Plasma Cutting",
+    tagline: "Heavy-duty CNC plasma cutting for industrial plate profiles",
+    description:
+      "CNC plasma cutting delivers fast and reliable profile cutting for mild steel and thicker industrial plates. It is well suited for structural parts, base plates, brackets, and fabrication-ready components.",
+    image: "/service-profile.png",
+    features: [
+      "High-speed CNC plasma profile cutting",
+      "Suitable for thick plate and structural jobs",
+      "Custom shape cutting from CAD drawings",
+      "Reliable output for fabrication-ready components",
+      "Efficient processing for industrial production batches",
+      "Supports base plates, brackets, and heavy-duty parts",
+    ],
+    specs: [
+      { label: "Process", value: "CNC plasma profile cutting" },
+      { label: "Material", value: "Mild steel and industrial steel plates" },
+      { label: "Applications", value: "Base plates, brackets, flanges, structural parts" },
+      { label: "Fit", value: "Heavy fabrication and repeat production work" },
     ],
   },
   {

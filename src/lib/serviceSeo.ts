@@ -226,6 +226,48 @@ const serviceSeoMap: Record<string, ServiceSeoEntry> = {
       },
     ],
   },
+  "cnc-plasma-cutting": {
+    metaTitle: "CNC Plasma Cutting Services in Surat for Plate Profiles",
+    metaDescription:
+      "CNC plasma cutting services in Surat for thick plate profiles, base plates, brackets, flanges, and fabrication-ready industrial steel components.",
+    intro:
+      "Our CNC plasma cutting service supports buyers who need fast profile cutting for heavy-duty steel parts, structural jobs, and drawing-based fabrication work in Surat.",
+    applications: [
+      "Base plates and mounting plates",
+      "Structural brackets and support components",
+      "Flanges and custom industrial profiles",
+      "Heavy fabrication parts for project jobs",
+    ],
+    process: [
+      "Drawing and profile review",
+      "Material and thickness confirmation",
+      "CNC plasma cutting and part marking",
+      "Inspection and dispatch planning",
+    ],
+    keywords: [
+      "cnc plasma cutting services surat",
+      "plasma profile cutting surat",
+      "thick plate plasma cutting gujarat",
+      "industrial plate cutting service surat",
+    ],
+    faqs: [
+      {
+        question: "Do you provide CNC plasma cutting in Surat?",
+        answer:
+          "Yes. We provide CNC plasma cutting for industrial buyers in Surat and nearby regions for thick plate and profile-based fabrication jobs.",
+      },
+      {
+        question: "What kinds of parts are suitable for plasma cutting?",
+        answer:
+          "Plasma cutting is commonly used for base plates, flanges, brackets, structural parts, and heavy-duty profile cutting requirements.",
+      },
+      {
+        question: "Can you work from DXF or fabrication drawings?",
+        answer:
+          "Yes. You can share DXF, DWG, PDF, or drawing-based requirements and our team will review the job for quotation.",
+      },
+    ],
+  },
   "base-plate": {
     metaTitle: "MS Base Plates and Foundation Bolt Work in Surat",
     metaDescription:

@@ -17,6 +17,7 @@ function fromDoc(id: string, data: any): Inquiry {
     quantity: data.quantity ?? "",
     material: data.material ?? "",
     message: data.message ?? "",
+    source: data.source ?? "",
     status: data.status ?? "new",
     createdAt: data.createdAt instanceof Timestamp
       ? data.createdAt.toDate().toISOString()

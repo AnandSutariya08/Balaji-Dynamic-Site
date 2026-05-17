@@ -6,7 +6,6 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import {
   createLocalBusinessJsonLd,
   createOrganizationJsonLd,
-  createWebsiteJsonLd,
 } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
@@ -78,11 +77,12 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/logo.png", type: "image/svg+xml" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/logo.png", type: "image/png" },
       { url: "/favicon.jpg", type: "image/jpeg" },
     ],
-    shortcut: ["/logo.png"],
-    apple: ["/logo.png"],
+    shortcut: ["/favicon.svg"],
+    apple: [{ url: "/logo.png", type: "image/png" }],
   },
   other: {
     "geo.region": "IN-GJ",
@@ -100,7 +100,6 @@ export const viewport: Viewport = {
 const globalSchemas = [
   createOrganizationJsonLd(),
   createLocalBusinessJsonLd(),
-  createWebsiteJsonLd(),
 ];
 
 export default function RootLayout({

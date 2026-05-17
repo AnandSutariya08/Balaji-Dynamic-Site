@@ -17,7 +17,7 @@ export const contactFaqs = [
   {
     question: "Do you offer on-site pickup?",
     answer:
-      "Yes. You can arrange pickup from our Kamrej, Navagam facility in Surat, and we can also coordinate dispatch across Gujarat and the rest of India.",
+      "Yes. You can arrange pickup from our Kamrej, Surat, Gujarat facility, and we can also coordinate dispatch across India.",
   },
 ] as const;
 
@@ -30,10 +30,10 @@ export const siteConfig = {
     process.env.NEXT_PUBLIC_SITE_URL || "https://sheetmetalbendingworks.com",
   ogImage: "/opengraph.jpg",
   description:
-    "SheetMetalBendingWorks.com is the digital home of Balaji Engineering Works, a Surat-based manufacturer and service provider for sheet metal bending, CNC laser cutting, plate rolling, profile cutting, shearing, punching, and heavy fabrication.",
-  phone: "+91-7942957640",
-  phoneDisplay: "+91 79429 57640",
-  email: "info@balajiengineering.in",
+    "SheetMetalBendingWorks.com is the digital home of Balaji Engineering Works, a Surat-based manufacturer and service provider for sheet metal bending, CNC laser cutting, CNC plasma cutting, plate rolling, profile cutting, shearing, and heavy fabrication.",
+  phone: "+919978753398",
+  phoneDisplay: "+91 99787 53398",
+  email: "balajieng.works12@gmail.com",
   foundingDate: "2001",
   priceRange: "$$",
   gstNumber: "24BCUPS8314Q1ZK",
@@ -71,6 +71,7 @@ export const siteConfig = {
     "sheet metal bending Surat",
     "sheet bending service Surat",
     "CNC laser cutting Surat",
+    "CNC plasma cutting Surat",
     "steel cutting services Surat",
     "plate bending services Surat",
     "plate rolling bending services",
@@ -93,12 +94,12 @@ export const siteConfig = {
   ],
   address: {
     streetAddress:
-      "Plot No. 11, 12, Soham Industrial Estate, NH 8, Kamrej, Opposite Hero Showroom, Navagam",
+      "Kamrej, Surat, Gujarat",
     locality: "Surat",
     region: "Gujarat",
     postalCode: "394185",
     country: "IN",
   },
   mapUrl:
-    "https://maps.google.com/?q=Balaji+Engineering+Works+Plot+No.+11+12+Soham+Industrial+Estate+NH+8+Kamrej+Navagam+Surat+394185",
+    "https://maps.google.com/?q=Balaji+Engineering+Works+Plot+No.+11+12+Soham+Industrial+Estate+NH+8+Kamrej+Surat+Gujarat+394185",
 } as const;

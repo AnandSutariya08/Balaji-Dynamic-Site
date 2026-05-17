@@ -59,6 +59,8 @@ ${articleLines}
 ## Optional
 
 - [RSS Feed](${absoluteUrl("/rss.xml")}): Latest article feed
+- [Privacy Policy](${absoluteUrl("/privacy")}): Data handling and inquiry privacy details
+- [Terms & Conditions](${absoluteUrl("/terms")}): Commercial terms, payment terms, and delivery policy
 - [Humans](${absoluteUrl("/humans.txt")}): Project and company overview
 - [Security](${absoluteUrl("/.well-known/security.txt")}): Security disclosure contact
 - [LLMS Full](${absoluteUrl("/llms-full.txt")}): Extended AI-readable company and content summary

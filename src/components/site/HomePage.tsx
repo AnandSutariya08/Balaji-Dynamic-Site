@@ -150,7 +150,7 @@ export default function HomePage({
                 <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1, duration: 0.7 }}
                   className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 mb-3 md:mb-4 lg:mb-5">
                   <span className="w-2 h-2 rounded-full bg-primary animate-pulse shrink-0" />
-                  <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.25em] uppercase">EST. 2001 · NAVAGAM, SURAT · GUJARAT</span>
+                  <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.25em] uppercase">EST. 2001 · KAMREJ, SURAT · GUJARAT</span>
                 </motion.div>
 
                 {/* Headline */}
@@ -169,7 +169,7 @@ export default function HomePage({
                 {/* Sub-text */}
                 <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.65, duration: 0.7 }}
                   className="text-sm sm:text-base md:text-lg text-zinc-300 font-light leading-relaxed max-w-xl mb-4 md:mb-5 lg:mb-6">
-                  Balaji Engineering Works delivers CNC laser cutting, sheet metal bending, plate rolling, steel cutting, punching, and heavy fabrication from Navagam, Surat for industrial clients across Gujarat and India.
+                  Balaji Engineering Works delivers CNC laser cutting, CNC plasma cutting, sheet metal bending, plate rolling, steel cutting, and heavy fabrication from Kamrej, Surat, Gujarat for industrial clients across India.
                 </motion.p>
 
                 {/* CTAs */}
@@ -189,7 +189,7 @@ export default function HomePage({
                   {[
                     { v: "20+", l: "Years" },
                     { v: "500+", l: "Projects" },
-                    { v: "25+", l: "Team" },
+                    { v: "50+", l: "Team" },
                     { v: "6 Days", l: "Working Week" },
                   ].map((s, i) => (
                     <div key={i} className="text-center">
@@ -203,7 +203,7 @@ export default function HomePage({
           </div>
 
           {/* Scroll indicator */}
-          
+
         </section>
 
         {/* Section 2: Marquee Ticker */}
@@ -221,7 +221,7 @@ export default function HomePage({
                 <span className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-white/30" />
                 <span>STEEL CUTTING</span>
                 <span className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-primary" />
-                <span>PRECISION PUNCHING</span>
+                <span>CNC PLASMA CUTTING</span>
                 <span className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-white/30" />
                 <span>STRUCTURAL WELDING</span>
                 <span className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-primary" />
@@ -246,12 +246,12 @@ export default function HomePage({
               {[
                 { value: 20, label: "Years Experience", suffix: "+", icon: Target },
                 { value: 500, label: "Projects Completed", suffix: "+", icon: Factory },
-                { value: 25, label: "Skilled Employees", suffix: "+", icon: Users },
+                { value: 50, label: "Skilled Employees", suffix: "+", icon: Users },
                 { value: 25, label: "Cr. Turnover", suffix: " Cr", prefix: "₹ 5-", icon: TrendingUp }
               ].map((stat, i) => (
                 <div key={i} className="flex flex-col items-center text-center">
                   <div className="text-2xl sm:text-3xl md:text-4xl xl:text-4xl font-display font-black text-[#1A1A1A] mb-3 md:mb-4 whitespace-nowrap">
-                    <Counter value={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
+                    {stat.label === "Cr. Turnover" ? "25 Cr+" : <Counter value={stat.value} prefix={stat.prefix} suffix={stat.suffix} />}
                   </div>
                   <div className="h-1 w-10 md:w-12 bg-primary mb-4 md:mb-6" />
                   <div className="text-[10px] sm:text-xs font-bold tracking-[0.2em] sm:tracking-[0.3em] text-slate-500 uppercase">{stat.label}</div>
@@ -273,7 +273,7 @@ export default function HomePage({
                   SheetMetalBendingWorks.com is built to help buyers searching for sheet metal bending works, CNC laser cutting, plate rolling, steel cutting, and fabrication services in Surat reach Balaji Engineering Works directly.
                 </p>
                 <p>
-                  If your requirement includes press brake bending, profile cutting, custom steel parts, base plates, or heavy fabrication job work, our team in Kamrej, Navagam can review drawings, recommend the right process, and share a fast commercial quote.
+                  If your requirement includes press brake bending, profile cutting, custom steel parts, base plates, or heavy fabrication job work, our team in Kamrej, Surat, Gujarat can review drawings, recommend the right process, and share a fast commercial quote.
                 </p>
               </div>
               <div className="mt-8 flex flex-wrap gap-3">
@@ -310,9 +310,9 @@ export default function HomePage({
                     desc: "Rolled and curved industrial plate components",
                   },
                   {
-                    title: "Punching",
-                    href: "/services/punching",
-                    desc: "Punch press hole and shape creation for production work",
+                    title: "CNC Plasma Cutting",
+                    href: "/services/cnc-plasma-cutting",
+                    desc: "Heavy-duty profile cutting for industrial plate and structural parts",
                   },
                 ].map((item) => (
                   <Link
@@ -357,8 +357,8 @@ export default function HomePage({
                   </h2>
                 </div>
                 <div className="space-y-5 text-lg md:text-xl text-slate-600 font-light leading-relaxed reveal-line">
-                  <p>Established in 2001, Balaji Engineering Works is a manufacturer and service provider based at Plot No. 11, 12, Soham Industrial Estate, NH 8, Kamrej, Navagam, Surat.</p>
-                  <p>We specialize in shearing, CNC laser cutting, sheet metal bending, plate rolling, profile cutting, punching, base plates, and heavy fabrication with fast quotations and dispatch support across India.</p>
+                  <p>Established in 2001, Balaji Engineering Works is a manufacturer and service provider based at  Kamrej, Surat, Gujarat.</p>
+                  <p>We specialize in shearing, CNC laser cutting, CNC plasma cutting, sheet metal bending, plate rolling, profile cutting, base plates, and heavy fabrication with fast quotations and dispatch support across India.</p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-8 reveal-line">
                   {["Established Since 2001", "Advanced CNC Setup", "Experienced Engineering Team", "End-to-End Job Work"].map((fact, i) => (
@@ -415,9 +415,8 @@ export default function HomePage({
                   <button
                     key={i}
                     onClick={() => { scrollToIndex(i); resetAutoPlay(); }}
-                    className={`rounded-full transition-all duration-300 ${
-                      i === activeService ? "w-5 h-2 bg-primary" : "w-2 h-2 bg-black/15 hover:bg-black/30"
-                    }`}
+                    className={`rounded-full transition-all duration-300 ${i === activeService ? "w-5 h-2 bg-primary" : "w-2 h-2 bg-black/15 hover:bg-black/30"
+                      }`}
                   />
                 ))}
               </div>
@@ -428,9 +427,8 @@ export default function HomePage({
               <Link
                 key={i}
                 href={`/services/${service.id}`}
-                className={`w-[160px] sm:w-[200px] md:w-[240px] min-w-0 h-[260px] sm:h-[320px] md:h-[400px] relative rounded-2xl overflow-hidden snap-center flex-shrink-0 border-2 transition-all duration-300 ${
-                  i === activeService ? "border-primary/60 shadow-[0_0_20px_rgba(172,60,60,0.2)]" : "border-transparent"
-                } group`}
+                className={`w-[160px] sm:w-[200px] md:w-[240px] min-w-0 h-[260px] sm:h-[320px] md:h-[400px] relative rounded-2xl overflow-hidden snap-center flex-shrink-0 border-2 transition-all duration-300 ${i === activeService ? "border-primary/60 shadow-[0_0_20px_rgba(172,60,60,0.2)]" : "border-transparent"
+                  } group`}
               >
                 <img src={service.image} alt={service.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
@@ -590,7 +588,7 @@ export default function HomePage({
                   <Link href="/contact">Get A Quote Now</Link>
                 </Button>
                 <div className="text-2xl sm:text-3xl md:text-4xl font-display font-black text-white mt-6 md:mt-12">
-                  <a href="tel:+917942957640" className="hover:text-primary transition-colors">+91-7942957640</a>
+                  <a href="tel:+919978753398" className="hover:text-primary transition-colors">+91 99787 53398</a>
                 </div>
               </div>
             </motion.div>

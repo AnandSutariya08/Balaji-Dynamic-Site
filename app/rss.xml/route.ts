@@ -57,6 +57,10 @@ export async function GET() {
     <language>en-IN</language>
     <lastBuildDate>${toRssDate(latestPostDate)}</lastBuildDate>
     <managingEditor>${siteConfig.email} (${escapeXml(siteConfig.legalName)})</managingEditor>
+    <webMaster>${siteConfig.email} (${escapeXml(siteConfig.legalName)})</webMaster>
+    <generator>Next.js</generator>
+    <docs>https://www.rssboard.org/rss-specification</docs>
+    <ttl>60</ttl>
     <image>
       <url>${absoluteUrl(siteConfig.ogImage)}</url>
       <title>${escapeXml(siteConfig.name)}</title>
