@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 import { Mail, MapPin, Phone, Clock, CheckCircle2, ArrowRight, Zap } from "lucide-react";
 import Link from "next/link";
 import type { FormEvent } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PageHero } from "@/components/site/PageHero";
 import { submitInquiryLead } from "@/lib/inquirySubmission";
 
@@ -31,6 +31,28 @@ const faqs = [
   { q: "Do you offer on-site pickup?", a: "Yes. You can arrange collection directly from our Kamrej, Surat, Gujarat facility. We also provide logistics coordination for delivery across pan-India." },
 ];
 
+const SERVICE_OPTIONS = [
+  { value: "cnc-plate-bending", label: "CNC Plate Bending" },
+  { value: "sheet-metal-shearing-cutting", label: "Sheet Metal Shearing Cutting" },
+  { value: "cnc-laser-cutting", label: "CNC Laser Cutting" },
+  { value: "cnc-plasma-cutting", label: "CNC Plasma Cutting" },
+  { value: "plate-rolling", label: "Plate Rolling" },
+  { value: "assembly", label: "Assembly" },
+  { value: "welding", label: "Welding" },
+  { value: "deep-drawing", label: "Deep Drawing" },
+  { value: "finishing", label: "Finishing" },
+  { value: "stamping", label: "Stamping" },
+  { value: "punching", label: "Punching" },
+  { value: "other", label: "Other / Custom Fabrication" },
+] as const;
+
+function getServiceLabel(serviceValue: string) {
+  return (
+    SERVICE_OPTIONS.find((option) => option.value === serviceValue)?.label ??
+    serviceValue
+  );
+}
+
 export default function ContactPage({
   defaultService = "",
 }: {
@@ -38,12 +60,24 @@ export default function ContactPage({
 }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+  const [selectedService, setSelectedService] = useState(defaultService);
+
+  useEffect(() => {
+    setSelectedService(defaultService);
+  }, [defaultService]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     const get = (id: string) => (form.querySelector(`#${id}`) as HTMLInputElement)?.value || "";
-    const getSelect = () => (form.querySelector("[data-radix-select-value]") as HTMLElement)?.textContent || get("service") || defaultService;
+    const serviceValue = selectedService || defaultService;
+
+    if (!serviceValue) {
+      toast.error("Please select a service", {
+        description: "Choose the required service before submitting your inquiry.",
+      });
+      return;
+    }
 
     setIsSubmitting(true);
     try {
@@ -51,7 +85,7 @@ export default function ContactPage({
         name: get("name"),
         phone: get("phone"),
         email: get("email"),
-        service: getSelect(),
+        service: getServiceLabel(serviceValue),
         quantity: get("quantity"),
         material: get("material"),
         message: get("message"),
@@ -63,6 +97,7 @@ export default function ContactPage({
           : "Inquiry saved successfully. Our team will review it from admin and contact you soon.",
       });
       form.reset();
+      setSelectedService("");
     } catch {
       toast.error("Something went wrong", {
         description: "Please try again or call us directly.",
@@ -226,23 +261,16 @@ export default function ContactPage({
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
                       <div className="space-y-2">
                         <Label htmlFor="service" className="text-xs font-bold tracking-widest text-slate-500 uppercase">Service Required *</Label>
-                        <Select defaultValue={defaultService}>
+                        <Select value={selectedService} onValueChange={setSelectedService}>
                           <SelectTrigger className="bg-[#F7F5F1] border-black/10 text-[#1A1A1A] h-12 focus:border-primary">
                             <SelectValue placeholder="Select a service" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="cnc-plate-bending">CNC Plate Bending</SelectItem>
-                            <SelectItem value="sheet-metal-shearing-cutting">Sheet Metal Shearing Cutting</SelectItem>
-                            <SelectItem value="cnc-laser-cutting">CNC Laser Cutting</SelectItem>
-                            <SelectItem value="cnc-plasma-cutting">CNC Plasma Cutting</SelectItem>
-                            <SelectItem value="plate-rolling">Plate Rolling</SelectItem>
-                            <SelectItem value="assembly">Assembly</SelectItem>
-                            <SelectItem value="welding">Welding</SelectItem>
-                            <SelectItem value="deep-drawing">Deep Drawing</SelectItem>
-                            <SelectItem value="finishing">Finishing</SelectItem>
-                            <SelectItem value="stamping">Stamping</SelectItem>
-                            <SelectItem value="punching">Punching</SelectItem>
-                            <SelectItem value="other">Other / Custom Fabrication</SelectItem>
+                            {SERVICE_OPTIONS.map((option) => (
+                              <SelectItem key={option.value} value={option.value}>
+                                {option.label}
+                              </SelectItem>
+                            ))}
                           </SelectContent>
                         </Select>
                       </div>

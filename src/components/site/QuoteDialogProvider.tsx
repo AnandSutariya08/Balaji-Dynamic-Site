@@ -19,6 +19,28 @@ type QuoteDialogContextValue = {
 
 const QuoteDialogContext = createContext<QuoteDialogContextValue | null>(null);
 
+const SERVICE_OPTIONS = [
+  { value: "cnc-plate-bending", label: "CNC Plate Bending" },
+  { value: "sheet-metal-shearing-cutting", label: "Sheet Metal Shearing Cutting" },
+  { value: "cnc-laser-cutting", label: "CNC Laser Cutting" },
+  { value: "cnc-plasma-cutting", label: "CNC Plasma Cutting" },
+  { value: "plate-rolling", label: "Plate Rolling" },
+  { value: "assembly", label: "Assembly" },
+  { value: "welding", label: "Welding" },
+  { value: "deep-drawing", label: "Deep Drawing" },
+  { value: "finishing", label: "Finishing" },
+  { value: "stamping", label: "Stamping" },
+  { value: "punching", label: "Punching" },
+  { value: "other", label: "Other / Custom Fabrication" },
+] as const;
+
+function getServiceLabel(serviceValue: string) {
+  return (
+    SERVICE_OPTIONS.find((option) => option.value === serviceValue)?.label ??
+    serviceValue
+  );
+}
+
 export function useQuoteDialog() {
   const value = useContext(QuoteDialogContext);
   if (!value) {
@@ -30,15 +52,21 @@ export function useQuoteDialog() {
 export function QuoteDialogProvider({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const [defaultService, setDefaultService] = useState("");
+  const [selectedService, setSelectedService] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const dialogRef = useRef<HTMLDivElement | null>(null);
 
   const openQuoteDialog = useCallback((options?: { service?: string }) => {
-    setDefaultService(options?.service ?? "");
+    const service = options?.service ?? "";
+    setDefaultService(service);
+    setSelectedService(service);
     setOpen(true);
   }, []);
 
-  const closeQuoteDialog = useCallback(() => setOpen(false), []);
+  const closeQuoteDialog = useCallback(() => {
+    setOpen(false);
+    setSelectedService("");
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -72,10 +100,14 @@ export function QuoteDialogProvider({ children }: { children: ReactNode }) {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     const get = (id: string) => (form.querySelector(`#${id}`) as HTMLInputElement)?.value || "";
-    const getSelect = () =>
-      (form.querySelector("[data-radix-select-value]") as HTMLElement)?.textContent ||
-      get("quote-service") ||
-      defaultService;
+    const serviceValue = selectedService || defaultService;
+
+    if (!serviceValue) {
+      toast.error("Please select a service", {
+        description: "Choose the required service before submitting your inquiry.",
+      });
+      return;
+    }
 
     setIsSubmitting(true);
     try {
@@ -83,7 +115,7 @@ export function QuoteDialogProvider({ children }: { children: ReactNode }) {
         name: get("quote-name"),
         phone: get("quote-phone"),
         email: get("quote-email"),
-        service: getSelect(),
+        service: getServiceLabel(serviceValue),
         quantity: get("quote-quantity"),
         material: get("quote-material"),
         message: get("quote-message"),
@@ -95,6 +127,7 @@ export function QuoteDialogProvider({ children }: { children: ReactNode }) {
           : "Inquiry saved successfully. Our team will review it from admin and contact you soon.",
       });
       form.reset();
+      setSelectedService("");
       closeQuoteDialog();
     } catch {
       toast.error("Something went wrong", {
@@ -194,23 +227,16 @@ export function QuoteDialogProvider({ children }: { children: ReactNode }) {
                     <Label htmlFor="quote-service" className="text-xs font-bold tracking-widest text-white/60 uppercase">
                       Service *
                     </Label>
-                    <Select defaultValue={defaultService}>
+                    <Select value={selectedService} onValueChange={setSelectedService}>
                       <SelectTrigger className="bg-black/40 border-white/10 text-white h-12 focus:border-primary">
                         <SelectValue placeholder="Select a service" />
                       </SelectTrigger>
                       <SelectContent className="z-[90]">
-                        <SelectItem value="cnc-plate-bending">CNC Plate Bending</SelectItem>
-                        <SelectItem value="sheet-metal-shearing-cutting">Sheet Metal Shearing Cutting</SelectItem>
-                        <SelectItem value="cnc-laser-cutting">CNC Laser Cutting</SelectItem>
-                        <SelectItem value="cnc-plasma-cutting">CNC Plasma Cutting</SelectItem>
-                        <SelectItem value="plate-rolling">Plate Rolling</SelectItem>
-                        <SelectItem value="assembly">Assembly</SelectItem>
-                        <SelectItem value="welding">Welding</SelectItem>
-                        <SelectItem value="deep-drawing">Deep Drawing</SelectItem>
-                        <SelectItem value="finishing">Finishing</SelectItem>
-                        <SelectItem value="stamping">Stamping</SelectItem>
-                        <SelectItem value="punching">Punching</SelectItem>
-                        <SelectItem value="other">Other / Custom Fabrication</SelectItem>
+                        {SERVICE_OPTIONS.map((option) => (
+                          <SelectItem key={option.value} value={option.value}>
+                            {option.label}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                   </div>
