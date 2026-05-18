@@ -7,22 +7,25 @@ import {
   createWebPageJsonLd,
 } from "@/lib/seo";
 
-const title = "Contact Balaji Engineering Works, Surat";
+const title = "Request Fabrication Quote in Surat | Balaji Engineering Works";
 const description =
-  "Contact Balaji Engineering Works in Surat through SheetMetalBendingWorks.com for fabrication service quotes and product requirements including base plates, foundation bolts, purlins, perforated sheets, and steel pallets.";
+  "Request a fabrication quote in Surat from Balaji Engineering Works for CNC laser cutting, CNC plasma cutting, plate bending, sheet metal job work, and industrial products including base plates, foundation bolts, purlins, and perforated sheets.";
 
 export const metadata = buildMetadata({
   title,
   description,
   path: "/contact",
   keywords: [
-    "contact Balaji Engineering Works Surat",
-    "contact sheetmetalbendingworks.com",
-    "contact sheet metal bending works",
-    "sheet metal shearing cutting surat",
-    "cnc press brake bending surat",
     "request fabrication quote Surat",
+    "fabrication quotation Surat",
+    "sheet metal job work inquiry Surat",
+    "contact Balaji Engineering Works Surat",
+    "laser cutting quote Surat",
+    "cnc plasma cutting quote surat",
+    "cnc plate bending quote surat",
     "product inquiry Surat",
+    "foundation bolt manufacturer inquiry surat",
+    "base plate manufacturer inquiry surat",
     "contact steel fabrication company Gujarat",
   ],
 });

@@ -11,6 +11,146 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "cnc-laser-cutting-services-surat-buyer-guide",
+    title: "CNC Laser Cutting Services in Surat: Buyer Guide for Industrial Parts",
+    category: "Guide",
+    date: "May 18, 2026",
+    readTime: "6 min read",
+    excerpt:
+      "What industrial buyers should check before finalizing CNC laser cutting services in Surat for sheet parts, fabrication blanks, and production components.",
+    content: `
+      <h2>What Buyers Expect from CNC Laser Cutting Services in Surat</h2>
+      <p>When buyers search for CNC laser cutting services in Surat, they usually need more than only a cutting vendor. They need a manufacturing partner who can read drawings properly, confirm material and thickness, and deliver parts that move smoothly into bending, welding, or assembly.</p>
+
+      <h3>1. Check Drawing Review Before Price</h3>
+      <p>A good supplier should review DXF, DWG, STEP, or PDF files before sending the quotation. This helps catch missing dimensions, hole sizing issues, and downstream fabrication risks before production starts.</p>
+
+      <h3>2. Confirm Material, Thickness, and Batch Requirement</h3>
+      <p>Laser cutting performance changes with mild steel, stainless steel, and sheet thickness. Buyers should clearly mention grade, thickness, and quantity so the quotation is practical and production-ready.</p>
+
+      <h3>3. Ask Whether the Vendor Supports Bending and Fabrication Too</h3>
+      <p>Many laser cut jobs are only one step in a larger manufacturing flow. If the same company can also support CNC plate bending, shearing, welding, or assembly, coordination becomes faster and less error-prone.</p>
+
+      <h3>4. Review Delivery Discipline</h3>
+      <p>Industrial projects often depend on committed dispatch schedules. A local laser cutting company in Surat with process planning and fabrication capability can usually support urgent follow-ups and repeat batches more smoothly.</p>
+
+      <p>Balaji Engineering Works supports CNC laser cutting services in Surat with drawing-based review, practical quoting, and integration with bending and fabrication operations when required.</p>
+    `,
+    image: "/service-cnc.png"
+  },
+  {
+    slug: "cnc-plasma-cutting-services-surat-thick-plate-guide",
+    title: "CNC Plasma Cutting Services in Surat for Thick Plate Jobs",
+    category: "Guide",
+    date: "May 15, 2026",
+    readTime: "6 min read",
+    excerpt:
+      "A practical guide for buyers sourcing CNC plasma cutting services in Surat for thick plate profiles, base plates, structural brackets, and fabrication parts.",
+    content: `
+      <h2>Why Buyers Choose Plasma for Heavy Plate Work</h2>
+      <p>CNC plasma cutting services in Surat are often searched by industrial buyers who need thick plate profiles, structural parts, brackets, flanges, and base plates at practical cost and good production speed.</p>
+
+      <h3>1. Start with the Thickness and Application</h3>
+      <p>Plasma cutting is especially useful when the job involves thicker plate and industrial fabrication parts. It is a practical option when the part does not require the fine edge quality of laser cutting but still needs accurate profile-based production.</p>
+
+      <h3>2. Share the End Use of the Part</h3>
+      <p>If the part will be welded into a structure, bolted onto equipment, or used for heavy fabrication, the vendor can recommend the best cutting and marking approach. Application context helps more than sending only a profile outline.</p>
+
+      <h3>3. Ask About Secondary Operations</h3>
+      <p>Many plasma cut parts later move to drilling, fit-up, welding, or assembly. A supplier who understands the full manufacturing sequence can reduce handling and improve dispatch readiness.</p>
+
+      <h3>4. Think Beyond the First Job</h3>
+      <p>For repeat industrial requirements, buyers usually benefit from a Surat fabrication partner who can support both one-off project plates and ongoing production quantities without quality variation.</p>
+
+      <p>Balaji Engineering Works supports CNC plasma cutting services in Surat for thick plate fabrication work, heavy industrial profiles, and project-based steel components.</p>
+    `,
+    image: "/service-profile.png"
+  },
+  {
+    slug: "foundation-bolt-manufacturer-surat-buyer-guide",
+    title: "How to Choose a Foundation Bolt Manufacturer in Surat",
+    category: "Guide",
+    date: "May 12, 2026",
+    readTime: "5 min read",
+    excerpt:
+      "A buyer checklist for selecting a foundation bolt manufacturer in Surat for industrial structures, machinery mounting, and anchor bolt supply.",
+    content: `
+      <h2>Foundation Bolt Buying Is About Fit-Up, Not Only Steel Weight</h2>
+      <p>When buyers search for a foundation bolt manufacturer in Surat, they are usually planning equipment foundations, steel structures, industrial sheds, or utility installations. In these jobs, dimensional accuracy and matching with civil and structural drawings matter more than generic stock supply.</p>
+
+      <h3>1. Confirm Diameter, Length, and Thread Requirement</h3>
+      <p>Foundation bolts must match the anchor layout, plate thickness, and nut arrangement in the approved drawing. Buyers should always send exact dimensions, thread length, and bend type where applicable.</p>
+
+      <h3>2. Share the Base Plate or Anchor Layout</h3>
+      <p>Many site issues happen because the bolt pattern and the plate pattern are not reviewed together. A capable manufacturer should check whether the bolt set and the related plate work as one assembly.</p>
+
+      <h3>3. Ask About Material and Finish</h3>
+      <p>Some projects require mild steel, while others may need specific coating or corrosion protection based on the installation environment. Early clarity avoids rework and procurement delay.</p>
+
+      <h3>4. Choose a Supplier Who Understands Fabrication Coordination</h3>
+      <p>If foundation bolts are supplied alongside base plates or structural components, coordination becomes easier when one manufacturing team can review the total requirement together.</p>
+
+      <p>Balaji Engineering Works supports foundation bolt manufacturing in Surat with drawing-based production, project coordination, and practical support for industrial buyers.</p>
+    `,
+    image: "/product-foundation-bolts.png"
+  },
+  {
+    slug: "ms-base-plate-manufacturer-surat-specification-guide",
+    title: "MS Base Plate Manufacturer in Surat: Specs Buyers Should Confirm",
+    category: "Technical",
+    date: "May 10, 2026",
+    readTime: "6 min read",
+    excerpt:
+      "A technical buyer guide covering thickness, hole pattern, finish, and fit-up checks before ordering from an MS base plate manufacturer in Surat.",
+    content: `
+      <h2>Base Plate Procurement Starts with Drawing Accuracy</h2>
+      <p>Buyers searching for an MS base plate manufacturer in Surat often need plates for steel structures, machine mounting, support assemblies, and project fabrication. The biggest risk is not usually manufacturing capacity. It is mismatch between the actual drawing requirement and the ordered plate specification.</p>
+
+      <h3>1. Confirm Thickness and Plate Size</h3>
+      <p>Even small differences in plate thickness or overall size can affect structural fit-up and installation. Always confirm the latest approved dimensions before the job moves into cutting.</p>
+
+      <h3>2. Review Hole Pattern Carefully</h3>
+      <p>Hole diameter, spacing, and edge distance should be checked against the bolt layout, not as separate items. This is especially important when the same project also includes foundation bolts or anchor sets.</p>
+
+      <h3>3. Clarify Whether Plasma or Laser Is the Better Process</h3>
+      <p>Depending on thickness and tolerance expectations, the manufacturer may recommend CNC plasma cutting or laser cutting. Buyers usually get better results when they share the application instead of specifying the process without context.</p>
+
+      <h3>4. Ask About Deburring, Marking, and Dispatch Condition</h3>
+      <p>Industrial buyers often prefer base plates that arrive ready for fabrication, welding, or installation. Secondary preparation details can save meaningful time at the next stage.</p>
+
+      <p>Balaji Engineering Works manufactures MS base plates in Surat for structural and industrial requirements with drawing review, coordinated bolt matching, and fabrication-ready output.</p>
+    `,
+    image: "/product-base-plates.png"
+  },
+  {
+    slug: "c-and-z-purlin-manufacturer-surat-project-guide",
+    title: "C and Z Purlin Manufacturer in Surat for Roofing and PEB Projects",
+    category: "Industry",
+    date: "May 8, 2026",
+    readTime: "6 min read",
+    excerpt:
+      "What contractors and project buyers should check when selecting a C and Z purlin manufacturer in Surat for roofing and pre-engineered building work.",
+    content: `
+      <h2>Purlin Supply Affects More Than Only Roofing Speed</h2>
+      <p>When buyers look for a C and Z purlin manufacturer in Surat, they are usually managing roofing systems, industrial sheds, mezzanines, or pre-engineered building structures. Correct section choice and dimensional consistency help the full installation move faster.</p>
+
+      <h3>1. Match Section Type to the Drawing</h3>
+      <p>C and Z purlins are not interchangeable in every project. Section depth, lip size, thickness, and span should match the approved structural design and connection requirement.</p>
+
+      <h3>2. Confirm Hole Pattern and Length Schedule</h3>
+      <p>Projects often require mixed lengths and different hole positions across the same order. A reliable manufacturer should review the complete cutting and punching schedule before dispatch planning begins.</p>
+
+      <h3>3. Think About Transport and Site Handling</h3>
+      <p>Long sections need practical bundling, labeling, and dispatch coordination so the material reaches site in sequence and with less confusion during installation.</p>
+
+      <h3>4. Choose a Supplier with Related Fabrication Capability</h3>
+      <p>If the project also includes base plates, brackets, perforated sheets, or steel supports, it helps when one Surat manufacturing company can coordinate multiple steel products together.</p>
+
+      <p>Balaji Engineering Works supports C and Z purlin manufacturing in Surat for industrial roofing and project-based structural requirements with drawing-led production support.</p>
+    `,
+    image: "/product-z-c-purlins.png"
+  },
+  {
     slug: "sheet-metal-bending-service-surat-guide",
     title: "How to Choose a Sheet Metal Bending Service in Surat",
     category: "Guide",

@@ -22,8 +22,13 @@ export const metadata = buildMetadata({
   keywords: [
     "sheet metal bending works services",
     "sheet metal bending services Surat",
+    "sheet metal cutting and bending services surat",
     "sheet metal shearing cutting surat",
     "cnc press brake bending surat",
+    "press brake bending services surat",
+    "laser cutting services in surat",
+    "cnc laser cutting services surat",
+    "cnc plasma cutting services surat",
     "CNC laser cutting services Gujarat",
     "steel cutting services Surat",
     "plate profile cutting company",

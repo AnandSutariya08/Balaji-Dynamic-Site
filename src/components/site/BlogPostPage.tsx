@@ -39,7 +39,7 @@ export default function BlogPostPage({
       <div className="min-h-screen flex items-center justify-center bg-black">
         <div className="flex flex-col items-center gap-4 text-zinc-400">
           <Loader2 className="w-8 h-8 animate-spin text-primary" />
-          <p className="text-sm uppercase tracking-widest font-bold">Loading article…</p>
+          <p className="text-sm uppercase tracking-widest font-bold">Loading article...</p>
         </div>
       </div>
     );
@@ -72,7 +72,7 @@ export default function BlogPostPage({
           <div className="absolute inset-0 z-0">
             <img
               src={post.image}
-              alt={post.title}
+              alt={`${post.title} article by Balaji Engineering Works`}
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/30" />
@@ -153,7 +153,7 @@ export default function BlogPostPage({
                 {related.map(rp => (
                         <Link key={rp.slug} href={`/blog/${encodeURIComponent(rp.slug)}`} className="group block">
                           <div className="aspect-video rounded-lg overflow-hidden mb-3 border border-white/5">
-                            <img src={rp.image} alt={rp.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                            <img src={rp.image} alt={`${rp.title} article by Balaji Engineering Works`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                           </div>
                           <h5 className="text-sm font-display font-bold text-white uppercase tracking-tight group-hover:text-primary transition-colors line-clamp-2">
                             {rp.title}

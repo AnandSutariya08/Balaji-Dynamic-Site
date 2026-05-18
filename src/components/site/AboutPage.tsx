@@ -142,7 +142,7 @@ export default function AboutPage() {
                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-4 md:mb-6 group-hover:bg-primary/20 transition-colors">
                     <stat.icon className="w-5 h-5 md:w-7 md:h-7 text-primary" />
                   </div>
-                  <div className="text-4xl sm:text-5xl md:text-8xl font-display font-black text-[#1A1A1A] mb-2 md:mb-3">
+                  <div className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl leading-none font-display font-black text-[#1A1A1A] mb-2 md:mb-3">
                     <Counter value={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
                   </div>
                   <div className="h-0.5 w-8 md:w-10 bg-primary mb-3 md:mb-4" />

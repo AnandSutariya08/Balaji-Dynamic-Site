@@ -6,7 +6,7 @@ export const staticProducts: Product[] = [
     title: "Gutters",
     tagline: "Fabricated industrial rainwater drainage channels for sheds and plant buildings",
     description:
-      "Balaji Engineering Works fabricates metal gutters for industrial sheds, warehouses, factory roofs, and utility buildings. These sections are made to project length, outlet, and bracket requirements so rainwater collection and drainage can be integrated neatly with the structure.",
+      "Balaji Engineering Works is an industrial gutters manufacturer in Surat for factory roofs, warehouses, utility buildings, and shed drainage systems. Our industrial gutters manufacturer in Surat page is focused on project-length fabricated gutter sections made to outlet, bracket, and drainage layout requirements so rainwater collection integrates neatly with the structure.",
     image: "/product-gutters.png",
     features: [
       "Custom lengths and sectional sizes",
@@ -52,6 +52,7 @@ export const staticProducts: Product[] = [
       },
     ],
     keywords: [
+      "industrial gutters manufacturer in surat",
       "industrial gutters manufacturer surat",
       "metal rain gutter fabrication gujarat",
       "shed gutter manufacturer india",
@@ -66,7 +67,7 @@ export const staticProducts: Product[] = [
     title: "Foundation Bolts",
     tagline: "Custom anchor and foundation bolt fabrication for structural and machinery installations",
     description:
-      "We support drawing-based foundation bolt manufacturing for machinery mounting, structural columns, PEB work, and industrial installation jobs. Balaji Engineering Works can produce straight, bent, and anchor-style bolt sets with matching fabrication support as required by the project.",
+      "Balaji Engineering Works works as a foundation bolt manufacturer in Surat for machinery mounting, structural columns, PEB work, and industrial installation jobs. As a foundation bolt manufacturer in Surat, we produce straight, bent, and anchor-style bolt sets with matching fabrication support as required by the project.",
     image: "/product-foundation-bolts.png",
     features: [
       "Drawing-based bolt set fabrication",
@@ -112,6 +113,7 @@ export const staticProducts: Product[] = [
       },
     ],
     keywords: [
+      "foundation bolt manufacturer in surat",
       "foundation bolt manufacturer surat",
       "anchor bolt fabrication gujarat",
       "structural foundation bolts india",
@@ -119,14 +121,14 @@ export const staticProducts: Product[] = [
     ],
     metaTitle: "Foundation Bolt Manufacturer in Surat",
     metaDescription:
-      "Custom foundation bolts, anchor bolts, and installation bolt sets for structural steel and machinery projects from Balaji Engineering Works.",
+      "Foundation bolt manufacturer in Surat for anchor bolts, installation bolt sets, and structural steel machinery projects from Balaji Engineering Works.",
   },
   {
     id: "base-plates",
     title: "Base Plates",
     tagline: "MS base plates and mounting plates for structures, columns, and machinery bases",
     description:
-      "Balaji Engineering Works manufactures base plates for structural steel, support columns, machinery mounts, and industrial installations. Plates are produced from drawing-based layouts with required hole patterns, thicknesses, and fabrication details for reliable project fit-up.",
+      "Balaji Engineering Works is an MS base plate manufacturer in Surat for structural steel, support columns, machinery mounts, and industrial installations. Our MS base plate manufacturer in Surat page covers drawing-based plates with required hole patterns, thicknesses, and fabrication details for reliable project fit-up.",
     image: "/product-base-plates.png",
     features: [
       "Custom hole patterns and plate sizes",
@@ -172,6 +174,7 @@ export const staticProducts: Product[] = [
       },
     ],
     keywords: [
+      "ms base plate manufacturer in surat",
       "ms base plates manufacturer surat",
       "base plate fabrication gujarat",
       "mounting plate supplier india",
@@ -186,7 +189,7 @@ export const staticProducts: Product[] = [
     title: "Z/C Purlins",
     tagline: "Project-specific Z and C purlin sections for industrial sheds and structural roofing systems",
     description:
-      "We fabricate Z and C purlins for roofing and cladding support systems used in industrial sheds, warehouses, and PEB structures. Section size, punching, length, and connection details are produced according to project drawings and installation requirements.",
+      "Balaji Engineering Works works as a C and Z purlin manufacturer in Surat for roofing and cladding support systems used in industrial sheds, warehouses, and PEB structures. As a C and Z purlin manufacturer in Surat, we produce section size, punching, length, and connection details according to project drawings and installation requirements.",
     image: "/product-z-c-purlins.png",
     features: [
       "Z and C profile section options",
@@ -232,21 +235,22 @@ export const staticProducts: Product[] = [
       },
     ],
     keywords: [
+      "c and z purlin manufacturer in surat",
       "z purlin manufacturer surat",
       "c purlin manufacturer gujarat",
       "purlin fabrication india",
       "shed purlin supplier surat",
     ],
-    metaTitle: "Z and C Purlins Manufacturer in Surat",
+    metaTitle: "C and Z Purlin Manufacturer in Surat",
     metaDescription:
-      "Custom Z and C purlins for industrial sheds, warehouses, and PEB roofing support systems from Balaji Engineering Works.",
+      "C and Z purlin manufacturer in Surat for industrial sheds, warehouses, and PEB roofing support systems from Balaji Engineering Works.",
   },
   {
     id: "conveyor-stringer",
     title: "Conveyor Stringer",
     tagline: "Fabricated conveyor stringers and side members for material handling structures",
     description:
-      "Balaji Engineering Works fabricates conveyor stringers and related structural members for material handling systems. These items are made for plant layouts, support frames, and conveyor line assemblies where dimensional fit and project coordination matter.",
+      "Balaji Engineering Works provides conveyor stringer fabrication in Surat for material handling systems, plant layouts, support frames, and conveyor line assemblies. Our conveyor stringer fabrication in Surat service is built for projects where dimensional fit and installation coordination matter.",
     image: "/product-conveyor-stringer.png",
     features: [
       "Drawing-based conveyor side member fabrication",
@@ -292,6 +296,7 @@ export const staticProducts: Product[] = [
       },
     ],
     keywords: [
+      "conveyor stringer fabrication in surat",
       "conveyor stringer manufacturer surat",
       "conveyor side frame fabrication gujarat",
       "material handling fabrication india",
@@ -306,7 +311,7 @@ export const staticProducts: Product[] = [
     title: "Perforated Sheets",
     tagline: "Custom perforated metal sheets with hole patterns for industrial, screening, and panel use",
     description:
-      "We provide perforated sheet fabrication for industrial panels, guards, screens, partitions, filters, and architectural utility use. Hole size, pitch, open area, border, and cut size can be produced according to the drawing or application requirement.",
+      "Balaji Engineering Works works as a perforated sheet manufacturer in Surat for industrial panels, guards, screens, partitions, filters, and architectural utility use. As a perforated sheet manufacturer in Surat, we produce hole size, pitch, open area, border, and cut size according to the drawing or application requirement.",
     image: "/product-perforated-sheets.png",
     features: [
       "Custom hole diameter and pitch options",
@@ -352,6 +357,7 @@ export const staticProducts: Product[] = [
       },
     ],
     keywords: [
+      "perforated sheet manufacturer in surat",
       "perforated sheet manufacturer surat",
       "custom perforated metal sheets gujarat",
       "perforated panel fabrication india",
@@ -366,7 +372,7 @@ export const staticProducts: Product[] = [
     title: "Decking Sheets",
     tagline: "Steel decking sheets for industrial flooring, mezzanine support, and composite deck applications",
     description:
-      "Balaji Engineering Works supports decking sheet requirements for industrial platforms, mezzanine structures, shed extensions, and composite deck style applications. We align sheet selection, profile, and project-related fabricated support requirements with practical site use.",
+      "Balaji Engineering Works is a decking sheet supplier in Surat for industrial platforms, mezzanine structures, shed extensions, and composite deck applications. Our decking sheet supplier in Surat page is built around practical sheet selection, profile coordination, and project-related fabricated support requirements.",
     image: "/product-decking-sheets.png",
     features: [
       "Profiles suited for industrial deck applications",
@@ -412,21 +418,22 @@ export const staticProducts: Product[] = [
       },
     ],
     keywords: [
+      "decking sheet supplier in surat",
       "decking sheets supplier surat",
       "steel decking sheet gujarat",
       "industrial decking sheet india",
       "mezzanine decking sheet supplier",
     ],
-    metaTitle: "Decking Sheets Supplier in Surat",
+    metaTitle: "Decking Sheet Supplier in Surat",
     metaDescription:
-      "Steel decking sheets for industrial platforms, mezzanine structures, and deck support applications from Balaji Engineering Works in Surat.",
+      "Decking sheet supplier in Surat for industrial platforms, mezzanine structures, and deck support applications from Balaji Engineering Works.",
   },
   {
     id: "corrugated-sheets",
     title: "Corrugated Sheets",
     tagline: "Corrugated metal sheets for roofing, cladding, partitions, and utility enclosures",
     description:
-      "We support corrugated sheet requirements for industrial sheds, roofing extensions, side cladding, protective enclosures, and utility partitions. Sheet length, coverage, and related fabricated support items can be coordinated as per project needs.",
+      "Balaji Engineering Works is a corrugated roofing sheets supplier in Surat for industrial sheds, roofing extensions, side cladding, protective enclosures, and utility partitions. Our corrugated roofing sheets supplier in Surat page focuses on sheet length, coverage, and related fabricated support coordination as per project needs.",
     image: "/product-corrugated-sheets.png",
     features: [
       "Suitable for industrial roofing and cladding use",
@@ -472,21 +479,22 @@ export const staticProducts: Product[] = [
       },
     ],
     keywords: [
+      "corrugated roofing sheets in surat",
       "corrugated sheets supplier surat",
       "metal corrugated sheet gujarat",
       "industrial roofing sheets india",
       "shed cladding sheet supplier surat",
     ],
-    metaTitle: "Corrugated Sheets Supplier in Surat",
+    metaTitle: "Corrugated Roofing Sheets Supplier in Surat",
     metaDescription:
-      "Corrugated metal sheets for industrial roofing, cladding, and enclosure applications from Balaji Engineering Works in Surat, Gujarat.",
+      "Corrugated roofing sheets supplier in Surat for industrial roofing, cladding, and enclosure applications from Balaji Engineering Works.",
   },
   {
     id: "walkway-plank",
     title: "Walkway Plank",
     tagline: "Steel walkway planks for roof access, platforms, and industrial maintenance paths",
     description:
-      "Balaji Engineering Works fabricates walkway planks for industrial sheds, roof access systems, maintenance routes, and plant platforms. These products are designed to provide practical footing, drainage/opening options, and integration with project support structures.",
+      "Balaji Engineering Works is a walkway plank manufacturer in Surat for industrial sheds, roof access systems, maintenance routes, and plant platforms. As a walkway plank manufacturer in Surat, we build products designed for practical footing, drainage and opening options, and integration with project support structures.",
     image: "/product-walkway-plank.png",
     features: [
       "Practical access solution for industrial roofs and platforms",
@@ -532,21 +540,22 @@ export const staticProducts: Product[] = [
       },
     ],
     keywords: [
+      "walkway plank manufacturer in surat",
       "walkway plank manufacturer surat",
       "steel walkway planks gujarat",
       "roof access plank supplier india",
       "industrial walkway fabrication surat",
     ],
-    metaTitle: "Steel Walkway Plank Manufacturer in Surat",
+    metaTitle: "Walkway Plank Manufacturer in Surat",
     metaDescription:
-      "Steel walkway planks for industrial roofs, maintenance access, and plant platforms from Balaji Engineering Works in Surat.",
+      "Walkway plank manufacturer in Surat for industrial roofs, maintenance access, and plant platforms from Balaji Engineering Works.",
   },
   {
     id: "steel-pallets",
     title: "Steel Pallets",
     tagline: "Heavy-duty steel pallets for industrial storage, material handling, and plant logistics",
     description:
-      "We fabricate steel pallets for warehouses, production plants, dispatch areas, and heavy-duty storage systems. These pallets are suitable where durability, repeat handling, and long service life matter more than disposable packaging solutions.",
+      "Balaji Engineering Works works as a steel pallets manufacturer in Surat for warehouses, production plants, dispatch areas, and heavy-duty storage systems. As a steel pallets manufacturer in Surat, we build pallets for buyers who need durability, repeat handling, and long service life instead of disposable packaging solutions.",
     image: "/product-steel-pallets.png",
     features: [
       "Heavy-duty reusable storage platform",
@@ -592,6 +601,7 @@ export const staticProducts: Product[] = [
       },
     ],
     keywords: [
+      "steel pallets manufacturer in surat",
       "steel pallets manufacturer surat",
       "industrial steel pallet supplier gujarat",
       "heavy duty metal pallets india",

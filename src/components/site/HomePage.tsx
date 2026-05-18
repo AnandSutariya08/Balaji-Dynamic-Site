@@ -135,10 +135,10 @@ export default function HomePage({
           <div className="absolute inset-0 z-0">
             <img
               src="/hero-bg.png"
-              alt="Precision Metal Fabrication"
+              alt="CNC laser cutting, plate bending, and steel fabrication facility in Surat"
               className="w-full h-full object-cover object-center"
             />
-            {/* Cinematic gradient — dark left for text, reveal image on right */}
+            {/* Cinematic gradient â€” dark left for text, reveal image on right */}
             <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/25" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
             {/* Subtle red accent glow bottom-left */}
@@ -152,7 +152,7 @@ export default function HomePage({
                 <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1, duration: 0.7 }}
                   className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 mb-3 md:mb-4 lg:mb-5">
                   <span className="w-2 h-2 rounded-full bg-primary animate-pulse shrink-0" />
-                  <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.25em] uppercase">EST. 2001 · KAMREJ, SURAT · GUJARAT</span>
+                  <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.25em] uppercase">EST. 2001 - KAMREJ, SURAT - GUJARAT</span>
                 </motion.div>
 
                 {/* Headline */}
@@ -161,17 +161,17 @@ export default function HomePage({
                   style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}
                 >
                   <motion.span initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2, duration: 0.75, ease: "easeOut" }}
-                    className="block">SHEET METAL</motion.span>
+                    className="block">CNC LASER</motion.span>
                   <motion.span initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.32, duration: 0.75, ease: "easeOut" }}
-                    className="block text-transparent bg-clip-text bg-gradient-to-r from-[#e05555] via-[#AC3C3C] to-[#c44040]">FORMING</motion.span>
+                    className="block text-transparent bg-clip-text bg-gradient-to-r from-[#e05555] via-[#AC3C3C] to-[#c44040]">PLATE BENDING</motion.span>
                   <motion.span initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.44, duration: 0.75, ease: "easeOut" }}
-                    className="block text-white">IN SURAT.</motion.span>
+                    className="block text-white">& FABRICATION</motion.span>
                 </h1>
 
                 {/* Sub-text */}
                 <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.65, duration: 0.7 }}
                   className="text-sm sm:text-base md:text-lg text-zinc-300 font-light leading-relaxed max-w-xl mb-4 md:mb-5 lg:mb-6">
-                  Balaji Engineering Works delivers CNC press brake bending, CNC laser cutting, CNC plasma cutting, sheet metal shearing cutting, plate rolling, and heavy fabrication from Kamrej, Surat, Gujarat for industrial clients across India.
+                  Balaji Engineering Works delivers CNC laser cutting services in Surat, CNC plasma cutting services in Surat, CNC plate bending service in Surat, and sheet metal shearing cutting service in Surat from our Kamrej manufacturing facility.
                 </motion.p>
 
                 {/* CTAs */}
@@ -249,7 +249,7 @@ export default function HomePage({
                 { value: 25, label: "Years Experience", suffix: "+", icon: Target },
                 { value: 500, label: "Projects Completed", suffix: "+", icon: Factory },
                 { value: 50, label: "Skilled Employees", suffix: "+", icon: Users },
-                { value: 25, label: "Cr. Turnover", suffix: " Cr", prefix: "₹ 5-", icon: TrendingUp }
+                { value: 25, label: "Cr. Turnover", suffix: " Cr", prefix: "Rs 5-", icon: TrendingUp }
               ].map((stat, i) => (
                 <div key={i} className="flex flex-col items-center text-center">
                   <div className="text-2xl sm:text-3xl md:text-4xl xl:text-4xl font-display font-black text-[#1A1A1A] mb-3 md:mb-4 whitespace-nowrap">
@@ -263,78 +263,6 @@ export default function HomePage({
           </div>
         </section>
 
-        {/* <section className="border-y border-black/8 bg-[#EDEAE4] py-14 md:py-20">
-          <div className="container mx-auto px-4">
-            <div className="max-w-5xl">
-              <span className="text-primary font-bold tracking-[0.3em] uppercase text-sm">Search Focus</span>
-              <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter">
-                Sheet Metal Bending Works in Surat, Gujarat
-              </h2>
-              <div className="mt-6 space-y-4 text-base md:text-lg text-slate-600 font-light leading-relaxed">
-                <p>
-                  SheetMetalBendingWorks.com is built to help buyers searching for sheet metal bending works, CNC laser cutting, plate rolling, steel cutting, and fabrication services in Surat reach Balaji Engineering Works directly.
-                </p>
-                <p>
-                  If your requirement includes press brake bending, profile cutting, custom steel parts, base plates, or heavy fabrication job work, our team in Kamrej, Surat, Gujarat can review drawings, recommend the right process, and share a fast commercial quote.
-                </p>
-              </div>
-              <div className="mt-8 flex flex-wrap gap-3">
-                {[
-                  { href: "/services/cnc-plate-bending", label: "CNC Plate Bending" },
-                  { href: "/services/cnc-laser-cutting", label: "CNC Laser Cutting" },
-                  { href: "/services/plate-rolling", label: "Plate Rolling" },
-                  { href: "/contact", label: "Request Fabrication Quote" },
-                ].map((item) => (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    className="rounded-full border border-black/10 bg-[#F7F5F1] px-4 py-2 text-xs font-bold uppercase tracking-widest text-[#1A1A1A] transition-colors hover:border-primary hover:text-primary"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-              <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                {[
-                  {
-                    title: "Sheet Bending Service",
-                    href: "/services/cnc-plate-bending",
-                    desc: "MS and SS bending for industrial components",
-                  },
-                  {
-                    title: "CNC Laser Cutting",
-                    href: "/services/cnc-laser-cutting",
-                    desc: "Production blanks and profile parts",
-                  },
-                  {
-                    title: "Plate Rolling",
-                    href: "/services/plate-rolling",
-                    desc: "Rolled and curved industrial plate components",
-                  },
-                  {
-                    title: "CNC Plasma Cutting",
-                    href: "/services/cnc-plasma-cutting",
-                    desc: "Heavy-duty profile cutting for industrial plate and structural parts",
-                  },
-                ].map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="rounded-2xl border border-black/8 bg-[#F7F5F1] p-4 transition-colors hover:border-primary/40 hover:bg-white"
-                  >
-                    <h3 className="text-sm font-display font-black uppercase tracking-tight text-[#1A1A1A]">
-                      {item.title}
-                    </h3>
-                    <p className="mt-2 text-xs font-light leading-relaxed text-slate-500">
-                      {item.desc}
-                    </p>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section> */}
-
         {/* Section 4: About Teaser */}
         <section className="py-16 md:py-32 bg-[#EDEAE4]">
           <div className="container mx-auto px-4">
@@ -346,7 +274,7 @@ export default function HomePage({
                 transition={{ duration: 0.8, ease: "easeOut" }}
                 className="relative aspect-square rounded-2xl overflow-hidden group"
               >
-                <img src="/service-fabrication.png" alt="Fabrication Excellence" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="eager" fetchPriority="high" />
+                <img src="/service-fabrication.png" alt="Heavy fabrication and steel processing at Balaji Engineering Works in Surat" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="eager" fetchPriority="high" />
                 <div className="absolute inset-0 bg-primary/10 mix-blend-multiply" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
               </motion.div>
@@ -360,7 +288,7 @@ export default function HomePage({
                 </div>
                 <div className="space-y-5 text-lg md:text-xl text-slate-600 font-light leading-relaxed reveal-line">
                   <p>Established in 2001, Balaji Engineering Works is a manufacturer and service provider based at Kamrej, Surat, Gujarat with 25+ years of experience.</p>
-                  <p>We specialize in sheet metal forming industries in Surat with CNC press brake bending, CNC laser cutting, CNC plasma cutting, sheet metal shearing cutting, plate rolling, profile cutting, base plates, and heavy fabrication with fast quotations and dispatch support across India.</p>
+                  <p>We specialize in CNC laser cutting, CNC plasma cutting, CNC press brake bending, sheet metal shearing cutting, plate rolling, product manufacturing, and heavy fabrication with fast quotations and dispatch support across India.</p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-8 reveal-line">
                   {["Established Since 2001", "Advanced CNC Setup", "Experienced Engineering Team", "End-to-End Job Work"].map((fact, i) => (
@@ -432,7 +360,7 @@ export default function HomePage({
                 className={`w-[160px] sm:w-[200px] md:w-[240px] min-w-0 h-[260px] sm:h-[320px] md:h-[400px] relative rounded-2xl overflow-hidden snap-center flex-shrink-0 border-2 transition-all duration-300 ${i === activeService ? "border-primary/60 shadow-[0_0_20px_rgba(172,60,60,0.2)]" : "border-transparent"
                   } group`}
               >
-                <img src={service.image} alt={service.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                <img src={service.image} alt={`${service.title} service by Balaji Engineering Works in Surat`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 px-3 py-4">
                   <h3 className="text-[11px] sm:text-sm md:text-base font-display font-black text-white uppercase tracking-tight line-clamp-1 mb-2">{service.title}</h3>
@@ -464,7 +392,7 @@ export default function HomePage({
                   What We Build
                 </h2>
                 <p className="mt-4 max-w-2xl text-sm md:text-base text-slate-600 font-light leading-relaxed">
-                  We also manufacture project-oriented steel products for roofing, structure, drainage, access, storage, and industrial installation requirements.
+                  We also manufacture project-oriented steel products including foundation bolts, MS base plates, C and Z purlins, perforated sheets, decking sheets, corrugated sheets, walkway planks, and steel pallets.
                 </p>
               </div>
               <Button variant="ghost" className="text-[#1A1A1A] hover:text-primary transition-colors font-bold uppercase tracking-widest shrink-0" asChild>
@@ -481,7 +409,7 @@ export default function HomePage({
                   <div className="aspect-[16/10] overflow-hidden border-b border-black/8">
                     <img
                       src={product.image}
-                      alt={product.title}
+                      alt={`${product.title} manufactured by Balaji Engineering Works in Surat`}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                   </div>
@@ -578,7 +506,7 @@ export default function HomePage({
               </div>
               <div className="relative mt-6 lg:mt-0">
                 <div className="absolute -inset-10 bg-primary/10 blur-[100px] rounded-full" />
-                <img src="/service-cnc.png" alt="CNC Precision" className="relative z-10 rounded-2xl border border-black/10 shadow-xl w-full" />
+                <img src="/service-cnc.png" alt="CNC laser cutting and precision fabrication setup at Balaji Engineering Works in Surat" className="relative z-10 rounded-2xl border border-black/10 shadow-xl w-full" />
               </div>
             </div>
           </div>
@@ -607,7 +535,7 @@ export default function HomePage({
                     {post.image ? (
                       <img
                         src={post.image}
-                        alt={post.title}
+                        alt={`${post.title} article by Balaji Engineering Works`}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                     ) : (

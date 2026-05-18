@@ -22,11 +22,11 @@ const capabilities = [
 ];
 
 const materials = [
-  { name: "Mild Steel (MS)", grades: "IS 2062 E250 / E350", thickness: "0.5mm – 60mm" },
-  { name: "Stainless Steel", grades: "SS 304 / SS 316 / SS 316L", thickness: "0.5mm – 25mm" },
-  { name: "Hot Rolled Steel", grades: "IS 2062 HR", thickness: "2mm – 50mm" },
-  { name: "Cold Rolled Steel", grades: "IS 513 CR", thickness: "0.5mm – 3mm" },
-  { name: "Structural Steel", grades: "IS 2062 E250B/C", thickness: "5mm – 100mm" },
+  { name: "Mild Steel (MS)", grades: "IS 2062 E250 / E350", thickness: "0.5mm - 60mm" },
+  { name: "Stainless Steel", grades: "SS 304 / SS 316 / SS 316L", thickness: "0.5mm - 25mm" },
+  { name: "Hot Rolled Steel", grades: "IS 2062 HR", thickness: "2mm - 50mm" },
+  { name: "Cold Rolled Steel", grades: "IS 513 CR", thickness: "0.5mm - 3mm" },
+  { name: "Structural Steel", grades: "IS 2062 E250B/C", thickness: "5mm - 100mm" },
 ];
 
 export default function ServicesPage({
@@ -43,11 +43,11 @@ export default function ServicesPage({
         {/* HERO */}
         <PageHero
           imageSrc="/service-cnc.png"
-          imageAlt="Sheet metal services at Balaji Engineering Works"
+          imageAlt="CNC laser cutting, plate bending, and sheet metal services at Balaji Engineering Works in Surat"
           pill={(
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-primary">
               <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase">
-                {services.length} Core Capabilities · Surat Manufacturer · Gujarat
+                {services.length} Core Capabilities - Surat Manufacturer - Gujarat
               </span>
             </div>
           )}
@@ -73,7 +73,7 @@ export default function ServicesPage({
           ]}
         />
 
-        {/* MARQUEE — red strip */}
+        {/* MARQUEE â€” red strip */}
         <section className="py-5 md:py-6 bg-primary overflow-hidden">
           <div className="flex whitespace-nowrap" style={{ animation: "marquee3 25s linear infinite" }}>
             {Array.from({ length: 3 }).map((_, i) => (
@@ -91,11 +91,11 @@ export default function ServicesPage({
           <style>{`@keyframes marquee3 { 0% { transform: translateX(0); } 100% { transform: translateX(-33.33%); } }`}</style>
         </section>
 
-        {/* SERVICES — Full-Width Alternating */}
+        {/* SERVICES â€” Full-Width Alternating */}
         <section className="py-8 bg-[#F7F5F1]">
           {loading ? (
             <div className="flex items-center justify-center gap-2 py-32 text-slate-400 text-sm">
-              <Loader2 className="w-5 h-5 animate-spin" /> Loading services from Firestore…
+              <Loader2 className="w-5 h-5 animate-spin" /> Loading services from Firestore...
             </div>
           ) : (
             services.map((service, i) => (
@@ -105,47 +105,49 @@ export default function ServicesPage({
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.6 }}
-                className="grid lg:grid-cols-2 border-b border-black/8 group"
+                className="grid items-center border-b border-black/8 group lg:grid-cols-2"
               >
                 {/* Image */}
-                <div className={`relative h-[260px] sm:h-[380px] lg:h-[500px] overflow-hidden ${i % 2 !== 0 ? 'lg:order-2' : ''}`}>
-                  <img src={service.image} alt={service.title} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
+                <div className={`relative flex h-[260px] items-center justify-center overflow-hidden bg-[#DDD6CE] sm:h-[380px] lg:h-[500px] ${i % 2 !== 0 ? 'lg:order-2' : ''}`}>
+                  <img src={service.image} alt={`${service.title} service by Balaji Engineering Works in Surat`} className="h-full w-full object-cover object-center transition-transform duration-1000 group-hover:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute top-4 left-4 md:top-8 md:left-8 text-[3rem] md:text-[5rem] font-display font-black text-white/5 leading-none">{String(i + 1).padStart(2, "0")}</div>
                 </div>
                 {/* Content */}
-                <div className={`p-6 sm:p-10 md:p-12 xl:p-16 flex flex-col justify-center bg-[#F7F5F1] ${i % 2 !== 0 ? 'lg:order-1' : ''}`}>
-                  <span className="text-primary font-bold tracking-[0.3em] uppercase text-xs mb-3 md:mb-4">{service.tagline}</span>
-                  <h2 className="text-[clamp(1.6rem,4.6vw,3.2rem)] font-display font-black text-[#1A1A1A] uppercase tracking-tighter mb-4 md:mb-6 leading-[0.92]">
-                    {service.title}
-                  </h2>
-                  <p className="text-slate-600 font-light leading-relaxed mb-6 md:mb-8 text-sm md:text-base">{service.description}</p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 md:gap-3 mb-6 md:mb-8">
-                    {service.specs.map((spec, j) => (
-                      <div key={j} className="bg-[#EDEAE4] border border-black/8 rounded-lg md:rounded-xl p-3 md:p-4 text-center">
-                        <div className="text-sm md:text-lg font-display font-black text-primary">{spec.value}</div>
-                        <div className="text-[9px] md:text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">{spec.label}</div>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 md:gap-3 mb-8 md:mb-10">
-                    {service.features.map((f, j) => (
-                      <div key={j} className="flex items-center gap-2.5">
-                        <div className="w-5 h-5 rounded-full bg-primary/15 flex items-center justify-center shrink-0">
-                          <CheckCircle2 className="w-3 h-3 text-primary" />
+                <div className={`flex justify-center bg-[#F7F5F1] p-6 sm:p-10 md:p-12 xl:p-16 ${i % 2 !== 0 ? 'lg:order-1' : ''}`}>
+                  <div className="flex w-full max-w-2xl flex-col justify-center">
+                    <span className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-primary md:mb-4">{service.tagline}</span>
+                    <h2 className="mb-4 text-[clamp(1.6rem,4.6vw,3.2rem)] font-display font-black uppercase tracking-tighter leading-[0.92] text-[#1A1A1A] md:mb-6">
+                      {service.title}
+                    </h2>
+                    <p className="mb-6 text-sm font-light leading-relaxed text-slate-600 md:mb-8 md:text-base">{service.description}</p>
+                    <div className="mb-6 grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:mb-8 md:gap-3">
+                      {service.specs.map((spec, j) => (
+                        <div key={j} className="rounded-lg border border-black/8 bg-[#EDEAE4] p-3 text-center md:rounded-xl md:p-4">
+                          <div className="text-sm font-display font-black text-primary md:text-lg">{spec.value}</div>
+                          <div className="mt-1 text-[9px] font-bold uppercase tracking-widest text-slate-500 md:text-[10px]">{spec.label}</div>
                         </div>
-                        <span className="text-xs font-bold text-[#1A1A1A] uppercase tracking-wider">{f}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="flex flex-col gap-3 sm:flex-row">
-                    <Button className="w-full sm:w-fit h-12 md:h-14 px-6 md:px-8 font-bold uppercase tracking-widest bg-primary hover:bg-primary/90 text-white shadow-[0_0_20px_rgba(172,60,60,0.25)] border-none text-sm" asChild>
-                      <Link href={`/services/${service.id}`}>View Details <ArrowRight className="ml-2 w-4 h-4" /></Link>
-                    </Button>
-                    <Button variant="outline" className="w-full sm:w-fit h-12 md:h-14 px-6 md:px-8 font-bold uppercase tracking-widest border-black/15 text-[#1A1A1A] hover:bg-black/5 text-sm" asChild>
-                      <Link href={`/contact?service=${service.id}`}>Request Quote</Link>
-                    </Button>
+                      ))}
+                    </div>
+                    <div className="mb-8 grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:mb-10 md:gap-3">
+                      {service.features.map((f, j) => (
+                        <div key={j} className="flex items-center gap-2.5">
+                          <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/15">
+                            <CheckCircle2 className="w-3 h-3 text-primary" />
+                          </div>
+                          <span className="text-xs font-bold uppercase tracking-wider text-[#1A1A1A]">{f}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="flex flex-col gap-3 sm:flex-row">
+                      <Button className="h-12 w-full border-none bg-primary px-6 text-sm font-bold uppercase tracking-widest text-white shadow-[0_0_20px_rgba(172,60,60,0.25)] hover:bg-primary/90 sm:w-fit md:h-14 md:px-8" asChild>
+                        <Link href={`/services/${service.id}`}>View Details <ArrowRight className="ml-2 w-4 h-4" /></Link>
+                      </Button>
+                      <Button variant="outline" className="h-12 w-full border-black/15 px-6 text-sm font-bold uppercase tracking-widest text-[#1A1A1A] hover:bg-black/5 sm:w-fit md:h-14 md:px-8" asChild>
+                        <Link href={`/contact?service=${service.id}`}>Request Quote</Link>
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -217,9 +219,9 @@ export default function ServicesPage({
           <div className="container mx-auto px-4">
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-8">
               {[
-                { icon: Zap, title: "Fast Turnaround", desc: "24–72 hour delivery on standard jobs. Urgent scheduling available." },
+                { icon: Zap, title: "Fast Turnaround", desc: "24-72 hour delivery on standard jobs. Urgent scheduling available." },
                 { icon: Shield, title: "Quality Assured", desc: "First-article inspection, in-process checks, and final dimensional reports." },
-                { icon: Layers, title: "All Under One Roof", desc: "Cutting, bending, rolling, and profiling — single-source, zero handoffs." },
+                { icon: Layers, title: "All Under One Roof", desc: "Cutting, bending, rolling, and profiling - single-source, zero handoffs." },
                 { icon: Settings, title: "CAD Ready", desc: "Submit DXF, DWG, or STEP files. We review for manufacturability at no charge." },
               ].map((item, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} className="p-6 md:p-8 border border-black/8 rounded-2xl group hover:border-primary/40 hover:bg-primary/5 transition-all bg-[#F7F5F1]">

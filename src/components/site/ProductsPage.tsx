@@ -26,11 +26,11 @@ export default function ProductsPage({
       <div className="bg-[#F7F5F1]">
         <PageHero
           imageSrc="/product-base-plates.png"
-          imageAlt="Industrial products from Balaji Engineering Works"
+          imageAlt="Industrial steel products manufactured by Balaji Engineering Works in Surat"
           pill={(
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/20 px-3 py-1 text-primary">
               <span className="text-[9px] font-bold uppercase tracking-[0.3em] sm:text-[10px]">
-                {products.length} Product Categories · Surat Manufacturing
+                {products.length} Product Categories - Surat Manufacturing
               </span>
             </div>
           )}
@@ -103,13 +103,13 @@ export default function ProductsPage({
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.6 }}
-              className="group grid border-b border-black/8 lg:grid-cols-2"
+              className="group grid items-center border-b border-black/8 lg:grid-cols-2"
             >
-              <div className={`relative h-[260px] overflow-hidden sm:h-[380px] lg:h-[500px] ${index % 2 !== 0 ? "lg:order-2" : ""}`}>
+              <div className={`relative flex h-[260px] items-center justify-center overflow-hidden bg-[#DDD6CE] sm:h-[380px] lg:h-[500px] ${index % 2 !== 0 ? "lg:order-2" : ""}`}>
                 <img
                   src={product.image}
-                  alt={product.title}
-                  className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                  alt={`${product.title} manufactured by Balaji Engineering Works in Surat`}
+                  className="h-full w-full object-cover object-center transition-transform duration-1000 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/45 to-transparent" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/65 to-transparent" />
@@ -118,52 +118,54 @@ export default function ProductsPage({
                 </div>
               </div>
 
-              <div className={`flex flex-col justify-center bg-[#F7F5F1] p-6 sm:p-10 md:p-12 xl:p-16 ${index % 2 !== 0 ? "lg:order-1" : ""}`}>
-                <span className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-primary md:mb-4">
-                  {product.tagline}
-                </span>
-                <h2 className="mb-4 text-[clamp(1.6rem,4.6vw,3.2rem)] font-display font-black uppercase tracking-tighter leading-[0.92] text-[#1A1A1A] md:mb-6">
-                  {product.title}
-                </h2>
-                <p className="mb-6 text-sm font-light leading-relaxed text-slate-600 md:mb-8 md:text-base">
-                  {product.description}
-                </p>
+              <div className={`flex justify-center bg-[#F7F5F1] p-6 sm:p-10 md:p-12 xl:p-16 ${index % 2 !== 0 ? "lg:order-1" : ""}`}>
+                <div className="flex w-full max-w-2xl flex-col justify-center">
+                  <span className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-primary md:mb-4">
+                    {product.tagline}
+                  </span>
+                  <h2 className="mb-4 text-[clamp(1.6rem,4.6vw,3.2rem)] font-display font-black uppercase tracking-tighter leading-[0.92] text-[#1A1A1A] md:mb-6">
+                    {product.title}
+                  </h2>
+                  <p className="mb-6 text-sm font-light leading-relaxed text-slate-600 md:mb-8 md:text-base">
+                    {product.description}
+                  </p>
 
-                <div className="mb-6 grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:mb-8 md:gap-3">
-                  {product.specs.map((spec) => (
-                    <div key={`${product.id}-${spec.label}`} className="rounded-xl border border-black/8 bg-[#EDEAE4] p-3 text-center md:p-4">
-                      <div className="text-sm font-display font-black text-primary md:text-lg">
-                        {spec.value}
+                  <div className="mb-6 grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:mb-8 md:gap-3">
+                    {product.specs.map((spec) => (
+                      <div key={`${product.id}-${spec.label}`} className="rounded-xl border border-black/8 bg-[#EDEAE4] p-3 text-center md:p-4">
+                        <div className="text-sm font-display font-black text-primary md:text-lg">
+                          {spec.value}
+                        </div>
+                        <div className="mt-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">
+                          {spec.label}
+                        </div>
                       </div>
-                      <div className="mt-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">
-                        {spec.label}
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
 
-                <div className="mb-8 grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:mb-10 md:gap-3">
-                  {product.features.map((feature) => (
-                    <div key={feature} className="flex items-center gap-2.5">
-                      <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/15">
-                        <CheckCircle2 className="h-3 w-3 text-primary" />
+                  <div className="mb-8 grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:mb-10 md:gap-3">
+                    {product.features.map((feature) => (
+                      <div key={feature} className="flex items-center gap-2.5">
+                        <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/15">
+                          <CheckCircle2 className="h-3 w-3 text-primary" />
+                        </div>
+                        <span className="text-xs font-bold uppercase tracking-wider text-[#1A1A1A]">
+                          {feature}
+                        </span>
                       </div>
-                      <span className="text-xs font-bold uppercase tracking-wider text-[#1A1A1A]">
-                        {feature}
-                      </span>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
 
-                <div className="flex flex-col gap-3 sm:flex-row">
-                  <Button className="h-12 w-full border-none bg-primary px-6 text-sm font-bold uppercase tracking-widest text-white shadow-[0_0_20px_rgba(172,60,60,0.25)] hover:bg-primary/90 sm:w-fit md:h-14 md:px-8" asChild>
-                    <Link href={`/products/${product.id}`}>
-                      View Details <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                  <Button variant="outline" className="h-12 w-full border-black/15 px-6 text-sm font-bold uppercase tracking-widest text-[#1A1A1A] hover:bg-black/5 sm:w-fit md:h-14 md:px-8" asChild>
-                    <Link href={`/contact?service=${product.id}`}>Request Quote</Link>
-                  </Button>
+                  <div className="flex flex-col gap-3 sm:flex-row">
+                    <Button className="h-12 w-full border-none bg-primary px-6 text-sm font-bold uppercase tracking-widest text-white shadow-[0_0_20px_rgba(172,60,60,0.25)] hover:bg-primary/90 sm:w-fit md:h-14 md:px-8" asChild>
+                      <Link href={`/products/${product.id}`}>
+                        View Details <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
+                    <Button variant="outline" className="h-12 w-full border-black/15 px-6 text-sm font-bold uppercase tracking-widest text-[#1A1A1A] hover:bg-black/5 sm:w-fit md:h-14 md:px-8" asChild>
+                      <Link href={`/contact?service=${product.id}`}>Request Quote</Link>
+                    </Button>
+                  </div>
                 </div>
               </div>
             </motion.div>

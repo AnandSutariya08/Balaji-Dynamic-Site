@@ -213,7 +213,7 @@ export function createOfferCatalogJsonLd(services: Service[]): SchemaObject {
     url: absoluteUrl("/services"),
     itemListElement: services.map((service, index) => ({
       "@type": "OfferCatalog",
-      "@id": `${absoluteUrl(`/services#${service.id}`)}#catalog-item`,
+      "@id": `${absoluteUrl(`/services/${service.id}`)}#catalog-item`,
       position: index + 1,
       name: service.title,
       description: service.description,
@@ -313,7 +313,7 @@ export function createServicesItemListJsonLd(services: Service[]): SchemaObject 
     itemListElement: services.map((service, index) => ({
       "@type": "ListItem",
       position: index + 1,
-      url: absoluteUrl(`/services#${service.id}`),
+      url: absoluteUrl(`/services/${service.id}`),
       name: service.title,
       description: service.description,
     })),
@@ -324,7 +324,7 @@ export function createServiceJsonLd(service: Service): SchemaObject {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
-    "@id": `${absoluteUrl(`/services#${service.id}`)}#service`,
+    "@id": `${absoluteUrl(`/services/${service.id}`)}#service`,
     serviceType: service.title,
     name: service.title,
     description: service.description,
@@ -333,7 +333,7 @@ export function createServiceJsonLd(service: Service): SchemaObject {
     },
     areaServed: siteConfig.serviceAreas,
     image: absoluteUrl(service.image),
-    url: absoluteUrl(`/services#${service.id}`),
+    url: absoluteUrl(`/services/${service.id}`),
     brand: {
       "@type": "Brand",
       name: siteConfig.name,

@@ -101,7 +101,7 @@ export default async function Page({
       <div className="bg-[#F7F5F1]">
         <PageHero
           imageSrc={service.image}
-          imageAlt={service.title}
+          imageAlt={`${service.title} service by Balaji Engineering Works in Surat`}
           pill={(
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-primary">
               <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase">

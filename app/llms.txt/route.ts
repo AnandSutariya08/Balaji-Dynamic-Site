@@ -1,3 +1,4 @@
+import { staticProducts } from "@/lib/productsData";
 import { staticServices } from "@/lib/servicesData";
 import { getPublicBlogsFromFirestore } from "@/lib/firestore/publicBlogsServer";
 import { absoluteUrl } from "@/lib/seo";
@@ -5,15 +6,22 @@ import { siteConfig } from "@/lib/site";
 
 export async function GET() {
   const services = staticServices;
+  const products = staticProducts;
   const posts = await getPublicBlogsFromFirestore();
 
   const serviceLines = services
     .slice(0, 8)
     .map(
       (service) =>
-        `- [${service.title}](${absoluteUrl(
-          "/services",
-        )}#${service.id}): ${service.description}`,
+        `- [${service.title}](${absoluteUrl(`/services/${service.id}`)}): ${service.description}`,
+    )
+    .join("\n");
+
+  const productLines = products
+    .slice(0, 10)
+    .map(
+      (product) =>
+        `- [${product.title}](${absoluteUrl(`/products/${product.id}`)}): ${product.description}`,
     )
     .join("\n");
 
@@ -45,12 +53,17 @@ Important notes:
 - [Home](${absoluteUrl("/")}): Company overview, manufacturing strengths, and featured content
 - [About](${absoluteUrl("/about")}): Company history, capabilities, certifications, and industrial profile
 - [Services](${absoluteUrl("/services")}): Main fabrication and steel processing capabilities
+- [Products](${absoluteUrl("/products")}): Industrial steel products including base plates, foundation bolts, purlins, perforated sheets, and pallets
 - [Blog](${absoluteUrl("/blog")}): Technical guides and manufacturing articles
 - [Contact](${absoluteUrl("/contact")}): Quote request and contact details
 
 ## Services
 
 ${serviceLines}
+
+## Products
+
+${productLines}
 
 ## Articles
 

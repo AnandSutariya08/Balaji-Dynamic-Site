@@ -46,7 +46,7 @@ export default function BlogPage({
         {/* HERO */}
         <section className="relative min-h-[80vh] flex items-center overflow-hidden">
           <div className="absolute inset-0">
-            <img src="/service-fabrication.png" alt="Fabrication Workshop" className="w-full h-full object-cover object-center" />
+            <img src="/service-fabrication.png" alt="Balaji Engineering Works fabrication workshop in Surat" className="w-full h-full object-cover object-center" />
             <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/75 to-black/50" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/40" />
             <div className="absolute bottom-0 left-0 w-[500px] h-[250px] bg-primary/20 blur-[80px] rounded-full" />
@@ -56,13 +56,13 @@ export default function BlogPage({
             <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }}>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-primary mb-6 md:mb-10">
                 <BookOpen className="w-3 h-3" />
-                <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase">{blogPosts.length} Articles · Engineering Intelligence</span>
+                <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase">{blogPosts.length} Articles - Engineering Intelligence</span>
               </div>
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-display font-black text-white uppercase tracking-tighter leading-[0.85] mb-6 md:mb-8">
                 Insights &<br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-[#AC3C3C] to-[#e05555]">Knowledge</span>
               </h1>
               <div className="hidden md:block max-w-md mt-8">
-                <p className="text-xl text-zinc-400 font-light leading-relaxed mb-8">Expert perspectives on metal fabrication, CNC precision, material science, and the future of industrial engineering.</p>
+                <p className="text-xl text-zinc-400 font-light leading-relaxed mb-8">Buyer guides and technical articles for CNC laser cutting services in Surat, CNC plasma cutting, base plates, foundation bolts, and steel fabrication planning.</p>
                 <div className="flex items-center gap-8 text-sm">
                   <div>
                     <div className="text-3xl font-display font-black text-white">{blogPosts.length}</div>
@@ -104,19 +104,19 @@ export default function BlogPage({
             <div className="grid gap-4 md:grid-cols-3">
               {[
                 {
-                  title: "CNC Plate Bending Guides",
-                  desc: "Learn what buyers should check before choosing a bending vendor in Surat.",
-                  href: "/services/cnc-plate-bending",
+                  title: "Laser Cutting Buyer Guides",
+                  desc: "Read what buyers should check before choosing CNC laser cutting services in Surat.",
+                  href: "/blog/cnc-laser-cutting-services-surat-buyer-guide",
                 },
                 {
-                  title: "CNC Laser Cutting Knowledge",
-                  desc: "Compare laser cutting, profile cutting, and fabrication process choices.",
-                  href: "/services/cnc-laser-cutting",
+                  title: "Foundation Bolt Buying",
+                  desc: "Use a practical checklist before finalizing a foundation bolt manufacturer in Surat.",
+                  href: "/blog/foundation-bolt-manufacturer-surat-buyer-guide",
                 },
                 {
-                  title: "Plate Rolling and Forming",
-                  desc: "Find the right process for rolled and curved industrial plate shapes.",
-                  href: "/services/plate-rolling",
+                  title: "Base Plate Specifications",
+                  desc: "Review the key dimensions and hole-pattern checks for MS base plate orders.",
+                  href: "/blog/ms-base-plate-manufacturer-surat-specification-guide",
                 },
               ].map((card) => (
                 <Link
@@ -142,7 +142,7 @@ export default function BlogPage({
         {/* Loading state */}
         {loading && (
           <div className="flex items-center justify-center gap-2 py-10 text-slate-400 text-sm bg-[#F7F5F1]">
-            <Loader2 className="w-4 h-4 animate-spin" /> Loading articles from Firestore…
+            <Loader2 className="w-4 h-4 animate-spin" /> Loading articles from Firestore...
           </div>
         )}
 
@@ -159,7 +159,7 @@ export default function BlogPage({
               <Link href={postHref(featuredPost.slug)} className="block">
                   <div className="grid lg:grid-cols-2 rounded-2xl overflow-hidden border border-black/8 hover:border-primary/30 transition-colors bg-[#EDEAE4]">
                     <div className="relative aspect-video lg:aspect-auto overflow-hidden">
-                      <img src={featuredPost.image} alt={featuredPost.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                      <img src={featuredPost.image} alt={`${featuredPost.title} article by Balaji Engineering Works`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                       <div className="absolute top-4 left-4 md:top-6 md:left-6">
                         <span className={`inline-flex px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest border ${categoryColors[featuredPost.category] ?? "bg-slate-50 text-slate-700 border-slate-200"}`}>
@@ -198,7 +198,7 @@ export default function BlogPage({
                   <Link key={post.slug} href={postHref(post.slug)} className="group block">
                     <div className="flex gap-4 items-start p-5 rounded-xl border border-black/8 hover:border-primary/30 hover:bg-[#F7F5F1] transition-all bg-[#EDEAE4]">
                       <div className="w-14 h-14 rounded-xl overflow-hidden shrink-0 bg-[#D5D0C8]">
-                        <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                        <img src={post.image} alt={`${post.title} article by Balaji Engineering Works`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                       </div>
                       <div>
                         <span className={`inline-flex px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest border mb-2 ${categoryColors[post.category] ?? "bg-slate-50 text-slate-600 border-slate-200"}`}>{post.category}</span>
@@ -214,7 +214,7 @@ export default function BlogPage({
                   <Link key={post.slug} href={postHref(post.slug)} className="group block">
                     <div className="flex gap-4 items-center p-4 rounded-xl border border-black/8 bg-[#EDEAE4] hover:border-primary/30 transition-colors">
                       <div className="w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-[#D5D0C8]">
-                        <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                        <img src={post.image} alt={`${post.title} article by Balaji Engineering Works`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <span className={`inline-flex px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest border mb-2 ${categoryColors[post.category] ?? "bg-slate-50 text-slate-600 border-slate-200"}`}>{post.category}</span>
@@ -261,7 +261,7 @@ export default function BlogPage({
           <div className="container mx-auto px-4">
             {loading ? (
               <div className="flex items-center justify-center gap-2 py-24 text-slate-400 text-sm">
-                <Loader2 className="w-5 h-5 animate-spin" /> Loading…
+                <Loader2 className="w-5 h-5 animate-spin" /> Loading...
               </div>
             ) : (
               <motion.div variants={container} initial="hidden" animate="show" key={filter} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
@@ -272,7 +272,7 @@ export default function BlogPage({
                     className="group bg-[#EDEAE4] rounded-2xl overflow-hidden border border-black/8 flex flex-col h-full hover:border-primary/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-lg"
                   >
                     <Link href={postHref(post.slug)} className="block relative overflow-hidden aspect-video">
-                      <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                      <img src={post.image} alt={`${post.title} article by Balaji Engineering Works`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                       <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-colors" />
                       <div className="absolute top-3 left-3 md:top-4 md:left-4">
                         <span className={`inline-flex px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest border backdrop-blur-sm ${categoryColors[post.category] ?? "bg-slate-50 text-slate-600 border-slate-200"}`}>{post.category}</span>

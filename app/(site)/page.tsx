@@ -1,9 +1,11 @@
 import HomePage from "@/components/site/HomePage";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { staticProducts } from "@/lib/productsData";
 import { staticServices } from "@/lib/servicesData";
 import {
   buildMetadata,
   createOfferCatalogJsonLd,
+  createProductsItemListJsonLd,
   createSiteNavigationJsonLd,
   createServicesItemListJsonLd,
   createWebPageJsonLd,
@@ -11,22 +13,22 @@ import {
 } from "@/lib/seo";
 
 const title =
-  "Sheet Metal Bending Works in Surat | CNC Laser Cutting & Fabrication";
+  "CNC Laser Cutting Services in Surat | Plasma & Plate Bending";
 const description =
-  "SheetMetalBendingWorks.com connects industrial buyers with Balaji Engineering Works for CNC press brake bending, sheet metal shearing cutting, CNC laser cutting, heavy fabrication, and industrial products like base plates, foundation bolts, purlins, and perforated sheets in Surat.";
+  "Balaji Engineering Works provides CNC laser cutting services in Surat, CNC plasma cutting services in Surat, and CNC plate bending service in Surat, along with sheet metal fabrication and industrial products like base plates, foundation bolts, purlins, and perforated sheets.";
 
 export const metadata = buildMetadata({
   title,
   description,
   path: "/",
   keywords: [
-    "sheetmetalbendingworks.com",
     "Balaji Engineering Works Surat",
+    "laser cutting services in surat",
+    "cnc plasma cutting services surat",
+    "cnc plate bending service surat",
     "sheet metal fabrication Surat",
-    "sheet metal bending works",
     "sheet metal shearing cutting Surat",
     "cnc press brake bending surat",
-    "laser cutting services Surat",
     "steel fabrication company Surat",
     "industrial products manufacturer Surat",
     "foundation bolts manufacturer Surat",
@@ -37,6 +39,7 @@ export const metadata = buildMetadata({
 
 export default async function Page() {
   const services = staticServices;
+  const products = staticProducts;
 
   const schemas = [
     createWebsiteJsonLd(),
@@ -48,6 +51,7 @@ export default async function Page() {
     createSiteNavigationJsonLd(),
     createOfferCatalogJsonLd(services),
     createServicesItemListJsonLd(services),
+    createProductsItemListJsonLd(products),
   ];
 
   return (

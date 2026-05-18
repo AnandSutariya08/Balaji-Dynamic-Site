@@ -1,3 +1,4 @@
+import { staticProducts } from "@/lib/productsData";
 import { staticServices } from "@/lib/servicesData";
 import { getPublicBlogsFromFirestore } from "@/lib/firestore/publicBlogsServer";
 import { absoluteUrl } from "@/lib/seo";
@@ -9,6 +10,7 @@ function stripHtml(html: string) {
 
 export async function GET() {
   const services = staticServices;
+  const products = staticProducts;
   const posts = await getPublicBlogsFromFirestore();
 
   const serviceBlocks = services
@@ -19,9 +21,29 @@ export async function GET() {
         .join("\n");
 
       return `### ${service.title}
-URL: ${absoluteUrl("/services")}#${service.id}
+URL: ${absoluteUrl(`/services/${service.id}`)}
 Tagline: ${service.tagline}
 Description: ${service.description}
+Features:
+${features}
+Specifications:
+${specs}`;
+    })
+    .join("\n\n");
+
+  const productBlocks = products
+    .map((product) => {
+      const features = product.features.map((feature) => `  - ${feature}`).join("\n");
+      const specs = product.specs
+        .map((spec) => `  - ${spec.label}: ${spec.value}`)
+        .join("\n");
+
+      return `### ${product.title}
+URL: ${absoluteUrl(`/products/${product.id}`)}
+Tagline: ${product.tagline}
+Description: ${product.description}
+Applications:
+${product.applications.map((item) => `  - ${item}`).join("\n")}
 Features:
 ${features}
 Specifications:
@@ -64,6 +86,10 @@ Summary: ${body}`;
 ## Services
 
 ${serviceBlocks}
+
+## Products
+
+${productBlocks}
 
 ## Articles
 

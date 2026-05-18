@@ -76,6 +76,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       images: [absoluteUrl("/service-fabrication.png")],
     },
     {
+      url: `${siteConfig.url}/llms.txt`,
+      lastModified: homeLastModified,
+    },
+    {
+      url: `${siteConfig.url}/llms-full.txt`,
+      lastModified: homeLastModified,
+    },
+    {
+      url: `${siteConfig.url}/rss.xml`,
+      lastModified: blogLastModified,
+    },
+    {
       url: `${siteConfig.url}/contact`,
       lastModified: homeLastModified,
       images: [absoluteUrl("/service-cnc.png")],

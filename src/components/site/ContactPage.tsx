@@ -26,9 +26,9 @@ const contactInfo = [
 ];
 
 const faqs = [
-  { q: "How fast can you deliver a quote?", a: "We aim to provide quotes within 4–8 business hours for standard jobs. Send us your DXF/DWG files and material specs for the fastest response." },
+  { q: "How fast can you deliver a quote?", a: "We aim to provide quotes within 4-8 business hours for standard jobs. Send us your DXF/DWG files and material specs for the fastest response." },
   { q: "What file formats do you accept?", a: "We accept DXF, DWG, STEP, IGES, PDF drawings, and sketched dimensions. Our engineers will review every submission for manufacturability." },
-  { q: "What is your minimum order quantity?", a: "We accept orders from 1 piece to full production runs. No minimum order restriction — we serve both prototypes and large batch contracts." },
+  { q: "What is your minimum order quantity?", a: "We accept orders from 1 piece to full production runs. No minimum order restriction - we serve both prototypes and large batch contracts." },
   { q: "Do you offer on-site pickup?", a: "Yes. You can arrange collection directly from our Kamrej, Surat, Gujarat facility. We also provide logistics coordination for delivery across pan-India." },
 ];
 
@@ -93,7 +93,7 @@ export default function ContactPage({
         {/* HERO */}
         <PageHero
           imageSrc="/service-cnc.png"
-          imageAlt="Contact Balaji Engineering Works"
+          imageAlt="Request fabrication quote from Balaji Engineering Works in Surat"
           pill={(
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-primary">
               <Zap className="w-3 h-3" />
@@ -104,17 +104,17 @@ export default function ContactPage({
           )}
           title={(
             <>
-              Contact
+              Request
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#AC3C3C] to-[#e05555]">
-                Balaji.
+                a Quote.
               </span>
             </>
           )}
           description={(
             <>
-              Tell us about your CNC press brake bending, laser cutting, shearing cutting, rolling, fabrication, or steel processing requirement.
-              Our Surat team will respond with a clear quote and production guidance.
+              Tell us about your CNC laser cutting, CNC plasma cutting, CNC plate bending, sheet metal shearing cutting, fabrication, or industrial product requirement.
+              Our Surat team will review the job and respond with a clear quotation and production guidance.
             </>
           )}
           stats={[
@@ -166,13 +166,13 @@ export default function ContactPage({
                 <div>
                   <span className="text-primary font-bold tracking-[0.3em] uppercase text-sm">Our Promise</span>
                   <h2 className="text-[clamp(1.55rem,4.4vw,3.2rem)] font-display font-black text-[#1A1A1A] uppercase tracking-tighter leading-[0.92] mt-4 mb-5 md:mb-8">
-                    What to Expect
+                    What Happens After You Request a Quote
                   </h2>
                   <div className="space-y-5 md:space-y-6">
                     {[
-                      { title: "4–8 Hour Quote", desc: "Send files now — get a detailed quote today." },
+                      { title: "4-8 Hour Quote", desc: "Send files now - get a detailed quote today." },
                       { title: "Free DFM Review", desc: "We check your design for manufacturability at no cost." },
-                      { title: "No Hidden Costs", desc: "Material, machine time, and delivery — all itemized." },
+                      { title: "No Hidden Costs", desc: "Material, machine time, and delivery - all itemized." },
                       { title: "Flexible MOQ", desc: "From single prototypes to 10,000-piece runs." },
                     ].map((item, i) => (
                       <div key={i} className="flex gap-4">
@@ -202,7 +202,7 @@ export default function ContactPage({
                     </div>
                     <div>
                       <div className="text-[10px] font-bold tracking-widest text-slate-400 uppercase mb-1">Established</div>
-                      <div className="text-[#1A1A1A] font-bold text-sm">2001 · Kamrej, Surat, Gujarat</div>
+                      <div className="text-[#1A1A1A] font-bold text-sm">2001 - Kamrej, Surat, Gujarat</div>
                     </div>
                   </div>
                 </div>
@@ -217,11 +217,11 @@ export default function ContactPage({
                 </div>
               </div>
 
-              {/* RIGHT — Form */}
+              {/* RIGHT â€” Form */}
               <div className="lg:col-span-3">
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="bg-[#EDEAE4] border border-black/8 rounded-2xl p-6 sm:p-10 xl:p-12">
-                  <h3 className="text-2xl md:text-3xl font-display font-black text-[#1A1A1A] uppercase tracking-tight mb-2">Submit Your Inquiry</h3>
-                  <p className="text-slate-500 font-light text-sm mb-8 md:mb-10">All fields marked * are required. We'll respond within 24 hours.</p>
+                  <h3 className="text-2xl md:text-3xl font-display font-black text-[#1A1A1A] uppercase tracking-tight mb-2">Request a Fabrication Quote</h3>
+                  <p className="text-slate-500 font-light text-sm mb-8 md:mb-10">Share your service, product, drawing, quantity, and material details. All required fields are marked *.</p>
                   <form onSubmit={handleSubmit} className="space-y-5 md:space-y-6">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
                       <div className="space-y-2">
@@ -239,7 +239,7 @@ export default function ContactPage({
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
                       <div className="space-y-2">
-                        <Label htmlFor="service" className="text-xs font-bold tracking-widest text-slate-500 uppercase">Requirement *</Label>
+                        <Label htmlFor="service" className="text-xs font-bold tracking-widest text-slate-500 uppercase">Service or Product *</Label>
                         <Select value={selectedService} onValueChange={setSelectedService}>
                           <SelectTrigger className="bg-[#F7F5F1] border-black/10 text-[#1A1A1A] h-12 focus:border-primary">
                             <SelectValue placeholder="Select a service or product" />
@@ -263,8 +263,8 @@ export default function ContactPage({
                       <Input id="material" placeholder="e.g. MS IS 2062, 10mm thick" className="bg-[#F7F5F1] border-black/10 text-[#1A1A1A] placeholder:text-slate-400 h-12 focus:border-primary" />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="message" className="text-xs font-bold tracking-widest text-slate-500 uppercase">Project Details *</Label>
-                      <Textarea id="message" required placeholder="Describe your requirements — dimensions, tolerances, finish, timeline, and any special considerations..." className="min-h-[120px] md:min-h-[140px] bg-[#F7F5F1] border-black/10 text-[#1A1A1A] placeholder:text-slate-400 focus:border-primary resize-none" />
+                      <Label htmlFor="message" className="text-xs font-bold tracking-widest text-slate-500 uppercase">Drawing, Job Work, or Product Details *</Label>
+                      <Textarea id="message" required placeholder="Describe your requirement: dimensions, tolerances, finish, delivery timeline, job work scope, or product specifications..." className="min-h-[120px] md:min-h-[140px] bg-[#F7F5F1] border-black/10 text-[#1A1A1A] placeholder:text-slate-400 focus:border-primary resize-none" />
                     </div>
                     <Button type="submit" size="lg" className="w-full h-14 md:h-16 font-bold tracking-widest uppercase text-sm md:text-base bg-primary hover:bg-primary/90 text-white shadow-[0_0_30px_rgba(172,60,60,0.3)] border-none" disabled={isSubmitting}>
                       {isSubmitting ? (
@@ -343,15 +343,16 @@ export default function ContactPage({
             <div className="text-center mb-10 md:mb-14">
               <span className="text-primary font-bold tracking-[0.3em] uppercase text-sm">Popular Inquiries</span>
               <h2 className="text-4xl sm:text-5xl md:text-6xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4">
-                Popular Pages Before You Contact Us
+                Popular Quote Request Pages
               </h2>
             </div>
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
               {[
+                { title: "CNC Laser Cutting", href: "/services/cnc-laser-cutting" },
                 { title: "CNC Plate Bending", href: "/services/cnc-plate-bending" },
                 { title: "Base Plates", href: "/products/base-plates" },
                 { title: "Foundation Bolts", href: "/products/foundation-bolts" },
-                { title: "Steel Pallets", href: "/products/steel-pallets" },
+                { title: "Perforated Sheets", href: "/products/perforated-sheets" },
               ].map((service) => (
                 <Link
                   key={service.href}
@@ -377,7 +378,7 @@ export default function ContactPage({
               <h2 className="text-[clamp(2.0rem,6.2vw,5.0rem)] font-display font-black text-white uppercase tracking-tighter leading-[0.9] mb-4 md:mb-6">
                 Still Have<br />Questions?
               </h2>
-              <p className="text-zinc-400 font-light text-base md:text-lg max-w-lg mx-auto mb-10 md:mb-12">Our team is available 7 days a week. Pick up the phone — we love talking shop.</p>
+              <p className="text-zinc-400 font-light text-base md:text-lg max-w-lg mx-auto mb-10 md:mb-12">Our team is available 7 days a week. Pick up the phone - we love talking shop.</p>
               <a href="tel:+919978753398" className="inline-flex items-center gap-3 md:gap-4 text-3xl sm:text-4xl md:text-5xl font-display font-black text-white hover:text-primary transition-colors">
                 <Phone className="w-8 h-8 md:w-10 md:h-10 text-primary" />+91 99787 53398
               </a>
