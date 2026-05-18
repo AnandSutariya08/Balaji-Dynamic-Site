@@ -7,7 +7,7 @@ export const staticProducts: Product[] = [
     tagline: "Fabricated industrial rainwater drainage channels for sheds and plant buildings",
     description:
       "Balaji Engineering Works fabricates metal gutters for industrial sheds, warehouses, factory roofs, and utility buildings. These sections are made to project length, outlet, and bracket requirements so rainwater collection and drainage can be integrated neatly with the structure.",
-    image: "/product-gutters.svg",
+    image: "/product-gutters.png",
     features: [
       "Custom lengths and sectional sizes",
       "Outlet, end-cap, and bracket provision",
@@ -67,7 +67,7 @@ export const staticProducts: Product[] = [
     tagline: "Custom anchor and foundation bolt fabrication for structural and machinery installations",
     description:
       "We support drawing-based foundation bolt manufacturing for machinery mounting, structural columns, PEB work, and industrial installation jobs. Balaji Engineering Works can produce straight, bent, and anchor-style bolt sets with matching fabrication support as required by the project.",
-    image: "/product-foundation-bolts.svg",
+    image: "/product-foundation-bolts.png",
     features: [
       "Drawing-based bolt set fabrication",
       "Suitable for structural and machinery installation work",
@@ -127,7 +127,7 @@ export const staticProducts: Product[] = [
     tagline: "MS base plates and mounting plates for structures, columns, and machinery bases",
     description:
       "Balaji Engineering Works manufactures base plates for structural steel, support columns, machinery mounts, and industrial installations. Plates are produced from drawing-based layouts with required hole patterns, thicknesses, and fabrication details for reliable project fit-up.",
-    image: "/product-base-plates.svg",
+    image: "/product-base-plates.png",
     features: [
       "Custom hole patterns and plate sizes",
       "Suitable for structural and machinery mounting",
@@ -187,7 +187,7 @@ export const staticProducts: Product[] = [
     tagline: "Project-specific Z and C purlin sections for industrial sheds and structural roofing systems",
     description:
       "We fabricate Z and C purlins for roofing and cladding support systems used in industrial sheds, warehouses, and PEB structures. Section size, punching, length, and connection details are produced according to project drawings and installation requirements.",
-    image: "/product-z-c-purlins.svg",
+    image: "/product-z-c-purlins.png",
     features: [
       "Z and C profile section options",
       "Length and hole pattern customization",
@@ -247,7 +247,7 @@ export const staticProducts: Product[] = [
     tagline: "Fabricated conveyor stringers and side members for material handling structures",
     description:
       "Balaji Engineering Works fabricates conveyor stringers and related structural members for material handling systems. These items are made for plant layouts, support frames, and conveyor line assemblies where dimensional fit and project coordination matter.",
-    image: "/product-conveyor-stringer.svg",
+    image: "/product-conveyor-stringer.png",
     features: [
       "Drawing-based conveyor side member fabrication",
       "Supports fabrication and assembly jobs",
@@ -307,7 +307,7 @@ export const staticProducts: Product[] = [
     tagline: "Custom perforated metal sheets with hole patterns for industrial, screening, and panel use",
     description:
       "We provide perforated sheet fabrication for industrial panels, guards, screens, partitions, filters, and architectural utility use. Hole size, pitch, open area, border, and cut size can be produced according to the drawing or application requirement.",
-    image: "/product-perforated-sheets.svg",
+    image: "/product-perforated-sheets.png",
     features: [
       "Custom hole diameter and pitch options",
       "Panels cut to application-specific sizes",
@@ -367,7 +367,7 @@ export const staticProducts: Product[] = [
     tagline: "Steel decking sheets for industrial flooring, mezzanine support, and composite deck applications",
     description:
       "Balaji Engineering Works supports decking sheet requirements for industrial platforms, mezzanine structures, shed extensions, and composite deck style applications. We align sheet selection, profile, and project-related fabricated support requirements with practical site use.",
-    image: "/product-decking-sheets.svg",
+    image: "/product-decking-sheets.png",
     features: [
       "Profiles suited for industrial deck applications",
       "Project-based length coordination",
@@ -427,7 +427,7 @@ export const staticProducts: Product[] = [
     tagline: "Corrugated metal sheets for roofing, cladding, partitions, and utility enclosures",
     description:
       "We support corrugated sheet requirements for industrial sheds, roofing extensions, side cladding, protective enclosures, and utility partitions. Sheet length, coverage, and related fabricated support items can be coordinated as per project needs.",
-    image: "/product-corrugated-sheets.svg",
+    image: "/product-corrugated-sheets.png",
     features: [
       "Suitable for industrial roofing and cladding use",
       "Project length and coverage planning support",
@@ -487,7 +487,7 @@ export const staticProducts: Product[] = [
     tagline: "Steel walkway planks for roof access, platforms, and industrial maintenance paths",
     description:
       "Balaji Engineering Works fabricates walkway planks for industrial sheds, roof access systems, maintenance routes, and plant platforms. These products are designed to provide practical footing, drainage/opening options, and integration with project support structures.",
-    image: "/product-walkway-plank.svg",
+    image: "/product-walkway-plank.png",
     features: [
       "Practical access solution for industrial roofs and platforms",
       "Slot, perforation, and anti-slip oriented design options",
@@ -547,7 +547,7 @@ export const staticProducts: Product[] = [
     tagline: "Heavy-duty steel pallets for industrial storage, material handling, and plant logistics",
     description:
       "We fabricate steel pallets for warehouses, production plants, dispatch areas, and heavy-duty storage systems. These pallets are suitable where durability, repeat handling, and long service life matter more than disposable packaging solutions.",
-    image: "/product-steel-pallets.svg",
+    image: "/product-steel-pallets.png",
     features: [
       "Heavy-duty reusable storage platform",
       "Suitable for plant, warehouse, and logistics use",

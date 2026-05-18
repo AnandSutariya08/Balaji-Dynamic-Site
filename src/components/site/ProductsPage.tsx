@@ -25,7 +25,7 @@ export default function ProductsPage({
     <PageTransition>
       <div className="bg-[#F7F5F1]">
         <PageHero
-          imageSrc="/product-base-plates.svg"
+          imageSrc="/product-base-plates.png"
           imageAlt="Industrial products from Balaji Engineering Works"
           pill={(
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/20 px-3 py-1 text-primary">

@@ -54,3 +54,63 @@ id = "RFVCBvp0j0MOEPx7yOvJb"
 uri = "file://artifacts/balaji-engineering/public/service-profile.png"
 type = "image"
 title = "Profile cutting"
+
+[[generated]]
+id = "XrhCYdf5A82JCPhqoPYyS"
+uri = "file://public/product-gutters.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "YHo3k-nJuJIr5hV8SavAR"
+uri = "file://public/product-foundation-bolts.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "yMnCwJVivfXGqatgBJZMm"
+uri = "file://public/product-base-plates.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "ym4oRUmK4r6RQLv_0jhc0"
+uri = "file://public/product-z-c-purlins.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "9FyJYf1DsjSMkcwABdvWw"
+uri = "file://public/product-conveyor-stringer.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "-FCJpkEqsojzD7Oy5Yu2E"
+uri = "file://public/product-perforated-sheets.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "PRkf3WsXQqtvI0NIK7jnT"
+uri = "file://public/product-decking-sheets.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "6jpSOMWiBj-KKY-FPtL0P"
+uri = "file://public/product-corrugated-sheets.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "Z65e5Ntbk5P0zvxP33X4I"
+uri = "file://public/product-walkway-plank.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "3V6xBrQBa5O_weMC8nOlP"
+uri = "file://public/product-steel-pallets.png"
+type = "image"
+title = "generated_image"

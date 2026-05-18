@@ -25,7 +25,7 @@ export const metadata = buildMetadata({
     "steel pallets manufacturer india",
     "z c purlins supplier surat",
   ],
-  image: "/product-base-plates.svg",
+  image: "/product-base-plates.png",
 });
 
 export default async function Page() {
