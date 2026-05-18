@@ -12,6 +12,7 @@ import { Mail, MapPin, Phone, Clock, CheckCircle2, ArrowRight, Zap } from "lucid
 import Link from "next/link";
 import type { FormEvent } from "react";
 import { useEffect, useState } from "react";
+import { getInquiryLabel, INQUIRY_OPTIONS } from "@/lib/inquiryOptions";
 import { PageHero } from "@/components/site/PageHero";
 import { submitInquiryLead } from "@/lib/inquirySubmission";
 
@@ -30,28 +31,6 @@ const faqs = [
   { q: "What is your minimum order quantity?", a: "We accept orders from 1 piece to full production runs. No minimum order restriction — we serve both prototypes and large batch contracts." },
   { q: "Do you offer on-site pickup?", a: "Yes. You can arrange collection directly from our Kamrej, Surat, Gujarat facility. We also provide logistics coordination for delivery across pan-India." },
 ];
-
-const SERVICE_OPTIONS = [
-  { value: "cnc-plate-bending", label: "CNC Plate Bending" },
-  { value: "sheet-metal-shearing-cutting", label: "Sheet Metal Shearing Cutting" },
-  { value: "cnc-laser-cutting", label: "CNC Laser Cutting" },
-  { value: "cnc-plasma-cutting", label: "CNC Plasma Cutting" },
-  { value: "plate-rolling", label: "Plate Rolling" },
-  { value: "assembly", label: "Assembly" },
-  { value: "welding", label: "Welding" },
-  { value: "deep-drawing", label: "Deep Drawing" },
-  { value: "finishing", label: "Finishing" },
-  { value: "stamping", label: "Stamping" },
-  { value: "punching", label: "Punching" },
-  { value: "other", label: "Other / Custom Fabrication" },
-] as const;
-
-function getServiceLabel(serviceValue: string) {
-  return (
-    SERVICE_OPTIONS.find((option) => option.value === serviceValue)?.label ??
-    serviceValue
-  );
-}
 
 export default function ContactPage({
   defaultService = "",
@@ -85,7 +64,7 @@ export default function ContactPage({
         name: get("name"),
         phone: get("phone"),
         email: get("email"),
-        service: getServiceLabel(serviceValue),
+        service: getInquiryLabel(serviceValue),
         quantity: get("quantity"),
         material: get("material"),
         message: get("message"),
@@ -260,13 +239,13 @@ export default function ContactPage({
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
                       <div className="space-y-2">
-                        <Label htmlFor="service" className="text-xs font-bold tracking-widest text-slate-500 uppercase">Service Required *</Label>
+                        <Label htmlFor="service" className="text-xs font-bold tracking-widest text-slate-500 uppercase">Requirement *</Label>
                         <Select value={selectedService} onValueChange={setSelectedService}>
                           <SelectTrigger className="bg-[#F7F5F1] border-black/10 text-[#1A1A1A] h-12 focus:border-primary">
-                            <SelectValue placeholder="Select a service" />
+                            <SelectValue placeholder="Select a service or product" />
                           </SelectTrigger>
                           <SelectContent>
-                            {SERVICE_OPTIONS.map((option) => (
+                            {INQUIRY_OPTIONS.map((option) => (
                               <SelectItem key={option.value} value={option.value}>
                                 {option.label}
                               </SelectItem>
@@ -364,15 +343,15 @@ export default function ContactPage({
             <div className="text-center mb-10 md:mb-14">
               <span className="text-primary font-bold tracking-[0.3em] uppercase text-sm">Popular Inquiries</span>
               <h2 className="text-4xl sm:text-5xl md:text-6xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter mt-4">
-                Choose a Service Before You Contact Us
+                Popular Pages Before You Contact Us
               </h2>
             </div>
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
               {[
                 { title: "CNC Plate Bending", href: "/services/cnc-plate-bending" },
-                { title: "Sheet Metal Shearing Cutting", href: "/services/sheet-metal-shearing-cutting" },
-                { title: "CNC Laser Cutting", href: "/services/cnc-laser-cutting" },
-                { title: "CNC Plasma Cutting", href: "/services/cnc-plasma-cutting" },
+                { title: "Base Plates", href: "/products/base-plates" },
+                { title: "Foundation Bolts", href: "/products/foundation-bolts" },
+                { title: "Steel Pallets", href: "/products/steel-pallets" },
               ].map((service) => (
                 <Link
                   key={service.href}
@@ -383,7 +362,7 @@ export default function ContactPage({
                     {service.title}
                   </h3>
                   <span className="mt-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary">
-                    View Service <ArrowRight className="w-3.5 h-3.5" />
+                    View Page <ArrowRight className="w-3.5 h-3.5" />
                   </span>
                 </Link>
               ))}

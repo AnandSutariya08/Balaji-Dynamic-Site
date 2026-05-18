@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Z and C purlins illustration</title>
+  <desc id="desc">A technical illustration of fabricated Z and C purlin sections.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f8f5f0"/>
+      <stop offset="1" stop-color="#ebe0d9"/>
+    </linearGradient>
+    <linearGradient id="steel" x1="0" x2="1">
+      <stop offset="0" stop-color="#5e6d7b"/>
+      <stop offset="1" stop-color="#c2ccd2"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <circle cx="940" cy="210" r="165" fill="#ac3c3c" opacity=".11"/>
+  <g transform="translate(150 245)">
+    <g transform="rotate(-10 350 220)">
+      <path d="M90 360H160V120H560V190H230V290H580V360H160V420H90Z" fill="url(#steel)"/>
+      <path d="M160 120L225 150V420L160 390Z" fill="#495864"/>
+      <path d="M560 120L620 148V218L560 190Z" fill="#8f9ba4"/>
+      <path d="M580 290L640 318V388L580 360Z" fill="#8f9ba4"/>
+      <g fill="#ac3c3c">
+        <circle cx="235" cy="154" r="10"/>
+        <circle cx="330" cy="154" r="10"/>
+        <circle cx="425" cy="154" r="10"/>
+        <circle cx="255" cy="326" r="10"/>
+        <circle cx="360" cy="326" r="10"/>
+        <circle cx="465" cy="326" r="10"/>
+      </g>
+    </g>
+    <g transform="translate(390 75) rotate(8 260 190)">
+      <path d="M80 120H520V185H175V260H500V325H80V260H430V185H80Z" fill="#d2d9de"/>
+      <path d="M80 120L140 148V353L80 325Z" fill="#61717f"/>
+      <g fill="#1a1a1a" opacity=".28">
+        <circle cx="182" cy="156" r="9"/>
+        <circle cx="292" cy="156" r="9"/>
+        <circle cx="402" cy="156" r="9"/>
+        <circle cx="215" cy="292" r="9"/>
+        <circle cx="325" cy="292" r="9"/>
+        <circle cx="435" cy="292" r="9"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -34,6 +34,36 @@ export interface Service {
 
 export type ServiceInput = Omit<Service, "id">;
 
+export interface ProductSpec {
+  label: string;
+  value: string;
+}
+
+export interface ProductFaq {
+  question: string;
+  answer: string;
+}
+
+export interface Product {
+  id: string;
+  title: string;
+  tagline: string;
+  description: string;
+  image: string;
+  features: string[];
+  specs: ProductSpec[];
+  applications: string[];
+  process: string[];
+  faqs: ProductFaq[];
+  keywords: string[];
+  metaTitle: string;
+  metaDescription: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export type ProductInput = Omit<Product, "id">;
+
 export type InquiryStatus = "new" | "in-progress" | "replied" | "closed";
 
 export interface Inquiry {

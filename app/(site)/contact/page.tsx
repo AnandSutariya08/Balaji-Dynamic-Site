@@ -9,7 +9,7 @@ import {
 
 const title = "Contact Balaji Engineering Works, Surat";
 const description =
-  "Contact Balaji Engineering Works in Surat through SheetMetalBendingWorks.com for CNC press brake bending, sheet metal shearing cutting, CNC laser cutting, plate rolling, and fabrication quotes.";
+  "Contact Balaji Engineering Works in Surat through SheetMetalBendingWorks.com for fabrication service quotes and product requirements including base plates, foundation bolts, purlins, perforated sheets, and steel pallets.";
 
 export const metadata = buildMetadata({
   title,
@@ -22,6 +22,7 @@ export const metadata = buildMetadata({
     "sheet metal shearing cutting surat",
     "cnc press brake bending surat",
     "request fabrication quote Surat",
+    "product inquiry Surat",
     "contact steel fabrication company Gujarat",
   ],
 });

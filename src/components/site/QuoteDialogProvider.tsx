@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { getInquiryLabel, INQUIRY_OPTIONS } from "@/lib/inquiryOptions";
 import { submitInquiryLead } from "@/lib/inquirySubmission";
 
 type QuoteDialogContextValue = {
@@ -18,28 +19,6 @@ type QuoteDialogContextValue = {
 };
 
 const QuoteDialogContext = createContext<QuoteDialogContextValue | null>(null);
-
-const SERVICE_OPTIONS = [
-  { value: "cnc-plate-bending", label: "CNC Plate Bending" },
-  { value: "sheet-metal-shearing-cutting", label: "Sheet Metal Shearing Cutting" },
-  { value: "cnc-laser-cutting", label: "CNC Laser Cutting" },
-  { value: "cnc-plasma-cutting", label: "CNC Plasma Cutting" },
-  { value: "plate-rolling", label: "Plate Rolling" },
-  { value: "assembly", label: "Assembly" },
-  { value: "welding", label: "Welding" },
-  { value: "deep-drawing", label: "Deep Drawing" },
-  { value: "finishing", label: "Finishing" },
-  { value: "stamping", label: "Stamping" },
-  { value: "punching", label: "Punching" },
-  { value: "other", label: "Other / Custom Fabrication" },
-] as const;
-
-function getServiceLabel(serviceValue: string) {
-  return (
-    SERVICE_OPTIONS.find((option) => option.value === serviceValue)?.label ??
-    serviceValue
-  );
-}
 
 export function useQuoteDialog() {
   const value = useContext(QuoteDialogContext);
@@ -115,7 +94,7 @@ export function QuoteDialogProvider({ children }: { children: ReactNode }) {
         name: get("quote-name"),
         phone: get("quote-phone"),
         email: get("quote-email"),
-        service: getServiceLabel(serviceValue),
+        service: getInquiryLabel(serviceValue),
         quantity: get("quote-quantity"),
         material: get("quote-material"),
         message: get("quote-message"),
@@ -225,14 +204,14 @@ export function QuoteDialogProvider({ children }: { children: ReactNode }) {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="quote-service" className="text-xs font-bold tracking-widest text-white/60 uppercase">
-                      Service *
+                      Requirement *
                     </Label>
                     <Select value={selectedService} onValueChange={setSelectedService}>
                       <SelectTrigger className="bg-black/40 border-white/10 text-white h-12 focus:border-primary">
-                        <SelectValue placeholder="Select a service" />
+                        <SelectValue placeholder="Select a service or product" />
                       </SelectTrigger>
                       <SelectContent className="z-[90]">
-                        {SERVICE_OPTIONS.map((option) => (
+                        {INQUIRY_OPTIONS.map((option) => (
                           <SelectItem key={option.value} value={option.value}>
                             {option.label}
                           </SelectItem>

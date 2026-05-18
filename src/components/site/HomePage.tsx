@@ -11,6 +11,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useBlogs } from "@/hooks/useBlogs";
 import type { BlogPost } from "@/lib/firestore/types";
+import { staticProducts } from "@/lib/productsData";
 import { staticServices } from "@/lib/servicesData";
 import { SectorsSection } from "@/components/site/SectorsSection";
 import { PartnersClientsSection } from "@/components/site/PartnersClientsSection";
@@ -38,6 +39,7 @@ export default function HomePage({
     image: service.image,
     subs: service.features.slice(0, 3),
   }));
+  const featuredProducts = staticProducts.slice(0, 6);
 
   const scrollCardIntoView = useCallback((index: number) => {
     const container = servicesScrollRef.current;
@@ -169,7 +171,7 @@ export default function HomePage({
                 {/* Sub-text */}
                 <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.65, duration: 0.7 }}
                   className="text-sm sm:text-base md:text-lg text-zinc-300 font-light leading-relaxed max-w-xl mb-4 md:mb-5 lg:mb-6">
-                  Balaji Engineering Works delivers CNC press brake bending, CNC bending, CNC laser cutting, CNC plasma cutting, sheet metal shearing cutting, plate rolling, and heavy fabrication from Kamrej, Surat, Gujarat for industrial clients across India.
+                  Balaji Engineering Works delivers CNC press brake bending, CNC laser cutting, CNC plasma cutting, sheet metal shearing cutting, plate rolling, and heavy fabrication from Kamrej, Surat, Gujarat for industrial clients across India.
                 </motion.p>
 
                 {/* CTAs */}
@@ -450,6 +452,56 @@ export default function HomePage({
             <Button variant="outline" className="w-full font-bold uppercase tracking-widest border-black/15 text-[#1A1A1A]" asChild>
               <Link href="/services">View All Capabilities <ArrowRight className="ml-2 w-4 h-4" /></Link>
             </Button>
+          </div>
+        </section>
+
+        <section className="py-16 md:py-28 bg-[#EDEAE4]">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mb-12 md:mb-16">
+              <div>
+                <span className="text-primary font-bold tracking-[0.3em] uppercase">Products</span>
+                <h2 className="text-[clamp(1.85rem,5.0vw,4.0rem)] font-display font-black text-[#1A1A1A] uppercase tracking-tighter leading-[0.92] mt-4">
+                  What We Build
+                </h2>
+                <p className="mt-4 max-w-2xl text-sm md:text-base text-slate-600 font-light leading-relaxed">
+                  We also manufacture project-oriented steel products for roofing, structure, drainage, access, storage, and industrial installation requirements.
+                </p>
+              </div>
+              <Button variant="ghost" className="text-[#1A1A1A] hover:text-primary transition-colors font-bold uppercase tracking-widest shrink-0" asChild>
+                <Link href="/products">View All Products <ArrowRight className="ml-2 w-4 h-4" /></Link>
+              </Button>
+            </div>
+            <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-5">
+              {featuredProducts.map((product) => (
+                <Link
+                  key={product.id}
+                  href={`/products/${product.id}`}
+                  className="group overflow-hidden rounded-2xl border border-black/8 bg-[#F7F5F1] transition-all hover:border-primary/40 hover:bg-white"
+                >
+                  <div className="aspect-[16/10] overflow-hidden border-b border-black/8">
+                    <img
+                      src={product.image}
+                      alt={product.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary">
+                      Industrial Product
+                    </span>
+                    <h3 className="mt-3 text-2xl font-display font-black text-[#1A1A1A] uppercase tracking-tight group-hover:text-primary transition-colors">
+                      {product.title}
+                    </h3>
+                    <p className="mt-3 text-sm font-light leading-relaxed text-slate-500">
+                      {product.tagline}
+                    </p>
+                    <span className="mt-5 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary">
+                      View Product <ArrowRight className="w-3.5 h-3.5" />
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </section>
 

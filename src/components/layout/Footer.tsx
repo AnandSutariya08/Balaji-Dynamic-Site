@@ -6,6 +6,7 @@ const quickLinks = [
   { name: "Home", path: "/" },
   { name: "About Us", path: "/about" },
   { name: "Services", path: "/services" },
+  { name: "Products", path: "/products" },
   { name: "Sectors", path: "/sectors" },
   { name: "Blog", path: "/blog" },
   { name: "Contact", path: "/contact" },
@@ -15,11 +16,11 @@ const capabilities = [
   { name: "CNC Plate Bending", path: "/services/cnc-plate-bending" },
   { name: "Sheet Metal Shearing Cutting", path: "/services/sheet-metal-shearing-cutting" },
   { name: "CNC Laser Cutting", path: "/services/cnc-laser-cutting" },
-  { name: "CNC Plasma Cutting", path: "/services/cnc-plasma-cutting" },
-  { name: "Plate Rolling", path: "/services/plate-rolling" },
-  { name: "Assembly", path: "/services/assembly" },
-  { name: "Welding", path: "/services/welding" },
-  { name: "Punching", path: "/services/punching" },
+  { name: "Base Plates", path: "/products/base-plates" },
+  { name: "Foundation Bolts", path: "/products/foundation-bolts" },
+  { name: "Perforated Sheets", path: "/products/perforated-sheets" },
+  { name: "Z/C Purlins", path: "/products/z-c-purlins" },
+  { name: "Steel Pallets", path: "/products/steel-pallets" },
 ];
 
 export function Footer() {
@@ -84,7 +85,7 @@ export function Footer() {
             </Link>
             <p className="mb-6 max-w-xs text-sm leading-relaxed text-white/40">
               Surat-based manufacturer and service provider for CNC laser cutting,
-              CNC plasma cutting, CNC press brake bending, sheet metal shearing cutting, plate rolling, profile cutting, and heavy fabrication.
+              CNC plasma cutting, CNC press brake bending, sheet metal shearing cutting, plate rolling, profile cutting, heavy fabrication, and industrial steel products.
             </p>
             <div className="flex flex-col gap-1.5 font-mono text-xs text-white/30">
               <span>GST: 24BCUPS8314Q1ZK</span>

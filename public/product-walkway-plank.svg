@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Walkway plank illustration</title>
+  <desc id="desc">A technical illustration of formed steel walkway planks with slot openings.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f7f4ef"/>
+      <stop offset="1" stop-color="#eee0da"/>
+    </linearGradient>
+    <linearGradient id="steel" x1="0" x2="1">
+      <stop offset="0" stop-color="#667682"/>
+      <stop offset="1" stop-color="#ced7dd"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <circle cx="940" cy="180" r="165" fill="#ac3c3c" opacity=".1"/>
+  <g transform="translate(170 270)">
+    <polygon points="110 280 760 180 920 260 270 362" fill="#50606c"/>
+    <polygon points="110 280 110 360 270 442 270 362" fill="#72838f"/>
+    <polygon points="270 362 920 260 920 340 270 442" fill="url(#steel)"/>
+    <polygon points="220 220 700 145 770 180 290 257" fill="#d9e1e6"/>
+    <polygon points="220 220 220 250 290 286 290 257" fill="#8a98a2"/>
+    <polygon points="290 257 770 180 770 210 290 286" fill="#bcc6cc"/>
+    <g fill="#1a1a1a" opacity=".3">
+      <rect x="280" y="239" width="56" height="18" rx="9"/>
+      <rect x="360" y="226" width="56" height="18" rx="9"/>
+      <rect x="440" y="213" width="56" height="18" rx="9"/>
+      <rect x="520" y="200" width="56" height="18" rx="9"/>
+      <rect x="600" y="187" width="56" height="18" rx="9"/>
+      <rect x="320" y="287" width="56" height="18" rx="9"/>
+      <rect x="400" y="274" width="56" height="18" rx="9"/>
+      <rect x="480" y="261" width="56" height="18" rx="9"/>
+      <rect x="560" y="248" width="56" height="18" rx="9"/>
+      <rect x="640" y="235" width="56" height="18" rx="9"/>
+    </g>
+    <path d="M110 360L270 442" stroke="#ac3c3c" stroke-width="12" opacity=".8"/>
+  </g>
+</svg>

@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { staticProducts } from "@/lib/productsData";
 import { staticServices } from "@/lib/servicesData";
 import { absoluteUrl } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
@@ -23,6 +24,7 @@ function uniqueImages(images: Array<string | undefined>) {
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getPublicBlogsFromFirestore();
+  const products = staticProducts;
   const services = staticServices;
 
   const serviceLastModified = services.length
@@ -34,8 +36,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const blogLastModified = posts.length
     ? maxDate(posts.map((post) => toDate(post.date)))
     : new Date();
+  const productLastModified = products.length
+    ? maxDate(
+        products.map((product) => toDate(product.updatedAt ?? product.createdAt)),
+      )
+    : new Date();
 
-  const homeLastModified = maxDate([serviceLastModified, blogLastModified]);
+  const homeLastModified = maxDate([serviceLastModified, productLastModified, blogLastModified]);
 
   const staticEntries: MetadataRoute.Sitemap = [
     {
@@ -52,6 +59,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${siteConfig.url}/services`,
       lastModified: serviceLastModified,
       images: services.map((service) => absoluteUrl(service.image)),
+    },
+    {
+      url: `${siteConfig.url}/products`,
+      lastModified: productLastModified,
+      images: products.map((product) => absoluteUrl(product.image)),
+    },
+    {
+      url: `${siteConfig.url}/sectors`,
+      lastModified: homeLastModified,
+      images: [absoluteUrl("/service-fabrication.png")],
     },
     {
       url: `${siteConfig.url}/blog`,
@@ -92,6 +109,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: toDate(service.updatedAt ?? service.createdAt),
     images: uniqueImages([absoluteUrl(service.image)]),
   }));
+  const productEntries = [...products].map((product) => ({
+    url: `${siteConfig.url}/products/${product.id}`,
+    lastModified: toDate(product.updatedAt ?? product.createdAt),
+    images: uniqueImages([absoluteUrl(product.image)]),
+  }));
 
-  return [...staticEntries, ...serviceEntries, ...blogEntries];
+  return [...staticEntries, ...serviceEntries, ...productEntries, ...blogEntries];
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import type { BlogPost, Service } from "@/lib/firestore/types";
+import type { BlogPost, Product, Service } from "@/lib/firestore/types";
 import { contactFaqs, siteConfig } from "@/lib/site";
 import type { ServiceFaq } from "@/lib/serviceSeo";
 
@@ -235,6 +235,7 @@ export function createSiteNavigationJsonLd(): SchemaObject {
       { name: "Home", path: "/" },
       { name: "About", path: "/about" },
       { name: "Services", path: "/services" },
+      { name: "Products", path: "/products" },
       { name: "Sectors", path: "/sectors" },
       { name: "Blog", path: "/blog" },
       { name: "Contact", path: "/contact" },
@@ -337,6 +338,48 @@ export function createServiceJsonLd(service: Service): SchemaObject {
       "@type": "Brand",
       name: siteConfig.name,
     },
+  };
+}
+
+export function createProductsItemListJsonLd(products: Product[]): SchemaObject {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Balaji Engineering Works Products",
+    numberOfItems: products.length,
+    itemListElement: products.map((product, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: absoluteUrl(`/products/${product.id}`),
+      name: product.title,
+      description: product.description,
+    })),
+  };
+}
+
+export function createProductJsonLd(product: Product): SchemaObject {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": `${absoluteUrl(`/products/${product.id}`)}#product`,
+    name: product.title,
+    description: product.description,
+    image: absoluteUrl(product.image),
+    url: absoluteUrl(`/products/${product.id}`),
+    category: "Industrial Fabricated Product",
+    brand: {
+      "@type": "Brand",
+      name: siteConfig.name,
+    },
+    manufacturer: {
+      "@id": `${siteConfig.url}#organization`,
+    },
+    areaServed: siteConfig.serviceAreas,
+    additionalProperty: product.specs.map((spec) => ({
+      "@type": "PropertyValue",
+      name: spec.label,
+      value: spec.value,
+    })),
   };
 }
 
