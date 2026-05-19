@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const SARVAM_API_KEY = process.env.SARVAM_API_KEY ?? "";
+const SARVAM_API_KEY = "sk_49pw2t4a_Adyi0riHaODYeXf66tjkYQ0Z";
 
 const SYSTEM_PROMPT = `You are Balaji AI, the intelligent assistant for Balaji Engineering Works — a leading sheet metal fabrication and CNC machining company in Surat, Gujarat, India.
 
@@ -69,10 +69,6 @@ type ChatMessage = {
 };
 
 export async function POST(req: NextRequest) {
-  if (!SARVAM_API_KEY) {
-    return NextResponse.json({ error: "AI service not configured." }, { status: 503 });
-  }
-
   try {
     const body = await req.json();
     const messages: ChatMessage[] = body.messages ?? [];

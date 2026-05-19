@@ -411,9 +411,6 @@ export function BalajiAI() {
                 </svg>
               </button>
             </div>
-            <p className="mt-2.5 text-center text-[10px] text-white/15 tracking-wide">
-              Powered by Sarvam AI · Balaji Engineering Works
-            </p>
           </div>
         </div>
       )}
