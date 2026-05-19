@@ -52,20 +52,27 @@ export function SectorsSection({
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.06 }}
-              className="group rounded-2xl border border-black/8 bg-[#EDEAE4] p-7 md:p-8 hover:border-primary/40 hover:bg-[#F7F5F1] transition-all"
             >
-              <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-5 md:mb-6 group-hover:bg-primary group-hover:border-primary transition-all duration-300">
-                {(() => {
-                  const Icon = iconMap[sector.icon as keyof typeof iconMap] ?? Factory;
-                  return <Icon className="w-6 h-6 text-primary group-hover:text-white transition-colors duration-300" />;
-                })()}
-              </div>
-              <h3 className="text-lg md:text-xl font-display font-black uppercase tracking-tight text-[#1A1A1A]">
-                {sector.name}
-              </h3>
-              <p className="mt-3 text-sm md:text-base font-light leading-relaxed text-slate-600">
-                {sector.description}
-              </p>
+              <Link
+                href={`/sectors/${sector.id}`}
+                className="group block h-full rounded-2xl border border-black/8 bg-[#EDEAE4] p-7 md:p-8 hover:border-primary/40 hover:bg-[#F7F5F1] transition-all"
+              >
+                <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-5 md:mb-6 group-hover:bg-primary group-hover:border-primary transition-all duration-300">
+                  {(() => {
+                    const Icon = iconMap[sector.icon as keyof typeof iconMap] ?? Factory;
+                    return <Icon className="w-6 h-6 text-primary group-hover:text-white transition-colors duration-300" />;
+                  })()}
+                </div>
+                <h3 className="text-lg md:text-xl font-display font-black uppercase tracking-tight text-[#1A1A1A]">
+                  {sector.name}
+                </h3>
+                <p className="mt-3 text-sm md:text-base font-light leading-relaxed text-slate-600">
+                  {sector.description}
+                </p>
+                <div className="mt-5 flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                  Learn More <ArrowRight className="w-3 h-3" />
+                </div>
+              </Link>
             </motion.article>
           ))}
         </div>

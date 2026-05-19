@@ -3,6 +3,7 @@ import { staticServices } from "@/lib/servicesData";
 import { getProductsData } from "@/lib/productsData";
 import { absoluteUrl } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
+import { sectorsData } from "@/lib/sectorsData";
 import { getPublicBlogsFromFirestore } from "@/lib/firestore/publicBlogsServer";
 import { getPublicGalleryFromFirestore } from "@/lib/firestore/publicGalleryServer";
 import type { BlogPost, GalleryItem, Product } from "@/lib/firestore/types";
@@ -179,5 +180,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       : [absoluteUrl("/product-base-plates.png")],
   }));
 
-  return [...staticEntries, ...serviceEntries, ...productEntries, ...blogEntries];
+  const sectorEntries: MetadataRoute.Sitemap = sectorsData.map((sector) => ({
+    url: `${siteConfig.url}/sectors/${sector.id}`,
+    lastModified: homeLastModified,
+    images: [absoluteUrl("/service-fabrication.png")],
+  }));
+
+  return [...staticEntries, ...serviceEntries, ...productEntries, ...sectorEntries, ...blogEntries];
 }
