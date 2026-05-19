@@ -267,7 +267,7 @@ export function BalajiAI() {
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-label="Open Balaji AI"
-        className="fixed bottom-24 right-4 sm:right-6 z-50 group relative flex h-14 w-14 items-center justify-center rounded-full bg-[#1a0505] shadow-[0_8px_32px_rgba(172,60,60,0.5)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(172,60,60,0.65)] active:translate-y-0"
+        className="fixed bottom-[5.5rem] right-4 sm:right-6 z-50 group relative flex h-14 w-14 items-center justify-center rounded-full bg-[#1a0505] shadow-[0_8px_32px_rgba(172,60,60,0.5)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(172,60,60,0.65)] active:translate-y-0"
       >
         {/* Blinking outer ring */}
         <span className="pointer-events-none absolute inset-0 rounded-full border-2 border-primary animate-[balajiRing_1.5s_ease-in-out_infinite]" />
@@ -285,32 +285,60 @@ export function BalajiAI() {
         </span>
       </button>
 
-      {/* Chat window */}
+      {/* Backdrop */}
       {open && (
         <div
-          className="balaji-ai-window fixed z-50 flex flex-col overflow-hidden border border-white/10 bg-[#120808] shadow-[0_24px_80px_rgba(0,0,0,0.7)]
-            inset-x-2 bottom-2 rounded-2xl
-            sm:inset-x-auto sm:bottom-[11rem] sm:right-6 sm:w-[360px] sm:rounded-2xl"
-          style={{ height: "calc(100dvh - 100px)", maxHeight: "580px" }}
+          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
+          onClick={() => setOpen(false)}
+        />
+      )}
+
+      {/* Chat window — centered modal */}
+      {open && (
+        <div
+          className="balaji-ai-window fixed z-50 flex flex-col overflow-hidden
+            inset-x-3 bottom-3 top-3 rounded-2xl
+            sm:inset-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:w-[420px] sm:rounded-2xl"
+          style={{
+            maxHeight: "min(680px, calc(100dvh - 24px))",
+            height: "calc(100dvh - 24px)",
+            background: "linear-gradient(145deg, #140a0a 0%, #1c0c0c 50%, #120808 100%)",
+            border: "1px solid rgba(172,60,60,0.25)",
+            boxShadow: "0 32px 100px rgba(0,0,0,0.8), 0 0 0 1px rgba(172,60,60,0.1), inset 0 1px 0 rgba(255,255,255,0.05)",
+          }}
         >
           {/* Header */}
-          <div className="flex items-center gap-3 border-b border-white/8 bg-[#1a0a0a] px-4 py-3">
+          <div
+            className="flex items-center gap-3 px-4 py-3.5"
+            style={{
+              background: "linear-gradient(135deg, #1f0a0a 0%, #2a0e0e 100%)",
+              borderBottom: "1px solid rgba(172,60,60,0.2)",
+              boxShadow: "0 1px 0 rgba(255,255,255,0.04)",
+            }}
+          >
             <div className="relative">
-              <img
-                src="/favicon.jpg"
-                alt="Balaji AI"
-                className="h-10 w-10 rounded-full border-2 border-primary/50 object-cover shadow"
-              />
-              <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-[#1a0a0a] bg-green-400" />
+              <div className="relative h-11 w-11 rounded-full overflow-hidden border-2 shadow-[0_0_16px_rgba(172,60,60,0.4)]" style={{ borderColor: "rgba(172,60,60,0.6)" }}>
+                <img
+                  src="/favicon.jpg"
+                  alt="Balaji AI"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <span className="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-[#1f0a0a] bg-green-400 shadow" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-bold text-white leading-tight">Balaji AI</p>
-              <p className="text-[11px] text-white/50 leading-tight">Balaji Engineering Works · Online</p>
+              <div className="flex items-center gap-2">
+                <p className="text-sm font-black text-white leading-tight tracking-wide">Balaji AI</p>
+                <span className="rounded-full px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider" style={{ background: "rgba(172,60,60,0.2)", color: "rgba(172,60,60,1)", border: "1px solid rgba(172,60,60,0.3)" }}>
+                  Live
+                </span>
+              </div>
+              <p className="text-[11px] text-white/40 leading-tight mt-0.5">Balaji Engineering Works · Online now</p>
             </div>
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="rounded-lg p-1.5 text-white/40 transition-colors hover:bg-white/10 hover:text-white"
+              className="rounded-xl p-2 text-white/30 transition-all hover:bg-white/10 hover:text-white active:scale-95"
               aria-label="Close"
             >
               <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2.5}>
@@ -340,8 +368,21 @@ export function BalajiAI() {
           </div>
 
           {/* Input */}
-          <div className="border-t border-white/8 bg-[#1a0a0a] px-3 py-3">
-            <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-[#0e0606] px-3 py-2 focus-within:border-primary/50 transition-colors">
+          <div
+            className="px-4 py-4"
+            style={{
+              borderTop: "1px solid rgba(172,60,60,0.15)",
+              background: "linear-gradient(135deg, #1a0a0a 0%, #1f0d0d 100%)",
+            }}
+          >
+            <div
+              className="flex items-center gap-2.5 rounded-2xl px-3.5 py-2.5 transition-all"
+              style={{
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.08)",
+              }}
+              onFocus={() => {}}
+            >
               <input
                 ref={inputRef}
                 type="text"
@@ -354,14 +395,15 @@ export function BalajiAI() {
                   }
                 }}
                 placeholder="Ask about services, products, pricing…"
-                className="flex-1 bg-transparent text-sm text-white placeholder-white/25 outline-none"
+                className="flex-1 bg-transparent text-sm text-white placeholder-white/20 outline-none"
                 disabled={loading}
               />
               <button
                 type="button"
                 onClick={sendMessage}
                 disabled={loading || !input.trim()}
-                className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-primary text-white shadow transition-all hover:bg-primary/90 disabled:opacity-40 disabled:cursor-not-allowed active:scale-95"
+                className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl text-white shadow-lg transition-all active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed"
+                style={{ background: "linear-gradient(135deg, #ac3c3c, #c94848)" }}
                 aria-label="Send"
               >
                 <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2.5}>
@@ -369,7 +411,7 @@ export function BalajiAI() {
                 </svg>
               </button>
             </div>
-            <p className="mt-2 text-center text-[10px] text-white/20">
+            <p className="mt-2.5 text-center text-[10px] text-white/15 tracking-wide">
               Powered by Sarvam AI · Balaji Engineering Works
             </p>
           </div>

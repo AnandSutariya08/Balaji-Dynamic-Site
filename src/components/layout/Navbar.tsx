@@ -52,12 +52,18 @@ export function Navbar() {
         >
           <div className="flex items-center justify-between">
             <Link href="/" className="z-50 flex items-center gap-3">
-              <img
-                src="/logo.png"
-                alt="Balaji Engineering Works Logo"
-                className={`w-auto rounded object-contain transition-all duration-300 ${isScrolled ? "h-8" : "h-9"
-                  }`}
-              />
+              <div className="relative flex-shrink-0">
+                <img
+                  src="/logo.png"
+                  alt="Balaji Engineering Works Logo"
+                  className={`w-auto rounded object-contain transition-all duration-300 ${isScrolled ? "h-8" : "h-9"}`}
+                />
+                <img
+                  src="/favicon.jpg"
+                  alt="Balaji AI"
+                  className={`absolute -bottom-1 -right-1 rounded-full border-2 border-primary/60 object-cover shadow-[0_0_8px_rgba(172,60,60,0.5)] transition-all duration-300 ${isScrolled ? "h-4 w-4" : "h-5 w-5"}`}
+                />
+              </div>
               <div className="flex flex-col leading-none">
                 <span
                   className={`font-display font-black tracking-wider text-white transition-all duration-300 ${isScrolled ? "text-sm" : "text-base md:text-lg"
