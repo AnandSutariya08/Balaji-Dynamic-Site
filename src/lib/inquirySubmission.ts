@@ -20,19 +20,24 @@ function buildSubject(input: InquiryInput, source: InquirySource) {
 }
 
 function buildMessage(input: InquiryInput, source: InquirySource, inquiryId?: string) {
-  return [
+  const lines: string[] = [
     `Source: ${SOURCE_LABELS[source]}`,
     inquiryId ? `Inquiry ID: ${inquiryId}` : "Inquiry ID: Pending / Not saved in Firestore",
     `Name: ${input.name || "-"}`,
     `Phone: ${input.phone || "-"}`,
-    `Email: ${input.email || "-"}`,
-    `Service: ${input.service || "-"}`,
-    `Quantity: ${input.quantity || "-"}`,
-    `Material: ${input.material || "-"}`,
-    "",
-    "Project Details:",
-    input.message || "-",
-  ].join("\n");
+  ];
+
+  if (input.email?.trim()) lines.push(`Email: ${input.email}`);
+  if (input.service?.trim()) lines.push(`Service: ${input.service}`);
+  if (input.quantity?.trim()) lines.push(`Quantity: ${input.quantity}`);
+  if (input.material?.trim()) lines.push(`Material: ${input.material}`);
+  if (input.message?.trim()) {
+    lines.push("");
+    lines.push("Project Details:");
+    lines.push(input.message);
+  }
+
+  return lines.join("\n");
 }
 
 async function sendInquiryMail(input: InquiryInput, source: InquirySource, inquiryId?: string) {

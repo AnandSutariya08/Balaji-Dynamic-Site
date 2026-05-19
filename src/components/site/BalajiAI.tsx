@@ -183,7 +183,7 @@ export function BalajiAI() {
         quantity: "",
         material: "",
       },
-      "contact-form",
+      "balaji-ai",
     ).catch(() => {
       setStatusMsg("Inquiry saved locally. Please call us at +91 99787 53398 to confirm.");
     });
