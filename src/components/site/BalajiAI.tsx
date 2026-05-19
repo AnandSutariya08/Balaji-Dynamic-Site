@@ -266,18 +266,6 @@ export function BalajiAI() {
           0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
           40% { transform: scale(1); opacity: 1; }
         }
-        @keyframes balajiSlideUp {
-          from { opacity: 0; transform: translateY(16px) scale(0.97); }
-          to   { opacity: 1; transform: translateY(0)    scale(1); }
-        }
-        @keyframes balajiRing {
-          0%   { transform: scale(1);    opacity: 0.9; }
-          60%  { transform: scale(1.55); opacity: 0;   }
-          100% { transform: scale(1.55); opacity: 0;   }
-        }
-        .balaji-ai-window {
-          animation: balajiSlideUp 0.22s cubic-bezier(0.34,1.56,0.64,1) both;
-        }
       `}</style>
 
       {/* Floating button — stacked above WhatsApp */}
@@ -306,7 +294,7 @@ export function BalajiAI() {
       {/* Chat window — centered modal */}
       {open && (
         <div
-          className="balaji-ai-window fixed z-50 flex flex-col overflow-hidden
+          className="fixed z-50 flex flex-col overflow-hidden
             inset-x-3 bottom-3 top-3 rounded-2xl
             sm:inset-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:w-[420px] sm:rounded-2xl"
           style={{
