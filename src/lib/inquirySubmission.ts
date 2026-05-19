@@ -5,11 +5,12 @@ import { isFirebaseConfigured } from "@/lib/firebase";
 const MAIL_ENDPOINT = "https://otp-khaki-iota.vercel.app/send-mail";
 const NOTIFICATION_EMAIL = "balajieng.works12@gmail.com";
 
-type InquirySource = "contact-form" | "quote-dialog";
+type InquirySource = "contact-form" | "quote-dialog" | "balaji-ai";
 
 const SOURCE_LABELS: Record<InquirySource, string> = {
   "contact-form": "Contact Form",
   "quote-dialog": "Quote Dialog",
+  "balaji-ai": "Balaji AI",
 };
 
 function buildSubject(input: InquiryInput, source: InquirySource) {

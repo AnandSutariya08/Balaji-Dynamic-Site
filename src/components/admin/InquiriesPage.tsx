@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import {
   AlertCircle,
+  CheckCircle2,
   Inbox,
   Loader2,
   Mail,
@@ -10,6 +11,7 @@ import {
   Phone,
   RefreshCw,
   Search,
+  Send,
   X,
 } from "lucide-react";
 import { getInquiries, updateInquiryStatus } from "@/lib/firestore/inquiries";
@@ -96,7 +98,163 @@ function DetailField({ label, children }: { label: string; children: ReactNode }
 function formatSource(source?: string) {
   if (source === "quote-dialog") return "Quote Dialog";
   if (source === "contact-form") return "Contact Form";
+  if (source === "balaji-ai") return "Balaji AI";
   return "Website";
+}
+
+const MAIL_ENDPOINT = "https://otp-khaki-iota.vercel.app/send-mail";
+
+function SendReplyModal({
+  inquiry,
+  onClose,
+}: {
+  inquiry: Inquiry;
+  onClose: () => void;
+}) {
+  const [to, setTo] = useState(inquiry.email ?? "");
+  const [subject, setSubject] = useState(`Re: ${inquiry.service || "Your Inquiry"} - Balaji Engineering Works`);
+  const [message, setMessage] = useState(
+    `Dear ${inquiry.name},\n\nThank you for reaching out to Balaji Engineering Works.\n\n\n\nWarm regards,\nBalaji Engineering Works\nPhone: +91 99787 53398\nEmail: balajieng.works12@gmail.com`,
+  );
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState("");
+  const overlayRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
+  const handleSend = async () => {
+    if (!to.trim()) { setError("Recipient email is required."); return; }
+    if (!subject.trim()) { setError("Subject is required."); return; }
+    if (!message.trim()) { setError("Message is required."); return; }
+    setSending(true);
+    setError("");
+    try {
+      const res = await fetch(MAIL_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ to: to.trim(), subject: subject.trim(), message: message.trim() }),
+      });
+      if (!res.ok) {
+        const text = await res.text().catch(() => "");
+        throw new Error(text || "Failed to send email.");
+      }
+      setSent(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to send email.");
+    } finally {
+      setSending(false);
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 z-[70] flex items-center justify-center p-4">
+      <div
+        ref={overlayRef}
+        className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+        onClick={onClose}
+      />
+      <div className="relative w-full max-w-lg rounded-2xl border border-white/10 bg-[#0f0f0f] shadow-[0_30px_120px_rgba(0,0,0,0.8)] overflow-hidden">
+        <div className="flex items-center justify-between border-b border-white/6 px-5 py-4">
+          <div>
+            <h3 className="text-sm font-bold text-white">Send Email Reply</h3>
+            <p className="mt-0.5 text-xs text-zinc-500">To: {inquiry.name}</p>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            className="rounded-lg border border-white/10 bg-white/5 p-2 text-zinc-400 transition-colors hover:bg-white/10 hover:text-white"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+
+        {sent ? (
+          <div className="flex flex-col items-center gap-3 px-5 py-12 text-center">
+            <CheckCircle2 className="h-10 w-10 text-green-400" />
+            <p className="font-semibold text-white">Email sent successfully!</p>
+            <p className="text-sm text-zinc-500">Your reply has been delivered to {to}</p>
+            <button
+              type="button"
+              onClick={onClose}
+              className="mt-2 rounded-xl border border-white/10 bg-white/5 px-5 py-2 text-sm font-semibold text-zinc-300 transition-colors hover:bg-white/10 hover:text-white"
+            >
+              Close
+            </button>
+          </div>
+        ) : (
+          <div className="space-y-4 px-5 py-5">
+            <div>
+              <label className="mb-1.5 block text-[10px] font-semibold uppercase tracking-widest text-zinc-500">
+                To (Email)
+              </label>
+              <input
+                value={to}
+                onChange={(e) => setTo(e.target.value)}
+                placeholder="customer@email.com"
+                className="h-10 w-full rounded-xl border border-white/8 bg-[#141414] px-3 text-sm text-white placeholder:text-zinc-600 outline-none transition-colors focus:border-[#AC3C3C]/40 focus:ring-2 focus:ring-[#AC3C3C]/15"
+              />
+            </div>
+            <div>
+              <label className="mb-1.5 block text-[10px] font-semibold uppercase tracking-widest text-zinc-500">
+                Subject
+              </label>
+              <input
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
+                className="h-10 w-full rounded-xl border border-white/8 bg-[#141414] px-3 text-sm text-white placeholder:text-zinc-600 outline-none transition-colors focus:border-[#AC3C3C]/40 focus:ring-2 focus:ring-[#AC3C3C]/15"
+              />
+            </div>
+            <div>
+              <label className="mb-1.5 block text-[10px] font-semibold uppercase tracking-widest text-zinc-500">
+                Message
+              </label>
+              <textarea
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                rows={8}
+                className="w-full rounded-xl border border-white/8 bg-[#141414] px-3 py-2.5 text-sm text-white placeholder:text-zinc-600 outline-none transition-colors focus:border-[#AC3C3C]/40 focus:ring-2 focus:ring-[#AC3C3C]/15 resize-none"
+              />
+            </div>
+
+            {error && (
+              <div className="flex items-center gap-2 rounded-xl border border-red-500/25 bg-red-500/10 px-3 py-2.5 text-sm text-red-400">
+                <AlertCircle className="h-4 w-4 shrink-0" />
+                {error}
+              </div>
+            )}
+
+            <div className="flex items-center justify-end gap-2 pt-1">
+              <button
+                type="button"
+                onClick={onClose}
+                className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-zinc-300 transition-colors hover:bg-white/10 hover:text-white"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={handleSend}
+                disabled={sending}
+                className="inline-flex items-center gap-2 rounded-xl bg-[#AC3C3C] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#c94848] disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {sending ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <Send className="h-4 w-4" />
+                )}
+                {sending ? "Sending…" : "Send Email"}
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
 
 function InquiryDetail({
@@ -109,6 +267,7 @@ function InquiryDetail({
   onStatusChange: (id: string, status: InquiryStatus) => Promise<void>;
 }) {
   const [updating, setUpdating] = useState(false);
+  const [replyOpen, setReplyOpen] = useState(false);
 
   const handleStatus = async (status: InquiryStatus) => {
     setUpdating(true);
@@ -216,7 +375,24 @@ function InquiryDetail({
             {updating && <Loader2 className="h-4 w-4 animate-spin text-zinc-500" />}
           </div>
         </div>
+
+        {inquiry.email && (
+          <div className="border-t border-white/6 pt-4">
+            <button
+              type="button"
+              onClick={() => setReplyOpen(true)}
+              className="inline-flex items-center gap-2 rounded-xl bg-[#AC3C3C] px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#c94848]"
+            >
+              <Send className="h-4 w-4" />
+              Send Email Reply
+            </button>
+          </div>
+        )}
       </div>
+
+      {replyOpen && (
+        <SendReplyModal inquiry={inquiry} onClose={() => setReplyOpen(false)} />
+      )}
     </div>
   );
 }
