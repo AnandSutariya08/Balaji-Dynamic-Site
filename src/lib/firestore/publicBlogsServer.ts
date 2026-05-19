@@ -95,21 +95,39 @@ function mapStatic(post: (typeof staticPosts)[number]): BlogPost {
   };
 }
 
-export async function getPublicBlogsFromFirestore(): Promise<BlogPost[]> {
-  if (!isConfigured()) return staticPosts.map(mapStatic);
+function toComparableTime(post: BlogPost) {
+  const raw = post.updatedAt ?? post.createdAt ?? post.date;
+  const parsed = new Date(raw);
+  return Number.isNaN(parsed.getTime()) ? 0 : parsed.getTime();
+}
+
+function normalizePosts(posts: BlogPost[]) {
+  return [...posts]
+    .filter((post) => post.slug && post.title)
+    .sort((a, b) => toComparableTime(b) - toComparableTime(a));
+}
+
+export async function getPublicBlogsFromFirestore(
+  options: { fallbackToStatic?: boolean } = {},
+): Promise<BlogPost[]> {
+  const { fallbackToStatic = true } = options;
+  const staticFallback = normalizePosts(staticPosts.map(mapStatic));
+
+  if (!isConfigured()) return fallbackToStatic ? staticFallback : [];
 
   const response = await fetch(
     `${baseUrl()}/blog-posts?key=${apiKey()}&pageSize=250`,
     { next: { revalidate: 300 } },
   );
 
-  if (!response.ok) return staticPosts.map(mapStatic);
+  if (!response.ok) return fallbackToStatic ? staticFallback : [];
 
   const data = (await response.json()) as { documents?: Record<string, unknown>[] };
-  const posts = (data.documents ?? []).map((doc) =>
+  const posts = normalizePosts((data.documents ?? []).map((doc) =>
     toPost(parseDoc(doc) as Record<string, unknown>),
-  );
-  return posts.length > 0 ? posts : staticPosts.map(mapStatic);
+  ));
+
+  return posts.length > 0 ? posts : fallbackToStatic ? staticFallback : [];
 }
 
 export async function getPublicBlogBySlugFromFirestore(slug: string): Promise<BlogPost | null> {

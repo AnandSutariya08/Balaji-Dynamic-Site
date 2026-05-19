@@ -143,7 +143,7 @@ export async function getPublicProductsFromFirestore(): Promise<Product[]> {
     };
     const products = (data.documents ?? []).map((doc) =>
       toProduct(parseDoc(doc) as Record<string, unknown>),
-    );
+    ).filter((product) => product.id && product.title);
 
     return sortProducts(products);
   } catch {

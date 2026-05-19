@@ -62,6 +62,23 @@ function toItem(raw: Record<string, unknown>): GalleryItem {
   };
 }
 
+function toComparableTime(item: GalleryItem) {
+  const raw = item.updatedAt ?? item.createdAt;
+  const parsed = new Date(raw ?? 0);
+  return Number.isNaN(parsed.getTime()) ? 0 : parsed.getTime();
+}
+
+function normalizeGallery(items: GalleryItem[]) {
+  return [...items]
+    .filter((item) => item.id && item.image)
+    .sort((a, b) => {
+      const aOrder = a.order ?? 0;
+      const bOrder = b.order ?? 0;
+      if (aOrder !== bOrder) return aOrder - bOrder;
+      return toComparableTime(b) - toComparableTime(a);
+    });
+}
+
 export async function getPublicGalleryFromFirestore(): Promise<GalleryItem[]> {
   if (!isConfigured()) return [];
 
@@ -72,7 +89,9 @@ export async function getPublicGalleryFromFirestore(): Promise<GalleryItem[]> {
     );
     if (!response.ok) return [];
     const data = (await response.json()) as { documents?: Record<string, unknown>[] };
-    return (data.documents ?? []).map((d) => toItem(parseDoc(d) as Record<string, unknown>));
+    return normalizeGallery(
+      (data.documents ?? []).map((d) => toItem(parseDoc(d) as Record<string, unknown>)),
+    );
   } catch {
     return [];
   }

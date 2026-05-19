@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import type { BlogPost, Product, Service } from "@/lib/firestore/types";
+import type { BlogPost, GalleryItem, Product, Service } from "@/lib/firestore/types";
 import { contactFaqs, siteConfig } from "@/lib/site";
 import type { ServiceFaq } from "@/lib/serviceSeo";
 
@@ -379,6 +379,48 @@ export function createProductJsonLd(product: Product): SchemaObject {
       "@type": "PropertyValue",
       name: spec.label,
       value: spec.value,
+    })),
+  };
+}
+
+export function createGalleryItemListJsonLd(items: GalleryItem[]): SchemaObject {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: `${siteConfig.name} Gallery`,
+    numberOfItems: items.length,
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: absoluteUrl("/gallery"),
+      name: item.title,
+      description: item.description || item.category,
+      image: absoluteUrl(item.image),
+    })),
+  };
+}
+
+export function createImageGalleryJsonLd(items: GalleryItem[]): SchemaObject {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    "@id": `${absoluteUrl("/gallery")}#gallery`,
+    name: `${siteConfig.name} Work Gallery`,
+    description:
+      "Manufacturing, fabrication, CNC cutting, bending, welding, and finished project photos from Balaji Engineering Works in Surat.",
+    url: absoluteUrl("/gallery"),
+    publisher: {
+      "@id": `${siteConfig.url}#organization`,
+    },
+    associatedMedia: items.slice(0, 24).map((item) => ({
+      "@type": "ImageObject",
+      contentUrl: absoluteUrl(item.image),
+      url: absoluteUrl(item.image),
+      name: item.title,
+      description: item.description || item.category,
+      ...(getIsoDate(item.updatedAt ?? item.createdAt)
+        ? { uploadDate: getIsoDate(item.updatedAt ?? item.createdAt) }
+        : {}),
     })),
   };
 }

@@ -5,6 +5,7 @@ import { absoluteUrl } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 import { getPublicBlogsFromFirestore } from "@/lib/firestore/publicBlogsServer";
 import { getPublicGalleryFromFirestore } from "@/lib/firestore/publicGalleryServer";
+import type { BlogPost, GalleryItem, Product } from "@/lib/firestore/types";
 
 function toDate(value?: string) {
   if (!value) {
@@ -23,10 +24,24 @@ function uniqueImages(images: Array<string | undefined>) {
   return Array.from(new Set(images.filter(Boolean))) as string[];
 }
 
+function toBlogDate(post: BlogPost) {
+  return toDate(post.updatedAt ?? post.createdAt ?? post.date);
+}
+
+function toGalleryDate(item: GalleryItem) {
+  return toDate(item.updatedAt ?? item.createdAt);
+}
+
+function toProductDate(product: Product) {
+  return toDate(product.updatedAt ?? product.createdAt);
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const posts = await getPublicBlogsFromFirestore();
-  const gallery = await getPublicGalleryFromFirestore();
-  const products = await getProductsData();
+  const [posts, gallery, products] = await Promise.all([
+    getPublicBlogsFromFirestore({ fallbackToStatic: false }),
+    getPublicGalleryFromFirestore(),
+    getProductsData(),
+  ]);
   const services = staticServices;
 
   const serviceLastModified = services.length
@@ -36,15 +51,27 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     : new Date();
 
   const blogLastModified = posts.length
-    ? maxDate(posts.map((post) => toDate(post.date)))
+    ? maxDate(posts.map((post) => toBlogDate(post)))
     : new Date();
   const productLastModified = products.length
     ? maxDate(
-        products.map((product) => toDate(product.updatedAt ?? product.createdAt)),
+        products.map((product) => toProductDate(product)),
       )
     : new Date();
-
-  const homeLastModified = maxDate([serviceLastModified, productLastModified, blogLastModified]);
+  const baseHomeLastModified = maxDate([
+    serviceLastModified,
+    productLastModified,
+    blogLastModified,
+  ]);
+  const galleryLastModified = gallery.length
+    ? maxDate(gallery.map((item) => toGalleryDate(item)))
+    : baseHomeLastModified;
+  const homeLastModified = maxDate([
+    serviceLastModified,
+    productLastModified,
+    blogLastModified,
+    galleryLastModified,
+  ]);
 
   const staticEntries: MetadataRoute.Sitemap = [
     {
@@ -65,7 +92,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: `${siteConfig.url}/products`,
       lastModified: productLastModified,
-      images: products.map((product) => absoluteUrl(product.image)),
+      images: products.length
+        ? uniqueImages(
+            products
+              .filter((product) => product.image)
+              .slice(0, 10)
+              .map((product) => absoluteUrl(product.image)),
+          )
+        : [absoluteUrl("/product-base-plates.png")],
     },
     {
       url: `${siteConfig.url}/sectors`,
@@ -75,7 +109,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: `${siteConfig.url}/blog`,
       lastModified: blogLastModified,
-      images: [absoluteUrl("/service-fabrication.png")],
+      images: posts.length
+        ? uniqueImages(
+            posts
+              .filter((post) => post.image)
+              .slice(0, 10)
+              .map((post) => absoluteUrl(post.image)),
+          )
+        : [absoluteUrl("/service-fabrication.png")],
     },
     {
       url: `${siteConfig.url}/llms.txt`,
@@ -91,9 +132,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${siteConfig.url}/gallery`,
-      lastModified: gallery.length
-        ? maxDate(gallery.map((item) => toDate(item.updatedAt ?? item.createdAt)))
-        : homeLastModified,
+      lastModified: galleryLastModified,
       images: gallery.length
         ? uniqueImages(gallery.slice(0, 10).map((item) => absoluteUrl(item.image)))
         : [absoluteUrl("/product-base-plates.png")],
@@ -116,15 +155,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   const blogEntries = [...posts]
-    .sort(
-      (a, b) =>
-        toDate(b.date).getTime() -
-        toDate(a.date).getTime(),
-    )
+    .filter((post) => post.slug)
     .map((post) => ({
       url: `${siteConfig.url}/blog/${post.slug}`,
-      lastModified: toDate(post.date),
-      images: post.image ? uniqueImages([absoluteUrl(post.image)]) : undefined,
+      lastModified: toBlogDate(post),
+      images: post.image
+        ? uniqueImages([absoluteUrl(post.image)])
+        : [absoluteUrl("/service-fabrication.png")],
     }));
 
   const serviceEntries = [...services].map((service) => ({
@@ -132,10 +169,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: toDate(service.updatedAt ?? service.createdAt),
     images: uniqueImages([absoluteUrl(service.image)]),
   }));
-  const productEntries = [...products].map((product) => ({
+  const productEntries = [...products]
+    .filter((product) => product.id)
+    .map((product) => ({
     url: `${siteConfig.url}/products/${product.id}`,
-    lastModified: toDate(product.updatedAt ?? product.createdAt),
-    images: uniqueImages([absoluteUrl(product.image)]),
+    lastModified: toProductDate(product),
+    images: product.image
+      ? uniqueImages([absoluteUrl(product.image)])
+      : [absoluteUrl("/product-base-plates.png")],
   }));
 
   return [...staticEntries, ...serviceEntries, ...productEntries, ...blogEntries];

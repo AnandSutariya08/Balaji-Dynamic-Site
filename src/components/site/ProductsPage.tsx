@@ -101,7 +101,7 @@ export default function ProductsPage({
           </div>
         </section>
 
-        <section className="py-8">
+        <section className="bg-[#F7F5F1] py-6">
           {loading ? (
             <div className="flex items-center justify-center gap-2 py-24 text-slate-400 text-sm">
               <Loader2 className="h-5 w-5 animate-spin" />
@@ -109,77 +109,66 @@ export default function ProductsPage({
             </div>
           ) : (
             products.map((product, index) => (
-            <motion.div
-              key={product.id}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.6 }}
-              className="group grid items-center border-b border-black/8 lg:grid-cols-2"
-            >
-              <div className={`relative flex h-[260px] items-center justify-center overflow-hidden bg-[#DDD6CE] sm:h-[380px] lg:h-[500px] ${index % 2 !== 0 ? "lg:order-2" : ""}`}>
-                <img
-                  src={product.image}
-                  alt={`${product.title} manufactured by Balaji Engineering Works in Surat`}
-                  className="h-full w-full object-cover object-center transition-transform duration-1000 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/45 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/65 to-transparent" />
-                <div className="absolute left-4 top-4 text-[3rem] font-display font-black leading-none text-white/6 md:left-8 md:top-8 md:text-[5rem]">
-                  {String(index + 1).padStart(2, "0")}
-                </div>
-              </div>
-
-              <div className={`flex justify-center bg-[#F7F5F1] p-6 sm:p-10 md:p-12 xl:p-16 ${index % 2 !== 0 ? "lg:order-1" : ""}`}>
-                <div className="flex w-full max-w-2xl flex-col justify-center">
-                  <span className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-primary md:mb-4">
-                    {product.tagline}
-                  </span>
-                  <h2 className="mb-4 text-[clamp(1.6rem,4.6vw,3.2rem)] font-display font-black uppercase tracking-tighter leading-[0.92] text-[#1A1A1A] md:mb-6">
-                    {product.title}
-                  </h2>
-                  <p className="mb-6 text-sm font-light leading-relaxed text-slate-600 md:mb-8 md:text-base">
-                    {product.description}
-                  </p>
-
-                  <div className="mb-6 grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:mb-8 md:gap-3">
-                    {product.specs.map((spec) => (
-                      <div key={`${product.id}-${spec.label}`} className="rounded-xl border border-black/8 bg-[#EDEAE4] p-3 text-center md:p-4">
-                        <div className="text-sm font-display font-black text-primary md:text-lg">
-                          {spec.value}
-                        </div>
-                        <div className="mt-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">
-                          {spec.label}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="mb-8 grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:mb-10 md:gap-3">
-                    {product.features.map((feature) => (
-                      <div key={feature} className="flex items-center gap-2.5">
-                        <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/15">
-                          <CheckCircle2 className="h-3 w-3 text-primary" />
-                        </div>
-                        <span className="text-xs font-bold uppercase tracking-wider text-[#1A1A1A]">
-                          {feature}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="flex flex-col gap-3 sm:flex-row">
-                    <Button className="h-12 w-full border-none bg-primary px-6 text-sm font-bold uppercase tracking-widest text-white shadow-[0_0_20px_rgba(172,60,60,0.25)] hover:bg-primary/90 sm:w-fit md:h-14 md:px-8" asChild>
-                      <Link href={`/products/${product.id}`}>
-                        View Details <ArrowRight className="ml-2 h-4 w-4" />
-                      </Link>
-                    </Button>
-                    <Button variant="outline" className="h-12 w-full border-black/15 px-6 text-sm font-bold uppercase tracking-widest text-[#1A1A1A] hover:bg-black/5 sm:w-fit md:h-14 md:px-8" asChild>
-                      <Link href={`/contact?service=${product.id}`}>Request Quote</Link>
-                    </Button>
+              <motion.div
+                key={product.id}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.6 }}
+                className="group grid items-center border-b border-black/8 lg:grid-cols-2"
+              >
+                <div className={`relative flex h-[220px] items-center justify-center overflow-hidden bg-[#DDD6CE] sm:h-[280px] lg:h-[340px] ${index % 2 !== 0 ? "lg:order-2" : ""}`}>
+                  <img
+                    src={product.image}
+                    alt={`${product.title} manufactured by Balaji Engineering Works in Surat`}
+                    className="h-full w-full object-cover object-center transition-transform duration-1000 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/45 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/65 to-transparent" />
+                  <div className="absolute left-4 top-4 text-[3rem] font-display font-black leading-none text-white/6 md:left-8 md:top-8 md:text-[5rem]">
+                    {String(index + 1).padStart(2, "0")}
                   </div>
                 </div>
-              </div>
-            </motion.div>
+
+                <div className={`flex justify-center bg-[#F7F5F1] p-5 sm:p-8 md:p-10 xl:p-12 ${index % 2 !== 0 ? "lg:order-1" : ""}`}>
+                  <div className="flex w-full max-w-2xl flex-col justify-center">
+                    <span className="mb-2 text-[11px] font-bold uppercase tracking-[0.28em] text-primary md:mb-3">
+                      {product.tagline}
+                    </span>
+                    <h2 className="mb-3 text-[clamp(1.5rem,4vw,2.8rem)] font-display font-black uppercase tracking-tighter leading-[0.95] text-[#1A1A1A] md:mb-4">
+                      {product.title}
+                    </h2>
+                    <p className="mb-5 max-w-xl text-sm font-light leading-relaxed text-slate-600 md:mb-6">
+                      {product.description}
+                    </p>
+
+                    <div className="mb-5 grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:mb-6 md:gap-3">
+                      {product.specs.slice(0, 2).map((spec) => (
+                        <div key={`${product.id}-${spec.label}`} className="rounded-lg border border-black/8 bg-[#EDEAE4] p-3 text-center md:rounded-xl md:p-4">
+                          <div className="text-sm font-display font-black text-primary md:text-base">
+                            {spec.value}
+                          </div>
+                          <div className="mt-1 text-[9px] font-bold uppercase tracking-widest text-slate-500 md:text-[10px]">
+                            {spec.label}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+
+
+                    <div className="flex flex-col gap-3 sm:flex-row">
+                      <Button className="h-12 w-full border-none bg-primary px-6 text-sm font-bold uppercase tracking-widest text-white shadow-[0_0_20px_rgba(172,60,60,0.25)] hover:bg-primary/90 sm:w-fit md:h-14 md:px-8" asChild>
+                        <Link href={`/products/${product.id}`}>
+                          View Details <ArrowRight className="ml-2 h-4 w-4" />
+                        </Link>
+                      </Button>
+                      <Button variant="outline" className="h-12 w-full border-black/15 px-6 text-sm font-bold uppercase tracking-widest text-[#1A1A1A] hover:bg-black/5 sm:w-fit md:h-14 md:px-8" asChild>
+                        <Link href={`/contact?service=${product.id}`}>Request Quote</Link>
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             ))
           )}
         </section>
