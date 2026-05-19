@@ -611,4 +611,309 @@ export const staticProducts: Product[] = [
     metaDescription:
       "Heavy-duty steel pallets for warehouse storage, material handling, and plant logistics from Balaji Engineering Works in Surat.",
   },
+  {
+    id: "gratings",
+    title: "Gratings",
+    tagline: "Fabricated steel bar gratings for industrial flooring, platforms, and drainage covers",
+    description:
+      "Balaji Engineering Works is a steel grating manufacturer in Surat for industrial platforms, walkways, trench covers, drainage gratings, and plant flooring systems. Our steel grating manufacturer in Surat service covers bearing bar and cross bar configurations fabricated to project size, load, and installation requirements.",
+    image: "/product-gratings.png",
+    features: [
+      "Bearing bar and cross bar fabrication",
+      "Custom panel sizes and load bar spacing",
+      "Suitable for platforms, walkways, and drain covers",
+      "Supports open area and anti-slip requirements",
+      "Project-specific cutting and trimming",
+      "Repeat panel supply for large installations",
+    ],
+    specs: [
+      { label: "Material", value: "MS, GI, or project-specified steel" },
+      { label: "Build", value: "Welded or press-locked bar grating" },
+      { label: "Use", value: "Platforms, trenches, drainage, walkways" },
+      { label: "Customization", value: "Panel size, bar spacing, serration, frame" },
+    ],
+    applications: [
+      "Industrial platform and mezzanine flooring",
+      "Trench and drainage covers in plants and utilities",
+      "Walkway grating for maintenance access",
+      "Custom fabricated grating panels for project installations",
+    ],
+    process: [
+      "Review grating size, load requirement, and bar specification",
+      "Fabricate bearing bars and cross bars to required spacing",
+      "Cut panels to project dimensions and add banding or frame if needed",
+      "Inspect weld quality and dimensional fit before dispatch",
+    ],
+    faqs: [
+      {
+        question: "Do you make steel gratings to custom panel sizes?",
+        answer:
+          "Yes. Grating panels are fabricated to project dimensions including bar spacing, panel size, and framing details.",
+      },
+      {
+        question: "Are gratings available for trench and drainage cover use?",
+        answer:
+          "Yes. Fabricated steel gratings are widely used for trench covers, drainage openings, and plant floor access points.",
+      },
+      {
+        question: "Can grating panels be supplied with serrated bars?",
+        answer:
+          "Yes. Serrated bearing bars for anti-slip surfaces can be incorporated as per the project specification.",
+      },
+    ],
+    keywords: [
+      "steel grating manufacturer in surat",
+      "steel grating manufacturer surat",
+      "bar grating fabrication gujarat",
+      "industrial grating supplier india",
+      "trench cover grating surat",
+    ],
+    metaTitle: "Steel Grating Manufacturer in Surat",
+    metaDescription:
+      "Steel bar grating manufacturer in Surat for industrial platforms, walkways, trench covers, and drainage applications from Balaji Engineering Works.",
+  },
+  {
+    id: "storage-tanks",
+    title: "Storage Tanks",
+    tagline: "Fabricated mild steel storage tanks for industrial liquids, water, and process fluids",
+    description:
+      "Balaji Engineering Works is a storage tank fabricator in Surat for industrial water tanks, process fluid tanks, chemical storage, and utility liquid containment. As a storage tank fabricator in Surat, we build tanks to capacity, shape, and connection requirements suited to plant and site installation.",
+    image: "/product-storage-tanks.png",
+    features: [
+      "Custom capacity and tank dimension fabrication",
+      "Suitable for water, process fluid, and utility storage",
+      "Inlet, outlet, and access provision as required",
+      "Supports rectangular and cylindrical tank formats",
+      "Can be fabricated with supports and base frames",
+      "Project-specific fabrication to site requirement",
+    ],
+    specs: [
+      { label: "Material", value: "MS, SS, or project-specified plate" },
+      { label: "Build", value: "Welded plate construction with connections" },
+      { label: "Use", value: "Water, chemicals, process fluids, utilities" },
+      { label: "Customization", value: "Capacity, shape, nozzles, supports, vents" },
+    ],
+    applications: [
+      "Industrial water storage and process fluid tanks",
+      "Chemical and utility liquid containment",
+      "Plant-side storage and supply tank installations",
+      "Custom fabricated tank assemblies for site use",
+    ],
+    process: [
+      "Review tank capacity, shape, and connection schedule",
+      "Prepare plates, shell sections, and structural details",
+      "Weld shell, end plates, nozzles, and access components",
+      "Inspect weld integrity and dimensional fit before dispatch",
+    ],
+    faqs: [
+      {
+        question: "Do you fabricate storage tanks to custom dimensions?",
+        answer:
+          "Yes. Tanks are built to required capacity, shape, connection layout, and structural support specification.",
+      },
+      {
+        question: "Are tanks available for both water and process fluid use?",
+        answer:
+          "Yes. We fabricate storage tanks for water storage, process liquids, and industrial utility containment.",
+      },
+      {
+        question: "Can tanks be supplied with base frames and support structures?",
+        answer:
+          "Yes. Tank fabrication can include base frames, support legs, and related structural items as part of the project.",
+      },
+    ],
+    keywords: [
+      "storage tank fabricator in surat",
+      "storage tank manufacturer surat",
+      "ms storage tank fabrication gujarat",
+      "industrial liquid tank supplier india",
+      "water storage tank fabrication surat",
+    ],
+    metaTitle: "Storage Tank Fabricator in Surat",
+    metaDescription:
+      "Custom storage tank fabrication in Surat for industrial water, process fluids, and utility liquid containment from Balaji Engineering Works.",
+  },
+  {
+    id: "rolled-cylinders",
+    title: "Rolled Cylinders",
+    tagline: "Plate rolled cylinders and shell sections for industrial fabrication and pressure vessel work",
+    description:
+      "Balaji Engineering Works provides rolled cylinder fabrication in Surat for shell sections, tanks, vessel components, pipe sleeves, and industrial round forms. Our rolled cylinder fabrication in Surat service covers plate rolling to diameter, wall thickness, and length requirements as per drawing or application specification.",
+    image: "/product-rolled-cylinders.png",
+    features: [
+      "Plate rolling to required diameter and thickness",
+      "Suitable for vessels, tanks, and shell fabrication",
+      "Supports short and long shell section requirements",
+      "Weld seam and edge preparation as required",
+      "Can be combined with flanges, end plates, and nozzles",
+      "Drawing-based fabrication for precision fit-up",
+    ],
+    specs: [
+      { label: "Process", value: "Plate rolling and shell forming" },
+      { label: "Material", value: "MS, SS, or project-specified plate" },
+      { label: "Use", value: "Vessels, tanks, sleeves, structural round sections" },
+      { label: "Customization", value: "Diameter, thickness, length, seam, edge" },
+    ],
+    applications: [
+      "Pressure vessel and tank shell sections",
+      "Structural round column and support forms",
+      "Pipe sleeve and industrial round component fabrication",
+      "Custom rolled sections for OEM and plant requirements",
+    ],
+    process: [
+      "Review cylinder diameter, wall thickness, and length specification",
+      "Prepare plate edges and rolling sequence",
+      "Roll plate to required diameter and check roundness",
+      "Weld seam and prepare ends or connections as required",
+    ],
+    faqs: [
+      {
+        question: "Do you roll cylinders to custom diameter and thickness?",
+        answer:
+          "Yes. Rolled cylinders are produced to drawing diameter, wall thickness, and length specification.",
+      },
+      {
+        question: "Can rolled cylinders be supplied with end plates or flanges?",
+        answer:
+          "Yes. Shell sections can be combined with end plates, flanges, nozzles, and related fabricated components.",
+      },
+      {
+        question: "Are rolled cylinders suitable for pressure vessel work?",
+        answer:
+          "Yes. They are used in vessel shell fabrication, tank construction, and related industrial round form requirements.",
+      },
+    ],
+    keywords: [
+      "rolled cylinder fabrication in surat",
+      "plate rolling fabrication surat",
+      "shell section rolling gujarat",
+      "cylinder rolling manufacturer india",
+      "industrial rolled shell surat",
+    ],
+    metaTitle: "Rolled Cylinder Fabrication in Surat",
+    metaDescription:
+      "Plate rolled cylinders and shell sections for tanks, vessels, and industrial fabrication from Balaji Engineering Works in Surat.",
+  },
+  {
+    id: "hoppers",
+    title: "Hoppers",
+    tagline: "Fabricated steel hoppers for material handling, bulk storage, and plant discharge systems",
+    description:
+      "Balaji Engineering Works is a steel hopper manufacturer in Surat for bulk material handling, storage bins, feed chutes, and industrial discharge systems. As a steel hopper manufacturer in Surat, we fabricate hoppers to volume, opening, and structural support specifications used across plant, material handling, and aggregate processing installations.",
+    image: "/product-hoppers.png",
+    features: [
+      "Custom volume and hopper profile fabrication",
+      "Suitable for bulk material and aggregate handling",
+      "Includes discharge outlet and connection details",
+      "Can be fabricated with support frames and legs",
+      "Supports feeder, conveyor, and bin system integration",
+      "Drawing-based construction for project fit-up",
+    ],
+    specs: [
+      { label: "Material", value: "MS, wear-resistant, or project-specified plate" },
+      { label: "Build", value: "Welded hopper body with outlet and support" },
+      { label: "Use", value: "Bulk material handling, bins, discharge systems" },
+      { label: "Customization", value: "Volume, outlet size, slope, support, liner" },
+    ],
+    applications: [
+      "Bulk aggregate and material storage hoppers",
+      "Plant feed and discharge chute systems",
+      "Conveyor and feeder integration bins",
+      "Custom fabricated hoppers for industrial processing",
+    ],
+    process: [
+      "Review volume, opening dimensions, and discharge requirements",
+      "Fabricate hopper body, side plates, and outlet details",
+      "Add support structure, liner, or gusset components as required",
+      "Inspect weld quality and dimensional fit before dispatch",
+    ],
+    faqs: [
+      {
+        question: "Do you fabricate hoppers to custom volume and outlet size?",
+        answer:
+          "Yes. Hoppers are made to project volume, outlet dimension, slope angle, and structural support specification.",
+      },
+      {
+        question: "Can hoppers be integrated with conveyor or feeder systems?",
+        answer:
+          "Yes. Hoppers are commonly used with belt conveyors, screw feeders, and plant discharge systems.",
+      },
+      {
+        question: "Are support frames and liners available with hopper fabrication?",
+        answer:
+          "Yes. Support legs, frames, and liner plates can be incorporated as part of the hopper project requirement.",
+      },
+    ],
+    keywords: [
+      "steel hopper manufacturer in surat",
+      "hopper fabrication surat",
+      "bulk material hopper manufacturer gujarat",
+      "industrial hopper supplier india",
+      "discharge hopper fabrication surat",
+    ],
+    metaTitle: "Steel Hopper Manufacturer in Surat",
+    metaDescription:
+      "Steel hopper manufacturer in Surat for bulk material handling, storage bins, and plant discharge systems from Balaji Engineering Works.",
+  },
+  {
+    id: "staircase-parts",
+    title: "Staircase Parts",
+    tagline: "Fabricated steel staircase components for industrial platforms, mezzanines, and access structures",
+    description:
+      "Balaji Engineering Works is a steel staircase parts manufacturer in Surat for industrial platform access, mezzanine stairs, plant walkways, and structural access systems. As a steel staircase parts manufacturer in Surat, we fabricate stringers, treads, risers, handrails, and connection details to drawing and site requirement.",
+    image: "/product-staircase-parts.png",
+    features: [
+      "Stringer, tread, riser, and handrail fabrication",
+      "Custom rise, going, and width to project drawings",
+      "Suitable for mezzanine, platform, and plant access",
+      "Anti-slip tread and grating tread options",
+      "Supports modular and site-assembled staircase systems",
+      "Paired fabrication with structural landing platforms",
+    ],
+    specs: [
+      { label: "Material", value: "MS, GI, or project-specified steel" },
+      { label: "Components", value: "Stringers, treads, risers, handrails, brackets" },
+      { label: "Use", value: "Mezzanine, platform, plant, and shed access" },
+      { label: "Customization", value: "Rise, going, width, tread type, handrail" },
+    ],
+    applications: [
+      "Mezzanine and storage platform staircase access",
+      "Industrial shed and plant maintenance stairways",
+      "Structural access systems for elevated work areas",
+      "Custom fabricated staircase components for site assembly",
+    ],
+    process: [
+      "Review stair rise, going, width, and connection details",
+      "Fabricate stringers, cut treads, and prepare handrail sections",
+      "Add tread nosing, anti-slip, or grating tread as required",
+      "Bundle components for site assembly and inspect before dispatch",
+    ],
+    faqs: [
+      {
+        question: "Do you fabricate staircase parts to drawing dimensions?",
+        answer:
+          "Yes. Stringers, treads, risers, and handrail sections are made to project rise, going, width, and connection specification.",
+      },
+      {
+        question: "Are anti-slip treads available for industrial stairs?",
+        answer:
+          "Yes. Grating treads, checker plate, and serrated nosing options can be incorporated depending on the application.",
+      },
+      {
+        question: "Can staircase parts be combined with platform landing fabrication?",
+        answer:
+          "Yes. Landing platforms, handrail posts, and structural connection details can be supplied as part of the same project.",
+      },
+    ],
+    keywords: [
+      "steel staircase parts manufacturer in surat",
+      "staircase fabrication surat",
+      "industrial staircase components gujarat",
+      "ms stair stringer fabrication india",
+      "platform staircase manufacturer surat",
+    ],
+    metaTitle: "Steel Staircase Parts Manufacturer in Surat",
+    metaDescription:
+      "Steel staircase parts manufacturer in Surat for industrial platforms, mezzanines, and plant access systems from Balaji Engineering Works.",
+  },
 ];
