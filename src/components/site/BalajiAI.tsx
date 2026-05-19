@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { submitInquiryLead } from "@/lib/inquirySubmission";
 
 type Role = "user" | "assistant";
@@ -149,6 +149,15 @@ export function BalajiAI() {
     if (open) setTimeout(() => inputRef.current?.focus(), 100);
   }, [open]);
 
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
   const sendMessage = useCallback(async () => {
     const text = input.trim();
     if (!text || loading) return;
@@ -163,13 +172,10 @@ export function BalajiAI() {
     setInput("");
     setLoading(true);
 
-    const history = [...messages, userMsg]
-      .filter((m) => m.id !== "welcome" || m.role !== "assistant")
-      .map((m) => ({ role: m.role, content: m.content }));
-
-    if (messages.length === 1 && messages[0].id === "welcome") {
-      history.unshift({ role: "assistant" as Role, content: WELCOME.content });
-    }
+    const history = [...messages, userMsg].map((m) => ({
+      role: m.role,
+      content: m.content,
+    }));
 
     try {
       const res = await fetch("/api/balaji-ai", {
@@ -339,7 +345,7 @@ export function BalajiAI() {
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto px-4 py-4 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/10">
+          <div className="flex-1 min-h-0 overflow-y-auto px-4 py-4 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/10" style={{ overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" } as React.CSSProperties}>
             {messages.map((msg) => (
               <Bubble
                 key={msg.id}

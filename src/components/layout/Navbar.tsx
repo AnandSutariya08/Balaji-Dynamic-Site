@@ -54,9 +54,9 @@ export function Navbar() {
             <Link href="/" className="z-50 flex items-center gap-3">
               <div className="relative flex-shrink-0">
                 <img
-                  src="/logo.png"
-                  alt="Balaji Engineering Works Logo"
-                  className={`w-auto rounded object-contain transition-all duration-300 ${isScrolled ? "h-8" : "h-9"}`}
+                  src="/favicon.jpg"
+                  alt="Balaji AI"
+                  className={`rounded-full object-cover border border-primary/40 shadow-[0_0_8px_rgba(172,60,60,0.3)] transition-all duration-300 ${isScrolled ? "h-8 w-8" : "h-10 w-10"}`}
                 />
               </div>
               <div className="flex flex-col leading-none">
