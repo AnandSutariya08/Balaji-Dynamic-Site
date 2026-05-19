@@ -69,6 +69,10 @@ type ChatMessage = {
 };
 
 export async function POST(req: NextRequest) {
+  if (!SARVAM_API_KEY) {
+    return NextResponse.json({ error: "AI service not configured." }, { status: 503 });
+  }
+
   try {
     const body = await req.json();
     const messages: ChatMessage[] = body.messages ?? [];
