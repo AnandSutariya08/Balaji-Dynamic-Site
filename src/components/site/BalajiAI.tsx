@@ -162,19 +162,21 @@ export function BalajiAI() {
 
   useEffect(() => {
     if (!open) return;
+    // iOS-safe scroll lock: position:fixed keeps page frozen without breaking inner scroll
+    const scrollY = window.scrollY;
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = "0";
+    document.body.style.right = "0";
     document.body.style.overflow = "hidden";
-    document.documentElement.style.overflow = "hidden";
-
-    const prevent = (e: TouchEvent) => {
-      if (messagesRef.current?.contains(e.target as Node)) return;
-      e.preventDefault();
-    };
-    document.addEventListener("touchmove", prevent, { passive: false });
 
     return () => {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
       document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
-      document.removeEventListener("touchmove", prevent);
+      window.scrollTo(0, scrollY);
     };
   }, [open]);
 
@@ -231,6 +233,7 @@ export function BalajiAI() {
       ]);
     } finally {
       setLoading(false);
+      setTimeout(() => inputRef.current?.focus(), 50);
     }
   }, [input, loading, messages]);
 
@@ -329,7 +332,7 @@ export function BalajiAI() {
             <div className="relative">
               <div className="relative h-11 w-11 rounded-full overflow-hidden border-2 shadow-[0_0_16px_rgba(172,60,60,0.4)]" style={{ borderColor: "rgba(172,60,60,0.6)" }}>
                 <img
-                  src="/favicon.jpg"
+                  src="/logo.png"
                   alt="Balaji AI"
                   className="h-full w-full object-cover"
                 />
