@@ -218,13 +218,22 @@ export function BalajiAI() {
         body: JSON.stringify({ messages: history }),
       });
 
+      if (!res.ok) {
+        throw new Error(`API error: ${res.status}`);
+      }
+
       const data = await res.json();
       const raw: string = data.content ?? "";
+
+      if (!raw) {
+        throw new Error("Empty response from AI");
+      }
+
       const { clean, inquiry, markerFound } = parseInquiry(raw);
 
       const fallback = markerFound
         ? "I have collected your details. Please wait while I submit your inquiry…"
-        : "Sorry, I could not process that. Please try again.";
+        : raw;
 
       const aiMsg: Message = {
         id: (Date.now() + 1).toString(),
@@ -243,7 +252,7 @@ export function BalajiAI() {
         {
           id: (Date.now() + 1).toString(),
           role: "assistant",
-          content: "Connection error. Please check your network and try again.",
+          content: "Something went wrong. Please try again or call us at +91 99787 53398.",
           inquiryData: null,
         },
       ]);
@@ -277,10 +286,10 @@ export function BalajiAI() {
         <span className="absolute top-1 right-1 h-3 w-3 rounded-full bg-primary border-2 border-[#1a0505]" />
       </button>
 
-      {/* Backdrop */}
+      {/* Backdrop — sits above navbar (z-50) and floating buttons */}
       {open && (
         <div
-          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
+          className="fixed inset-0 z-[55] bg-black/70 backdrop-blur-sm"
           onClick={() => setOpen(false)}
         />
       )}
@@ -288,7 +297,7 @@ export function BalajiAI() {
       {/* Chat window — centered modal */}
       {open && (
         <div
-          className="fixed z-50 flex flex-col overflow-hidden
+          className="fixed z-[60] flex flex-col overflow-hidden
             inset-x-3 bottom-3 top-3 rounded-2xl
             sm:inset-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:w-[420px] sm:rounded-2xl"
           style={{
