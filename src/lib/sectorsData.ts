@@ -1,3 +1,8 @@
+export type SectorFaq = {
+  question: string;
+  answer: string;
+};
+
 export type Sector = {
   id: string;
   name: string;
@@ -12,6 +17,7 @@ export type Sector = {
   services: string[];
   applications: string[];
   whyUs: string[];
+  faqs: SectorFaq[];
 };
 
 export const sectorsData: Sector[] = [
@@ -58,6 +64,28 @@ export const sectorsData: Sector[] = [
       "In-house laser cutting, press braking, welding, and surface treatment under one roof",
       "Prototype runs accepted — no minimum order quantity for development parts",
     ],
+    faqs: [
+      {
+        question: "What automotive sheet metal parts can Balaji Engineering Works fabricate?",
+        answer: "We fabricate chassis brackets, underbody guards, body panels, door reinforcements, engine bay mounts, fuel tank guards, and commercial vehicle floor sections. We work from customer-supplied DXF, DWG, STEP, or PDF drawings and scale from prototype to production batch.",
+      },
+      {
+        question: "What materials do you use for automotive fabrication?",
+        answer: "We work with CRCA (Cold Rolled Close Annealed), HRCA (Hot Rolled Close Annealed), galvanized steel, and SS 304/316 grades commonly specified for automotive applications. Material selection is guided by the component's structural, corrosion, and weight requirements.",
+      },
+      {
+        question: "Do you supply to automotive OEMs and Tier-1 suppliers?",
+        answer: "Yes. We supply fabricated sheet metal components to automotive OEMs and Tier-1 ancillary suppliers across Gujarat and Maharashtra, with consistent quality and reliable lead times for both prototype orders and repeat production runs.",
+      },
+      {
+        question: "What surface finishes are available for automotive parts?",
+        answer: "We offer powder coating, zinc plating coordination, epoxy primer coating, and raw steel finishes. Specific finish specifications from your engineering or quality team can be accommodated on request.",
+      },
+      {
+        question: "What is the typical lead time for automotive sheet metal components?",
+        answer: "Prototype parts typically ship within 5–10 working days after drawing approval. Production batches are scheduled based on volume and complexity — we share a committed delivery schedule before production begins.",
+      },
+    ],
   },
   {
     id: "aviation",
@@ -101,6 +129,24 @@ export const sectorsData: Sector[] = [
       "Documented welding procedures and inspection records available on request",
       "Experience with aluminium, SS 304/316, and mild steel for ground-based aviation parts",
       "Quick-turnaround prototyping for MRO and retrofit projects",
+    ],
+    faqs: [
+      {
+        question: "What aviation ground support equipment does Balaji Engineering Works fabricate?",
+        answer: "We fabricate ground support trolleys and frames, aircraft wheel chocks, safety barriers, airside access covers, MRO workshop workbenches, and storage racking systems for hangars and maintenance facilities.",
+      },
+      {
+        question: "What materials are used for aviation-grade sheet metal fabrication?",
+        answer: "We work with aerospace-grade aluminium (6061, 5052), SS 304/316, and mild steel as specified by the customer. Material selection depends on weight requirements, corrosion environment, and structural load for each ground-based component.",
+      },
+      {
+        question: "Do you provide weld inspection records for aviation parts?",
+        answer: "Yes. We document welding procedures and provide visual inspection records for all structural aviation components. Dimensional inspection reports can also be provided for critical parts on request.",
+      },
+      {
+        question: "Can you fabricate custom MRO parts to our drawings?",
+        answer: "Yes. We accept DXF, DWG, STEP, IGES, and PDF drawings for MRO replacement or retrofit parts. Prototype turnaround is typically 5–7 working days after drawing review and approval.",
+      },
     ],
   },
   {
@@ -146,6 +192,28 @@ export const sectorsData: Sector[] = [
       "In-house powder coating and zinc priming for weather-resistant finishes",
       "Large-project capacity with dedicated production scheduling",
     ],
+    faqs: [
+      {
+        question: "What structural steel and sheet metal work do you do for construction projects?",
+        answer: "We fabricate metal roofing systems, facade cladding panels, structural columns and beams, staircases, balustrades, handrails, canopy structures, and purlins. We work from architect or structural engineer drawings and coordinate with main contractors on site requirements.",
+      },
+      {
+        question: "Do you work directly with architects and PMCs?",
+        answer: "Yes. We coordinate directly with architects, project management consultants, and main contractors to ensure fabricated metalwork matches design intent, project specifications, and installation requirements.",
+      },
+      {
+        question: "What finishes are available for architectural metalwork?",
+        answer: "We offer powder coating in any RAL colour, zinc priming, epoxy primer, hot-dip galvanizing coordination, and brushed or mill finishes on stainless steel. For CORTEN-effect applications, we can advise on material and finish options.",
+      },
+      {
+        question: "Can you fabricate custom staircases and handrail systems?",
+        answer: "Yes. We fabricate internal and external staircases, balustrades, and handrail systems in mild steel, stainless steel, and aluminium to architectural drawings. Both straight and curved profiles can be accommodated.",
+      },
+      {
+        question: "What is your capacity for large construction projects?",
+        answer: "We have dedicated production scheduling for large project volumes and can manage phased deliveries to match site installation timelines. Contact us with your BOQ and drawings for a capacity and timeline assessment.",
+      },
+    ],
   },
   {
     id: "energy-power",
@@ -189,6 +257,24 @@ export const sectorsData: Sector[] = [
       "Experience with corrosion protection specifications required for outdoor energy infrastructure",
       "Volume production capability for solar EPC and wind project contractors",
       "Galvanizing, powder coating, and zinc priming in-house or through trusted partners",
+    ],
+    faqs: [
+      {
+        question: "Do you fabricate solar panel mounting structures?",
+        answer: "Yes. We fabricate ground-mount and rooftop solar racking frames and structural supports for solar EPC contractors. We handle high-volume repeat orders with consistent dimensional accuracy across large batches.",
+      },
+      {
+        question: "What corrosion protection options do you offer for energy sector parts?",
+        answer: "We coordinate hot-dip galvanizing, and offer in-house powder coating and zinc-rich primer application. These protect outdoor energy infrastructure components against UV exposure, coastal salt spray, and humidity.",
+      },
+      {
+        question: "Can you fabricate electrical panel enclosures and cable trays?",
+        answer: "Yes. We fabricate HT/LT electrical panel enclosures, cable trays, transformer housings, and substation structures in mild steel and stainless steel to customer specifications.",
+      },
+      {
+        question: "Do you supply to solar EPC contractors in India?",
+        answer: "Yes. We supply solar mounting frames and structural components to EPC contractors across India. Our production capacity supports large project volumes with phased delivery schedules to match site installation timelines.",
+      },
     ],
   },
   {
@@ -234,6 +320,28 @@ export const sectorsData: Sector[] = [
       "DXF, DWG, STEP, IGES, PDF accepted — fast DFM review turnaround",
       "Prototype to production batch in the same facility, same quality controls",
     ],
+    faqs: [
+      {
+        question: "Do you accept job work orders with customer-supplied drawings?",
+        answer: "Yes. We accept job work orders from drawings in DXF, DWG, STEP, IGES, and PDF formats. Our team reviews every drawing for manufacturability and responds with a quote and lead time within 4–8 business hours.",
+      },
+      {
+        question: "What is your minimum order quantity for custom sheet metal parts?",
+        answer: "We accept orders from a single prototype piece up to large production batches. There is no fixed minimum order quantity — requirements are assessed based on the process, material, and complexity of each part.",
+      },
+      {
+        question: "What types of enclosures and housings can you fabricate?",
+        answer: "We fabricate control panel enclosures, electrical junction boxes, machine housings, equipment covers, and custom industrial enclosures in mild steel, stainless steel, and aluminium to your exact drawings.",
+      },
+      {
+        question: "Can you provide first-article inspection reports?",
+        answer: "Yes. For new part numbers, we provide first-article inspection (FAI) reports with dimensional verification against the supplied drawing before full production commences.",
+      },
+      {
+        question: "Do you offer tapping, punching, and hardware insertion services?",
+        answer: "Yes. In addition to cutting, bending, and welding, we offer tapping, punching, countersinking, and PEM nut or stud insertion as value-added operations on sheet metal parts.",
+      },
+    ],
   },
   {
     id: "agriculture-heavy-machinery",
@@ -277,6 +385,24 @@ export const sectorsData: Sector[] = [
       "Heavy-gauge bending capability up to 8 mm mild steel",
       "Structural weld experience for vibration and high-load applications",
       "Supply to major agricultural OEMs and implement manufacturers in Gujarat",
+    ],
+    faqs: [
+      {
+        question: "What agricultural machinery parts can you fabricate?",
+        answer: "We fabricate tractor bonnets, hoods, fenders, seed drill frames, rotavator tine assemblies, combine harvester cutter bar parts, planter frames, and earthmover cab panels. We work with HRCA, CRCA, and wear-resistant steel grades.",
+      },
+      {
+        question: "Can you handle heavy-gauge steel for agricultural equipment?",
+        answer: "Yes. Our press braking capacity handles heavy-gauge mild steel up to 8 mm thickness, suitable for structural brackets, chassis components, and loader bucket side plates on agricultural and earthmoving equipment.",
+      },
+      {
+        question: "Do you fabricate sub-assemblies for agricultural OEMs?",
+        answer: "Yes. We supply welded sub-assemblies and pre-assembled structural units to agricultural OEMs and implement manufacturers, reducing your final assembly time and simplifying supply chain management.",
+      },
+      {
+        question: "What welding processes do you use for heavy agricultural parts?",
+        answer: "We use MIG welding for structural agricultural weldments requiring full-penetration joints and high fatigue resistance. All critical welds undergo visual and dimensional inspection before dispatch.",
+      },
     ],
   },
   {
@@ -322,6 +448,24 @@ export const sectorsData: Sector[] = [
       "Full-penetration weld capability with dimensional verification for critical load-bearing structures",
       "On-time supply to crushing plant and conveyor system integrators across India",
     ],
+    faqs: [
+      {
+        question: "What crushing and mining components do you fabricate?",
+        answer: "We fabricate conveyor belt frame sections, feed hoppers, discharge chutes, crusher side plates and access covers, vibrating screen frames, grizzly feeder frames, and belt conveyor drive and tail pulley support structures.",
+      },
+      {
+        question: "Can you work with abrasion-resistant (AR) plate steel?",
+        answer: "Yes. We cut and form AR plate (Hardox equivalent grades) for wear-critical applications such as hopper liners, chute liners, and conveyor impact zones. Cutting is done by CNC plasma or laser depending on plate thickness.",
+      },
+      {
+        question: "What welding standard do you follow for structural mining components?",
+        answer: "We use full-penetration MIG welding for load-bearing structural components and supply dimensional inspection reports for critical parts. Weld procedure documentation is available on request for quality audit purposes.",
+      },
+      {
+        question: "Do you supply directly to conveyor system integrators?",
+        answer: "Yes. We supply fabricated structural components directly to conveyor system integrators, crushing plant contractors, and mineral processing equipment manufacturers across India.",
+      },
+    ],
   },
   {
     id: "defense-military",
@@ -365,6 +509,24 @@ export const sectorsData: Sector[] = [
       "Documented welding procedures and material traceability available for defense-grade components",
       "Strict project confidentiality maintained across all defense-related fabrication work",
       "Experience with high-tensile plate and heavy structural fabrication for robust applications",
+    ],
+    faqs: [
+      {
+        question: "What defense-related sheet metal components do you fabricate?",
+        answer: "We fabricate military vehicle body panels and protective covers, equipment shelter frames, ammunition and storage rack systems, generator enclosures, underbody guards, communication shelter frames, and cable management systems for base infrastructure.",
+      },
+      {
+        question: "Do you maintain project confidentiality for defense orders?",
+        answer: "Yes. All defense-related fabrication projects are treated with strict confidentiality. Details of components, quantities, and customer identities are not disclosed outside our production team.",
+      },
+      {
+        question: "Can you provide material traceability documentation for defense components?",
+        answer: "Yes. We can provide material test certificates with heat number traceability, weld procedure documentation, and dimensional inspection records for critical defense-grade structural components.",
+      },
+      {
+        question: "What steel grades do you work with for defense applications?",
+        answer: "We work with high-tensile steel (HT 500, HT 550), mild steel plates, SS 304/316, and aluminium alloys as specified by defense customers. Material selection is based on structural, weight, and ballistic protection requirements of each component.",
+      },
     ],
   },
   {
@@ -410,6 +572,28 @@ export const sectorsData: Sector[] = [
       "Custom RAL powder coating with samples available before production approval",
       "Packaging engineered to protect decorative finishes during transport to project sites",
     ],
+    faqs: [
+      {
+        question: "Can you fabricate custom CNC laser-cut decorative panels from my design?",
+        answer: "Yes. Send us your design as a DXF or vector file (AI, EPS, SVG) and we will cut the pattern precisely in your chosen material — mild steel, stainless steel, or aluminium. We can advise on minimum feature size and material thickness for your intended use.",
+      },
+      {
+        question: "What powder coating colours are available for decorative metalwork?",
+        answer: "We offer powder coating in any RAL colour. Sample pieces can be produced before full production to confirm colour and finish match your project requirements. Matte, satin, and gloss finishes are all available.",
+      },
+      {
+        question: "What materials can be used for exterior facade cladding panels?",
+        answer: "We fabricate facade cladding in mild steel (powder coated), stainless steel (brushed or powder coated), and aluminium. For outdoor applications, we recommend powder coating with a weather-resistant primer base to ensure long-term finish durability.",
+      },
+      {
+        question: "What is the lead time for decorative laser-cut panels?",
+        answer: "Standard decorative panels typically ship within 7–14 working days after design approval and material selection confirmation. Large project runs with multiple panel designs are scheduled based on total quantity and complexity.",
+      },
+      {
+        question: "Do you fabricate pergolas and outdoor shade structures?",
+        answer: "Yes. We fabricate custom pergolas, canopies, and outdoor shade structures in mild steel and aluminium, with powder coating for weather resistance. We work from customer or architect drawings and can suggest structural sizing based on span and load.",
+      },
+    ],
   },
   {
     id: "marine-industry",
@@ -454,6 +638,24 @@ export const sectorsData: Sector[] = [
       "TIG welding for watertight and low-distortion marine assemblies",
       "Material test certificates and weld inspection records provided on request",
     ],
+    faqs: [
+      {
+        question: "What marine and offshore components can you fabricate?",
+        answer: "We fabricate vessel interior panels and partitions, deck fixtures and housings, offshore platform handrail systems, gangways, cable trays, and structural support frames for marine and port infrastructure applications.",
+      },
+      {
+        question: "What materials do you use for marine-grade fabrication?",
+        answer: "We work primarily with SS 304, SS 316, and SS 316L for marine environments requiring high corrosion resistance. For structural applications, we use mild steel with heavy-duty marine paint or hot-dip galvanizing as specified.",
+      },
+      {
+        question: "Do you use TIG welding for stainless steel marine components?",
+        answer: "Yes. We use TIG welding for stainless steel marine components where clean, full-penetration welds and corrosion resistance are critical. All stainless weld seams are properly passivated and inspected before dispatch.",
+      },
+      {
+        question: "Can you provide material test certificates for marine parts?",
+        answer: "Yes. We provide material test certificates (MTCs) with heat number traceability and weld inspection records for marine components on request. These are commonly required by classification societies and marine project QA teams.",
+      },
+    ],
   },
   {
     id: "railway-transportation",
@@ -497,6 +699,28 @@ export const sectorsData: Sector[] = [
       "High-volume production capability with consistent dimensional accuracy across large batches",
       "Experience with railway-specification powder coating and epoxy primer finishes",
       "Supply to Indian Railways contractors and metro project subcontractors",
+    ],
+    faqs: [
+      {
+        question: "What railway sheet metal components do you fabricate?",
+        answer: "We fabricate train carriage interior panels, under-seat equipment housings, cable tray and conduit systems, station canopy structural supports, platform edge frames, driver's cab panels, and metro coach interior fixtures.",
+      },
+      {
+        question: "What materials do you use for railway and metro applications?",
+        answer: "We work with SS 304/316, 6061 aluminium, and mild steel as specified by the rolling stock manufacturer or railway contractor. Material selection follows the fire-resistance, weight, and structural requirements of each application.",
+      },
+      {
+        question: "Can you supply to Indian Railways contractors and metro project vendors?",
+        answer: "Yes. We supply fabricated sheet metal components to Indian Railways contractors, metro rail project subcontractors, and railway station infrastructure companies across India.",
+      },
+      {
+        question: "Do you handle powder coating for railway interior components?",
+        answer: "Yes. We offer powder coating in specified RAL or railway project standard colours, with surface prep and primer application for interior and exterior railway components. Colour and finish samples are available before full production.",
+      },
+      {
+        question: "What volume capacity do you have for railway production orders?",
+        answer: "We support both prototype and production-volume orders for railway customers. Our production scheduling accommodates phased delivery to match rolling stock assembly or infrastructure construction timelines. Contact us with your BOQ for a capacity assessment.",
+      },
     ],
   },
 ];

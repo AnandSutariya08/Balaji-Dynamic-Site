@@ -3,6 +3,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import {
   buildMetadata,
   createBreadcrumbJsonLd,
+  createGenericFaqJsonLd,
   createLocalBusinessJsonLd,
   createOrganizationJsonLd,
   createWebPageJsonLd,
@@ -131,6 +132,7 @@ export default async function Page({
     itemListSchema,
     createOrganizationJsonLd(),
     createLocalBusinessJsonLd(),
+    createGenericFaqJsonLd(sector.faqs),
   ];
 
   return (

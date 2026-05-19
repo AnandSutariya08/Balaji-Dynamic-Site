@@ -1,8 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, ChevronLeft, CheckCircle2, Wrench, Package, Award } from "lucide-react";
-import { motion } from "framer-motion";
+import { ArrowRight, ChevronLeft, CheckCircle2, Wrench, Package, Award, ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { PageTransition } from "@/components/layout/PageTransition";
 import { PageHero } from "@/components/site/PageHero";
 import { Button } from "@/components/ui/button";
@@ -10,6 +11,7 @@ import type { Sector } from "@/lib/sectorsData";
 
 export default function SectorDetailPage({ sector }: { sector: Sector }) {
   const heroImage = sector.image;
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
     <PageTransition>
@@ -118,6 +120,56 @@ export default function SectorDetailPage({ sector }: { sector: Sector }) {
                   ))}
                 </div>
               </motion.div>
+
+              {sector.faqs && sector.faqs.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                >
+                  <h2 className="text-2xl font-display font-black uppercase tracking-tight text-[#1A1A1A] mb-6">
+                    Frequently Asked Questions
+                  </h2>
+                  <div className="space-y-3">
+                    {sector.faqs.map((faq, i) => (
+                      <div
+                        key={i}
+                        className="rounded-2xl border border-black/8 bg-[#EDEAE4] overflow-hidden"
+                      >
+                        <button
+                          type="button"
+                          onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                          className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left"
+                          aria-expanded={openFaq === i}
+                        >
+                          <span className="text-sm md:text-base font-semibold text-[#1A1A1A] leading-snug">
+                            {faq.question}
+                          </span>
+                          <ChevronDown
+                            className={`w-4 h-4 shrink-0 text-primary transition-transform duration-200 ${openFaq === i ? "rotate-180" : ""}`}
+                          />
+                        </button>
+                        <AnimatePresence initial={false}>
+                          {openFaq === i && (
+                            <motion.div
+                              key="answer"
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.22, ease: "easeInOut" }}
+                              className="overflow-hidden"
+                            >
+                              <p className="px-5 pb-5 text-sm md:text-base leading-relaxed text-slate-600">
+                                {faq.answer}
+                              </p>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
             </div>
 
             <div className="space-y-6">
