@@ -140,6 +140,7 @@ export function BalajiAI() {
   const [statusMsg, setStatusMsg] = useState<string | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const messagesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -150,16 +151,20 @@ export function BalajiAI() {
   }, [open]);
 
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-      document.documentElement.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
-    }
+    if (!open) return;
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+
+    const prevent = (e: TouchEvent) => {
+      if (messagesRef.current?.contains(e.target as Node)) return;
+      e.preventDefault();
+    };
+    document.addEventListener("touchmove", prevent, { passive: false });
+
     return () => {
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";
+      document.removeEventListener("touchmove", prevent);
     };
   }, [open]);
 
@@ -280,13 +285,14 @@ export function BalajiAI() {
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-label="Open Balaji AI"
-        className="fixed bottom-[5.5rem] right-4 sm:right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#1a0505] shadow-[0_4px_16px_rgba(172,60,60,0.4)] transition-shadow hover:shadow-[0_6px_24px_rgba(172,60,60,0.6)]"
+        className="fixed bottom-[5.5rem] right-4 sm:right-6 z-50 relative flex h-14 w-14 items-center justify-center rounded-full bg-[#1a0505] shadow-[0_4px_16px_rgba(172,60,60,0.4)] transition-shadow hover:shadow-[0_6px_24px_rgba(172,60,60,0.6)]"
       >
         <img
           src="/logo.png"
           alt="Balaji AI"
-          className="h-10 w-10 rounded-full object-cover"
+          className="h-7 w-7 rounded-full object-cover"
         />
+        <span className="absolute top-1 right-1 h-3 w-3 rounded-full bg-primary border-2 border-[#1a0505]" />
       </button>
 
       {/* Backdrop */}
@@ -352,7 +358,7 @@ export function BalajiAI() {
           </div>
 
           {/* Messages */}
-          <div className="flex-1 min-h-0 overflow-y-auto px-4 py-4 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/10" style={{ overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" } as React.CSSProperties}>
+          <div ref={messagesRef} className="flex-1 min-h-0 overflow-y-auto px-4 py-4 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/10" style={{ overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" } as React.CSSProperties}>
             {messages.map((msg) => (
               <Bubble
                 key={msg.id}
