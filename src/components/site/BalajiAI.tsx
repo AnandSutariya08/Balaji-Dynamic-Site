@@ -215,6 +215,8 @@ export function BalajiAI() {
           email: data.email,
           service: data.service,
           message: data.message,
+          quantity: "",
+          material: "",
         },
         "contact-form",
       );
