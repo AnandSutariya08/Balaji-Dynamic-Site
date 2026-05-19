@@ -2,20 +2,15 @@ import "server-only";
 
 import type { GalleryItem } from "@/lib/firestore/types";
 
-function projectId() {
-  return process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
-}
-
-function apiKey() {
-  return process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
-}
+const FIREBASE_PROJECT_ID = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "balaji-eng";
+const FIREBASE_API_KEY = process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "AIzaSyCLwn48koGG36jAjS-Ps_YoU4FVVpBj5LA";
 
 function isConfigured() {
-  return Boolean(projectId() && apiKey());
+  return Boolean(FIREBASE_PROJECT_ID && FIREBASE_API_KEY);
 }
 
 function baseUrl() {
-  return `https://firestore.googleapis.com/v1/projects/${projectId()}/databases/(default)/documents`;
+  return `https://firestore.googleapis.com/v1/projects/${FIREBASE_PROJECT_ID}/databases/(default)/documents`;
 }
 
 function parseValue(value: Record<string, unknown> | null | undefined): unknown {
@@ -72,7 +67,7 @@ export async function getPublicGalleryFromFirestore(): Promise<GalleryItem[]> {
 
   try {
     const response = await fetch(
-      `${baseUrl()}/gallery?key=${apiKey()}&pageSize=100`,
+      `${baseUrl()}/gallery?key=${FIREBASE_API_KEY}&pageSize=100`,
       { next: { revalidate: 300 } },
     );
     if (!response.ok) return [];

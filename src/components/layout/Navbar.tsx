@@ -90,16 +90,6 @@ export function Navbar() {
                   />
                 </Link>
               ))}
-              <button
-                type="button"
-                className={`ml-3 rounded-xl px-5 py-2.5 text-[11px] font-black uppercase tracking-[0.15em] text-white transition-all duration-300 ${isScrolled
-                  ? "bg-primary shadow-[0_0_20px_rgba(172,60,60,0.4)] hover:bg-primary/90"
-                  : "border border-primary/50 bg-primary/90 shadow-[0_0_20px_rgba(172,60,60,0.3)] backdrop-blur-sm hover:bg-primary"
-                  }`}
-                onClick={() => openQuoteDialog()}
-              >
-                Get Quote
-              </button>
             </nav>
 
             <button
