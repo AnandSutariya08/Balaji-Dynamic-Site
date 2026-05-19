@@ -65,6 +65,7 @@ export default async function Page({
 
   const seo = getServiceSeoContent(service);
   const relatedServices = services.filter((item) => item.id !== service.id).slice(0, 4);
+  const highlightFeatures = service.features.slice(0, 4);
   const relatedPosts = posts
     .filter((post) => {
       const haystack = `${post.title} ${post.excerpt} ${post.content}`.toLowerCase();
@@ -148,40 +149,90 @@ export default async function Page({
 
         <section className="border-y border-black/8 bg-[#EDEAE4] py-14 md:py-20">
           <div className="container mx-auto px-4">
-            <div className="grid gap-10 lg:grid-cols-[1.3fr_0.7fr] lg:gap-16">
-              <div>
-                <span className="text-sm font-bold uppercase tracking-[0.3em] text-primary">
-                  Service Overview
-                </span>
-                <h2 className="mt-4 text-3xl font-display font-black uppercase tracking-tighter text-[#1A1A1A] md:text-5xl">
-                  {seo.metaTitle}
-                </h2>
-                <p className="mt-6 text-base font-light leading-relaxed text-slate-600 md:text-lg">
-                  {seo.intro}
-                </p>
-                <p className="mt-4 text-base font-light leading-relaxed text-slate-600 md:text-lg">
-                  {service.description}
-                </p>
+            <div className="grid gap-8 xl:grid-cols-[1.25fr_0.75fr] xl:gap-12">
+              <div className="overflow-hidden rounded-[2rem] border border-black/8 bg-[#F7F5F1]">
+                <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
+                  <div className="relative min-h-[260px] overflow-hidden bg-[#DDD6CE] sm:min-h-[320px]">
+                    <img
+                      src={service.image}
+                      alt={`${service.title} service by Balaji Engineering Works in Surat`}
+                      className="h-full w-full object-cover object-center"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
+                    <div className="absolute left-5 top-5 rounded-full border border-white/15 bg-black/25 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.28em] text-white/80 backdrop-blur">
+                      Selected Service
+                    </div>
+                  </div>
+                  <div className="p-6 sm:p-8 md:p-10">
+                    <span className="text-sm font-bold uppercase tracking-[0.3em] text-primary">
+                      Service Snapshot
+                    </span>
+                    <h2 className="mt-4 text-3xl font-display font-black uppercase tracking-tighter text-[#1A1A1A] md:text-5xl">
+                      {seo.metaTitle}
+                    </h2>
+                    <p className="mt-6 text-base font-light leading-relaxed text-slate-600 md:text-lg">
+                      {seo.intro}
+                    </p>
+                    <p className="mt-4 text-base font-light leading-relaxed text-slate-600 md:text-lg">
+                      {service.description}
+                    </p>
+                    <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                      {highlightFeatures.map((feature) => (
+                        <div
+                          key={feature}
+                          className="rounded-2xl border border-black/8 bg-[#EDEAE4] px-4 py-3"
+                        >
+                          <div className="flex items-start gap-3">
+                            <div className="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-primary" />
+                            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#1A1A1A]">
+                              {feature}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div className="rounded-2xl border border-black/8 bg-[#F7F5F1] p-6 md:p-8">
-                <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-slate-500">
-                  Quick Specs
-                </h3>
-                <div className="mt-6 grid gap-3">
-                  {service.specs.map((spec) => (
-                    <div
-                      key={spec.label}
-                      className="rounded-xl border border-black/8 bg-white px-4 py-3"
-                    >
-                      <div className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400">
-                        {spec.label}
+              <div className="grid gap-5">
+                <div className="rounded-2xl border border-black/8 bg-[#F7F5F1] p-6 md:p-8">
+                  <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-slate-500">
+                    Quick Specs
+                  </h3>
+                  <div className="mt-6 grid gap-3">
+                    {service.specs.map((spec) => (
+                      <div
+                        key={`${spec.label}-${spec.value}`}
+                        className="rounded-xl border border-black/8 bg-white px-4 py-3"
+                      >
+                        <div className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400">
+                          {spec.label}
+                        </div>
+                        <div className="mt-1 text-sm font-bold text-[#1A1A1A]">
+                          {spec.value}
+                        </div>
                       </div>
-                      <div className="mt-1 text-sm font-bold text-[#1A1A1A]">
-                        {spec.value}
+                    ))}
+                  </div>
+                </div>
+
+                <div className="rounded-2xl border border-black/8 bg-[#1A1A1A] p-6 text-white md:p-8">
+                  <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-primary">
+                    Best Fit For
+                  </h3>
+                  <div className="mt-6 space-y-3">
+                    {seo.applications.slice(0, 4).map((application) => (
+                      <div key={application} className="flex gap-3">
+                        <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/10">
+                          <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
+                        </div>
+                        <p className="text-sm font-light leading-relaxed text-zinc-300">
+                          {application}
+                        </p>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>

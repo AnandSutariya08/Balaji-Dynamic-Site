@@ -92,7 +92,7 @@ export default function ServicesPage({
         </section>
 
         {/* SERVICES â€” Full-Width Alternating */}
-        <section className="py-8 bg-[#F7F5F1]">
+        <section className="bg-[#F7F5F1] py-6">
           {loading ? (
             <div className="flex items-center justify-center gap-2 py-32 text-slate-400 text-sm">
               <Loader2 className="w-5 h-5 animate-spin" /> Loading services from Firestore...
@@ -108,38 +108,31 @@ export default function ServicesPage({
                 className="grid items-center border-b border-black/8 group lg:grid-cols-2"
               >
                 {/* Image */}
-                <div className={`relative flex h-[260px] items-center justify-center overflow-hidden bg-[#DDD6CE] sm:h-[380px] lg:h-[500px] ${i % 2 !== 0 ? 'lg:order-2' : ''}`}>
+                <div className={`relative flex h-[220px] items-center justify-center overflow-hidden bg-[#DDD6CE] sm:h-[280px] lg:h-[340px] ${i % 2 !== 0 ? 'lg:order-2' : ''}`}>
                   <img src={service.image} alt={`${service.title} service by Balaji Engineering Works in Surat`} className="h-full w-full object-cover object-center transition-transform duration-1000 group-hover:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute top-4 left-4 md:top-8 md:left-8 text-[3rem] md:text-[5rem] font-display font-black text-white/5 leading-none">{String(i + 1).padStart(2, "0")}</div>
                 </div>
                 {/* Content */}
-                <div className={`flex justify-center bg-[#F7F5F1] p-6 sm:p-10 md:p-12 xl:p-16 ${i % 2 !== 0 ? 'lg:order-1' : ''}`}>
+                <div className={`flex justify-center bg-[#F7F5F1] p-5 sm:p-8 md:p-10 xl:p-12 ${i % 2 !== 0 ? 'lg:order-1' : ''}`}>
                   <div className="flex w-full max-w-2xl flex-col justify-center">
-                    <span className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-primary md:mb-4">{service.tagline}</span>
-                    <h2 className="mb-4 text-[clamp(1.6rem,4.6vw,3.2rem)] font-display font-black uppercase tracking-tighter leading-[0.92] text-[#1A1A1A] md:mb-6">
+                    <span className="mb-2 text-[11px] font-bold uppercase tracking-[0.28em] text-primary md:mb-3">{service.tagline}</span>
+                    <h2 className="mb-3 text-[clamp(1.5rem,4vw,2.8rem)] font-display font-black uppercase tracking-tighter leading-[0.95] text-[#1A1A1A] md:mb-4">
                       {service.title}
                     </h2>
-                    <p className="mb-6 text-sm font-light leading-relaxed text-slate-600 md:mb-8 md:text-base">{service.description}</p>
-                    <div className="mb-6 grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:mb-8 md:gap-3">
-                      {service.specs.map((spec, j) => (
+                    <p className="mb-5 max-w-xl text-sm font-light leading-relaxed text-slate-600 md:mb-6">
+                      {service.description}
+                    </p>
+                    <div className="mb-5 grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:mb-6 md:gap-3">
+                      {service.specs.slice(0, 2).map((spec, j) => (
                         <div key={j} className="rounded-lg border border-black/8 bg-[#EDEAE4] p-3 text-center md:rounded-xl md:p-4">
-                          <div className="text-sm font-display font-black text-primary md:text-lg">{spec.value}</div>
+                          <div className="text-sm font-display font-black text-primary md:text-base">{spec.value}</div>
                           <div className="mt-1 text-[9px] font-bold uppercase tracking-widest text-slate-500 md:text-[10px]">{spec.label}</div>
                         </div>
                       ))}
                     </div>
-                    <div className="mb-8 grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:mb-10 md:gap-3">
-                      {service.features.map((f, j) => (
-                        <div key={j} className="flex items-center gap-2.5">
-                          <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/15">
-                            <CheckCircle2 className="w-3 h-3 text-primary" />
-                          </div>
-                          <span className="text-xs font-bold uppercase tracking-wider text-[#1A1A1A]">{f}</span>
-                        </div>
-                      ))}
-                    </div>
+
                     <div className="flex flex-col gap-3 sm:flex-row">
                       <Button className="h-12 w-full border-none bg-primary px-6 text-sm font-bold uppercase tracking-widest text-white shadow-[0_0_20px_rgba(172,60,60,0.25)] hover:bg-primary/90 sm:w-fit md:h-14 md:px-8" asChild>
                         <Link href={`/services/${service.id}`}>View Details <ArrowRight className="ml-2 w-4 h-4" /></Link>

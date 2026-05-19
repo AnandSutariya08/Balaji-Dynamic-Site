@@ -1,4 +1,4 @@
-import { staticProducts } from "@/lib/productsData";
+import { getProductsData } from "@/lib/productsData";
 import { staticServices } from "@/lib/servicesData";
 import { getPublicBlogsFromFirestore } from "@/lib/firestore/publicBlogsServer";
 import { absoluteUrl } from "@/lib/seo";
@@ -10,7 +10,7 @@ function stripHtml(html: string) {
 
 export async function GET() {
   const services = staticServices;
-  const products = staticProducts;
+  const products = await getProductsData();
   const posts = await getPublicBlogsFromFirestore();
 
   const serviceBlocks = services

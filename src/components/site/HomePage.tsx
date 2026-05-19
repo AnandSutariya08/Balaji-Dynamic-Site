@@ -10,19 +10,24 @@ import { ArrowRight, ChevronRight, ChevronLeft, CheckCircle2, Factory, Zap, Shie
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useBlogs } from "@/hooks/useBlogs";
+import { useProducts } from "@/hooks/useProducts";
 import type { BlogPost } from "@/lib/firestore/types";
-import { staticProducts } from "@/lib/productsData";
+import type { Product } from "@/lib/firestore/types";
 import { staticServices } from "@/lib/servicesData";
 import { SectorsSection } from "@/components/site/SectorsSection";
 import { PartnersClientsSection } from "@/components/site/PartnersClientsSection";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const EMPTY_PRODUCTS: Product[] = [];
+
 export default function HomePage({
   initialPosts = [],
+  initialProducts = EMPTY_PRODUCTS,
   organizationJsonLd,
 }: {
   initialPosts?: BlogPost[];
+  initialProducts?: Product[];
   organizationJsonLd?: Record<string, unknown>;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -31,6 +36,7 @@ export default function HomePage({
   const [activeService, setActiveService] = useState(0);
   const autoPlayRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const { posts: blogPosts } = useBlogs(initialPosts);
+  const { products } = useProducts(initialProducts);
   const previewPosts = blogPosts.slice(0, 3);
 
   const services = staticServices.map((service) => ({
@@ -39,7 +45,7 @@ export default function HomePage({
     image: service.image,
     subs: service.features.slice(0, 3),
   }));
-  const featuredProducts = staticProducts.slice(0, 6);
+  const featuredProducts = products.slice(0, 6);
 
   const scrollCardIntoView = useCallback((index: number) => {
     const container = servicesScrollRef.current;

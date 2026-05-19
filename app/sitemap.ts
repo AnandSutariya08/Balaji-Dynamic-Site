@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
-import { staticProducts } from "@/lib/productsData";
 import { staticServices } from "@/lib/servicesData";
+import { getProductsData } from "@/lib/productsData";
 import { absoluteUrl } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 import { getPublicBlogsFromFirestore } from "@/lib/firestore/publicBlogsServer";
@@ -26,7 +26,7 @@ function uniqueImages(images: Array<string | undefined>) {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getPublicBlogsFromFirestore();
   const gallery = await getPublicGalleryFromFirestore();
-  const products = staticProducts;
+  const products = await getProductsData();
   const services = staticServices;
 
   const serviceLastModified = services.length

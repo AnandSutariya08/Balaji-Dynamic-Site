@@ -11,8 +11,9 @@ import { motion } from "framer-motion";
 import { Mail, MapPin, Phone, Clock, CheckCircle2, ArrowRight, Zap } from "lucide-react";
 import Link from "next/link";
 import type { FormEvent } from "react";
-import { useEffect, useState } from "react";
-import { getInquiryLabel, INQUIRY_OPTIONS } from "@/lib/inquiryOptions";
+import { useEffect, useMemo, useState } from "react";
+import { useProducts } from "@/hooks/useProducts";
+import { getInquiryLabel, getInquiryOptions } from "@/lib/inquiryOptions";
 import { PageHero } from "@/components/site/PageHero";
 import { submitInquiryLead } from "@/lib/inquirySubmission";
 
@@ -40,6 +41,8 @@ export default function ContactPage({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
   const [selectedService, setSelectedService] = useState(defaultService);
+  const { products } = useProducts();
+  const inquiryOptions = useMemo(() => getInquiryOptions(products), [products]);
 
   useEffect(() => {
     setSelectedService(defaultService);
@@ -64,7 +67,7 @@ export default function ContactPage({
         name: get("name"),
         phone: get("phone"),
         email: get("email"),
-        service: getInquiryLabel(serviceValue),
+        service: getInquiryLabel(serviceValue, inquiryOptions),
         quantity: get("quantity"),
         material: get("material"),
         message: get("message"),
@@ -245,7 +248,7 @@ export default function ContactPage({
                             <SelectValue placeholder="Select a service or product" />
                           </SelectTrigger>
                           <SelectContent>
-                            {INQUIRY_OPTIONS.map((option) => (
+                            {inquiryOptions.map((option) => (
                               <SelectItem key={option.value} value={option.value}>
                                 {option.label}
                               </SelectItem>

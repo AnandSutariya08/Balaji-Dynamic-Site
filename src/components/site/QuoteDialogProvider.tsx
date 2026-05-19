@@ -10,7 +10,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { getInquiryLabel, INQUIRY_OPTIONS } from "@/lib/inquiryOptions";
+import { useProducts } from "@/hooks/useProducts";
+import { getInquiryLabel, getInquiryOptions } from "@/lib/inquiryOptions";
 import { submitInquiryLead } from "@/lib/inquirySubmission";
 
 type QuoteDialogContextValue = {
@@ -34,6 +35,8 @@ export function QuoteDialogProvider({ children }: { children: ReactNode }) {
   const [selectedService, setSelectedService] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const dialogRef = useRef<HTMLDivElement | null>(null);
+  const { products } = useProducts();
+  const inquiryOptions = useMemo(() => getInquiryOptions(products), [products]);
 
   const openQuoteDialog = useCallback((options?: { service?: string }) => {
     const service = options?.service ?? "";
@@ -94,7 +97,7 @@ export function QuoteDialogProvider({ children }: { children: ReactNode }) {
         name: get("quote-name"),
         phone: get("quote-phone"),
         email: get("quote-email"),
-        service: getInquiryLabel(serviceValue),
+        service: getInquiryLabel(serviceValue, inquiryOptions),
         quantity: get("quote-quantity"),
         material: get("quote-material"),
         message: get("quote-message"),
@@ -211,7 +214,7 @@ export function QuoteDialogProvider({ children }: { children: ReactNode }) {
                         <SelectValue placeholder="Select a service or product" />
                       </SelectTrigger>
                       <SelectContent className="z-[90]">
-                        {INQUIRY_OPTIONS.map((option) => (
+                        {inquiryOptions.map((option) => (
                           <SelectItem key={option.value} value={option.value}>
                             {option.label}
                           </SelectItem>

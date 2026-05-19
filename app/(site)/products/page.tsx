@@ -1,6 +1,6 @@
 import ProductsPage from "@/components/site/ProductsPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { staticProducts } from "@/lib/productsData";
+import { getProductsData } from "@/lib/productsData";
 import {
   buildMetadata,
   createBreadcrumbJsonLd,
@@ -35,7 +35,7 @@ export const metadata = buildMetadata({
 });
 
 export default async function Page() {
-  const products = staticProducts;
+  const products = await getProductsData();
   const schemas = [
     createWebPageJsonLd({
       title,
@@ -56,7 +56,7 @@ export default async function Page() {
       {schemas.map((schema, index) => (
         <JsonLd key={index} data={schema} />
       ))}
-      <ProductsPage products={products} />
+      <ProductsPage initialProducts={products} />
     </>
   );
 }

@@ -1,6 +1,6 @@
 import HomePage from "@/components/site/HomePage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { staticProducts } from "@/lib/productsData";
+import { getProductsData } from "@/lib/productsData";
 import { staticServices } from "@/lib/servicesData";
 import {
   buildMetadata,
@@ -39,7 +39,7 @@ export const metadata = buildMetadata({
 
 export default async function Page() {
   const services = staticServices;
-  const products = staticProducts;
+  const products = await getProductsData();
 
   const schemas = [
     createWebsiteJsonLd(),
@@ -59,7 +59,7 @@ export default async function Page() {
       {schemas.map((schema, index) => (
         <JsonLd key={index} data={schema} />
       ))}
-      <HomePage />
+      <HomePage initialProducts={products} />
     </>
   );
 }

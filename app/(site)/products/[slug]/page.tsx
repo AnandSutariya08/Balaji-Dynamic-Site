@@ -5,7 +5,7 @@ import { ArrowRight, CheckCircle2, ChevronLeft } from "lucide-react";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { PageHero } from "@/components/site/PageHero";
 import { Button } from "@/components/ui/button";
-import { staticProducts } from "@/lib/productsData";
+import { getProductDataById, getProductsData } from "@/lib/productsData";
 import { staticServices } from "@/lib/servicesData";
 import {
   buildMetadata,
@@ -16,7 +16,8 @@ import {
 } from "@/lib/seo";
 
 export async function generateStaticParams() {
-  return staticProducts.map((product) => ({
+  const products = await getProductsData();
+  return products.map((product) => ({
     slug: product.id,
   }));
 }
@@ -27,7 +28,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const product = staticProducts.find((item) => item.id === slug);
+  const product = await getProductDataById(slug);
 
   if (!product) {
     return buildMetadata({
@@ -53,13 +54,14 @@ export default async function Page({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const product = staticProducts.find((item) => item.id === slug);
+  const products = await getProductsData();
+  const product = products.find((item) => item.id === slug);
 
   if (!product) {
     notFound();
   }
 
-  const relatedProducts = staticProducts
+  const relatedProducts = products
     .filter((item) => item.id !== product.id)
     .slice(0, 4);
   const relatedServices = staticServices.slice(0, 4);

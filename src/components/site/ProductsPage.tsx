@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, Boxes, Factory, Ruler, ShieldCheck } from "lucide-react";
+import { ArrowRight, CheckCircle2, Boxes, Factory, Loader2, Ruler, ShieldCheck } from "lucide-react";
 
 import { PageTransition } from "@/components/layout/PageTransition";
+import { useProducts } from "@/hooks/useProducts";
 import { PageHero } from "@/components/site/PageHero";
 import { Button } from "@/components/ui/button";
 import type { Product } from "@/lib/firestore/types";
@@ -16,11 +17,15 @@ const highlights = [
   { icon: ShieldCheck, title: "Industrial Durability", desc: "Designed for plant, structure, warehouse, and heavy-duty industrial usage conditions." },
 ];
 
+const EMPTY_PRODUCTS: Product[] = [];
+
 export default function ProductsPage({
-  products,
+  initialProducts = EMPTY_PRODUCTS,
 }: {
-  products: Product[];
+  initialProducts?: Product[];
 }) {
+  const { products, loading } = useProducts(initialProducts);
+
   return (
     <PageTransition>
       <div className="bg-[#F7F5F1]">
@@ -97,7 +102,13 @@ export default function ProductsPage({
         </section>
 
         <section className="py-8">
-          {products.map((product, index) => (
+          {loading ? (
+            <div className="flex items-center justify-center gap-2 py-24 text-slate-400 text-sm">
+              <Loader2 className="h-5 w-5 animate-spin" />
+              Loading products from Firestore...
+            </div>
+          ) : (
+            products.map((product, index) => (
             <motion.div
               key={product.id}
               initial={{ opacity: 0 }}
@@ -169,7 +180,8 @@ export default function ProductsPage({
                 </div>
               </div>
             </motion.div>
-          ))}
+            ))
+          )}
         </section>
 
         <section className="bg-[#1C1C1C] py-20 md:py-32">

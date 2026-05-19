@@ -6,6 +6,7 @@ import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import {
   BookOpen,
+  Boxes,
   Camera,
   ChevronRight,
   ExternalLink,
@@ -16,6 +17,7 @@ import {
 
 const navItems = [
   { href: "/admin/inquiries", label: "Inquiries", icon: MessageSquare },
+  { href: "/admin/products", label: "Products", icon: Boxes },
   { href: "/admin/blogs", label: "Blog Posts", icon: BookOpen },
   { href: "/admin/gallery", label: "Gallery", icon: Camera },
 ];
