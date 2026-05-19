@@ -161,11 +161,11 @@ export default function HomePage({
                   style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}
                 >
                   <motion.span initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2, duration: 0.75, ease: "easeOut" }}
-                    className="block">CNC LASER</motion.span>
+                    className="block">SHEET METAL</motion.span>
                   <motion.span initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.32, duration: 0.75, ease: "easeOut" }}
-                    className="block text-transparent bg-clip-text bg-gradient-to-r from-[#e05555] via-[#AC3C3C] to-[#c44040]">PLATE BENDING</motion.span>
+                    className="block text-transparent bg-clip-text bg-gradient-to-r from-[#e05555] via-[#AC3C3C] to-[#c44040]">FORMING</motion.span>
                   <motion.span initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.44, duration: 0.75, ease: "easeOut" }}
-                    className="block text-white">& FABRICATION</motion.span>
+                    className="block text-white">IN SURAT</motion.span>
                 </h1>
 
                 {/* Sub-text */}
