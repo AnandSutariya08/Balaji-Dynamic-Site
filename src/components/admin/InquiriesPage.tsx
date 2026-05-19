@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 import {
   AlertCircle,
   CheckCircle2,
@@ -159,7 +160,7 @@ function SendReplyModal({
     }
   };
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-[70] flex items-center justify-center p-4">
       <div
         ref={overlayRef}
@@ -266,7 +267,8 @@ function SendReplyModal({
           </div>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
