@@ -144,3 +144,51 @@ id = "zQZDotXj3ERunitctz0H5"
 uri = "file://public/product-staircase-parts.png"
 type = "image"
 title = "steel staircase parts industrial"
+
+[[generated]]
+id = "aW--vdVsAy8g_ZXhw1u8H"
+uri = "file://public/gallery-cnc-laser-cutting.png"
+type = "image"
+title = "cnc laser cutting"
+
+[[generated]]
+id = "CV0V28sANw1EUkacvV4MA"
+uri = "file://public/gallery-plate-bending.png"
+type = "image"
+title = "plate bending machine"
+
+[[generated]]
+id = "NhBKH6i0xSk6cjx_Bv_zj"
+uri = "file://public/gallery-welding-fabrication.png"
+type = "image"
+title = "welding fabrication"
+
+[[generated]]
+id = "VnsF_ik-3BXLDtPOV6aLB"
+uri = "file://public/gallery-perforated-sheets.png"
+type = "image"
+title = "perforated metal sheets"
+
+[[generated]]
+id = "E5NW77M_OydVvUIJnRrcR"
+uri = "file://public/gallery-finished-products.png"
+type = "image"
+title = "finished steel products dispatch"
+
+[[generated]]
+id = "j6VImgFpIrGT_ARrjb-Yz"
+uri = "file://public/gallery-plasma-cutting.png"
+type = "image"
+title = "plasma cutting machine"
+
+[[generated]]
+id = "K8LzzMsEuWU7Q8VfR5My1"
+uri = "file://public/gallery-sheet-shearing.png"
+type = "image"
+title = "sheet metal shearing"
+
+[[generated]]
+id = "0CuZIFAUFKPo5H9R4RZCP"
+uri = "file://public/gallery-workshop-interior.png"
+type = "image"
+title = "fabrication workshop interior"

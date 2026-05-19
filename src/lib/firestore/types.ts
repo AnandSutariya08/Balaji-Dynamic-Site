@@ -81,3 +81,16 @@ export interface Inquiry {
 }
 
 export type InquiryInput = Omit<Inquiry, "id" | "status" | "createdAt">;
+
+export interface GalleryItem {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  category: string;
+  order?: number;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export type GalleryInput = Omit<GalleryItem, "id">;

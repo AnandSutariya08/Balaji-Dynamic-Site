@@ -6,6 +6,7 @@ import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import {
   BookOpen,
+  Camera,
   ChevronRight,
   ExternalLink,
   LayoutDashboard,
@@ -16,6 +17,7 @@ import {
 const navItems = [
   { href: "/admin/inquiries", label: "Inquiries", icon: MessageSquare },
   { href: "/admin/blogs", label: "Blog Posts", icon: BookOpen },
+  { href: "/admin/gallery", label: "Gallery", icon: Camera },
 ];
 
 const ADMIN_SESSION_KEY = "balaji_admin_authed";

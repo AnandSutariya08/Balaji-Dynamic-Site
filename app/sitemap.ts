@@ -4,6 +4,7 @@ import { staticServices } from "@/lib/servicesData";
 import { absoluteUrl } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 import { getPublicBlogsFromFirestore } from "@/lib/firestore/publicBlogsServer";
+import { getPublicGalleryFromFirestore } from "@/lib/firestore/publicGalleryServer";
 
 function toDate(value?: string) {
   if (!value) {
@@ -24,6 +25,7 @@ function uniqueImages(images: Array<string | undefined>) {
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getPublicBlogsFromFirestore();
+  const gallery = await getPublicGalleryFromFirestore();
   const products = staticProducts;
   const services = staticServices;
 
@@ -86,6 +88,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: `${siteConfig.url}/rss.xml`,
       lastModified: blogLastModified,
+    },
+    {
+      url: `${siteConfig.url}/gallery`,
+      lastModified: gallery.length
+        ? maxDate(gallery.map((item) => toDate(item.updatedAt ?? item.createdAt)))
+        : homeLastModified,
+      images: gallery.length
+        ? uniqueImages(gallery.slice(0, 10).map((item) => absoluteUrl(item.image)))
+        : [absoluteUrl("/product-base-plates.png")],
     },
     {
       url: `${siteConfig.url}/contact`,
