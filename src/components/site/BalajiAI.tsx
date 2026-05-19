@@ -273,13 +273,19 @@ export function BalajiAI() {
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-label="Open Balaji AI"
-        className="fixed bottom-[5.5rem] right-4 sm:right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#1a0505] shadow-[0_4px_16px_rgba(172,60,60,0.4)] transition-shadow hover:shadow-[0_6px_24px_rgba(172,60,60,0.6)]"
+        className="fixed bottom-[5.5rem] right-4 sm:right-6 z-50 group relative flex h-14 w-14 items-center justify-center rounded-full bg-[#1a0505] shadow-[0_8px_32px_rgba(172,60,60,0.5)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(172,60,60,0.65)] active:translate-y-0"
       >
+        <span className="pointer-events-none absolute inset-0 rounded-full border-2 border-primary animate-[balajiRing_1.5s_ease-in-out_infinite]" />
+        <span className="pointer-events-none absolute inset-0 rounded-full border-2 border-primary animate-[balajiRing_1.5s_ease-in-out_0.75s_infinite]" />
         <img
           src="/favicon.jpg"
           alt="Balaji AI"
           className="h-10 w-10 rounded-full object-cover"
         />
+        <span className="absolute top-0.5 right-0.5 flex h-3 w-3">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+          <span className="relative inline-flex h-3 w-3 rounded-full bg-primary" />
+        </span>
       </button>
 
       {/* Backdrop */}
