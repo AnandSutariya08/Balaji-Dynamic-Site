@@ -43,7 +43,7 @@ const WELCOME: Message = {
   id: "welcome",
   role: "assistant",
   content:
-    "Jai Shree Krishna! 🙏 I'm **Balaji AI**, your assistant for Balaji Engineering Works. I can help you with information about our CNC laser cutting, plate bending, fabrication services, products, and more. How can I help you today?",
+    "Jai Shree Krishna! 🙏 Welcome to **Balaji Engineering Works**.\n\nPlease select your preferred language:\n\n**1.** English\n**2.** Gujarati (ગુજરાતી)\n**3.** Hindi (हिंदी)",
   inquiryData: null,
 };
 
