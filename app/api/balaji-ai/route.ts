@@ -110,6 +110,7 @@ export async function POST(req: NextRequest) {
         temperature: 0.5,
         top_p: 1,
         max_tokens: 4096,
+        stream: true,
       }),
     });
 
@@ -118,10 +119,56 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: err }, { status: response.status });
     }
 
-    const data = await response.json();
-    const content: string = data.choices?.[0]?.message?.content ?? "";
+    const stream = new ReadableStream({
+      async start(controller) {
+        const reader = response.body!.getReader();
+        const decoder = new TextDecoder();
+        let buffer = "";
 
-    return NextResponse.json({ content });
+        try {
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+
+            buffer += decoder.decode(value, { stream: true });
+            const lines = buffer.split("\n");
+            buffer = lines.pop() ?? "";
+
+            for (const line of lines) {
+              const trimmed = line.trim();
+              if (!trimmed.startsWith("data:")) continue;
+              const data = trimmed.slice(5).trim();
+              if (data === "[DONE]") {
+                controller.close();
+                return;
+              }
+              try {
+                const parsed = JSON.parse(data);
+                const token: string = parsed.choices?.[0]?.delta?.content ?? "";
+                if (token) {
+                  controller.enqueue(new TextEncoder().encode(token));
+                }
+              } catch {
+                // skip malformed chunks
+              }
+            }
+          }
+        } catch {
+          controller.error(new Error("Stream read error"));
+        } finally {
+          reader.releaseLock();
+          controller.close();
+        }
+      },
+    });
+
+    return new Response(stream, {
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Cache-Control": "no-cache",
+        "X-Accel-Buffering": "no",
+      },
+    });
   } catch {
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }

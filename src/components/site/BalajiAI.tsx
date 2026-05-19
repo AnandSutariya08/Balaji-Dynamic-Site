@@ -211,6 +211,8 @@ export function BalajiAI() {
       content: m.content,
     }));
 
+    const streamingId = (Date.now() + 1).toString();
+
     try {
       const res = await fetch("/api/balaji-ai", {
         method: "POST",
@@ -222,40 +224,72 @@ export function BalajiAI() {
         throw new Error(`API error: ${res.status}`);
       }
 
-      const data = await res.json();
-      const raw: string = data.content ?? "";
-
-      if (!raw) {
-        throw new Error("Empty response from AI");
+      if (!res.body) {
+        throw new Error("No response body");
       }
 
-      const { clean, inquiry, markerFound } = parseInquiry(raw);
+      // Insert a blank streaming message immediately
+      setMessages((prev) => [
+        ...prev,
+        { id: streamingId, role: "assistant", content: "", inquiryData: null },
+      ]);
+      setLoading(false);
 
-      const fallback = markerFound
-        ? "I have collected your details. Please wait while I submit your inquiry…"
-        : raw;
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let fullContent = "";
 
-      const aiMsg: Message = {
-        id: (Date.now() + 1).toString(),
-        role: "assistant",
-        content: clean || fallback,
-        inquiryData: null,
-      };
-      setMessages((prev) => [...prev, aiMsg]);
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        const chunk = decoder.decode(value, { stream: true });
+        fullContent += chunk;
+
+        // Stream visible text only (hide the inquiry token line while typing)
+        const visibleContent = fullContent.includes("%%INQUIRY_READY%%")
+          ? fullContent.slice(0, fullContent.indexOf("%%INQUIRY_READY%%")).trim()
+          : fullContent;
+
+        setMessages((prev) =>
+          prev.map((m) =>
+            m.id === streamingId ? { ...m, content: visibleContent } : m
+          )
+        );
+      }
+
+      // Once stream ends, parse for inquiry token
+      const { clean, inquiry } = parseInquiry(fullContent);
+      const finalContent = clean || fullContent;
+
+      setMessages((prev) =>
+        prev.map((m) =>
+          m.id === streamingId ? { ...m, content: finalContent } : m
+        )
+      );
 
       if (inquiry) {
         await autoSubmitInquiry(inquiry);
       }
     } catch {
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: (Date.now() + 1).toString(),
-          role: "assistant",
-          content: "Something went wrong. Please try again or call us at +91 99787 53398.",
-          inquiryData: null,
-        },
-      ]);
+      setMessages((prev) => {
+        const hasStreaming = prev.some((m) => m.id === streamingId);
+        if (hasStreaming) {
+          return prev.map((m) =>
+            m.id === streamingId
+              ? { ...m, content: "Something went wrong. Please try again or call us at +91 99787 53398." }
+              : m
+          );
+        }
+        return [
+          ...prev,
+          {
+            id: streamingId,
+            role: "assistant" as const,
+            content: "Something went wrong. Please try again or call us at +91 99787 53398.",
+            inquiryData: null,
+          },
+        ];
+      });
     } finally {
       setLoading(false);
       setTimeout(() => inputRef.current?.focus(), 50);
