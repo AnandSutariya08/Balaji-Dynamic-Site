@@ -72,7 +72,7 @@ export function Navbar() {
               </div>
             </Link>
 
-            <nav className="hidden items-center gap-1 md:flex">
+            <nav className="hidden items-center gap-1 lg:flex">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
@@ -95,7 +95,7 @@ export function Navbar() {
 
             <button
               type="button"
-              className={`z-50 flex h-9 w-9 items-center justify-center rounded-xl transition-all duration-200 md:hidden ${isScrolled || mobileMenuOpen ? "bg-white/10 text-white" : "text-white"
+              className={`z-50 flex h-9 w-9 items-center justify-center rounded-xl transition-all duration-200 lg:hidden ${isScrolled || mobileMenuOpen ? "bg-white/10 text-white" : "text-white"
                 }`}
               onClick={() => setMobileMenuOpen((value) => !value)}
             >
@@ -106,7 +106,7 @@ export function Navbar() {
       </header>
 
       <div
-        className={`fixed left-3 right-3 z-40 transition-all duration-300 ease-out md:hidden ${mobileMenuOpen
+        className={`fixed left-3 right-3 z-40 transition-all duration-300 ease-out lg:hidden ${mobileMenuOpen
           ? "pointer-events-auto translate-y-0 opacity-100"
           : "pointer-events-none -translate-y-4 opacity-0"
           } ${isScrolled ? "top-[5.2rem]" : "top-[4.8rem]"}`}
@@ -145,7 +145,7 @@ export function Navbar() {
 
       {mobileMenuOpen && (
         <div
-          className="fixed inset-0 z-30 bg-black/50 backdrop-blur-sm md:hidden"
+          className="fixed inset-0 z-30 bg-black/50 backdrop-blur-sm lg:hidden"
           onClick={() => setMobileMenuOpen(false)}
         />
       )}

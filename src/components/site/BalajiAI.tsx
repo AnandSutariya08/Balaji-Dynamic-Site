@@ -72,8 +72,8 @@ function Bubble({ msg }: {
   return (
     <div className={`flex gap-2.5 ${isUser ? "flex-row-reverse" : "flex-row"} mb-3`}>
       {!isUser && (
-        <div className="flex-shrink-0 h-8 w-8 rounded-full overflow-hidden border border-white/10 bg-[#1a0a0a] flex items-center justify-center shadow">
-          <img src="/logo.png" alt="Balaji AI" className="h-full w-full object-cover" />
+        <div className="flex-shrink-0 h-8 w-8 rounded-full border border-white/10 bg-[#1a0a0a] flex items-center justify-center shadow">
+          <img src="/logo.png" alt="Balaji AI" className="h-6 w-6 object-contain" />
         </div>
       )}
 
@@ -100,8 +100,8 @@ function Bubble({ msg }: {
 function TypingDots() {
   return (
     <div className="flex gap-2.5 flex-row mb-3">
-      <div className="flex-shrink-0 h-8 w-8 rounded-full overflow-hidden border border-white/10 bg-[#1a0a0a] flex items-center justify-center shadow">
-        <img src="/logo.png" alt="Balaji AI" className="h-full w-full object-cover" />
+      <div className="flex-shrink-0 h-8 w-8 rounded-full border border-white/10 bg-[#1a0a0a] flex items-center justify-center shadow">
+        <img src="/logo.png" alt="Balaji AI" className="h-6 w-6 object-contain" />
       </div>
       <div className="bg-[#1e1212] border border-white/8 rounded-2xl rounded-tl-sm px-4 py-3 flex items-center gap-1 shadow-sm">
         {[0, 1, 2].map((i) => (
@@ -272,7 +272,7 @@ export function BalajiAI() {
         <img
           src="/logo.png"
           alt="Balaji AI"
-          className="h-7 w-7 rounded-full object-cover"
+          className="h-10 w-10 object-contain"
         />
         <span className="absolute top-1 right-1 h-3 w-3 rounded-full bg-primary border-2 border-[#1a0505]" />
       </button>
@@ -308,15 +308,8 @@ export function BalajiAI() {
               boxShadow: "0 1px 0 rgba(255,255,255,0.04)",
             }}
           >
-            <div className="relative">
-              <div className="relative h-11 w-11 rounded-full overflow-hidden border-2 shadow-[0_0_16px_rgba(172,60,60,0.4)]" style={{ borderColor: "rgba(172,60,60,0.6)" }}>
-                <img
-                  src="/logo.png"
-                  alt="Balaji AI"
-                  className="h-full w-full object-cover"
-                />
-              </div>
-              <span className="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-[#1f0a0a] bg-green-400 shadow" />
+            <div className="relative flex-shrink-0">
+              <span className="flex h-3 w-3 rounded-full bg-green-400 shadow" />
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">
