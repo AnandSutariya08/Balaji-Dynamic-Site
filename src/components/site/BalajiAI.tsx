@@ -273,7 +273,7 @@ export function BalajiAI() {
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-label="Open Balaji AI"
-        className="fixed bottom-[5.5rem] right-4 sm:right-6 z-50 relative flex h-14 w-14 items-center justify-center rounded-full bg-[#1a0505] shadow-[0_4px_16px_rgba(172,60,60,0.4)] transition-shadow hover:shadow-[0_6px_24px_rgba(172,60,60,0.6)]"
+        className="fixed bottom-[5.5rem] right-4 sm:right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#1a0505] shadow-[0_4px_16px_rgba(172,60,60,0.4)] transition-shadow hover:shadow-[0_6px_24px_rgba(172,60,60,0.6)]"
       >
         <img
           src="/logo.png"
