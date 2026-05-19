@@ -4,7 +4,7 @@ import type { Product } from "@/lib/firestore/types";
 import { getProductsData } from "@/lib/productsData";
 import { staticServices } from "@/lib/servicesData";
 
-const SARVAM_API_KEY = "sk_49pw2t4a_Adyi0riHaODYeXf66tjkYQ0Z";
+const SARVAM_API_KEY = process.env.SARVAM_API_KEY ?? "";
 
 function buildServicesContext() {
   return staticServices
