@@ -8,22 +8,8 @@ import { PageHero } from "@/components/site/PageHero";
 import { Button } from "@/components/ui/button";
 import type { Sector } from "@/lib/sectorsData";
 
-const iconMap: Record<string, string> = {
-  automotive: "/service-fabrication.png",
-  aviation: "/service-cnc.png",
-  "construction-architecture": "/service-fabrication.png",
-  "energy-power": "/service-welding.png",
-  "general-manufacturing": "/service-fabrication.png",
-  "agriculture-heavy-machinery": "/service-fabrication.png",
-  "crushing-mining": "/service-welding.png",
-  "defense-military": "/service-fabrication.png",
-  "interior-exterior-design": "/service-cnc.png",
-  "marine-industry": "/service-welding.png",
-  "railway-transportation": "/service-fabrication.png",
-};
-
 export default function SectorDetailPage({ sector }: { sector: Sector }) {
-  const heroImage = iconMap[sector.id] ?? "/service-fabrication.png";
+  const heroImage = sector.image;
 
   return (
     <PageTransition>

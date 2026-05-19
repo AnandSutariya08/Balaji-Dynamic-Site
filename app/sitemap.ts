@@ -183,7 +183,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const sectorEntries: MetadataRoute.Sitemap = sectorsData.map((sector) => ({
     url: `${siteConfig.url}/sectors/${sector.id}`,
     lastModified: homeLastModified,
-    images: [absoluteUrl("/service-fabrication.png")],
+    images: [absoluteUrl(sector.image)],
   }));
 
   return [...staticEntries, ...serviceEntries, ...productEntries, ...sectorEntries, ...blogEntries];

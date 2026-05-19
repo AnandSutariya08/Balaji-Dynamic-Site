@@ -3,11 +3,13 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import {
   buildMetadata,
   createBreadcrumbJsonLd,
+  createLocalBusinessJsonLd,
+  createOrganizationJsonLd,
   createWebPageJsonLd,
+  absoluteUrl,
 } from "@/lib/seo";
 import { sectorsData } from "@/lib/sectorsData";
 import SectorDetailPage from "@/components/site/SectorDetailPage";
-import { absoluteUrl } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
 export async function generateStaticParams() {
@@ -35,7 +37,14 @@ export async function generateMetadata({
     title: sector.metaTitle,
     description: sector.metaDescription,
     path: `/sectors/${sector.id}`,
-    keywords: sector.keywords,
+    image: sector.image,
+    keywords: [
+      ...sector.keywords,
+      sector.name,
+      "Balaji Engineering Works",
+      "sheet metal fabrication Surat",
+      "steel fabrication Gujarat India",
+    ],
   });
 }
 
@@ -49,19 +58,61 @@ export default async function Page({
 
   if (!sector) notFound();
 
+  const pageUrl = absoluteUrl(`/sectors/${sector.id}`);
+  const imageUrl = absoluteUrl(sector.image);
+
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: sector.name,
+    "@id": `${pageUrl}#service`,
+    name: `${sector.name} Sheet Metal Fabrication`,
     description: sector.metaDescription,
+    image: imageUrl,
     provider: {
       "@type": "LocalBusiness",
+      "@id": `${siteConfig.url}#local-business`,
       name: siteConfig.name,
       url: siteConfig.url,
+      telephone: siteConfig.phone,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Surat",
+        addressRegion: "Gujarat",
+        addressCountry: "IN",
+      },
     },
-    areaServed: "India",
+    areaServed: [
+      { "@type": "Country", name: "India" },
+      { "@type": "State", name: "Gujarat" },
+      { "@type": "State", name: "Maharashtra" },
+    ],
     serviceType: "Sheet Metal Fabrication",
-    url: absoluteUrl(`/sectors/${sector.id}`),
+    url: pageUrl,
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: `${sector.name} Fabrication Services`,
+      itemListElement: sector.services.map((svc, i) => ({
+        "@type": "Offer",
+        position: i + 1,
+        itemOffered: {
+          "@type": "Service",
+          name: svc,
+        },
+      })),
+    },
+  };
+
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: `${sector.name} — Typical Applications`,
+    description: `Components fabricated by Balaji Engineering Works for the ${sector.name} sector`,
+    numberOfItems: sector.applications.length,
+    itemListElement: sector.applications.map((app, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: app,
+    })),
   };
 
   const schemas = [
@@ -73,10 +124,13 @@ export default async function Page({
     }),
     createBreadcrumbJsonLd([
       { name: "Home", path: "/" },
-      { name: "Sectors", path: "/sectors" },
+      { name: "Sectors We Serve", path: "/sectors" },
       { name: sector.name, path: `/sectors/${sector.id}` },
     ]),
     serviceSchema,
+    itemListSchema,
+    createOrganizationJsonLd(),
+    createLocalBusinessJsonLd(),
   ];
 
   return (

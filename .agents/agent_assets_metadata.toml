@@ -192,3 +192,63 @@ id = "0CuZIFAUFKPo5H9R4RZCP"
 uri = "file://public/gallery-workshop-interior.png"
 type = "image"
 title = "fabrication workshop interior"
+
+[[generated]]
+id = "2S_NgIrdzHbAAzvcQYmzw"
+uri = "file://public/sector-automotive.png"
+type = "image"
+title = "automotive sector fabrication"
+
+[[generated]]
+id = "sAWwwLvE3XgwG3G8NpNtB"
+uri = "file://public/sector-aviation.png"
+type = "image"
+title = "aviation sector fabrication"
+
+[[generated]]
+id = "7BB0A85VEJHUjgNOcZU9K"
+uri = "file://public/sector-construction.png"
+type = "image"
+title = "construction sector fabrication"
+
+[[generated]]
+id = "3SdJWO0m6QW_rQlEywXGl"
+uri = "file://public/sector-energy.png"
+type = "image"
+title = "energy sector fabrication"
+
+[[generated]]
+id = "jSqV18VecpqfqJfFhBKi0"
+uri = "file://public/sector-manufacturing.png"
+type = "image"
+title = "manufacturing sector fabrication"
+
+[[generated]]
+id = "XuNOLfNP1_tdeNepULkGK"
+uri = "file://public/sector-agriculture.png"
+type = "image"
+title = "agriculture machinery fabrication"
+
+[[generated]]
+id = "SjJK_Z4VkDZZy0P8cwZUk"
+uri = "file://public/sector-mining.png"
+type = "image"
+title = "mining sector fabrication"
+
+[[generated]]
+id = "VZu9nBQJWppvxMzckJ3Lr"
+uri = "file://public/sector-defense.png"
+type = "image"
+title = "defense sector fabrication"
+
+[[generated]]
+id = "RxnC39taLJt4TFe5XApFj"
+uri = "file://public/sector-interior-design.png"
+type = "image"
+title = "interior design metalwork"
+
+[[generated]]
+id = "88qoNbdEZOyFKfMd3uJbq"
+uri = "file://public/sector-marine.png"
+type = "image"
+title = "marine sector fabrication"

@@ -3,6 +3,7 @@ export type Sector = {
   name: string;
   description: string;
   icon: string;
+  image: string;
   metaTitle: string;
   metaDescription: string;
   keywords: string[];
@@ -19,6 +20,7 @@ export const sectorsData: Sector[] = [
     name: "Automotive Industry",
     description: "Chassis parts, panels, brackets, and structural assemblies for passenger vehicles, commercial trucks, and two-wheelers.",
     icon: "car",
+    image: "/sector-automotive.png",
     metaTitle: "Sheet Metal Fabrication for Automotive Industry | Balaji Engineering Works",
     metaDescription: "Precision sheet metal fabrication for the automotive sector — chassis parts, body panels, brackets, guards, and structural assemblies. Serving OEMs and Tier-1 suppliers across India from Surat, Gujarat.",
     keywords: [
@@ -62,6 +64,7 @@ export const sectorsData: Sector[] = [
     name: "Aviation",
     description: "Precision metal parts, airside ground support equipment, hangar structures, and airport infrastructure components.",
     icon: "plane",
+    image: "/sector-aviation.png",
     metaTitle: "Sheet Metal Fabrication for Aviation Sector | Balaji Engineering Works",
     metaDescription: "High-tolerance sheet metal and structural fabrication for aviation — ground support equipment, MRO parts, hangar structures, and airside infrastructure. Made in Surat, Gujarat.",
     keywords: [
@@ -105,6 +108,7 @@ export const sectorsData: Sector[] = [
     name: "Construction and Architecture",
     description: "Metal roofing, structural supports, facade cladding, handrails, staircases, and architectural metalwork for commercial and residential projects.",
     icon: "building2",
+    image: "/sector-construction.png",
     metaTitle: "Structural and Architectural Metal Fabrication | Balaji Engineering Works",
     metaDescription: "Custom structural steel and sheet metal fabrication for construction — roofing, facade cladding, staircases, handrails, and structural supports. Serving architects and contractors across India from Surat.",
     keywords: [
@@ -148,6 +152,7 @@ export const sectorsData: Sector[] = [
     name: "Energy and Power",
     description: "Sheet metal and structural components for wind turbines, solar mounting systems, power plant infrastructure, and electrical enclosures.",
     icon: "zap",
+    image: "/sector-energy.png",
     metaTitle: "Sheet Metal Fabrication for Energy and Power Sector | Balaji Engineering Works",
     metaDescription: "Precision fabrication of wind turbine parts, solar panel mounting structures, power plant enclosures, and transformer housings. Reliable steel fabrication for India's energy sector — based in Surat, Gujarat.",
     keywords: [
@@ -191,6 +196,7 @@ export const sectorsData: Sector[] = [
     name: "General Manufacturing",
     description: "Custom sheet metal parts, enclosures, machine guards, and fabricated assemblies for diverse industrial machinery and production equipment.",
     icon: "factory",
+    image: "/sector-manufacturing.png",
     metaTitle: "Custom Sheet Metal Parts for General Manufacturing | Balaji Engineering Works",
     metaDescription: "Balaji Engineering Works produces custom sheet metal enclosures, machine guards, panels, and assemblies for industrial manufacturing equipment. Job work and contract fabrication from Surat, Gujarat.",
     keywords: [
@@ -234,6 +240,7 @@ export const sectorsData: Sector[] = [
     name: "Agriculture and Heavy Machinery",
     description: "Fabricated parts for tractors, combine harvesters, agricultural implements, and heavy earthmoving and construction equipment.",
     icon: "cog",
+    image: "/sector-agriculture.png",
     metaTitle: "Sheet Metal Parts for Agriculture and Heavy Machinery | Balaji Engineering Works",
     metaDescription: "Custom sheet metal fabrication for tractors, harvesters, agricultural implements, and heavy machinery. Robust steel parts built for field conditions — supplied from Surat, Gujarat.",
     keywords: [
@@ -277,6 +284,7 @@ export const sectorsData: Sector[] = [
     name: "Crushing and Mining",
     description: "Conveyor system frames, crusher liners, equipment housing, structural steelwork, and wear-resistant components for mining and mineral processing.",
     icon: "hammer",
+    image: "/sector-mining.png",
     metaTitle: "Sheet Metal and Structural Fabrication for Crushing and Mining | Balaji Engineering Works",
     metaDescription: "Heavy structural fabrication for crushing, mining, and mineral processing — conveyor frames, crusher housing, chutes, hoppers, and wear-plate components. Balaji Engineering Works, Surat.",
     keywords: [
@@ -320,6 +328,7 @@ export const sectorsData: Sector[] = [
     name: "Defense and Military",
     description: "Fabricated structural and protective components for defense vehicles, shelters, storage systems, and military infrastructure applications.",
     icon: "shield",
+    image: "/sector-defense.png",
     metaTitle: "Defense Sector Sheet Metal Fabrication | Balaji Engineering Works",
     metaDescription: "Precision structural and sheet metal fabrication for defense and military applications — vehicle components, protective enclosures, storage systems, and base infrastructure. Balaji Engineering Works, Surat Gujarat.",
     keywords: [
@@ -363,6 +372,7 @@ export const sectorsData: Sector[] = [
     name: "Interior and Exterior Design",
     description: "CNC laser-cut metal art, decorative facade panels, elevation cladding, pergolas, feature walls, and custom architectural metalwork.",
     icon: "palette",
+    image: "/sector-interior-design.png",
     metaTitle: "Decorative Metal Fabrication for Interior and Exterior Design | Balaji Engineering Works",
     metaDescription: "Custom CNC laser-cut metal panels, decorative facades, feature walls, pergolas, and elevation cladding for interior designers and architects. Premium architectural metalwork from Surat, Gujarat.",
     keywords: [
@@ -406,6 +416,7 @@ export const sectorsData: Sector[] = [
     name: "Marine Industry",
     description: "Corrosion-resistant sheet metal and structural fabrication for shipbuilding, vessel interiors, offshore platforms, and port infrastructure.",
     icon: "anchor",
+    image: "/sector-marine.png",
     metaTitle: "Marine Sheet Metal and Structural Fabrication | Balaji Engineering Works",
     metaDescription: "Marine-grade fabrication in SS 316, aluminium, and galvanized steel for shipbuilding, vessel components, port infrastructure, and offshore structures. Balaji Engineering Works, Surat Gujarat.",
     keywords: [
@@ -449,6 +460,7 @@ export const sectorsData: Sector[] = [
     name: "Railway and Transportation",
     description: "Sheet metal components for train carriages, metro systems, bus bodywork, and railway station infrastructure.",
     icon: "train",
+    image: "/sector-manufacturing.png",
     metaTitle: "Sheet Metal Fabrication for Railway and Transportation | Balaji Engineering Works",
     metaDescription: "Precision sheet metal and structural fabrication for railway coaches, metro trains, bus bodywork, and rail station infrastructure. Serving Indian Railways contractors and metro project suppliers from Surat.",
     keywords: [
