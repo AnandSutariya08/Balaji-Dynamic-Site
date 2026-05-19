@@ -57,10 +57,8 @@ const WELCOME: Message = {
   inquiryData: null,
 };
 
-function Bubble({ msg, onSendInquiry, inquirySent }: {
+function Bubble({ msg }: {
   msg: Message;
-  onSendInquiry: (d: InquiryPayload) => void;
-  inquirySent: boolean;
 }) {
   const isUser = msg.role === "user";
 
@@ -88,28 +86,6 @@ function Bubble({ msg, onSendInquiry, inquirySent }: {
           }`}
           dangerouslySetInnerHTML={{ __html: renderMarkdown(msg.content) }}
         />
-
-        {msg.inquiryData && !inquirySent && (
-          <button
-            type="button"
-            onClick={() => onSendInquiry(msg.inquiryData!)}
-            className="mt-1 flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-lg hover:bg-primary/90 transition-all active:scale-95"
-          >
-            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
-            </svg>
-            Send Inquiry to Team
-          </button>
-        )}
-
-        {msg.inquiryData && inquirySent && (
-          <div className="mt-1 flex items-center gap-2 rounded-xl bg-green-900/50 border border-green-500/30 px-4 py-2 text-xs font-semibold text-green-400">
-            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-            </svg>
-            Inquiry sent! Team will contact you soon.
-          </div>
-        )}
       </div>
 
       {isUser && (
@@ -180,6 +156,42 @@ export function BalajiAI() {
     };
   }, [open]);
 
+  const autoSubmitInquiry = useCallback(async (data: InquiryPayload) => {
+    setSendingInquiry(true);
+    setStatusMsg(null);
+    try {
+      await submitInquiryLead(
+        {
+          name: data.name,
+          phone: data.phone,
+          email: data.email,
+          service: data.service,
+          message: data.message,
+          quantity: "",
+          material: "",
+        },
+        "contact-form",
+      );
+      setInquirySent(true);
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: Date.now().toString(),
+          role: "assistant",
+          content:
+            "✅ Your inquiry has been submitted successfully!\n\nOur team at Balaji Engineering Works will contact you on **" +
+            data.phone +
+            "** shortly. Thank you for reaching out!",
+          inquiryData: null,
+        },
+      ]);
+    } catch {
+      setStatusMsg("Failed to send inquiry. Please call us at +91 99787 53398.");
+    } finally {
+      setSendingInquiry(false);
+    }
+  }, []);
+
   const sendMessage = useCallback(async () => {
     const text = input.trim();
     if (!text || loading) return;
@@ -211,16 +223,20 @@ export function BalajiAI() {
       const { clean, inquiry, markerFound } = parseInquiry(raw);
 
       const fallback = markerFound
-        ? "I have noted your details. Please click the button below to send your inquiry to our team!"
+        ? "I have collected your details. Please wait while I submit your inquiry…"
         : "Sorry, I could not process that. Please try again.";
 
       const aiMsg: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
         content: clean || fallback,
-        inquiryData: inquiry,
+        inquiryData: null,
       };
       setMessages((prev) => [...prev, aiMsg]);
+
+      if (inquiry) {
+        await autoSubmitInquiry(inquiry);
+      }
     } catch {
       setMessages((prev) => [
         ...prev,
@@ -235,44 +251,7 @@ export function BalajiAI() {
       setLoading(false);
       setTimeout(() => inputRef.current?.focus(), 50);
     }
-  }, [input, loading, messages]);
-
-  const handleSendInquiry = useCallback(async (data: InquiryPayload) => {
-    setSendingInquiry(true);
-    setStatusMsg(null);
-    try {
-      await submitInquiryLead(
-        {
-          name: data.name,
-          phone: data.phone,
-          email: data.email,
-          service: data.service,
-          message: data.message,
-          quantity: "",
-          material: "",
-        },
-        "contact-form",
-      );
-      setInquirySent(true);
-      setStatusMsg(null);
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: Date.now().toString(),
-          role: "assistant",
-          content:
-            "Your inquiry has been sent to our team! ✅ Someone from Balaji Engineering Works will contact you on **" +
-            data.phone +
-            "** shortly. Is there anything else I can help you with?",
-          inquiryData: null,
-        },
-      ]);
-    } catch {
-      setStatusMsg("Failed to send inquiry. Please call us at +91 99787 53398.");
-    } finally {
-      setSendingInquiry(false);
-    }
-  }, []);
+  }, [input, loading, messages, autoSubmitInquiry]);
 
   return (
     <>
@@ -361,13 +340,17 @@ export function BalajiAI() {
           </div>
 
           {/* Messages */}
-          <div ref={messagesRef} className="flex-1 min-h-0 overflow-y-auto px-4 py-4 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/10" style={{ overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" } as React.CSSProperties}>
+          <div
+            ref={messagesRef}
+            data-lenis-prevent
+            onWheel={(e) => e.stopPropagation()}
+            className="flex-1 min-h-0 overflow-y-auto px-4 py-4 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/10"
+            style={{ overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" } as React.CSSProperties}
+          >
             {messages.map((msg) => (
               <Bubble
                 key={msg.id}
                 msg={msg}
-                onSendInquiry={handleSendInquiry}
-                inquirySent={inquirySent}
               />
             ))}
             {loading && <TypingDots />}
