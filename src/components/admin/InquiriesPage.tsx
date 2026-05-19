@@ -103,6 +103,7 @@ function formatSource(source?: string) {
 }
 
 const MAIL_ENDPOINT = "https://otp-khaki-iota.vercel.app/send-mail";
+const NOTIFICATION_EMAIL = "balajieng.works12@gmail.com";
 
 function SendReplyModal({
   inquiry,
@@ -133,16 +134,23 @@ function SendReplyModal({
     if (!message.trim()) { setError("Message is required."); return; }
     setSending(true);
     setError("");
-    try {
+
+    const sendTo = async (recipient: string) => {
       const res = await fetch(MAIL_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ to: to.trim(), subject: subject.trim(), message: message.trim() }),
+        body: JSON.stringify({ to: recipient, subject: subject.trim(), message: message.trim() }),
       });
       if (!res.ok) {
         const text = await res.text().catch(() => "");
-        throw new Error(text || "Failed to send email.");
+        throw new Error(text || `Failed to send to ${recipient}`);
       }
+    };
+
+    try {
+      const recipients = [to.trim()];
+      if (to.trim() !== NOTIFICATION_EMAIL) recipients.push(NOTIFICATION_EMAIL);
+      await Promise.all(recipients.map(sendTo));
       setSent(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to send email.");
@@ -177,7 +185,12 @@ function SendReplyModal({
           <div className="flex flex-col items-center gap-3 px-5 py-12 text-center">
             <CheckCircle2 className="h-10 w-10 text-green-400" />
             <p className="font-semibold text-white">Email sent successfully!</p>
-            <p className="text-sm text-zinc-500">Your reply has been delivered to {to}</p>
+            <div className="text-sm text-zinc-500 space-y-1">
+              <p>Sent to: <span className="text-zinc-300">{to}</span></p>
+              {to.trim() !== NOTIFICATION_EMAIL && (
+                <p>Copy sent to: <span className="text-zinc-300">{NOTIFICATION_EMAIL}</span></p>
+              )}
+            </div>
             <button
               type="button"
               onClick={onClose}
