@@ -22,20 +22,30 @@ interface InquiryPayload {
 
 const INQUIRY_MARKER = "%%INQUIRY_READY%%";
 
-function parseInquiry(raw: string): { clean: string; inquiry: InquiryPayload | null } {
+function parseInquiry(raw: string): { clean: string; inquiry: InquiryPayload | null; markerFound: boolean } {
   const idx = raw.indexOf(INQUIRY_MARKER);
-  if (idx === -1) return { clean: raw, inquiry: null };
+  if (idx === -1) return { clean: raw, inquiry: null, markerFound: false };
 
   const clean = raw.slice(0, idx).trim();
-  const jsonStart = idx + INQUIRY_MARKER.length;
-  const jsonEnd = raw.indexOf("%%", jsonStart);
-  if (jsonEnd === -1) return { clean, inquiry: null };
+  const afterMarker = raw.slice(idx + INQUIRY_MARKER.length);
+
+  // Try to extract JSON object anywhere after the marker
+  const jsonMatch = afterMarker.match(/\{[\s\S]*?\}/);
+  if (!jsonMatch) return { clean, inquiry: null, markerFound: true };
 
   try {
-    const inquiry = JSON.parse(raw.slice(jsonStart, jsonEnd)) as InquiryPayload;
-    return { clean, inquiry };
+    const inquiry = JSON.parse(jsonMatch[0]) as InquiryPayload;
+    return { clean, inquiry, markerFound: true };
   } catch {
-    return { clean, inquiry: null };
+    // Try to grab everything up to closing %% or end of string
+    const jsonEnd = afterMarker.indexOf("%%");
+    const jsonStr = (jsonEnd !== -1 ? afterMarker.slice(0, jsonEnd) : afterMarker).trim();
+    try {
+      const inquiry = JSON.parse(jsonStr) as InquiryPayload;
+      return { clean, inquiry, markerFound: true };
+    } catch {
+      return { clean, inquiry: null, markerFound: true };
+    }
   }
 }
 
@@ -65,7 +75,7 @@ function Bubble({ msg, onSendInquiry, inquirySent }: {
     <div className={`flex gap-2.5 ${isUser ? "flex-row-reverse" : "flex-row"} mb-3`}>
       {!isUser && (
         <div className="flex-shrink-0 h-8 w-8 rounded-full overflow-hidden border border-white/10 bg-[#1a0a0a] flex items-center justify-center shadow">
-          <img src="/favicon.jpg" alt="Balaji AI" className="h-full w-full object-cover" />
+          <img src="/logo.png" alt="Balaji AI" className="h-full w-full object-cover" />
         </div>
       )}
 
@@ -115,7 +125,7 @@ function TypingDots() {
   return (
     <div className="flex gap-2.5 flex-row mb-3">
       <div className="flex-shrink-0 h-8 w-8 rounded-full overflow-hidden border border-white/10 bg-[#1a0a0a] flex items-center justify-center shadow">
-        <img src="/favicon.jpg" alt="Balaji AI" className="h-full w-full object-cover" />
+        <img src="/logo.png" alt="Balaji AI" className="h-full w-full object-cover" />
       </div>
       <div className="bg-[#1e1212] border border-white/8 rounded-2xl rounded-tl-sm px-4 py-3 flex items-center gap-1 shadow-sm">
         {[0, 1, 2].map((i) => (
@@ -195,15 +205,17 @@ export function BalajiAI() {
       });
 
       const data = await res.json();
-      const raw: string = data.content ?? "Sorry, I could not process that. Please try again.";
-      const { clean, inquiry } = parseInquiry(raw);
+      const raw: string = data.content ?? "";
+      const { clean, inquiry, markerFound } = parseInquiry(raw);
+
+      const fallback = markerFound
+        ? "I have noted your details. Please click the button below to send your inquiry to our team!"
+        : "Sorry, I could not process that. Please try again.";
 
       const aiMsg: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
-        content: clean || (inquiry
-          ? "I have all your details ready. Please click the button below to send your inquiry to our team!"
-          : "Sorry, I could not process that. Please try again."),
+        content: clean || fallback,
         inquiryData: inquiry,
       };
       setMessages((prev) => [...prev, aiMsg]);
