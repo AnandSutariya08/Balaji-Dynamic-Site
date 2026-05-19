@@ -250,33 +250,38 @@ export function BalajiAI() {
           from { opacity: 0; transform: translateY(16px) scale(0.97); }
           to   { opacity: 1; transform: translateY(0)    scale(1); }
         }
+        @keyframes balajiRing {
+          0%   { transform: scale(1);    opacity: 0.9; }
+          60%  { transform: scale(1.55); opacity: 0;   }
+          100% { transform: scale(1.55); opacity: 0;   }
+        }
         .balaji-ai-window {
           animation: balajiSlideUp 0.22s cubic-bezier(0.34,1.56,0.64,1) both;
         }
       `}</style>
 
-      {/* Floating button — above WhatsApp */}
-      <div className="fixed bottom-[5.5rem] right-4 sm:right-6 z-50 flex flex-col items-center gap-1">
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Open Balaji AI"
-          className="group relative flex h-13 w-13 sm:h-14 sm:w-14 items-center justify-center rounded-full border-2 border-primary/60 bg-[#1a0505] shadow-[0_8px_32px_rgba(172,60,60,0.45)] transition-all hover:-translate-y-0.5 hover:border-primary hover:shadow-[0_12px_40px_rgba(172,60,60,0.55)] active:translate-y-0"
-        >
-          <img
-            src="/favicon.jpg"
-            alt="Balaji AI"
-            className="h-8 w-8 sm:h-9 sm:w-9 rounded-full object-cover"
-          />
-          <span className="absolute -top-1 -right-1 flex h-3 w-3">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60" />
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-primary" />
-          </span>
-        </button>
-        <span className="rounded-full bg-[#1a0505] border border-primary/40 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-primary shadow-md">
-          Balaji AI
+      {/* Floating button — stacked above WhatsApp */}
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-label="Open Balaji AI"
+        className="fixed bottom-24 right-4 sm:right-6 z-50 group relative flex h-14 w-14 items-center justify-center rounded-full bg-[#1a0505] shadow-[0_8px_32px_rgba(172,60,60,0.5)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(172,60,60,0.65)] active:translate-y-0"
+      >
+        {/* Blinking outer ring */}
+        <span className="pointer-events-none absolute inset-0 rounded-full border-2 border-primary animate-[balajiRing_1.5s_ease-in-out_infinite]" />
+        {/* Second blinking ring (offset) */}
+        <span className="pointer-events-none absolute inset-0 rounded-full border-2 border-primary animate-[balajiRing_1.5s_ease-in-out_0.75s_infinite]" />
+        <img
+          src="/favicon.jpg"
+          alt="Balaji AI"
+          className="h-10 w-10 rounded-full object-cover"
+        />
+        {/* Live dot */}
+        <span className="absolute top-0.5 right-0.5 flex h-3 w-3">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+          <span className="relative inline-flex h-3 w-3 rounded-full bg-primary" />
         </span>
-      </div>
+      </button>
 
       {/* Chat window */}
       {open && (
