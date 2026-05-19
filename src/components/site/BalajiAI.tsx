@@ -256,17 +256,17 @@ export function BalajiAI() {
       `}</style>
 
       {/* Floating button — above WhatsApp */}
-      <div className="fixed bottom-[5.5rem] right-6 z-50 flex flex-col items-center gap-1">
+      <div className="fixed bottom-[5.5rem] right-4 sm:right-6 z-50 flex flex-col items-center gap-1">
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
           aria-label="Open Balaji AI"
-          className="group relative flex h-14 w-14 items-center justify-center rounded-full border-2 border-primary/60 bg-[#1a0505] shadow-[0_8px_32px_rgba(172,60,60,0.45)] transition-all hover:-translate-y-0.5 hover:border-primary hover:shadow-[0_12px_40px_rgba(172,60,60,0.55)] active:translate-y-0"
+          className="group relative flex h-13 w-13 sm:h-14 sm:w-14 items-center justify-center rounded-full border-2 border-primary/60 bg-[#1a0505] shadow-[0_8px_32px_rgba(172,60,60,0.45)] transition-all hover:-translate-y-0.5 hover:border-primary hover:shadow-[0_12px_40px_rgba(172,60,60,0.55)] active:translate-y-0"
         >
           <img
             src="/favicon.jpg"
             alt="Balaji AI"
-            className="h-9 w-9 rounded-full object-cover"
+            className="h-8 w-8 sm:h-9 sm:w-9 rounded-full object-cover"
           />
           <span className="absolute -top-1 -right-1 flex h-3 w-3">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60" />
@@ -281,8 +281,10 @@ export function BalajiAI() {
       {/* Chat window */}
       {open && (
         <div
-          className="balaji-ai-window fixed bottom-[11rem] right-6 z-50 flex w-[360px] max-w-[calc(100vw-24px)] flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#120808] shadow-[0_24px_80px_rgba(0,0,0,0.7)]"
-          style={{ height: "520px" }}
+          className="balaji-ai-window fixed z-50 flex flex-col overflow-hidden border border-white/10 bg-[#120808] shadow-[0_24px_80px_rgba(0,0,0,0.7)]
+            inset-x-2 bottom-2 rounded-2xl
+            sm:inset-x-auto sm:bottom-[11rem] sm:right-6 sm:w-[360px] sm:rounded-2xl"
+          style={{ height: "calc(100dvh - 100px)", maxHeight: "580px" }}
         >
           {/* Header */}
           <div className="flex items-center gap-3 border-b border-white/8 bg-[#1a0a0a] px-4 py-3">

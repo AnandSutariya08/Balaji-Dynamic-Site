@@ -15,7 +15,7 @@ export function FloatingCta() {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 group"
+      className="fixed bottom-6 right-4 sm:right-6 z-50 group"
       aria-label="Chat on WhatsApp"
     >
       <div className="relative grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-2xl transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_60px_rgba(37,211,102,0.35)] active:translate-y-0 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#25D366]/30 leading-none">
