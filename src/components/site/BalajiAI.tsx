@@ -152,10 +152,15 @@ export function BalajiAI() {
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     }
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    };
   }, [open]);
 
   const sendMessage = useCallback(async () => {
@@ -191,7 +196,9 @@ export function BalajiAI() {
       const aiMsg: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
-        content: clean,
+        content: clean || (inquiry
+          ? "I have all your details ready. Please click the button below to send your inquiry to our team!"
+          : "Sorry, I could not process that. Please try again."),
         inquiryData: inquiry,
       };
       setMessages((prev) => [...prev, aiMsg]);
