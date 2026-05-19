@@ -252,3 +252,9 @@ id = "88qoNbdEZOyFKfMd3uJbq"
 uri = "file://public/sector-marine.png"
 type = "image"
 title = "marine sector fabrication"
+
+[[generated]]
+id = "1ShvFK_BUlnp29XsDQQdd"
+uri = "file://public/sector-railway.png"
+type = "image"
+title = "railway sector fabrication"

@@ -460,7 +460,7 @@ export const sectorsData: Sector[] = [
     name: "Railway and Transportation",
     description: "Sheet metal components for train carriages, metro systems, bus bodywork, and railway station infrastructure.",
     icon: "train",
-    image: "/sector-manufacturing.png",
+    image: "/sector-railway.png",
     metaTitle: "Sheet Metal Fabrication for Railway and Transportation | Balaji Engineering Works",
     metaDescription: "Precision sheet metal and structural fabrication for railway coaches, metro trains, bus bodywork, and rail station infrastructure. Serving Indian Railways contractors and metro project suppliers from Surat.",
     keywords: [
