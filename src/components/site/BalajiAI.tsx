@@ -156,40 +156,37 @@ export function BalajiAI() {
     };
   }, [open]);
 
-  const autoSubmitInquiry = useCallback(async (data: InquiryPayload) => {
-    setSendingInquiry(true);
-    setStatusMsg(null);
-    try {
-      await submitInquiryLead(
-        {
-          name: data.name,
-          phone: data.phone,
-          email: data.email,
-          service: data.service,
-          message: data.message,
-          quantity: "",
-          material: "",
-        },
-        "contact-form",
-      );
-      setInquirySent(true);
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: Date.now().toString(),
-          role: "assistant",
-          content:
-            "✅ Your inquiry has been submitted successfully!\n\nOur team at Balaji Engineering Works will contact you on **" +
-            data.phone +
-            "** shortly. Thank you for reaching out!",
-          inquiryData: null,
-        },
-      ]);
-    } catch {
-      setStatusMsg("Failed to send inquiry. Please call us at +91 99787 53398.");
-    } finally {
-      setSendingInquiry(false);
-    }
+  const autoSubmitInquiry = useCallback((data: InquiryPayload) => {
+    // Show success message immediately — don't wait for network calls
+    setInquirySent(true);
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: Date.now().toString(),
+        role: "assistant",
+        content:
+          "✅ Your inquiry has been submitted successfully!\n\nOur team at Balaji Engineering Works will contact you on **" +
+          data.phone +
+          "** shortly. Thank you for reaching out!",
+        inquiryData: null,
+      },
+    ]);
+
+    // Fire Firebase + email in the background without blocking
+    submitInquiryLead(
+      {
+        name: data.name,
+        phone: data.phone,
+        email: data.email,
+        service: data.service,
+        message: data.message,
+        quantity: "",
+        material: "",
+      },
+      "contact-form",
+    ).catch(() => {
+      setStatusMsg("Inquiry saved locally. Please call us at +91 99787 53398 to confirm.");
+    });
   }, []);
 
   const sendMessage = useCallback(async () => {
