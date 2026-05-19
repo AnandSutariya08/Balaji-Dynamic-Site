@@ -204,3 +204,41 @@ input[type="search"]::-webkit-search-cancel-button {
 .container {
   width: min(100%, 1920px);
 }
+
+/* ── Source-code protection ─────────────────────────────────────────────── */
+
+/* Disable text selection site-wide */
+*, *::before, *::after {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+/* Re-enable selection only inside form inputs so the site stays usable */
+input, textarea, [contenteditable="true"] {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  user-select: text;
+}
+
+/* Prevent image drag-and-drop download */
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+  pointer-events: none;
+}
+
+/* Re-enable pointer events on links/buttons that contain images */
+a img, button img {
+  pointer-events: auto;
+}
+
+/* Block touch callout (long-press context menu) on iOS */
+* {
+  -webkit-touch-callout: none;
+}
+
+/* Block print — hides the page content if someone tries Ctrl+P */
+@media print {
+  body { display: none !important; }
+}
