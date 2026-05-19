@@ -114,3 +114,33 @@ id = "3V6xBrQBa5O_weMC8nOlP"
 uri = "file://public/product-steel-pallets.png"
 type = "image"
 title = "generated_image"
+
+[[generated]]
+id = "0ztB3axDtS-duHU-OjRMI"
+uri = "file://public/product-gratings.png"
+type = "image"
+title = "steel gratings industrial"
+
+[[generated]]
+id = "Lwggy-kZ4M2HTLQK5KmwE"
+uri = "file://public/product-storage-tanks.png"
+type = "image"
+title = "steel storage tanks industrial"
+
+[[generated]]
+id = "w3sFtpBm52liVLu1QuR_3"
+uri = "file://public/product-rolled-cylinders.png"
+type = "image"
+title = "rolled steel cylinders industrial"
+
+[[generated]]
+id = "Y1ivl5M3CjPkPeni5KZx2"
+uri = "file://public/product-hoppers.png"
+type = "image"
+title = "steel hoppers industrial"
+
+[[generated]]
+id = "zQZDotXj3ERunitctz0H5"
+uri = "file://public/product-staircase-parts.png"
+type = "image"
+title = "steel staircase parts industrial"
