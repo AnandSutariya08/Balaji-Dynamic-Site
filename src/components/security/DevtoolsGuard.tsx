@@ -2,196 +2,173 @@
 
 import { useEffect, useRef, useState } from "react";
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   STRATEGY — "No inspection in any situation"
-   ─────────────────────────────────────────────────────────────────────────
-   1. DEBUGGER LOOP starts IMMEDIATELY on mount — before any detection fires.
-      `debugger` is a complete no-op when DevTools is closed, so normal users
-      see zero effect. The moment DevTools opens (keyboard, menu, any method)
-      the NEXT 50 ms tick pauses JS execution, making the inspector unusable.
+/*
+  DevTools detection strategy — zero false positives, instant response
+  ─────────────────────────────────────────────────────────────────────
+  WHAT WE DO NOT USE (and why):
+    • console.debug + getter traps — false-positives on browser extensions
+      (React DevTools, Sentry, LogRocket, etc.) that intercept console calls
+      and eagerly evaluate object properties even with DevTools closed.
+    • outerWidth/innerWidth on touch devices — browser chrome (address bar,
+      nav bar, iOS safe area) creates gaps identical to a docked panel.
 
-   2. KEYBOARD SHORTCUTS — every known shortcut that opens DevTools is
-      intercepted in the capture phase and suppressed.
+  WHAT WE USE:
+    1. SIZE GAP — desktop (non-touch) only.
+       When DevTools docks, the inner viewport shrinks.
+       Threshold = 200 px:
+         • OS scrollbar           ~17 px  ← safely below
+         • macOS browser toolbar  ~60 px  ← safely below
+         • DevTools minimum size  ~200 px ← we catch at exactly this point
+       Touch devices are EXCLUDED: on phones/tablets, DevTools is only
+       reachable via USB remote-debugging on a separate PC — the device
+       screen itself never shows a DevTools panel.
 
-   3. CONTEXT MENU / RIGHT-CLICK — blocked globally everywhere so
-      "Inspect Element" is never reachable.
+    2. KEYBOARD SHORTCUTS — every shortcut that opens DevTools is
+       suppressed in the capture phase on all devices.
 
-   4. SIZE GAP (desktop only) — when DevTools docks, the inner viewport
-      shrinks. Threshold 160 px is above OS scrollbar + browser toolbar
-      but below the minimum practical DevTools panel. Skipped on
-      touch/mobile to prevent false positives from browser chrome.
+    3. CONTEXT MENU — blocked globally so "Inspect Element" is unreachable.
 
-   5. CONSOLE PROBES — a bait Image and a bait toString object are logged to
-      console.debug(). DevTools Console evaluates them, firing our getters.
-      Covers undocked DevTools windows, Firebug-style panels, etc.
+  RESPONSE:
+    • First positive size check → overlay + debugger loop start immediately.
+    • `debugger` every 50 ms makes the inspector unusable once opened.
+    • Overlay clears only after 20 consecutive negative checks (~2 s).
+*/
 
-   Any signal → block shown immediately (no stability delay for detection).
-   Overlay stays until 20 consecutive clean checks (~2 s) have passed.
-═══════════════════════════════════════════════════════════════════════════ */
-
-/* ─── Helpers ────────────────────────────────────────────────────────────── */
+const DEVTOOLS_SIZE_THRESHOLD = 200; // px — safe minimum
 
 function isTouchDevice(): boolean {
+  if (typeof window === "undefined") return false;
   return (
     window.matchMedia("(pointer: coarse)").matches ||
     navigator.maxTouchPoints > 0
   );
 }
 
+/**
+ * Desktop-only: measures whether a DevTools panel is docked.
+ * Returns false on any touch/mobile device unconditionally.
+ */
 function detectBySize(): boolean {
   if (isTouchDevice()) return false;
   const wGap = window.outerWidth  - window.innerWidth;
   const hGap = window.outerHeight - window.innerHeight;
-  return wGap > 160 || hGap > 160;
+  return wGap > DEVTOOLS_SIZE_THRESHOLD || hGap > DEVTOOLS_SIZE_THRESHOLD;
 }
 
-function detectByConsoleProbe(): boolean {
-  let hit = false;
-  const bait = new Image();
-  Object.defineProperty(bait, "id", {
-    configurable: true,
-    get() { hit = true; return "bait"; },
-  });
-  // eslint-disable-next-line no-console
-  console.debug(bait);
-  return hit;
+/** Keyboard shortcuts that open DevTools in any major browser. */
+function isBlockedShortcut(e: KeyboardEvent): boolean {
+  const k    = e.key.toLowerCase();
+  const ctrl  = e.ctrlKey || e.metaKey;
+  const shift = e.shiftKey;
+  const alt   = e.altKey;
+  return (
+    k === "f12"                                                                       ||
+    (ctrl && shift && ["i","j","c","k","e","m","p","s","u","f","l","o","r"].includes(k)) ||
+    (ctrl && alt   && ["i","j","c","k","u"].includes(k))                              ||
+    (ctrl && !shift && !alt && ["u","s","p"].includes(k))                             ||
+    (shift && k === "f12")                                                            ||
+    (alt   && k === "f12")
+  );
 }
 
-function detectByToString(): boolean {
-  let hit = false;
-  const bait = {
-    toString() { hit = true; return "bait"; },
-    valueOf()  { hit = true; return 0;      },
-  };
-  // eslint-disable-next-line no-console
-  console.debug("%s", bait);
-  return hit;
-}
-
-function isDevToolsOpen(): boolean {
-  return detectBySize() || detectByConsoleProbe() || detectByToString();
-}
-
-/* ─── Debugger loop ──────────────────────────────────────────────────────
-   Fires every 50 ms. When DevTools is closed → pure no-op, zero cost.
-   When DevTools is open → browser pauses JS here every 50 ms, making the
-   inspector completely unusable regardless of which panel is active.
-─────────────────────────────────────────────────────────────────────────── */
+/** Starts a tight debugger loop. No-op when DevTools is closed; freezes inspector when open. */
 function startDebuggerLoop(): () => void {
   /* eslint-disable no-debugger */
   const id = setInterval(() => { debugger; }, 50);
   return () => clearInterval(id);
 }
 
-/* ─── Blocked keyboard shortcuts ─────────────────────────────────────────── */
-function isBlockedShortcut(e: KeyboardEvent): boolean {
-  const k    = e.key.toLowerCase();
-  const ctrl  = e.ctrlKey || e.metaKey;
-  const shift = e.shiftKey;
-  const alt   = e.altKey;
-
-  return (
-    k === "f12" ||
-    // All common DevTools open shortcuts
-    (ctrl && shift && ["i", "j", "c", "k", "e", "m", "p", "s", "u", "f", "l", "o", "r"].includes(k)) ||
-    (ctrl && alt   && ["i", "j", "c", "k", "u"].includes(k)) ||
-    // View source / save / print
-    (ctrl && !shift && !alt && ["u", "s", "p"].includes(k)) ||
-    // Safari / Firefox specific
-    (alt  && k === "f12") ||
-    (shift && k === "f12")
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   COMPONENT
-═══════════════════════════════════════════════════════════════════════════ */
+/* ─── Component ─────────────────────────────────────────────────────────── */
 export function DevtoolsGuard() {
   const [blocked, setBlocked] = useState(false);
-  const missCount   = useRef(0);
-  const latestOpen  = useRef(false);
-  // stopDebugger is initialised in useEffect — loop starts on mount
+  const missCount    = useRef(0);
+  const latestOpen   = useRef(false);
   const stopDebugger = useRef<(() => void) | null>(null);
 
   useEffect(() => {
-    /* ── 1. Start debugger loop IMMEDIATELY — no detection required ── */
-    stopDebugger.current = startDebuggerLoop();
-
-    /* ── 2. Keyboard shortcut guard ── */
+    /* Keyboard guard */
     const onKey = (e: KeyboardEvent) => {
-      if (isBlockedShortcut(e)) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        latestOpen.current = true;
-        missCount.current  = 0;
-        setBlocked(true);
-      }
+      if (!isBlockedShortcut(e)) return;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      // Treat shortcut press as confirmed DevTools open attempt
+      missCount.current = 0;
+      latestOpen.current = true;
+      setBlocked(true);
+      if (!stopDebugger.current) stopDebugger.current = startDebuggerLoop();
     };
 
-    /* ── 3. Block ALL context menus / right-click everywhere ── */
+    /* Right-click / context menu — block everywhere */
     const suppress = (e: Event) => {
       e.preventDefault();
       e.stopPropagation();
       e.stopImmediatePropagation();
     };
     const noRightBtn = (e: MouseEvent) => {
-      if (e.button === 2) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-      }
-    };
-    /* ── 4. Block touch long-press (context menu on mobile) ── */
-    const noLongPress = (e: TouchEvent) => {
-      e.preventDefault();
+      if (e.button === 2) { e.preventDefault(); e.stopImmediatePropagation(); }
     };
 
-    /* ── Register listeners at capture phase ── */
-    window.addEventListener  ("keydown",     onKey,       { capture: true });
-    window.addEventListener  ("contextmenu", suppress,    { capture: true });
-    document.addEventListener("contextmenu", suppress,    { capture: true });
-    document.addEventListener("mousedown",   noRightBtn,  { capture: true });
-    document.addEventListener("touchstart",  noLongPress, { capture: true, passive: false });
+    /* Touch long-press context menu */
+    let touchTimer: ReturnType<typeof setTimeout> | null = null;
+    const onTouchStart = () => {
+      touchTimer = setTimeout(() => { /* no-op, just prevent default below */ }, 400);
+    };
+    const onTouchEnd = () => {
+      if (touchTimer) { clearTimeout(touchTimer); touchTimer = null; }
+    };
+    const onTouchMove = () => {
+      if (touchTimer) { clearTimeout(touchTimer); touchTimer = null; }
+    };
 
-    /* ── Disable text selection & drag ── */
+    window.addEventListener  ("keydown",     onKey,      { capture: true });
+    window.addEventListener  ("contextmenu", suppress,   { capture: true });
+    document.addEventListener("contextmenu", suppress,   { capture: true });
+    document.addEventListener("mousedown",   noRightBtn, { capture: true });
+    document.addEventListener("touchstart",  onTouchStart, { passive: true });
+    document.addEventListener("touchend",    onTouchEnd,   { passive: true });
+    document.addEventListener("touchmove",   onTouchMove,  { passive: true });
+
+    /* Disable text selection */
     document.body.style.userSelect = "none";
     (document.body.style as CSSStyleDeclaration & { webkitUserSelect: string }).webkitUserSelect = "none";
-    document.body.setAttribute("ondragstart", "return false");
-    document.body.setAttribute("onselectstart", "return false");
 
-    /* ── 5. Detection loop at 100 ms — triggers on FIRST hit ── */
+    /* Size-based polling — 150 ms interval, desktop only */
     const check = () => {
-      const open = isDevToolsOpen();
+      const open = detectBySize();
       latestOpen.current = open;
 
       if (open) {
         missCount.current = 0;
-        setBlocked(true);           // immediate — no stability wait
+        setBlocked(true);
+        if (!stopDebugger.current) stopDebugger.current = startDebuggerLoop();
       } else {
         missCount.current += 1;
-        // Unblock only after ~2 s of consecutive clean checks
-        if (missCount.current >= 20) {
+        if (missCount.current >= 20 && stopDebugger.current) {
+          // DevTools genuinely closed for ~3 s — dismiss
+          stopDebugger.current();
+          stopDebugger.current = null;
           setBlocked(false);
         }
       }
     };
 
-    const interval = window.setInterval(check, 100);
+    const interval = window.setInterval(check, 150);
     window.addEventListener("resize", check, { passive: true });
-    check(); // immediate first check
+    check();
 
     return () => {
       window.clearInterval(interval);
       stopDebugger.current?.();
       stopDebugger.current = null;
-      window.removeEventListener("resize",      check,      { passive: true } as EventListenerOptions);
-      window.removeEventListener("keydown",     onKey,      { capture: true } as EventListenerOptions);
-      window.removeEventListener("contextmenu", suppress,   { capture: true } as EventListenerOptions);
-      document.removeEventListener("contextmenu",suppress,  { capture: true } as EventListenerOptions);
-      document.removeEventListener("mousedown", noRightBtn, { capture: true } as EventListenerOptions);
-      document.removeEventListener("touchstart",noLongPress,{ capture: true } as EventListenerOptions);
+      window.removeEventListener("resize",     check,     { passive: true } as EventListenerOptions);
+      window.removeEventListener("keydown",    onKey,     { capture: true } as EventListenerOptions);
+      window.removeEventListener("contextmenu",suppress,  { capture: true } as EventListenerOptions);
+      document.removeEventListener("contextmenu",suppress,{ capture: true } as EventListenerOptions);
+      document.removeEventListener("mousedown",noRightBtn,{ capture: true } as EventListenerOptions);
+      document.removeEventListener("touchstart",  onTouchStart, { passive: true } as EventListenerOptions);
+      document.removeEventListener("touchend",    onTouchEnd,   { passive: true } as EventListenerOptions);
+      document.removeEventListener("touchmove",   onTouchMove,  { passive: true } as EventListenerOptions);
       document.body.style.userSelect = "";
-      document.body.removeAttribute("ondragstart");
-      document.body.removeAttribute("onselectstart");
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -228,6 +205,8 @@ export function DevtoolsGuard() {
           onClick={() => {
             if (!latestOpen.current) {
               missCount.current = 20;
+              stopDebugger.current?.();
+              stopDebugger.current = null;
               setBlocked(false);
             }
           }}
