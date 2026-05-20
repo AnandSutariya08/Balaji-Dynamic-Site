@@ -2,13 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 
-/* ─── Detection helpers ───────────────────────────────────────────────────── */
-
-function detectBySize(threshold = 140) {
-  const wDiff = Math.abs(window.outerWidth - window.innerWidth);
-  const hDiff = Math.abs(window.outerHeight - window.innerHeight);
-  return wDiff > threshold || hDiff > threshold;
-}
+/* ─── Detection helpers ───────────────────────────────────────────────────────
+   NOTE: Size-based detection (outerWidth vs innerWidth) is intentionally
+   removed — it false-positives on mobile/small screens because browser chrome
+   (address bar, nav bar, toolbars) creates a naturally large gap that looks
+   identical to a docked DevTools panel.
+   Only probe-based methods are used — they require the DevTools console to
+   actually be evaluating objects, so they never fire on a normal user's device.
+─────────────────────────────────────────────────────────────────────────────── */
 
 function detectByConsoleProbe() {
   let hit = false;
@@ -30,18 +31,18 @@ function detectByToString() {
   return hit;
 }
 
-/* ─── Continuous debugger (runs in a tight loop when DevTools is open) ─────
-   When the DevTools panel is open and paused on a breakpoint, the JS engine
-   keeps re-pausing here every 50 ms, making the inspector effectively unusable.
+/* ─── Continuous debugger (runs in a tight loop when DevTools is open) ───────
+   When the DevTools panel is open, the JS engine keeps re-pausing here every
+   50 ms, making the inspector effectively unusable.
    When DevTools is closed, `debugger` is a no-op.
-─────────────────────────────────────────────────────────────────────────── */
+─────────────────────────────────────────────────────────────────────────────── */
 function startDebuggerLoop() {
   /* eslint-disable no-debugger */
   const id = setInterval(() => { debugger; }, 50);
   return () => clearInterval(id);
 }
 
-/* ─── Keys to block ──────────────────────────────────────────────────────── */
+/* ─── Keyboard shortcuts to block ────────────────────────────────────────── */
 const BLOCKED_SHORTCUTS = (e: KeyboardEvent): boolean => {
   const k = e.key.toLowerCase();
   const ctrl = e.ctrlKey || e.metaKey;
@@ -50,10 +51,8 @@ const BLOCKED_SHORTCUTS = (e: KeyboardEvent): boolean => {
 
   return (
     k === "f12" ||
-    // Inspector / Console / Elements
     (ctrl && shift && ["i", "j", "c", "k", "e", "m", "p", "s", "u", "f"].includes(k)) ||
     (ctrl && alt  && ["i", "j", "c", "k"].includes(k)) ||
-    // View source / Save page / Print
     (ctrl && !shift && !alt && ["u", "s", "p"].includes(k))
   );
 };
@@ -88,25 +87,24 @@ export function DevtoolsGuard() {
     };
 
     /* ── Register listeners ── */
-    window.addEventListener("keydown",      onKey,        { capture: true });
-    window.addEventListener("contextmenu",  onContext,    { capture: true });
-    document.addEventListener("contextmenu",onContext,    { capture: true });
-    document.addEventListener("mousedown",  onMouseDown,  { capture: true });
-    document.addEventListener("touchstart", onTouchStart, { capture: true, passive: false });
+    window.addEventListener("keydown",       onKey,        { capture: true });
+    window.addEventListener("contextmenu",   onContext,    { capture: true });
+    document.addEventListener("contextmenu", onContext,    { capture: true });
+    document.addEventListener("mousedown",   onMouseDown,  { capture: true });
+    document.addEventListener("touchstart",  onTouchStart, { capture: true, passive: false });
 
     /* ── Disable text selection globally ── */
     document.body.style.userSelect = "none";
     (document.body.style as CSSStyleDeclaration & { webkitUserSelect: string }).webkitUserSelect = "none";
 
-    /* ── Detection loop ── */
+    /* ── Detection loop — probe only, no size check ── */
     const check = () => {
       if (!document.hasFocus()) return;
 
       probeTick.current += 1;
-      const sizeHit    = detectBySize(140);
       const consoleHit = probeTick.current % 2 === 0 ? detectByConsoleProbe() : false;
       const stringHit  = probeTick.current % 3 === 0 ? detectByToString()     : false;
-      const detected   = sizeHit || consoleHit || stringHit;
+      const detected   = consoleHit || stringHit;
       latestHit.current = detected;
 
       if (detected === last.current) {
@@ -120,18 +118,15 @@ export function DevtoolsGuard() {
         if (detected) {
           closedTick.current = 0;
           setBlocked(true);
-          // Start continuous debugger loop if not already running
           if (!stopDebugger.current) {
             stopDebugger.current = startDebuggerLoop();
           }
         } else {
-          // Stop the debugger loop once DevTools is actually closed
           if (stopDebugger.current) {
             stopDebugger.current();
             stopDebugger.current = null;
           }
           closedTick.current += 1;
-          // Keep the overlay up for a long time after closing to discourage re-open
           if (closedTick.current >= 20) {
             setBlocked(false);
           }
@@ -140,17 +135,15 @@ export function DevtoolsGuard() {
     };
 
     const interval = window.setInterval(check, 200);
-    window.addEventListener("resize", check, { passive: true });
     check();
 
     return () => {
       window.clearInterval(interval);
-      window.removeEventListener("resize",      check as EventListener);
-      window.removeEventListener("keydown",     onKey,       { capture: true } as EventListenerOptions);
-      window.removeEventListener("contextmenu", onContext,   { capture: true } as EventListenerOptions);
-      document.removeEventListener("contextmenu",onContext,  { capture: true } as EventListenerOptions);
-      document.removeEventListener("mousedown", onMouseDown, { capture: true } as EventListenerOptions);
-      document.removeEventListener("touchstart",onTouchStart,{ capture: true } as EventListenerOptions);
+      window.removeEventListener("keydown",      onKey,        { capture: true } as EventListenerOptions);
+      window.removeEventListener("contextmenu",  onContext,    { capture: true } as EventListenerOptions);
+      document.removeEventListener("contextmenu",onContext,    { capture: true } as EventListenerOptions);
+      document.removeEventListener("mousedown",  onMouseDown,  { capture: true } as EventListenerOptions);
+      document.removeEventListener("touchstart", onTouchStart, { capture: true } as EventListenerOptions);
       document.body.style.userSelect = "";
       stopDebugger.current?.();
     };
@@ -165,7 +158,6 @@ export function DevtoolsGuard() {
     >
       <div className="max-w-md w-full rounded-2xl border border-red-900/40 bg-[#0e0404] p-10 text-center shadow-[0_0_80px_rgba(172,60,60,0.25)]">
 
-        {/* Shield icon */}
         <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 border border-primary/30">
           <svg viewBox="0 0 24 24" className="h-8 w-8 text-primary" fill="none" stroke="currentColor" strokeWidth={1.8}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
