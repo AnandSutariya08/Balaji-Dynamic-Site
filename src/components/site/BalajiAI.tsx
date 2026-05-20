@@ -53,7 +53,7 @@ const WELCOME: Message = {
   id: "welcome",
   role: "assistant",
   content:
-    "Jai Shree Krishna! 🙏 Welcome to **Balaji Engineering Works**.\n\nPlease select your preferred language:\n\n**1.** English\n**2.** Gujarati (ગુજરાતી)\n**3.** Hindi (हिंदी)",
+    "Welcome to **Balaji Engineering Works**.\n\nPlease select your preferred language:\n\n**1.** English\n**2.** Gujarati (ગુજરાતી)\n**3.** Hindi (हिंदी)",
   inquiryData: null,
 };
 
