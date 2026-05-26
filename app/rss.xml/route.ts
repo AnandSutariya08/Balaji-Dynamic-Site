@@ -2,6 +2,8 @@ import { getPublicBlogsFromFirestore } from "@/lib/firestore/publicBlogsServer";
 import { absoluteUrl } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
+export const revalidate = 3600;
+
 function escapeXml(value: string) {
   return value
     .replaceAll("&", "&amp;")

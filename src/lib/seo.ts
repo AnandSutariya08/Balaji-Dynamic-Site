@@ -540,28 +540,54 @@ export function createBlogJsonLd(posts: BlogPost[]): SchemaObject {
 }
 
 export function createBlogPostingJsonLd(post: BlogPost): SchemaObject {
+  const authorName = post.author || siteConfig.name;
+  const authorSlug = authorName.toLowerCase().replace(/\s+/g, "-");
+
   return {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),
+    "@id": `${absoluteUrl(`/blog/${post.slug}`)}#article`,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": absoluteUrl(`/blog/${post.slug}`),
+    },
     headline: post.title,
     description: post.excerpt,
-    image: absoluteUrl(post.image),
+    image: {
+      "@type": "ImageObject",
+      url: absoluteUrl(post.image),
+      width: 1200,
+      height: 630,
+    },
     datePublished: getIsoDate(post.createdAt ?? post.date),
     dateModified: getIsoDate(post.updatedAt ?? post.createdAt ?? post.date),
     articleSection: post.category,
+    inLanguage: "en-IN",
+    isPartOf: {
+      "@type": "Blog",
+      "@id": `${siteConfig.url}/blog#blog`,
+      name: `${siteConfig.name} — Engineering Blog`,
+      publisher: { "@id": `${siteConfig.url}#organization` },
+    },
     author: {
-      "@type": "Organization",
-      name: post.author || siteConfig.name,
+      "@type": "Person",
+      "@id": `${siteConfig.url}#author-${authorSlug}`,
+      name: authorName,
+      url: siteConfig.url,
+      worksFor: { "@id": `${siteConfig.url}#organization` },
+      knowsAbout: [
+        "Sheet Metal Fabrication",
+        "CNC Laser Cutting",
+        "CNC Plasma Cutting",
+        "Industrial Steel Manufacturing",
+        "Precision Fabrication",
+      ],
     },
     publisher: {
-      "@type": "Organization",
-      name: siteConfig.name,
-      logo: {
-        "@type": "ImageObject",
-        url: absoluteUrl("/logo.png"),
-      },
+      "@id": `${siteConfig.url}#organization`,
     },
+    copyrightHolder: { "@id": `${siteConfig.url}#organization` },
+    copyrightYear: new Date(post.createdAt ?? post.date ?? new Date()).getFullYear(),
   };
 }
 
