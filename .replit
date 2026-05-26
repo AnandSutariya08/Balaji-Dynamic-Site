@@ -34,3 +34,9 @@ externalPort = 3001
 
 [agent]
 expertMode = true
+
+[userenv]
+
+[userenv.shared]
+NEXT_PUBLIC_SITE_URL = "https://sheetmetalbendingworks.com"
+ADMIN_USERNAME = "admin"

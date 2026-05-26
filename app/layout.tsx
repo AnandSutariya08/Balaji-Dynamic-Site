@@ -6,6 +6,8 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import {
   createLocalBusinessJsonLd,
   createOrganizationJsonLd,
+  createWebsiteJsonLd,
+  createGraphJsonLd,
 } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
@@ -97,10 +99,11 @@ export const viewport: Viewport = {
   colorScheme: "light",
 };
 
-const globalSchemas = [
+const globalSchema = createGraphJsonLd([
   createOrganizationJsonLd(),
   createLocalBusinessJsonLd(),
-];
+  createWebsiteJsonLd(),
+]);
 
 export default function RootLayout({
   children,
@@ -110,9 +113,7 @@ export default function RootLayout({
   return (
     <html lang="en-IN">
       <body>
-        {globalSchemas.map((schema, index) => (
-          <JsonLd key={index} data={schema} />
-        ))}
+        <JsonLd data={globalSchema} />
         <Providers>{children}</Providers>
       </body>
     </html>

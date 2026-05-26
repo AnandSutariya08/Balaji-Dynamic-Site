@@ -8,17 +8,16 @@ import { getPublicBlogsFromFirestore } from "@/lib/firestore/publicBlogsServer";
 import { getPublicGalleryFromFirestore } from "@/lib/firestore/publicGalleryServer";
 import type { BlogPost, GalleryItem, Product } from "@/lib/firestore/types";
 
-function toDate(value?: string) {
-  if (!value) {
-    return new Date();
-  }
+type SitemapEntry = MetadataRoute.Sitemap[number];
 
+function toDate(value?: string) {
+  if (!value) return new Date();
   const parsed = new Date(value);
   return Number.isNaN(parsed.getTime()) ? new Date() : parsed;
 }
 
 function maxDate(dates: Date[]) {
-  return new Date(Math.max(...dates.map((date) => date.getTime())));
+  return new Date(Math.max(...dates.map((d) => d.getTime())));
 }
 
 function uniqueImages(images: Array<string | undefined>) {
@@ -45,28 +44,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
   const services = staticServices;
 
-  const serviceLastModified = services.length
-    ? maxDate(
-        services.map((service) => toDate(service.updatedAt ?? service.createdAt)),
-      )
-    : new Date();
+  const now = new Date();
 
+  const serviceLastModified = services.length
+    ? maxDate(services.map((s) => toDate(s.updatedAt ?? s.createdAt)))
+    : now;
   const blogLastModified = posts.length
-    ? maxDate(posts.map((post) => toBlogDate(post)))
-    : new Date();
+    ? maxDate(posts.map(toBlogDate))
+    : now;
   const productLastModified = products.length
-    ? maxDate(
-        products.map((product) => toProductDate(product)),
-      )
-    : new Date();
-  const baseHomeLastModified = maxDate([
-    serviceLastModified,
-    productLastModified,
-    blogLastModified,
-  ]);
+    ? maxDate(products.map(toProductDate))
+    : now;
   const galleryLastModified = gallery.length
-    ? maxDate(gallery.map((item) => toGalleryDate(item)))
-    : baseHomeLastModified;
+    ? maxDate(gallery.map(toGalleryDate))
+    : now;
   const homeLastModified = maxDate([
     serviceLastModified,
     productLastModified,
@@ -74,117 +65,154 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     galleryLastModified,
   ]);
 
-  const staticEntries: MetadataRoute.Sitemap = [
+  const staticEntries: SitemapEntry[] = [
     {
       url: siteConfig.url,
       lastModified: homeLastModified,
-      images: [absoluteUrl(siteConfig.ogImage)],
+      changeFrequency: "daily",
+      priority: 1.0,
+      images: uniqueImages([
+        absoluteUrl(siteConfig.ogImage),
+        absoluteUrl("/logo.png"),
+        ...services.slice(0, 6).map((s) => absoluteUrl(s.image)),
+      ]),
     },
     {
       url: `${siteConfig.url}/about`,
-      lastModified: homeLastModified,
-      images: [absoluteUrl("/service-fabrication.png")],
+      lastModified: serviceLastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
+      images: uniqueImages([
+        absoluteUrl("/service-fabrication.png"),
+        absoluteUrl(siteConfig.ogImage),
+      ]),
     },
     {
       url: `${siteConfig.url}/services`,
       lastModified: serviceLastModified,
-      images: services.map((service) => absoluteUrl(service.image)),
+      changeFrequency: "weekly",
+      priority: 0.95,
+      images: uniqueImages(services.map((s) => absoluteUrl(s.image))),
     },
     {
       url: `${siteConfig.url}/products`,
       lastModified: productLastModified,
-      images: products.length
-        ? uniqueImages(
-            products
-              .filter((product) => product.image)
-              .slice(0, 10)
-              .map((product) => absoluteUrl(product.image)),
-          )
-        : [absoluteUrl("/product-base-plates.png")],
+      changeFrequency: "weekly",
+      priority: 0.95,
+      images: uniqueImages(
+        products.length
+          ? products.filter((p) => p.image).slice(0, 12).map((p) => absoluteUrl(p.image))
+          : [absoluteUrl("/product-base-plates.png")],
+      ),
     },
     {
       url: `${siteConfig.url}/sectors`,
-      lastModified: homeLastModified,
-      images: [absoluteUrl("/service-fabrication.png")],
+      lastModified: serviceLastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
+      images: uniqueImages(sectorsData.map((s) => absoluteUrl(s.image))),
     },
     {
       url: `${siteConfig.url}/blog`,
       lastModified: blogLastModified,
-      images: posts.length
-        ? uniqueImages(
-            posts
-              .filter((post) => post.image)
-              .slice(0, 10)
-              .map((post) => absoluteUrl(post.image)),
-          )
-        : [absoluteUrl("/service-fabrication.png")],
-    },
-    {
-      url: `${siteConfig.url}/llms.txt`,
-      lastModified: homeLastModified,
-    },
-    {
-      url: `${siteConfig.url}/llms-full.txt`,
-      lastModified: homeLastModified,
-    },
-    {
-      url: `${siteConfig.url}/rss.xml`,
-      lastModified: blogLastModified,
+      changeFrequency: "daily",
+      priority: 0.85,
+      images: uniqueImages(
+        posts.length
+          ? posts.filter((p) => p.image).slice(0, 12).map((p) => absoluteUrl(p.image))
+          : [absoluteUrl("/service-fabrication.png")],
+      ),
     },
     {
       url: `${siteConfig.url}/gallery`,
       lastModified: galleryLastModified,
-      images: gallery.length
-        ? uniqueImages(gallery.slice(0, 10).map((item) => absoluteUrl(item.image)))
-        : [absoluteUrl("/product-base-plates.png")],
+      changeFrequency: "weekly",
+      priority: 0.75,
+      images: uniqueImages(
+        gallery.length
+          ? gallery.slice(0, 20).map((i) => absoluteUrl(i.image))
+          : [absoluteUrl("/product-base-plates.png")],
+      ),
     },
     {
       url: `${siteConfig.url}/contact`,
-      lastModified: homeLastModified,
-      images: [absoluteUrl("/service-cnc.png")],
+      lastModified: serviceLastModified,
+      changeFrequency: "monthly",
+      priority: 0.85,
+      images: uniqueImages([
+        absoluteUrl("/service-cnc.png"),
+        absoluteUrl(siteConfig.ogImage),
+      ]),
     },
     {
       url: `${siteConfig.url}/privacy`,
       lastModified: homeLastModified,
-      images: [absoluteUrl(siteConfig.ogImage)],
+      changeFrequency: "yearly",
+      priority: 0.2,
     },
     {
       url: `${siteConfig.url}/terms`,
       lastModified: homeLastModified,
-      images: [absoluteUrl(siteConfig.ogImage)],
+      changeFrequency: "yearly",
+      priority: 0.2,
+    },
+    {
+      url: `${siteConfig.url}/rss.xml`,
+      lastModified: blogLastModified,
+      changeFrequency: "daily",
+      priority: 0.4,
     },
   ];
 
-  const blogEntries = [...posts]
-    .filter((post) => post.slug)
+  const serviceEntries: SitemapEntry[] = services.map((service) => ({
+    url: `${siteConfig.url}/services/${service.id}`,
+    lastModified: toDate(service.updatedAt ?? service.createdAt),
+    changeFrequency: "monthly",
+    priority: 0.9,
+    images: uniqueImages([absoluteUrl(service.image)]),
+  }));
+
+  const productEntries: SitemapEntry[] = products
+    .filter((p) => p.id)
+    .map((product) => ({
+      url: `${siteConfig.url}/products/${product.id}`,
+      lastModified: toProductDate(product),
+      changeFrequency: "weekly",
+      priority: 0.88,
+      images: uniqueImages(
+        product.image
+          ? [absoluteUrl(product.image)]
+          : [absoluteUrl("/product-base-plates.png")],
+      ),
+    }));
+
+  const sectorEntries: SitemapEntry[] = sectorsData.map((sector) => ({
+    url: `${siteConfig.url}/sectors/${sector.id}`,
+    lastModified: serviceLastModified,
+    changeFrequency: "monthly",
+    priority: 0.75,
+    images: uniqueImages([absoluteUrl(sector.image)]),
+  }));
+
+  const blogEntries: SitemapEntry[] = posts
+    .filter((p) => p.slug)
     .map((post) => ({
       url: `${siteConfig.url}/blog/${post.slug}`,
       lastModified: toBlogDate(post),
-      images: post.image
-        ? uniqueImages([absoluteUrl(post.image)])
-        : [absoluteUrl("/service-fabrication.png")],
+      changeFrequency: "weekly",
+      priority: 0.8,
+      images: uniqueImages(
+        post.image
+          ? [absoluteUrl(post.image)]
+          : [absoluteUrl("/service-fabrication.png")],
+      ),
     }));
 
-  const serviceEntries = [...services].map((service) => ({
-    url: `${siteConfig.url}/services/${service.id}`,
-    lastModified: toDate(service.updatedAt ?? service.createdAt),
-    images: uniqueImages([absoluteUrl(service.image)]),
-  }));
-  const productEntries = [...products]
-    .filter((product) => product.id)
-    .map((product) => ({
-    url: `${siteConfig.url}/products/${product.id}`,
-    lastModified: toProductDate(product),
-    images: product.image
-      ? uniqueImages([absoluteUrl(product.image)])
-      : [absoluteUrl("/product-base-plates.png")],
-  }));
-
-  const sectorEntries: MetadataRoute.Sitemap = sectorsData.map((sector) => ({
-    url: `${siteConfig.url}/sectors/${sector.id}`,
-    lastModified: homeLastModified,
-    images: [absoluteUrl(sector.image)],
-  }));
-
-  return [...staticEntries, ...serviceEntries, ...productEntries, ...sectorEntries, ...blogEntries];
+  return [
+    ...staticEntries,
+    ...serviceEntries,
+    ...productEntries,
+    ...sectorEntries,
+    ...blogEntries,
+  ];
 }
