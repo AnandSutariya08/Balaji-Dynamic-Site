@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { BlogPost, GalleryItem, Product, Service } from "@/lib/firestore/types";
 import { contactFaqs, siteConfig } from "@/lib/site";
 import type { ServiceFaq } from "@/lib/serviceSeo";
+import { getAllServiceFaqs } from "@/lib/serviceSeo";
 
 type SchemaObject = Record<string, unknown>;
 
@@ -566,6 +567,52 @@ export function createBlogPostingJsonLd(post: BlogPost): SchemaObject {
 
 export function createFaqJsonLd() {
   return createGenericFaqJsonLd(contactFaqs);
+}
+
+const homepageGeneralFaqs: ServiceFaq[] = [
+  {
+    question: "Where is Balaji Engineering Works located?",
+    answer:
+      "Balaji Engineering Works is located in Kamrej, Surat, Gujarat — serving industrial buyers across Surat, Bharuch, Vadodara, Ankleshwar, Vapi, and across Gujarat and India.",
+  },
+  {
+    question: "What fabrication and manufacturing services do you offer?",
+    answer:
+      "We offer CNC laser cutting, CNC plasma cutting, CNC plate bending, sheet metal bending, plate rolling, pipe rolling, deep drawing, perforated sheet manufacturing, surface finishing, and precision welding — all under one roof in Surat.",
+  },
+  {
+    question: "Do you manufacture industrial products as well as provide job work?",
+    answer:
+      "Yes. Balaji Engineering Works manufactures industrial products including MS base plates, MS foundation bolts, MS anchor bolts, C-purlins, Z-purlins, MS chequered plates, and perforated sheets, alongside contract job work for fabrication requirements.",
+  },
+  {
+    question: "How do I get a quotation from Balaji Engineering Works?",
+    answer:
+      "You can share your drawings (DXF, DWG, PDF) or dimensions via our contact page or WhatsApp. Our team reviews the job and sends a quotation based on material, thickness, and quantity. We support both one-off samples and repeat production orders.",
+  },
+  {
+    question: "Which industries does Balaji Engineering Works serve?",
+    answer:
+      "We serve chemical, pharmaceutical, heavy engineering, construction, food processing, power, oil & gas, textile, and general manufacturing industries across Surat, Gujarat, and India.",
+  },
+];
+
+export function createHomepageFaqJsonLd(): SchemaObject {
+  const serviceFaqs = getAllServiceFaqs();
+  const combined = [...homepageGeneralFaqs, ...serviceFaqs].slice(0, 10);
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${siteConfig.url}#faq`,
+    mainEntity: combined.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
 }
 
 export function createGenericFaqJsonLd(

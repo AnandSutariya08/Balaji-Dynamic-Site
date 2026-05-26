@@ -507,3 +507,7 @@ export function getServiceSeoContent(service: Service): ServiceSeoEntry {
     ],
   };
 }
+
+export function getAllServiceFaqs(): ServiceFaq[] {
+  return Object.values(serviceSeoMap).map((entry) => entry.faqs[0]);
+}
