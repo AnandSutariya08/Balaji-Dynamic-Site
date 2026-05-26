@@ -185,8 +185,21 @@ export function createLocalBusinessJsonLd(): SchemaObject {
     priceRange: siteConfig.priceRange,
     taxID: siteConfig.gstNumber,
     address: getAddressSchema(),
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 21.2447,
+      longitude: 72.9504,
+    },
     hasMap: siteConfig.mapUrl,
     sameAs: [siteConfig.indiaMartProfile],
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        opens: "09:00",
+        closes: "18:00",
+      },
+    ],
     areaServed: siteConfig.serviceAreas.map((name) => ({
       "@type": "AdministrativeArea",
       name,
@@ -201,6 +214,11 @@ export function createLocalBusinessJsonLd(): SchemaObject {
         availableLanguage: ["English", "Hindi", "Gujarati"],
       },
     ],
+    knowsAbout: siteConfig.industries,
+    numberOfEmployees: {
+      "@type": "QuantitativeValue",
+      value: 50,
+    },
   };
 }
 
@@ -389,12 +407,66 @@ export function createProductJsonLd(product: Product): SchemaObject {
     manufacturer: {
       "@id": `${siteConfig.url}#organization`,
     },
-    areaServed: siteConfig.serviceAreas,
+    offers: {
+      "@type": "Offer",
+      url: absoluteUrl(`/products/${product.id}`),
+      priceCurrency: "INR",
+      price: "0",
+      priceValidUntil: new Date(new Date().getFullYear() + 1, 11, 31).toISOString().split("T")[0],
+      availability: "https://schema.org/InStock",
+      itemCondition: "https://schema.org/NewCondition",
+      seller: {
+        "@id": `${siteConfig.url}#organization`,
+      },
+      areaServed: siteConfig.serviceAreas.map((name) => ({
+        "@type": "AdministrativeArea",
+        name,
+      })),
+      description: `Contact ${siteConfig.name} for pricing on ${product.title}. Price depends on quantity, material, and specifications.`,
+    },
     additionalProperty: product.specs.map((spec) => ({
       "@type": "PropertyValue",
       name: spec.label,
       value: spec.value,
     })),
+    keywords: product.keywords.join(", "),
+  };
+}
+
+export function createHowToJsonLd({
+  name,
+  description,
+  steps,
+  image,
+}: {
+  name: string;
+  description: string;
+  steps: string[];
+  image?: string;
+}): SchemaObject {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name,
+    description,
+    ...(image ? { image: absoluteUrl(image) } : {}),
+    step: steps.map((text, index) => ({
+      "@type": "HowToStep",
+      position: index + 1,
+      name: text,
+      text,
+    })),
+    tool: [
+      { "@type": "HowToTool", name: "CNC Press Brake" },
+      { "@type": "HowToTool", name: "Fiber Laser Cutter" },
+      { "@type": "HowToTool", name: "CNC Plasma Cutter" },
+      { "@type": "HowToTool", name: "Plate Rolling Machine" },
+    ],
+    supply: [
+      { "@type": "HowToSupply", name: "Mild Steel Plate" },
+      { "@type": "HowToSupply", name: "Stainless Steel Sheet" },
+      { "@type": "HowToSupply", name: "Structural Steel" },
+    ],
   };
 }
 

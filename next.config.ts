@@ -2,13 +2,68 @@ import type { NextConfig } from "next";
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const WebpackObfuscator = require("webpack-obfuscator");
 
+const securityHeaders = [
+  { key: "X-DNS-Prefetch-Control", value: "on" },
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "X-Frame-Options", value: "SAMEORIGIN" },
+  { key: "X-XSS-Protection", value: "1; mode=block" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  {
+    key: "Permissions-Policy",
+    value: "camera=(), microphone=(), geolocation=(self), interest-cohort=()",
+  },
+  {
+    key: "Strict-Transport-Security",
+    value: "max-age=63072000; includeSubDomains; preload",
+  },
+];
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+
+  allowedDevOrigins: ["*.replit.dev", "*.sisko.replit.dev", "*.repl.co"],
+
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "firebasestorage.googleapis.com" },
+      { protocol: "https", hostname: "storage.googleapis.com" },
+      { protocol: "https", hostname: "lh3.googleusercontent.com" },
+    ],
+    formats: ["image/avif", "image/webp"],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+  },
+
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: securityHeaders,
+      },
+      {
+        source: "/sitemap.xml",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400" },
+          { key: "Content-Type", value: "application/xml; charset=utf-8" },
+        ],
+      },
+      {
+        source: "/sitemap-images.xml",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400" },
+          { key: "Content-Type", value: "application/xml; charset=utf-8" },
+        ],
+      },
+      {
+        source: "/robots.txt",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=86400, s-maxage=86400" },
+        ],
+      },
+    ];
+  },
+
   webpack: (config, { isServer, dev }) => {
-    // ── 1. Preserve `debugger` statements through minification ────────────
-    // SWC and Terser both strip `debugger` by default in production.
-    // Our DevtoolsGuard uses `new Function('debugger')` to work around SWC,
-    // but we also patch Terser here as a belt-and-suspenders backup.
     const minimizers: unknown[] = config.optimization?.minimizer ?? [];
     minimizers.forEach((plugin: unknown) => {
       if (plugin && typeof plugin === "object") {
@@ -24,26 +79,6 @@ const nextConfig: NextConfig = {
       }
     });
 
-    // ── 2. Obfuscate client-side bundles in production ────────────────────
-    // Only runs on the browser (client) bundles, never on the server build,
-    // and never in development (would slow down HMR to a crawl).
-    //
-    // Safe settings for React / Next.js App Router:
-    //   • controlFlowFlattening: false  — breaks React's reconciler logic
-    //   • deadCodeInjection:     false  — inflates bundle + breaks tree-shaking
-    //   • selfDefending:         false  — conflicts with our own debugger guard
-    //   • renameGlobals:         false  — breaks Next.js runtime globals
-    //   • transformObjectKeys:   false  — breaks React JSX object spread
-    //
-    // What IS enabled:
-    //   • stringArray + base64 encoding — all string literals (incl. Firebase
-    //     config, API keys, route paths) are encoded into a rotating array and
-    //     decoded at runtime via generated helper functions
-    //   • splitStrings — long strings are split into 10-char chunks joined at runtime
-    //   • identifierNamesGenerator: 'hexadecimal' — every variable, function,
-    //     and class name becomes a hex string like _0x3f2a1b
-    //   • numbersToExpressions — numeric literals replaced with expressions
-    //   • stringArrayCallsTransform — call sites are further obscured
     if (!dev && !isServer) {
       config.plugins.push(
         new WebpackObfuscator(

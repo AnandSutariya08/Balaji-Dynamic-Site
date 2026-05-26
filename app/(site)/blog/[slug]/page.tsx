@@ -1,8 +1,19 @@
 import { notFound } from "next/navigation";
 import BlogPostPage from "@/components/site/BlogPostPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { getPublicBlogBySlugFromFirestore } from "@/lib/firestore/publicBlogsServer";
+import { getPublicBlogBySlugFromFirestore, getPublicBlogsFromFirestore } from "@/lib/firestore/publicBlogsServer";
 import { buildMetadata, createBlogPostingJsonLd, createBreadcrumbJsonLd } from "@/lib/seo";
+
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  try {
+    const posts = await getPublicBlogsFromFirestore({ fallbackToStatic: true });
+    return posts.filter((p) => p.slug).map((p) => ({ slug: p.slug }));
+  } catch {
+    return [];
+  }
+}
 
 export async function generateMetadata({
   params,

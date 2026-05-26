@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
+import { Inter, Rajdhani } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/Providers";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -10,6 +11,22 @@ import {
   createGraphJsonLd,
 } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  variable: "--app-font-sans",
+  display: "swap",
+  preload: true,
+});
+
+const rajdhani = Rajdhani({
+  subsets: ["latin", "devanagari"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--app-font-display",
+  display: "swap",
+  preload: true,
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -111,7 +128,12 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="en-IN">
+    <html lang="en-IN" className={`${inter.variable} ${rajdhani.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://firebasestorage.googleapis.com" />
+        <link rel="dns-prefetch" href="https://firebasestorage.googleapis.com" />
+        <link rel="preconnect" href="https://api.sarvam.ai" />
+      </head>
       <body>
         <JsonLd data={globalSchema} />
         <Providers>{children}</Providers>
