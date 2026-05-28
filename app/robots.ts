@@ -29,7 +29,6 @@ export default function robots(): MetadataRoute.Robots {
           "/admin",
           "/admin/",
           "/api/",
-          "/_next/",
           "/404",
           "/500",
         ],
