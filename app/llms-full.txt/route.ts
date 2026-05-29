@@ -1,5 +1,6 @@
 import { getProductsData } from "@/lib/productsData";
 import { staticServices } from "@/lib/servicesData";
+import { sectorsData } from "@/lib/sectorsData";
 import { getPublicBlogsFromFirestore } from "@/lib/firestore/publicBlogsServer";
 import { absoluteUrl } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
@@ -51,6 +52,21 @@ ${specs}`;
     })
     .join("\n\n");
 
+  const sectorBlocks = sectorsData
+    .map((sector) => {
+      const sectorServices = sector.services.map((s) => `  - ${s}`).join("\n");
+      const applications = sector.applications.map((a) => `  - ${a}`).join("\n");
+
+      return `### ${sector.name}
+URL: ${absoluteUrl(`/sectors/${sector.id}`)}
+Description: ${sector.description}
+Services provided:
+${sectorServices}
+Applications:
+${applications}`;
+    })
+    .join("\n\n");
+
   const articleBlocks = posts
     .map((post) => {
       const body = stripHtml(post.content).slice(0, 1200);
@@ -90,6 +106,10 @@ ${serviceBlocks}
 ## Products
 
 ${productBlocks}
+
+## Sectors
+
+${sectorBlocks}
 
 ## Articles
 

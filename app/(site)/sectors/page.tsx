@@ -6,9 +6,9 @@ import {
   createWebPageJsonLd,
 } from "@/lib/seo";
 
-const title = "Industries and Sectors Served by Balaji Engineering Works";
+const title = "Industries Served by Sheet Metal Bending Works Surat | Automotive, Construction, Energy & More | Balaji Engineering Works";
 const description =
-  "Explore the sectors served by Balaji Engineering Works, including automotive, aviation, construction, energy, defense, marine, railway, mining, and general manufacturing.";
+  "Balaji Engineering Works provides sheet metal bending works services for automotive, aviation, construction, energy, defense, marine, railway, mining, chemical, and general manufacturing industries across Surat and Gujarat.";
 
 export const metadata = buildMetadata({
   title,

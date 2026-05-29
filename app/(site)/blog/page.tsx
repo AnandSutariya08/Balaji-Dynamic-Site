@@ -8,9 +8,9 @@ import {
   createWebPageJsonLd,
 } from "@/lib/seo";
 
-const title = "Sheet Metal Fabrication Blog & Guides";
+const title = "Sheet Metal Bending Works Blog & Guides | CNC Laser Cutting & Fabrication Tips | Balaji Engineering Works";
 const description =
-  "Read fabrication guides, technical insights, and manufacturing articles from Balaji Engineering Works on sheet metal bending, laser cutting, plate rolling, and steel fabrication.";
+  "Read sheet metal bending works guides, CNC laser cutting tips, plasma cutting insights, press brake bending articles, and fabrication knowledge from Balaji Engineering Works in Surat.";
 
 export const metadata = buildMetadata({
   title,

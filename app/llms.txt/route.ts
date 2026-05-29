@@ -1,5 +1,6 @@
 import { getProductsData } from "@/lib/productsData";
 import { staticServices } from "@/lib/servicesData";
+import { sectorsData } from "@/lib/sectorsData";
 import { getPublicBlogsFromFirestore } from "@/lib/firestore/publicBlogsServer";
 import { absoluteUrl } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
@@ -22,6 +23,13 @@ export async function GET() {
     .map(
       (product) =>
         `- [${product.title}](${absoluteUrl(`/products/${product.id}`)}): ${product.description}`,
+    )
+    .join("\n");
+
+  const sectorLines = sectorsData
+    .map(
+      (sector) =>
+        `- [${sector.name}](${absoluteUrl(`/sectors/${sector.id}`)}): ${sector.description}`,
     )
     .join("\n");
 
@@ -54,6 +62,8 @@ Important notes:
 - [About](${absoluteUrl("/about")}): Company history, capabilities, certifications, and industrial profile
 - [Services](${absoluteUrl("/services")}): Main fabrication and steel processing capabilities
 - [Products](${absoluteUrl("/products")}): Industrial steel products including base plates, foundation bolts, purlins, perforated sheets, and pallets
+- [Sectors](${absoluteUrl("/sectors")}): Industries and sectors served — automotive, construction, infrastructure, and more
+- [Gallery](${absoluteUrl("/gallery")}): Fabrication work photos and project showcase
 - [Blog](${absoluteUrl("/blog")}): Technical guides and manufacturing articles
 - [Contact](${absoluteUrl("/contact")}): Quote request and contact details
 
@@ -65,13 +75,16 @@ ${serviceLines}
 
 ${productLines}
 
+## Sectors
+
+${sectorLines}
+
 ## Articles
 
 ${articleLines}
 
 ## Optional
 
-- [RSS Feed](${absoluteUrl("/rss.xml")}): Latest article feed
 - [Privacy Policy](${absoluteUrl("/privacy")}): Data handling and inquiry privacy details
 - [Terms & Conditions](${absoluteUrl("/terms")}): Commercial terms, payment terms, and delivery policy
 - [Humans](${absoluteUrl("/humans.txt")}): Project and company overview

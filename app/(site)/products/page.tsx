@@ -9,9 +9,9 @@ import {
   createWebPageJsonLd,
 } from "@/lib/seo";
 
-const title = "Industrial Steel Products Manufacturer in Surat";
+const title = "Sheet Metal Bending Works Products Manufacturer Surat | Base Plates, Foundation Bolts, Purlins & Perforated Sheets | Balaji Engineering Works";
 const description =
-  "Explore industrial steel products from Balaji Engineering Works including gutters, foundation bolts, base plates, Z/C purlins, perforated sheets, decking sheets, corrugated sheets, walkway planks, conveyor stringers, and steel pallets.";
+  "Balaji Engineering Works manufactures sheet metal bending works products in Surat — MS base plates, foundation bolts, anchor bolts, Z/C purlins, perforated sheets, decking sheets, corrugated roofing sheets, walkway planks, conveyor stringers, and steel pallets.";
 
 export const metadata = buildMetadata({
   title,
