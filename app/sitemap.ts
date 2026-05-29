@@ -156,12 +156,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "yearly",
       priority: 0.2,
     },
-    {
-      url: `${siteConfig.url}/rss.xml`,
-      lastModified: blogLastModified,
-      changeFrequency: "daily",
-      priority: 0.4,
-    },
   ];
 
   const serviceEntries: SitemapEntry[] = services.map((service) => ({

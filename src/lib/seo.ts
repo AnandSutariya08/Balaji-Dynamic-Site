@@ -50,7 +50,8 @@ export function buildMetadata({
   authors,
   section,
 }: MetadataOptions): Metadata {
-  const canonical = ensureLeadingSlash(path);
+  const canonicalPath = ensureLeadingSlash(path);
+  const canonicalUrl = absoluteUrl(canonicalPath);
   const imageUrl = absoluteUrl(image);
   const metadataTitle = title.includes(siteConfig.name)
     ? title
@@ -62,13 +63,13 @@ export function buildMetadata({
     keywords: Array.from(new Set([...siteConfig.keywords, ...keywords])),
     authors: (authors ?? [siteConfig.legalName]).map((name) => ({ name })),
     alternates: {
-      canonical,
+      canonical: canonicalUrl,
     },
     category: "Industrial Manufacturing",
     openGraph: {
       type,
       locale: siteConfig.locale,
-      url: absoluteUrl(canonical),
+      url: canonicalUrl,
       title: metadataTitle,
       description,
       siteName: siteConfig.name,

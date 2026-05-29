@@ -7,34 +7,6 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
-        userAgent: "*",
-        allow: [
-          "/",
-          "/services",
-          "/services/",
-          "/products",
-          "/products/",
-          "/blog",
-          "/blog/",
-          "/gallery",
-          "/about",
-          "/contact",
-          "/sectors",
-          "/sectors/",
-          "/sitemap.xml",
-          "/sitemap-images.xml",
-          "/rss.xml",
-        ],
-        disallow: [
-          "/admin",
-          "/admin/",
-          "/api/",
-          "/404",
-          "/500",
-        ],
-        crawlDelay: 1,
-      },
-      {
         userAgent: "Googlebot",
         allow: ["/"],
         disallow: ["/admin/", "/api/"],
@@ -72,11 +44,15 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "Bytespider",
         disallow: ["/"],
       },
+      {
+        userAgent: "*",
+        allow: ["/"],
+        disallow: ["/admin/", "/api/"],
+      },
     ],
     sitemap: [
       `${base}/sitemap.xml`,
       `${base}/sitemap-images.xml`,
     ],
-    host: new URL(base).host,
   };
 }
