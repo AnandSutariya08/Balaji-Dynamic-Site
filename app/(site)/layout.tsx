@@ -8,8 +8,7 @@ import { FloatingCta } from "@/components/site/FloatingCta";
 import { SiteSmoothScroll } from "@/components/site/SiteSmoothScroll";
 import { QuoteDialogProvider } from "@/components/site/QuoteDialogProvider";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
-import dynamic from "next/dynamic";
-const BalajiAI = dynamic(() => import("@/components/site/BalajiAI").then((m) => ({ default: m.BalajiAI })), { ssr: false });
+import { BalajiAI } from "@/components/site/BalajiAI";
 
 export default function SiteLayout({
   children,
@@ -23,7 +22,10 @@ export default function SiteLayout({
         event.reason?.message?.includes("Loading chunk")
       ) {
         event.preventDefault();
-        window.location.reload();
+        if (!sessionStorage.getItem("_cer")) {
+          sessionStorage.setItem("_cer", "1");
+          window.location.reload();
+        }
       }
     };
     window.addEventListener("unhandledrejection", handler);
