@@ -9,8 +9,6 @@ import { PageHero } from "@/components/site/PageHero";
 import {
   buildMetadata,
   createBreadcrumbJsonLd,
-  createGenericFaqJsonLd,
-  createHowToJsonLd,
   createServiceJsonLd,
   createWebPageJsonLd,
 } from "@/lib/seo";
@@ -83,7 +81,7 @@ export default async function Page({
       title: seo.metaTitle,
       description: seo.metaDescription,
       path,
-      type: "Service",
+      type: "ItemPage",
     }),
     createBreadcrumbJsonLd([
       { name: "Home", path: "/" },
@@ -91,13 +89,6 @@ export default async function Page({
       { name: service.title, path },
     ]),
     createServiceJsonLd(service),
-    createGenericFaqJsonLd(seo.faqs),
-    createHowToJsonLd({
-      name: `How to Get ${service.title} from Balaji Engineering Works`,
-      description: `Step-by-step process for ordering ${service.title} in Surat from Balaji Engineering Works — drawing review, material confirmation, production, and dispatch.`,
-      steps: seo.process,
-      image: service.image,
-    }),
   ];
 
   return (

@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import BlogPostPage from "@/components/site/BlogPostPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getPublicBlogBySlugFromFirestore, getPublicBlogsFromFirestore } from "@/lib/firestore/publicBlogsServer";
-import { buildMetadata, createBlogPostingJsonLd, createBreadcrumbJsonLd } from "@/lib/seo";
+import { buildMetadata, createBlogPostingJsonLd, createBreadcrumbJsonLd, createWebPageJsonLd } from "@/lib/seo";
 
 export const revalidate = 3600;
 
@@ -70,6 +70,12 @@ export default async function Page({
       { name: post.title, path: `/blog/${post.slug}` },
     ]),
     createBlogPostingJsonLd(post),
+    createWebPageJsonLd({
+      title: post.title,
+      description: post.excerpt,
+      path: `/blog/${post.slug}`,
+      type: "Article",
+    }),
   ];
 
   return (

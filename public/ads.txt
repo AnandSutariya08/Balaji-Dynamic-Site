@@ -1,0 +1,14 @@
+# ads.txt — Authorized Digital Sellers
+# https://iabtechlab.com/ads-txt/
+# Domain: sheetmetalbendingworks.com
+# Owner: Balaji Engineering Works, Surat, Gujarat, India
+# Contact: info@sheetmetalbendingworks.com
+#
+# This site does not currently participate in programmatic advertising.
+# No third parties are authorized to sell advertising inventory on behalf of this domain.
+#
+# If you wish to advertise, contact us directly:
+#   Email: info@sheetmetalbendingworks.com
+#   Phone: +91-XXXXXXXXXX
+#
+# placeholder.example.com, placeholder, DIRECT, placeholder

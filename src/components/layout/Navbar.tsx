@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -72,7 +72,7 @@ export function Navbar() {
               </div>
             </Link>
 
-            <nav className="hidden items-center gap-1 lg:flex">
+            <nav aria-label="Main navigation" className="hidden items-center gap-1 lg:flex">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
@@ -113,7 +113,7 @@ export function Navbar() {
       >
         <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#111]/95 shadow-[0_20px_60px_rgba(0,0,0,0.6)] backdrop-blur-2xl">
           <div className="h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent" />
-          <nav className="flex flex-col py-2">
+          <nav aria-label="Mobile navigation" className="flex flex-col py-2">
             {navLinks.map((link) => (
               <Link
                 key={link.name}

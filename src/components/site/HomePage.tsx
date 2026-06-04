@@ -143,6 +143,9 @@ export default function HomePage({
               src="/hero-bg.png"
               alt="CNC laser cutting, plate bending, and steel fabrication facility in Surat"
               className="w-full h-full object-cover object-center"
+              fetchPriority="high"
+              loading="eager"
+              decoding="sync"
             />
             {/* Cinematic gradient â€” dark left for text, reveal image on right */}
             <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/25" />
@@ -153,9 +156,9 @@ export default function HomePage({
 
           <div className="container relative z-10 mx-auto px-4 pt-28 pb-16 md:pt-32 md:pb-20">
             <div className="max-w-3xl">
-              <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+              <motion.div initial={{ y: 20 }} animate={{ y: 0 }} transition={{ duration: 0.5 }}>
                 {/* Badge */}
-                <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1, duration: 0.7 }}
+                <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0, duration: 0.4 }}
                   className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 mb-3 md:mb-4 lg:mb-5">
                   <span className="w-2 h-2 rounded-full bg-primary animate-pulse shrink-0" />
                   <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.25em] uppercase">EST. 2001 - KAMREJ, SURAT - GUJARAT</span>
@@ -181,7 +184,7 @@ export default function HomePage({
                 </motion.p>
 
                 {/* CTAs */}
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.6 }}
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.4 }}
                   className="flex flex-col sm:flex-row gap-3">
                   <Button size="lg" className="h-11 sm:h-12 px-6 sm:px-8 text-xs sm:text-sm font-black uppercase tracking-widest bg-primary hover:bg-[#c44040] text-white shadow-[0_0_40px_rgba(172,60,60,0.55)] border-none transition-all duration-300" asChild>
                     <Link href="/services">Explore Services</Link>
@@ -192,7 +195,7 @@ export default function HomePage({
                 </motion.div>
 
                 {/* Hero stats row */}
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1, duration: 0.7 }}
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 0.5 }}
                   className="flex items-center gap-5 sm:gap-8 mt-5 md:mt-6 lg:mt-8 pt-4 md:pt-5 lg:pt-6 border-t border-white/15">
                   {[
                     { v: "25+", l: "Years" },

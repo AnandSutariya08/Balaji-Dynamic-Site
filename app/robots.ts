@@ -61,6 +61,12 @@ export default function robots(): MetadataRoute.Robots {
         allow: ["/"],
         disallow: ["/admin/", "/api/"],
       },
+      // Google AI / Gemini
+      {
+        userAgent: "Google-Extended",
+        allow: ["/"],
+        disallow: ["/admin/", "/api/"],
+      },
       // AI crawlers — allowed
       {
         userAgent: "GPTBot",
@@ -109,6 +115,16 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: "Bytedance-Bot",
+        allow: ["/"],
+        disallow: ["/admin/", "/api/"],
+      },
+      {
+        userAgent: "Amazonbot",
+        allow: ["/"],
+        disallow: ["/admin/", "/api/"],
+      },
+      {
+        userAgent: "Diffbot",
         allow: ["/"],
         disallow: ["/admin/", "/api/"],
       },
@@ -167,8 +183,10 @@ export default function robots(): MetadataRoute.Robots {
       },
     ],
     sitemap: [
+      `${base}/sitemap-index.xml`,
       `${base}/sitemap.xml`,
       `${base}/sitemap-images.xml`,
+      `${base}/sitemap-news.xml`,
     ],
   };
 }

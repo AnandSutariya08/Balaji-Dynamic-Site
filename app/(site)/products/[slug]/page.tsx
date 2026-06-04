@@ -10,7 +10,6 @@ import { staticServices } from "@/lib/servicesData";
 import {
   buildMetadata,
   createBreadcrumbJsonLd,
-  createGenericFaqJsonLd,
   createProductJsonLd,
   createWebPageJsonLd,
 } from "@/lib/seo";
@@ -71,7 +70,7 @@ export default async function Page({
       title: product.metaTitle,
       description: product.metaDescription,
       path,
-      type: "Product",
+      type: "ItemPage",
     }),
     createBreadcrumbJsonLd([
       { name: "Home", path: "/" },
@@ -79,7 +78,6 @@ export default async function Page({
       { name: product.title, path },
     ]),
     createProductJsonLd(product),
-    createGenericFaqJsonLd(product.faqs),
   ];
 
   return (

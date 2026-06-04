@@ -18,6 +18,7 @@ import { BlogForm } from "./BlogForm";
 import { deleteBlog } from "@/lib/firestore/blogs";
 import { db, isFirebaseConfigured } from "@/lib/firebase";
 import type { BlogPost } from "@/lib/firestore/types";
+import { revalidateBlogCache } from "@/lib/actions/revalidate";
 
 const CATEGORY_COLORS: Record<string, string> = {
   Technical: "bg-blue-500/10 text-blue-400 border-blue-500/20",
@@ -79,6 +80,7 @@ export function BlogsPage() {
     setDeleting(id);
     try {
       await deleteBlog(id);
+      await revalidateBlogCache();
       setPosts((current) => current.filter((post) => post.id !== id));
     } catch (error_) {
       const message = error_ instanceof Error ? error_.message : "Failed to delete.";

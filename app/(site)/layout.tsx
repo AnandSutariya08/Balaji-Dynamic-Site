@@ -6,7 +6,8 @@ import { FloatingCta } from "@/components/site/FloatingCta";
 import { SiteSmoothScroll } from "@/components/site/SiteSmoothScroll";
 import { QuoteDialogProvider } from "@/components/site/QuoteDialogProvider";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
-import { BalajiAI } from "@/components/site/BalajiAI";
+import dynamic from "next/dynamic";
+const BalajiAI = dynamic(() => import("@/components/site/BalajiAI").then((m) => ({ default: m.BalajiAI })), { ssr: false });
 
 export default function SiteLayout({
   children,

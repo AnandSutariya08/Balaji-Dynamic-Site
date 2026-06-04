@@ -16,14 +16,12 @@ function esc(value: string) {
     .replace(/'/g, "&apos;");
 }
 
-function imageTag(url: string, caption: string, title: string) {
+function imageTag(url: string) {
   if (!url) return "";
   const absUrl = absoluteUrl(url);
   return `
     <image:image>
       <image:loc>${esc(absUrl)}</image:loc>
-      <image:caption>${esc(caption)}</image:caption>
-      <image:title>${esc(title)}</image:title>
     </image:image>`;
 }
 
@@ -52,11 +50,9 @@ export async function GET() {
     urlTag(
       siteConfig.url,
       [
-        imageTag(siteConfig.ogImage, `${siteConfig.name} - Sheet Metal Fabrication, CNC Cutting and Bending Services in Surat`, siteConfig.name),
-        imageTag("/logo.png", `${siteConfig.name} Logo`, `${siteConfig.name} Logo`),
-        ...services.slice(0, 6).map((s) =>
-          imageTag(s.image, `${s.title} - ${siteConfig.name}`, s.title)
-        ),
+        imageTag(siteConfig.ogImage),
+        imageTag("/logo.png"),
+        ...services.slice(0, 6).map((s) => imageTag(s.image)),
       ].join(""),
     ),
   );
@@ -64,9 +60,7 @@ export async function GET() {
   entries.push(
     urlTag(
       `${siteConfig.url}/services`,
-      services
-        .map((s) => imageTag(s.image, `${s.title} Service - ${siteConfig.name} Surat`, s.title))
-        .join(""),
+      services.map((s) => imageTag(s.image)).join(""),
     ),
   );
 
@@ -74,7 +68,7 @@ export async function GET() {
     entries.push(
       urlTag(
         `${siteConfig.url}/services/${service.id}`,
-        imageTag(service.image, `${service.title} in Surat | ${siteConfig.name}`, service.title),
+        imageTag(service.image),
       ),
     );
   }
@@ -86,7 +80,7 @@ export async function GET() {
         products
           .filter((p) => p.image)
           .slice(0, 15)
-          .map((p) => imageTag(p.image, `${p.title} - ${siteConfig.name}`, p.title))
+          .map((p) => imageTag(p.image))
           .join(""),
       ),
     );
@@ -95,11 +89,7 @@ export async function GET() {
       entries.push(
         urlTag(
           `${siteConfig.url}/products/${product.id}`,
-          imageTag(
-            product.image,
-            `${product.title} | Manufactured by ${siteConfig.name}, Surat`,
-            product.title,
-          ),
+          imageTag(product.image),
         ),
       );
     }
@@ -108,13 +98,7 @@ export async function GET() {
   if (gallery.length > 0) {
     const galleryImages = gallery
       .filter((i) => i.image)
-      .map((i) =>
-        imageTag(
-          i.image,
-          `${i.title} - ${i.category} | ${siteConfig.name} Gallery`,
-          i.title || i.category,
-        )
-      )
+      .map((i) => imageTag(i.image))
       .join("");
     entries.push(urlTag(`${siteConfig.url}/gallery`, galleryImages));
   }
@@ -126,7 +110,7 @@ export async function GET() {
         posts
           .filter((p) => p.image)
           .slice(0, 15)
-          .map((p) => imageTag(p.image, `${p.title} | ${siteConfig.name} Blog`, p.title))
+          .map((p) => imageTag(p.image))
           .join(""),
       ),
     );
@@ -135,7 +119,7 @@ export async function GET() {
       entries.push(
         urlTag(
           `${siteConfig.url}/blog/${post.slug}`,
-          imageTag(post.image, `${post.title} | ${siteConfig.name}`, post.title),
+          imageTag(post.image),
         ),
       );
     }
@@ -145,7 +129,7 @@ export async function GET() {
     entries.push(
       urlTag(
         `${siteConfig.url}/sectors/${sector.id}`,
-        imageTag(sector.image, `${sector.name} - ${siteConfig.name}`, sector.name),
+        imageTag(sector.image),
       ),
     );
   }

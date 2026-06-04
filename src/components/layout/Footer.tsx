@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { siteConfig } from "@/lib/site";
 
@@ -94,7 +94,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div>
+          <nav aria-label="Footer navigation">
             <h4 className="mb-6 flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.35em] text-white/50">
               <span className="h-[2px] w-4 rounded-full bg-primary" />
               Navigation
@@ -112,7 +112,7 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
           <div>
             <h4 className="mb-6 flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.35em] text-white/50">

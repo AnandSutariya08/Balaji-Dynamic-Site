@@ -143,9 +143,20 @@ export function createOrganizationJsonLd(): SchemaObject {
     url: siteConfig.url,
     logo: {
       "@type": "ImageObject",
+      "@id": `${siteConfig.url}#logo`,
       url: absoluteUrl("/logo.png"),
+      contentUrl: absoluteUrl("/logo.png"),
+      width: 192,
+      height: 192,
+      caption: siteConfig.name,
     },
-    image: absoluteUrl(siteConfig.ogImage),
+    image: {
+      "@type": "ImageObject",
+      url: absoluteUrl(siteConfig.ogImage),
+      contentUrl: absoluteUrl(siteConfig.ogImage),
+      width: 1200,
+      height: 630,
+    },
     email: siteConfig.email,
     telephone: siteConfig.phone,
     foundingDate: siteConfig.foundingDate,
@@ -163,6 +174,10 @@ export function createOrganizationJsonLd(): SchemaObject {
       },
     ],
     knowsAbout: siteConfig.industries,
+    areaServed: siteConfig.serviceAreas.map((name) => ({
+      "@type": "AdministrativeArea",
+      name,
+    })),
   };
 }
 
@@ -176,15 +191,28 @@ export function createLocalBusinessJsonLd(): SchemaObject {
     alternateName: siteConfig.alternateName,
     description: siteConfig.description,
     url: siteConfig.url,
-    image: absoluteUrl(siteConfig.ogImage),
+    image: {
+      "@type": "ImageObject",
+      url: absoluteUrl(siteConfig.ogImage),
+      contentUrl: absoluteUrl(siteConfig.ogImage),
+      width: 1200,
+      height: 630,
+    },
     logo: {
       "@type": "ImageObject",
+      "@id": `${siteConfig.url}#logo`,
       url: absoluteUrl("/logo.png"),
+      contentUrl: absoluteUrl("/logo.png"),
+      width: 192,
+      height: 192,
+      caption: siteConfig.name,
     },
     telephone: siteConfig.phone,
     email: siteConfig.email,
     foundingDate: siteConfig.foundingDate,
     priceRange: siteConfig.priceRange,
+    currenciesAccepted: "INR",
+    paymentAccepted: "Cash, Bank Transfer, UPI, NEFT, RTGS",
     taxID: siteConfig.gstNumber,
     address: getAddressSchema(),
     geo: {
@@ -221,6 +249,20 @@ export function createLocalBusinessJsonLd(): SchemaObject {
       "@type": "QuantitativeValue",
       value: 50,
     },
+    potentialAction: [
+      {
+        "@type": "ReserveAction",
+        name: "Request a Quote",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: `${siteConfig.url}/contact`,
+          actionPlatform: [
+            "http://schema.org/DesktopWebPlatform",
+            "http://schema.org/MobileWebPlatform",
+          ],
+        },
+      },
+    ],
   };
 }
 
@@ -247,22 +289,60 @@ export function createOfferCatalogJsonLd(services: Service[]): SchemaObject {
 }
 
 export function createSiteNavigationJsonLd(): SchemaObject {
+  const navItems = [
+    {
+      name: "Home",
+      path: "/",
+      description: "Overview of Balaji Engineering Works — sheet metal fabrication, CNC laser cutting, and industrial products in Surat",
+    },
+    {
+      name: "About",
+      path: "/about",
+      description: "Company history, manufacturing capabilities, equipment, and industrial profile of Balaji Engineering Works",
+    },
+    {
+      name: "Services",
+      path: "/services",
+      description: "CNC laser cutting, CNC plasma cutting, CNC press brake bending, plate rolling, and sheet metal fabrication services in Surat",
+    },
+    {
+      name: "Products",
+      path: "/products",
+      description: "Industrial steel products — MS base plates, foundation bolts, C/Z purlins, perforated sheets, steel pallets manufactured in Surat",
+    },
+    {
+      name: "Sectors",
+      path: "/sectors",
+      description: "Industries served by Balaji Engineering Works — construction, chemical, pharmaceutical, automotive, power, infrastructure",
+    },
+    {
+      name: "Gallery",
+      path: "/gallery",
+      description: "Photo gallery of fabrication work, CNC cutting, bending, welding, and finished products from Balaji Engineering Works",
+    },
+    {
+      name: "Blog",
+      path: "/blog",
+      description: "Technical guides and industrial manufacturing articles on sheet metal fabrication, laser cutting, and steel bending",
+    },
+    {
+      name: "Contact",
+      path: "/contact",
+      description: "Request a quote or contact Balaji Engineering Works in Surat — phone, email, and address",
+    },
+  ];
+
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
+    "@id": `${siteConfig.url}#site-navigation`,
     name: "Primary Site Navigation",
-    itemListElement: [
-      { name: "Home", path: "/" },
-      { name: "About", path: "/about" },
-      { name: "Services", path: "/services" },
-      { name: "Products", path: "/products" },
-      { name: "Sectors", path: "/sectors" },
-      { name: "Blog", path: "/blog" },
-      { name: "Contact", path: "/contact" },
-    ].map((item, index) => ({
+    itemListElement: navItems.map((item, index) => ({
       "@type": "SiteNavigationElement",
+      "@id": `${absoluteUrl(item.path)}#nav-item`,
       position: index + 1,
       name: item.name,
+      description: item.description,
       url: absoluteUrl(item.path),
     })),
   };
@@ -281,14 +361,6 @@ export function createWebsiteJsonLd(): SchemaObject {
     publisher: {
       "@id": `${siteConfig.url}#organization`,
     },
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${siteConfig.url}/blog?q={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
-    },
   };
 }
 
@@ -300,9 +372,11 @@ export function createGraphJsonLd(schemas: SchemaObject[]): SchemaObject {
 }
 
 export function createBreadcrumbJsonLd(items: BreadcrumbItem[]): SchemaObject {
+  const lastItem = items[items.length - 1];
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "@id": lastItem ? `${absoluteUrl(lastItem.path)}#breadcrumb` : `${siteConfig.url}#breadcrumb`,
     itemListElement: items.map((item, index) => ({
       "@type": "ListItem",
       position: index + 1,
@@ -336,6 +410,12 @@ export function createWebPageJsonLd({
     about: {
       "@id": `${siteConfig.url}#local-business`,
     },
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: absoluteUrl(siteConfig.ogImage),
+      width: 1200,
+      height: 630,
+    },
   };
 }
 
@@ -366,12 +446,30 @@ export function createServiceJsonLd(service: Service): SchemaObject {
     provider: {
       "@id": `${siteConfig.url}#organization`,
     },
-    areaServed: siteConfig.serviceAreas,
-    image: absoluteUrl(service.image),
+    areaServed: siteConfig.serviceAreas.map((name) => ({
+      "@type": "AdministrativeArea",
+      name,
+    })),
+    image: {
+      "@type": "ImageObject",
+      url: absoluteUrl(service.image),
+    },
     url: absoluteUrl(`/services/${service.id}`),
     brand: {
       "@type": "Brand",
       name: siteConfig.name,
+    },
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "INR",
+      availability: "https://schema.org/InStock",
+      areaServed: siteConfig.serviceAreas.map((name) => ({
+        "@type": "AdministrativeArea",
+        name,
+      })),
+      seller: {
+        "@id": `${siteConfig.url}#organization`,
+      },
     },
   };
 }
@@ -399,7 +497,14 @@ export function createProductJsonLd(product: Product): SchemaObject {
     "@id": `${absoluteUrl(`/products/${product.id}`)}#product`,
     name: product.title,
     description: product.description,
-    image: absoluteUrl(product.image),
+    image: {
+      "@type": "ImageObject",
+      url: absoluteUrl(product.image),
+      contentUrl: absoluteUrl(product.image),
+      width: 1200,
+      height: 630,
+      caption: product.title,
+    },
     url: absoluteUrl(`/products/${product.id}`),
     category: "Industrial Fabricated Product",
     brand: {
@@ -554,15 +659,16 @@ export function createBlogPostingJsonLd(post: BlogPost): SchemaObject {
     },
     headline: post.title,
     description: post.excerpt,
-    image: {
-      "@type": "ImageObject",
-      url: absoluteUrl(post.image),
-      width: 1200,
-      height: 630,
-    },
+    image: [
+      { "@type": "ImageObject", url: absoluteUrl(post.image), width: 1200, height: 630 },
+      { "@type": "ImageObject", url: absoluteUrl(post.image), width: 800, height: 600 },
+      { "@type": "ImageObject", url: absoluteUrl(post.image), width: 800, height: 800 },
+    ],
+    thumbnailUrl: absoluteUrl(post.image),
     datePublished: getIsoDate(post.createdAt ?? post.date),
     dateModified: getIsoDate(post.updatedAt ?? post.createdAt ?? post.date),
     articleSection: post.category,
+    keywords: post.category,
     inLanguage: "en-IN",
     isPartOf: {
       "@type": "Blog",
@@ -589,6 +695,10 @@ export function createBlogPostingJsonLd(post: BlogPost): SchemaObject {
     },
     copyrightHolder: { "@id": `${siteConfig.url}#organization` },
     copyrightYear: new Date(post.createdAt ?? post.date ?? new Date()).getFullYear(),
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["article h1", "article p:first-of-type"],
+    },
   };
 }
 

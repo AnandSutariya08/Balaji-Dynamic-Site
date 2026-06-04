@@ -38,5 +38,5 @@ expertMode = true
 [userenv]
 
 [userenv.shared]
-NEXT_PUBLIC_SITE_URL = "https://sheetmetalbendingworks.com"
+NEXT_PUBLIC_SITE_URL = "https://www.sheetmetalbendingworks.com"
 ADMIN_USERNAME = "admin"

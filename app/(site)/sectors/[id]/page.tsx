@@ -3,9 +3,6 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import {
   buildMetadata,
   createBreadcrumbJsonLd,
-  createGenericFaqJsonLd,
-  createLocalBusinessJsonLd,
-  createOrganizationJsonLd,
   createWebPageJsonLd,
   absoluteUrl,
 } from "@/lib/seo";
@@ -45,7 +42,7 @@ export async function generateMetadata({
       "Balaji Engineering Works",
       "sheet metal fabrication Surat",
       "steel fabrication Gujarat India",
-    ],
+  ],
   });
 }
 
@@ -86,7 +83,7 @@ export default async function Page({
       { "@type": "Country", name: "India" },
       { "@type": "State", name: "Gujarat" },
       { "@type": "State", name: "Maharashtra" },
-    ],
+  ],
     serviceType: "Sheet Metal Fabrication",
     url: pageUrl,
     hasOfferCatalog: {
@@ -127,12 +124,9 @@ export default async function Page({
       { name: "Home", path: "/" },
       { name: "Sectors We Serve", path: "/sectors" },
       { name: sector.name, path: `/sectors/${sector.id}` },
-    ]),
+  ]),
     serviceSchema,
     itemListSchema,
-    createOrganizationJsonLd(),
-    createLocalBusinessJsonLd(),
-    createGenericFaqJsonLd(sector.faqs),
   ];
 
   return (

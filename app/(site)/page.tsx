@@ -4,13 +4,10 @@ import { getProductsData } from "@/lib/productsData";
 import { staticServices } from "@/lib/servicesData";
 import {
   buildMetadata,
-  createHomepageFaqJsonLd,
   createOfferCatalogJsonLd,
   createProductsItemListJsonLd,
-  createSiteNavigationJsonLd,
   createServicesItemListJsonLd,
   createWebPageJsonLd,
-  createWebsiteJsonLd,
 } from "@/lib/seo";
 
 const title =
@@ -43,17 +40,14 @@ export default async function Page() {
   const products = await getProductsData();
 
   const schemas = [
-    createWebsiteJsonLd(),
     createWebPageJsonLd({
       title,
       description,
       path: "/",
     }),
-    createSiteNavigationJsonLd(),
     createOfferCatalogJsonLd(services),
     createServicesItemListJsonLd(services),
     createProductsItemListJsonLd(products),
-    createHomepageFaqJsonLd(),
   ];
 
   return (

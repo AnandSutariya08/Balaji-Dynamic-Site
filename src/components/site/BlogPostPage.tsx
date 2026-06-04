@@ -70,11 +70,15 @@ export default function BlogPostPage({
         {/* Post Hero */}
         <section className="relative min-h-[88vh] flex flex-col justify-end overflow-hidden">
           <div className="absolute inset-0 z-0">
-            <img
-              src={post.image}
-              alt={`${post.title} article by Balaji Engineering Works`}
-              className="w-full h-full object-cover"
-            />
+            {post.image ? (
+              <img
+                src={post.image}
+                alt={`${post.title} article by Balaji Engineering Works`}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="w-full h-full bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900" />
+            )}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/30" />
           </div>
 
@@ -153,7 +157,11 @@ export default function BlogPostPage({
                 {related.map(rp => (
                         <Link key={rp.slug} href={`/blog/${encodeURIComponent(rp.slug)}`} className="group block">
                           <div className="aspect-video rounded-lg overflow-hidden mb-3 border border-white/5">
-                            <img src={rp.image} alt={`${rp.title} article by Balaji Engineering Works`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                            {rp.image ? (
+                              <img src={rp.image} alt={`${rp.title} article by Balaji Engineering Works`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                            ) : (
+                              <div className="w-full h-full bg-gradient-to-br from-zinc-900 to-zinc-800" />
+                            )}
                           </div>
                           <h5 className="text-sm font-display font-bold text-white uppercase tracking-tight group-hover:text-primary transition-colors line-clamp-2">
                             {rp.title}

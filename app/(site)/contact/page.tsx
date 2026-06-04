@@ -3,7 +3,6 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import {
   buildMetadata,
   createBreadcrumbJsonLd,
-  createFaqJsonLd,
   createWebPageJsonLd,
 } from "@/lib/seo";
 
@@ -47,7 +46,6 @@ export default async function Page({
       { name: "Home", path: "/" },
       { name: "Contact", path: "/contact" },
     ]),
-    createFaqJsonLd(),
   ];
 
   return (

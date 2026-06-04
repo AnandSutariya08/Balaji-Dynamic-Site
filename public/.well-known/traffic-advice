@@ -1,0 +1,8 @@
+[{
+  "user_agent": "*",
+  "disallow": false,
+  "crawl_delay": 1
+}, {
+  "user_agent": "prefetch-proxy",
+  "fraction": 1.0
+}]

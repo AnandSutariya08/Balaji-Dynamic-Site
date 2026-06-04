@@ -7,6 +7,7 @@ import { addBlog, updateBlog } from "@/lib/firestore/blogs";
 import { uploadImage } from "@/lib/firestore/storage";
 import { isFirebaseConfigured } from "@/lib/firebase";
 import type { BlogInput, BlogPost } from "@/lib/firestore/types";
+import { revalidateBlogCache } from "@/lib/actions/revalidate";
 
 const CATEGORIES = ["Technical", "Guide", "Industry"] as const;
 
@@ -81,6 +82,11 @@ export function BlogForm({
       return;
     }
 
+    if (!form.image && !imageFile) {
+      setError("Please upload a cover image before publishing.");
+      return;
+    }
+
     setError("");
     setSaving(true);
 
@@ -101,6 +107,7 @@ export function BlogForm({
         await addBlog(payload);
       }
 
+      await revalidateBlogCache();
       onSaved();
       onClose();
     } catch (error_) {
@@ -209,7 +216,7 @@ export function BlogForm({
             />
           </Field>
 
-          <Field label="Cover Image">
+          <Field label="Cover Image" required>
             <div
               onClick={() => fileRef.current?.click()}
               className="relative min-h-[140px] cursor-pointer overflow-hidden rounded-xl border-2 border-dashed border-white/10 transition-colors hover:border-[#AC3C3C]/50"
@@ -228,7 +235,7 @@ export function BlogForm({
                 <div className="flex h-36 flex-col items-center justify-center gap-2 text-zinc-500">
                   <ImageIcon className="h-8 w-8" />
                   <span className="text-sm">Click to upload cover image</span>
-                  <span className="text-xs">JPG, PNG, WebP</span>
+                  <span className="text-xs">JPG, PNG, WebP — required to publish</span>
                 </div>
               )}
 

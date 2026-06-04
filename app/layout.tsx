@@ -8,6 +8,7 @@ import {
   createLocalBusinessJsonLd,
   createOrganizationJsonLd,
   createWebsiteJsonLd,
+  createSiteNavigationJsonLd,
   createGraphJsonLd,
 } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
@@ -21,8 +22,8 @@ const inter = Inter({
 });
 
 const rajdhani = Rajdhani({
-  subsets: ["latin", "devanagari"],
-  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
   variable: "--app-font-display",
   display: "swap",
   preload: true,
@@ -55,6 +56,7 @@ export const metadata: Metadata = {
     },
     types: {
       "application/rss+xml": `${siteConfig.url}/rss.xml`,
+      "application/atom+xml": `${siteConfig.url}/atom.xml`,
     },
   },
   verification: {
@@ -117,13 +119,13 @@ export const metadata: Metadata = {
   other: {
     "geo.region": "IN-GJ",
     "geo.placename": `${siteConfig.address.locality}, ${siteConfig.address.region}, India`,
-    "geo.position": "21.2447;72.9504",
-    "ICBM": "21.2447, 72.9504",
+    "geo.position": "21.24470;72.95040",
+    "ICBM": "21.24470, 72.95040",
     "contact:phone_number": siteConfig.phone,
     "contact:email": siteConfig.email,
     "msapplication-TileColor": "#ac3c3c",
     "msapplication-TileImage": `${siteConfig.url}/logo.png`,
-    "msapplication-config": "none",
+    "msapplication-config": "/browserconfig.xml",
     "apple-mobile-web-app-capable": "yes",
     "apple-mobile-web-app-status-bar-style": "default",
     "apple-mobile-web-app-title": siteConfig.shortName,
@@ -152,6 +154,7 @@ const globalSchema = createGraphJsonLd([
   createOrganizationJsonLd(),
   createLocalBusinessJsonLd(),
   createWebsiteJsonLd(),
+  createSiteNavigationJsonLd(),
 ]);
 
 export default function RootLayout({
@@ -162,11 +165,15 @@ export default function RootLayout({
   return (
     <html lang="en-IN" className={`${inter.variable} ${rajdhani.variable}`}>
       <head>
+        {/* Hero image preload — eliminates LCP delay */}
+        <link rel="preload" href="/hero-bg.png" as="image" fetchPriority="high" />
         <link rel="preconnect" href="https://firebasestorage.googleapis.com" />
         <link rel="dns-prefetch" href="https://firebasestorage.googleapis.com" />
         <link rel="preconnect" href="https://storage.googleapis.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://api.sarvam.ai" />
         <link rel="home" href={siteConfig.url} />
+        {/* OpenSearch — allows browsers to add this site to their search bar */}
+        <link rel="search" type="application/opensearchdescription+xml" title={siteConfig.name} href="/opensearch.xml" />
       </head>
       <body>
         <JsonLd data={globalSchema} />
