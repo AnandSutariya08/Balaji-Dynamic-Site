@@ -62,48 +62,50 @@ export function AdModal() {
 
   const showImage = (ad.type === "image" || ad.type === "full") && ad.image;
   const showText = ad.type === "text" || ad.type === "full";
+  const hasTextContent = showText && (ad.title || ad.description || (ad.link && ad.buttonText));
 
   return (
     <div
       className="fixed inset-0 z-[9998] flex items-center justify-center p-4"
-      style={{ background: "rgba(0,0,0,0.65)", backdropFilter: "blur(4px)" }}
+      style={{ background: "rgba(0,0,0,0.75)", backdropFilter: "blur(6px)" }}
     >
-      <div className="relative w-full max-w-sm overflow-hidden rounded-2xl border border-white/10 bg-zinc-900 shadow-2xl sm:max-w-md">
+      <div
+        className="relative w-full max-w-sm overflow-y-auto rounded-2xl shadow-2xl"
+        style={{ maxHeight: "90vh", background: hasTextContent ? "#18181b" : "transparent" }}
+      >
         {/* Close button */}
         <button
           type="button"
           onClick={handleClose}
           aria-label="Close ad"
-          className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-black/60 text-white transition-colors hover:bg-black/80"
+          className="absolute right-2 top-2 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-black/70 text-white backdrop-blur-sm transition-colors hover:bg-black/90"
         >
-          <X className="h-4 w-4" />
+          <X className="h-3.5 w-3.5" />
         </button>
 
-        {/* Image */}
+        {/* Image — full width, no cropping, no side gaps */}
         {showImage && (
-          <div className="relative w-full overflow-hidden bg-zinc-800">
-            {ad.link ? (
-              <a href={ad.link} target="_blank" rel="noopener noreferrer" className="block w-full">
-                <img
-                  src={ad.image}
-                  alt={ad.title || "Advertisement"}
-                  className="w-full object-contain"
-                  style={{ maxHeight: "70vh" }}
-                />
-              </a>
-            ) : (
+          ad.link ? (
+            <a href={ad.link} target="_blank" rel="noopener noreferrer" className="block">
               <img
                 src={ad.image}
                 alt={ad.title || "Advertisement"}
-                className="w-full object-contain"
-                style={{ maxHeight: "70vh" }}
+                className="block w-full h-auto rounded-t-2xl"
+                style={{ borderRadius: hasTextContent ? undefined : "1rem" }}
               />
-            )}
-          </div>
+            </a>
+          ) : (
+            <img
+              src={ad.image}
+              alt={ad.title || "Advertisement"}
+              className="block w-full h-auto"
+              style={{ borderRadius: hasTextContent ? "1rem 1rem 0 0" : "1rem" }}
+            />
+          )
         )}
 
         {/* Text content */}
-        {showText && (ad.title || ad.description) && (
+        {hasTextContent && (
           <div className="px-5 py-4">
             {ad.title && (
               <h3 className="text-base font-bold text-white">{ad.title}</h3>
@@ -127,10 +129,10 @@ export function AdModal() {
           </div>
         )}
 
-        {/* Footer text */}
+        {/* Footer text — only if set */}
         {ad.footerText && (
           <div className="border-t border-white/8 px-5 py-2.5">
-            <p className="text-[10px] text-zinc-600">{ad.footerText}</p>
+            <p className="text-[10px] text-zinc-500">{ad.footerText}</p>
           </div>
         )}
       </div>
