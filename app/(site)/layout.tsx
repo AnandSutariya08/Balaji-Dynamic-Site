@@ -10,6 +10,7 @@ import { QuoteDialogProvider } from "@/components/site/QuoteDialogProvider";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { BalajiAI } from "@/components/site/BalajiAI";
 import { VisitorCollect } from "@/components/site/VisitorCollect";
+import { AdModal } from "@/components/site/AdModal";
 
 export default function SiteLayout({
   children,
@@ -45,6 +46,7 @@ export default function SiteLayout({
         <BalajiAI />
         <FloatingCta />
         <VisitorCollect />
+        <AdModal />
       </div>
     </QuoteDialogProvider>
   );
