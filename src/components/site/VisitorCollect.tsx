@@ -64,20 +64,6 @@ async function collectAndSave(): Promise<void> {
     // IP lookup failed — continue with remaining data
   }
 
-  // Ask for precise browser geolocation (may trigger browser permission dialog)
-  try {
-    const pos = await new Promise<GeolocationPosition>((resolve, reject) =>
-      navigator.geolocation.getCurrentPosition(resolve, reject, {
-        timeout: 10000,
-        maximumAge: 60000,
-      }),
-    );
-    lat = pos.coords.latitude;
-    lng = pos.coords.longitude;
-  } catch {
-    // Permission denied or unavailable — keep IP-based coords
-  }
-
   await saveVisitorRecord({
     timestamp,
     date,

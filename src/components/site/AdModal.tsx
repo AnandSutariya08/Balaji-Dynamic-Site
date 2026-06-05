@@ -5,7 +5,6 @@ import { X } from "lucide-react";
 import { getActiveAd, type Ad } from "@/lib/firestore/ads";
 import { isFirebaseConfigured } from "@/lib/firebase";
 
-const CONSENT_KEY = "balaji_visitor_consent";
 const DISMISSED_KEY = "balaji_ad_dismissed_at";
 const COOLDOWN_MS = 4 * 60 * 60 * 1000; // 4 hours
 
@@ -44,31 +43,17 @@ export function AdModal() {
     }
   }
 
-  function scheduleShow() {
-    showTimerRef.current = setTimeout(() => {
-      loadAndShow();
-    }, 3000);
-  }
-
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (window.location.pathname.startsWith("/admin")) return;
     if (isOnCooldown()) return;
 
-    // If visitor already consented (returning visitor), show after 3s directly
-    const alreadyConsented = localStorage.getItem(CONSENT_KEY);
-    if (alreadyConsented) {
-      scheduleShow();
-    }
+    // Show ad after 5 seconds directly
+    showTimerRef.current = setTimeout(() => {
+      loadAndShow();
+    }, 5000);
 
-    // Also listen for first-time consent event from VisitorCollect
-    const onConsent = () => scheduleShow();
-    window.addEventListener("visitor-consent-given", onConsent);
-
-    return () => {
-      window.removeEventListener("visitor-consent-given", onConsent);
-      clearTimeout(showTimerRef.current);
-    };
+    return () => clearTimeout(showTimerRef.current);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
