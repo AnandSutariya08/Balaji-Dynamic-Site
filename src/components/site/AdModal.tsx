@@ -81,20 +81,22 @@ export function AdModal() {
 
         {/* Image */}
         {showImage && (
-          <div className="relative w-full overflow-hidden bg-zinc-800" style={{ aspectRatio: "16/9" }}>
+          <div className="relative w-full overflow-hidden bg-zinc-800">
             {ad.link ? (
-              <a href={ad.link} target="_blank" rel="noopener noreferrer" className="block h-full w-full">
+              <a href={ad.link} target="_blank" rel="noopener noreferrer" className="block w-full">
                 <img
                   src={ad.image}
                   alt={ad.title || "Advertisement"}
-                  className="h-full w-full object-cover transition-transform hover:scale-105 duration-500"
+                  className="w-full object-contain"
+                  style={{ maxHeight: "70vh" }}
                 />
               </a>
             ) : (
               <img
                 src={ad.image}
                 alt={ad.title || "Advertisement"}
-                className="h-full w-full object-cover"
+                className="w-full object-contain"
+                style={{ maxHeight: "70vh" }}
               />
             )}
           </div>
