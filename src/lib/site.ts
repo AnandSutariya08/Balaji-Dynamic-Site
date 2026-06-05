@@ -26,8 +26,9 @@ export const siteConfig = {
   legalName: "Balaji Engineering Works",
   shortName: "Balaji Engineering",
   alternateName: "Sheet Metal Bending Works",
-  url:
-    process.env.NEXT_PUBLIC_SITE_URL || "https://www.sheetmetalbendingworks.com",
+  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://www.sheetmetalbendingworks.com").replace(
+    /^https:\/\/(?!www\.|localhost|127\.)/, "https://www."
+  ),
   ogImage: "/opengraph.jpg",
   description:
     "Balaji Engineering Works is a Surat-based manufacturer and service provider for CNC laser cutting services in Surat, CNC plasma cutting services in Surat, CNC plate bending service in Surat, sheet metal fabrication, and industrial products including base plates, foundation bolts, purlins, perforated sheets, and heavy fabrication.",

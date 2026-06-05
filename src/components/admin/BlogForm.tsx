@@ -99,7 +99,7 @@ export function BlogForm({
         setUploadProgress(null);
       }
 
-      const payload: BlogInput = { ...form, image: imageUrl };
+      const payload: BlogInput = { ...form, image: imageUrl, slug: slugify(form.slug) };
 
       if (isEdit && post) {
         await updateBlog(post.id, payload);
@@ -107,7 +107,7 @@ export function BlogForm({
         await addBlog(payload);
       }
 
-      await revalidateBlogCache();
+      await revalidateBlogCache(payload.slug);
       onSaved();
       onClose();
     } catch (error_) {

@@ -117,7 +117,7 @@ export async function getPublicBlogsFromFirestore(
 
   const response = await fetch(
     `${baseUrl()}/blog-posts?key=${apiKey()}&pageSize=250`,
-    { next: { revalidate: 300, tags: ["blog-posts"] } },
+    { next: { revalidate: 60, tags: ["blog-posts"] } },
   );
 
   if (!response.ok) return fallbackToStatic ? staticFallback : [];

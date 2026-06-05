@@ -37,6 +37,12 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/:path*",
+        has: [{ type: "host", value: "sheetmetalbendingworks.com" }],
+        destination: "https://www.sheetmetalbendingworks.com/:path*",
+        permanent: true,
+      },
+      {
         source: "/favicon.ico",
         destination: "/favicon.jpg",
         permanent: true,

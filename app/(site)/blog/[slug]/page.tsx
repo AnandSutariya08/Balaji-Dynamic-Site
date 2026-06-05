@@ -4,7 +4,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { getPublicBlogBySlugFromFirestore, getPublicBlogsFromFirestore } from "@/lib/firestore/publicBlogsServer";
 import { buildMetadata, createBlogPostingJsonLd, createBreadcrumbJsonLd, createWebPageJsonLd } from "@/lib/seo";
 
-export const revalidate = 3600;
+export const revalidate = 60;
 
 export async function generateStaticParams() {
   try {
@@ -60,30 +60,34 @@ export default async function Page({
   const { slug } = await params;
   if (!slug) notFound();
 
+  // Try server-side fetch (REST API). If Firestore security rules block
+  // unauthenticated reads, this returns null — the client-side Firebase
+  // SDK inside BlogPostPage will fetch the post instead.
   const post = await getPublicBlogBySlugFromFirestore(slug);
-  if (!post) notFound();
 
-  const schemas = [
-    createBreadcrumbJsonLd([
-      { name: "Home", path: "/" },
-      { name: "Blog", path: "/blog" },
-      { name: post.title, path: `/blog/${post.slug}` },
-    ]),
-    createBlogPostingJsonLd(post),
-    createWebPageJsonLd({
-      title: post.title,
-      description: post.excerpt,
-      path: `/blog/${post.slug}`,
-      type: "Article",
-    }),
-  ];
+  const schemas = post
+    ? [
+        createBreadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Blog", path: "/blog" },
+          { name: post.title, path: `/blog/${post.slug}` },
+        ]),
+        createBlogPostingJsonLd(post),
+        createWebPageJsonLd({
+          title: post.title,
+          description: post.excerpt,
+          path: `/blog/${post.slug}`,
+          type: "Article",
+        }),
+      ]
+    : [];
 
   return (
     <>
       {schemas.map((schema, index) => (
         <JsonLd key={index} data={schema} />
       ))}
-      <BlogPostPage slug={slug} />
+      <BlogPostPage slug={slug} initialPost={post} />
     </>
   );
 }

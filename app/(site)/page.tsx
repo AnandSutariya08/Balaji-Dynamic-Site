@@ -4,6 +4,7 @@ import { getProductsData } from "@/lib/productsData";
 import { staticServices } from "@/lib/servicesData";
 import {
   buildMetadata,
+  createHomepageFaqJsonLd,
   createOfferCatalogJsonLd,
   createProductsItemListJsonLd,
   createServicesItemListJsonLd,
@@ -48,6 +49,7 @@ export default async function Page() {
     createOfferCatalogJsonLd(services),
     createServicesItemListJsonLd(services),
     createProductsItemListJsonLd(products),
+    createHomepageFaqJsonLd(),
   ];
 
   return (

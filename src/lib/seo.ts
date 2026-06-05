@@ -518,8 +518,12 @@ export function createProductJsonLd(product: Product): SchemaObject {
       "@type": "Offer",
       url: absoluteUrl(`/products/${product.id}`),
       priceCurrency: "INR",
-      price: "0",
-      priceValidUntil: new Date(new Date().getFullYear() + 1, 11, 31).toISOString().split("T")[0],
+      priceSpecification: {
+        "@type": "UnitPriceSpecification",
+        priceCurrency: "INR",
+        priceType: "https://schema.org/InvoicePrice",
+        description: `Contact ${siteConfig.name} for pricing on ${product.title}. Price depends on quantity, material, and specifications.`,
+      },
       availability: "https://schema.org/InStock",
       itemCondition: "https://schema.org/NewCondition",
       seller: {
@@ -530,6 +534,41 @@ export function createProductJsonLd(product: Product): SchemaObject {
         name,
       })),
       description: `Contact ${siteConfig.name} for pricing on ${product.title}. Price depends on quantity, material, and specifications.`,
+      shippingDetails: {
+        "@type": "OfferShippingDetails",
+        shippingRate: {
+          "@type": "MonetaryAmount",
+          value: 0,
+          currency: "INR",
+        },
+        shippingDestination: {
+          "@type": "DefinedRegion",
+          addressCountry: "IN",
+        },
+        deliveryTime: {
+          "@type": "ShippingDeliveryTime",
+          handlingTime: {
+            "@type": "QuantitativeValue",
+            minValue: 3,
+            maxValue: 10,
+            unitCode: "DAY",
+          },
+          transitTime: {
+            "@type": "QuantitativeValue",
+            minValue: 1,
+            maxValue: 3,
+            unitCode: "DAY",
+          },
+        },
+      },
+      hasMerchantReturnPolicy: {
+        "@type": "MerchantReturnPolicy",
+        applicableCountry: "IN",
+        returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+        merchantReturnDays: 7,
+        returnMethod: "https://schema.org/ReturnInStore",
+        returnFees: "https://schema.org/FreeReturn",
+      },
     },
     additionalProperty: product.specs.map((spec) => ({
       "@type": "PropertyValue",
