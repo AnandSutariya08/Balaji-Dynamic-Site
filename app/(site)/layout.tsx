@@ -9,6 +9,7 @@ import { SiteSmoothScroll } from "@/components/site/SiteSmoothScroll";
 import { QuoteDialogProvider } from "@/components/site/QuoteDialogProvider";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { BalajiAI } from "@/components/site/BalajiAI";
+import { VisitorCollect } from "@/components/site/VisitorCollect";
 
 export default function SiteLayout({
   children,
@@ -43,6 +44,7 @@ export default function SiteLayout({
         <Footer />
         <BalajiAI />
         <FloatingCta />
+        <VisitorCollect />
       </div>
     </QuoteDialogProvider>
   );

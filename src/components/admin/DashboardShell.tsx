@@ -13,6 +13,7 @@ import {
   LayoutDashboard,
   LogOut,
   MessageSquare,
+  Users,
 } from "lucide-react";
 
 const navItems = [
@@ -20,6 +21,7 @@ const navItems = [
   { href: "/admin/products", label: "Products", icon: Boxes },
   { href: "/admin/blogs", label: "Blog Posts", icon: BookOpen },
   { href: "/admin/gallery", label: "Gallery", icon: Camera },
+  { href: "/admin/visitors", label: "Visitors", icon: Users },
 ];
 
 const ADMIN_SESSION_KEY = "balaji_admin_authed";
