@@ -1,11 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Shield } from "lucide-react";
+import { useEffect } from "react";
 import { saveVisitorRecord } from "@/lib/firestore/visitors";
 import { isFirebaseConfigured } from "@/lib/firebase";
 
-const CONSENT_KEY = "balaji_visitor_consent";
+const COLLECTED_KEY = "balaji_visitor_collected";
 
 function parseBrowser(ua: string): string {
   if (/Edg\//i.test(ua)) return "Edge";
@@ -64,6 +63,20 @@ async function collectAndSave(): Promise<void> {
     // IP lookup failed — continue with remaining data
   }
 
+  // Ask browser geolocation permission directly
+  try {
+    const pos = await new Promise<GeolocationPosition>((resolve, reject) =>
+      navigator.geolocation.getCurrentPosition(resolve, reject, {
+        timeout: 10000,
+        maximumAge: 60000,
+      }),
+    );
+    lat = pos.coords.latitude;
+    lng = pos.coords.longitude;
+  } catch {
+    // Permission denied or unavailable — keep IP-based coords
+  }
+
   await saveVisitorRecord({
     timestamp,
     date,
@@ -88,60 +101,12 @@ async function collectAndSave(): Promise<void> {
 }
 
 export function VisitorCollect() {
-  const [show, setShow] = useState(false);
-
   useEffect(() => {
     if (window.location.pathname.startsWith("/admin")) return;
-    if (localStorage.getItem(CONSENT_KEY)) return;
-    const t = setTimeout(() => setShow(true), 5000);
-    return () => clearTimeout(t);
+    if (localStorage.getItem(COLLECTED_KEY)) return;
+    localStorage.setItem(COLLECTED_KEY, "1");
+    collectAndSave().catch(() => {});
   }, []);
 
-  async function handleOkay() {
-    setShow(false);
-    localStorage.setItem(CONSENT_KEY, "granted");
-    // Signal AdModal to start its 3-second timer
-    window.dispatchEvent(new CustomEvent("visitor-consent-given"));
-    // Collect and save in background — does not block UI
-    collectAndSave().catch(() => {});
-  }
-
-  if (!show) return null;
-
-  return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-      <div className="w-full max-w-sm overflow-hidden rounded-2xl border border-white/10 bg-zinc-900 shadow-2xl">
-        {/* Header */}
-        <div className="flex items-center gap-3 border-b border-white/8 px-6 py-5">
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#AC3C3C]/20">
-            <Shield className="h-4 w-4 text-[#e05555]" />
-          </div>
-          <div>
-            <div className="text-sm font-bold text-white">Your Privacy</div>
-            <div className="text-[10px] text-zinc-500 uppercase tracking-widest">Balaji Engineering Works</div>
-          </div>
-        </div>
-
-        {/* Body */}
-        <div className="px-6 py-5">
-          <p className="text-sm leading-relaxed text-zinc-400">
-            We collect anonymous visit information — such as your browser,
-            device type, and approximate location — to understand our visitors
-            and improve this website. No personal data is stored or shared.
-          </p>
-        </div>
-
-        {/* Footer */}
-        <div className="border-t border-white/8 px-6 py-4">
-          <button
-            type="button"
-            onClick={handleOkay}
-            className="w-full rounded-xl bg-[#AC3C3C] py-3 text-sm font-bold uppercase tracking-widest text-white transition-colors hover:bg-[#c44040] active:scale-[0.98]"
-          >
-            Okay, Got It
-          </button>
-        </div>
-      </div>
-    </div>
-  );
+  return null;
 }
