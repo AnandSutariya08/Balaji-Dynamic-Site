@@ -7,6 +7,7 @@ import {
   updateDoc,
   query,
   orderBy,
+  limit,
   serverTimestamp,
   Timestamp,
   where,
@@ -66,7 +67,7 @@ export async function getActiveAd(): Promise<Ad | null> {
   const q = query(
     collection(db, COL),
     where("active", "==", true),
-    orderBy("createdAt", "desc"),
+    limit(1),
   );
   const snap = await getDocs(q);
   if (snap.empty) return null;
