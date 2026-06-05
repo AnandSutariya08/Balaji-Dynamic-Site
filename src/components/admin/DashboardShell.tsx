@@ -12,9 +12,9 @@ import {
   ExternalLink,
   LayoutDashboard,
   LogOut,
+  Megaphone,
   MessageSquare,
   Users,
-  Megaphone,
 } from "lucide-react";
 
 const navItems = [
@@ -70,7 +70,7 @@ export function DashboardShell({ children }: { children: ReactNode }) {
           </div>
         </div>
 
-        <nav className="flex-1 overflow-y-auto space-y-0.5 p-3">
+        <nav className="thin-scrollbar flex-1 overflow-y-auto space-y-0.5 p-3">
           {navItems.map(({ href, label, icon: Icon }) => {
             const active = pathname === href;
             return (
@@ -111,7 +111,7 @@ export function DashboardShell({ children }: { children: ReactNode }) {
         </div>
       </aside>
 
-      <main className="flex-1 overflow-y-auto">{children}</main>
+      <main className="thin-scrollbar flex-1 overflow-y-auto">{children}</main>
 
       {confirmOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">

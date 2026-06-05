@@ -177,7 +177,7 @@ export function VisitorsPage() {
           </div>
         </div>
       ) : (
-        <div className="overflow-x-auto rounded-xl border border-white/8">
+        <div className="thin-scrollbar overflow-x-auto rounded-xl border border-white/8">
           <table className="w-full min-w-[900px] text-xs">
             <thead>
               <tr className="border-b border-white/8 bg-[#141414]">

@@ -204,6 +204,32 @@ input[type="search"]::-webkit-search-cancel-button {
   width: min(100%, 1920px);
 }
 
+/* ── Custom scrollbars ──────────────────────────────────────────────────── */
+
+.thin-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.10) transparent;
+}
+.thin-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.thin-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 999px;
+}
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.10);
+  border-radius: 999px;
+  transition: background 0.2s;
+}
+.thin-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(172, 60, 60, 0.65);
+}
+.thin-scrollbar::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 /* ── Source-code protection ─────────────────────────────────────────────── */
 
 /* Disable text selection site-wide */
