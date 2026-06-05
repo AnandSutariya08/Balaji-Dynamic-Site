@@ -66,12 +66,17 @@ export function AdModal() {
 
   return (
     <div
-      className="fixed inset-0 z-[9998] flex items-center justify-center p-4"
+      className="fixed inset-0 z-[9998] flex items-center justify-center p-3"
       style={{ background: "rgba(0,0,0,0.75)", backdropFilter: "blur(6px)" }}
     >
+      {/* Modal auto-sizes to fit the image */}
       <div
-        className="no-scrollbar relative w-full max-w-sm overflow-y-auto rounded-2xl shadow-2xl"
-        style={{ maxHeight: "90vh", background: hasTextContent ? "#18181b" : "transparent" }}
+        className="relative overflow-hidden rounded-2xl shadow-2xl"
+        style={{
+          width: "fit-content",
+          maxWidth: "min(92vw, 480px)",
+          background: hasTextContent ? "#18181b" : "transparent",
+        }}
       >
         {/* Close button */}
         <button
@@ -83,23 +88,35 @@ export function AdModal() {
           <X className="h-3.5 w-3.5" />
         </button>
 
-        {/* Image — full width, no cropping, no side gaps */}
+        {/* Image — scales to fit screen, no cropping, no side gaps */}
         {showImage && (
           ad.link ? (
             <a href={ad.link} target="_blank" rel="noopener noreferrer" className="block">
               <img
                 src={ad.image}
                 alt={ad.title || "Advertisement"}
-                className="block w-full h-auto rounded-t-2xl"
-                style={{ borderRadius: hasTextContent ? undefined : "1rem" }}
+                style={{
+                  display: "block",
+                  width: "auto",
+                  height: "auto",
+                  maxWidth: "min(92vw, 480px)",
+                  maxHeight: hasTextContent ? "55vh" : "88vh",
+                  borderRadius: hasTextContent ? "1rem 1rem 0 0" : "1rem",
+                }}
               />
             </a>
           ) : (
             <img
               src={ad.image}
               alt={ad.title || "Advertisement"}
-              className="block w-full h-auto"
-              style={{ borderRadius: hasTextContent ? "1rem 1rem 0 0" : "1rem" }}
+              style={{
+                display: "block",
+                width: "auto",
+                height: "auto",
+                maxWidth: "min(92vw, 480px)",
+                maxHeight: hasTextContent ? "55vh" : "88vh",
+                borderRadius: hasTextContent ? "1rem 1rem 0 0" : "1rem",
+              }}
             />
           )
         )}
