@@ -26,8 +26,6 @@ function markDismissed() {
 
 export function AdModal() {
   const [ad, setAd] = useState<Ad | null>(null);
-  const [timeLeft, setTimeLeft] = useState(0);
-  const countdownRef = useRef<ReturnType<typeof setInterval> | undefined>(undefined);
   const showTimerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   async function loadAndShow() {
@@ -36,7 +34,6 @@ export function AdModal() {
     try {
       const active = await getActiveAd();
       if (!active) return;
-      setTimeLeft(active.duration);
       setAd(active);
     } catch {
       // Firestore read failed — skip ad silently
@@ -48,7 +45,6 @@ export function AdModal() {
     if (window.location.pathname.startsWith("/admin")) return;
     if (isOnCooldown()) return;
 
-    // Show ad after 5 seconds directly
     showTimerRef.current = setTimeout(() => {
       loadAndShow();
     }, 5000);
@@ -57,25 +53,7 @@ export function AdModal() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Countdown timer
-  useEffect(() => {
-    if (!ad) return;
-    countdownRef.current = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          clearInterval(countdownRef.current);
-          handleClose();
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-    return () => clearInterval(countdownRef.current);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ad]);
-
   function handleClose() {
-    clearInterval(countdownRef.current);
     markDismissed();
     setAd(null);
   }
@@ -84,7 +62,6 @@ export function AdModal() {
 
   const showImage = (ad.type === "image" || ad.type === "full") && ad.image;
   const showText = ad.type === "text" || ad.type === "full";
-  const progress = (timeLeft / ad.duration) * 100;
 
   return (
     <div
@@ -154,19 +131,6 @@ export function AdModal() {
             <p className="text-[10px] text-zinc-600">{ad.footerText}</p>
           </div>
         )}
-
-        {/* Progress bar + timer */}
-        <div className="flex items-center gap-3 border-t border-white/8 px-5 py-2.5">
-          <div className="flex-1 overflow-hidden rounded-full bg-white/10" style={{ height: 3 }}>
-            <div
-              className="h-full rounded-full bg-[#AC3C3C] transition-all duration-1000 ease-linear"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-          <span className="shrink-0 text-[10px] font-mono text-zinc-600">
-            {timeLeft}s
-          </span>
-        </div>
       </div>
     </div>
   );
