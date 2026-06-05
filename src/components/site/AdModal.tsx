@@ -34,6 +34,15 @@ export function AdModal() {
     try {
       const active = await getActiveAd();
       if (!active) return;
+      // Preload image fully before opening modal — no flicker
+      if (active.image) {
+        await new Promise<void>((resolve) => {
+          const img = new window.Image();
+          img.onload = () => resolve();
+          img.onerror = () => resolve(); // show even if image fails
+          img.src = active.image;
+        });
+      }
       setAd(active);
     } catch {
       // Firestore read failed — skip ad silently
