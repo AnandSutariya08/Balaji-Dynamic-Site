@@ -70,7 +70,7 @@ export function AdModal() {
       style={{ background: "rgba(0,0,0,0.75)", backdropFilter: "blur(6px)" }}
     >
       <div
-        className="relative w-full max-w-sm overflow-y-auto rounded-2xl shadow-2xl"
+        className="no-scrollbar relative w-full max-w-sm overflow-y-auto rounded-2xl shadow-2xl"
         style={{ maxHeight: "90vh", background: hasTextContent ? "#18181b" : "transparent" }}
       >
         {/* Close button */}
