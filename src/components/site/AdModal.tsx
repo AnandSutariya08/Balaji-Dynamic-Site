@@ -28,8 +28,8 @@ function markDismissed() {
 export function AdModal() {
   const [ad, setAd] = useState<Ad | null>(null);
   const [timeLeft, setTimeLeft] = useState(0);
-  const countdownRef = useRef<ReturnType<typeof setInterval>>();
-  const showTimerRef = useRef<ReturnType<typeof setTimeout>>();
+  const countdownRef = useRef<ReturnType<typeof setInterval> | undefined>(undefined);
+  const showTimerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   async function loadAndShow() {
     if (!isFirebaseConfigured()) return;
