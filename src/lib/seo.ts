@@ -166,7 +166,6 @@ export function createOrganizationJsonLd(): SchemaObject {
     foundingDate: siteConfig.foundingDate,
     taxID: siteConfig.gstNumber,
     address: getAddressSchema(),
-    sameAs: [siteConfig.indiaMartProfile],
     contactPoint: [
       {
         "@type": "ContactPoint",
@@ -225,7 +224,6 @@ export function createLocalBusinessJsonLd(): SchemaObject {
       longitude: 72.9504,
     },
     hasMap: siteConfig.mapUrl,
-    sameAs: [siteConfig.indiaMartProfile],
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
