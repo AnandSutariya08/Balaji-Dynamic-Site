@@ -64,6 +64,10 @@ export function buildMetadata({
     authors: (authors ?? [siteConfig.legalName]).map((name) => ({ name })),
     alternates: {
       canonical: canonicalUrl,
+      languages: {
+        "en-IN": canonicalUrl,
+        "x-default": siteConfig.url,
+      },
     },
     category: "Industrial Manufacturing",
     openGraph: {

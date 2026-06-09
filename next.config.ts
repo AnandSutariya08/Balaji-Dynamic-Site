@@ -57,6 +57,14 @@ const nextConfig: NextConfig = {
         headers: securityHeaders,
       },
       {
+        // Prevent Vercel preview URLs from being indexed by Google
+        source: "/(.*)",
+        has: [{ type: "host", value: ".*\\.vercel\\.app" }],
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex, nofollow" },
+        ],
+      },
+      {
         source: "/sitemap.xml",
         headers: [
           { key: "Cache-Control", value: "public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400" },
