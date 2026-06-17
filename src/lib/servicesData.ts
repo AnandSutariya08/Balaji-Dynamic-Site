@@ -139,7 +139,7 @@ export const staticServices: Service[] = [
     tagline: "Sheet metal and fabrication welding for strong joints",
     description:
       "Welding joins metal parts using heat, pressure, or both, and is widely used in sheet metal fabrication to join sections together.",
-    image: "/service-welding-unique.png",
+    image: "/service-welding.png",
     features: [
       "Heat and pressure joining methods",
       "Section joining for sheet metal fabrication",
