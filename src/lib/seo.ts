@@ -66,7 +66,7 @@ export function buildMetadata({
       canonical: canonicalUrl,
       languages: {
         "en-IN": canonicalUrl,
-        "x-default": siteConfig.url,
+        "x-default": canonicalUrl,
       },
     },
     category: "Industrial Manufacturing",
