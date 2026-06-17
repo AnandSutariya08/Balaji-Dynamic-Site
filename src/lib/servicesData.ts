@@ -161,7 +161,7 @@ export const staticServices: Service[] = [
     tagline: "Sheet metal forming into 3D shapes using die-based stretching",
     description:
       "Deep drawing forms flat sheet metal into 3D shapes by stretching over a die, commonly used for cans, pots, containers, and similar products.",
-    image: "/service-steel-deep-drawing.jpg",
+    image: "/service-deep-drawing.png",
     features: [
       "Die-based sheet metal stretching",
       "3D part formation from flat blanks",
