@@ -205,7 +205,7 @@ export const staticServices: Service[] = [
     tagline: "High-speed sheet metal part production",
     description:
       "Stamping is a high-speed manufacturing process for creating parts from metal sheets and is commonly used for automotive body panels and appliance components.",
-    image: "/service-fabrication.png",
+    image: "/service-stamping.png",
     features: [
       "High-speed sheet metal part production",
       "Repeatable shape creation",
