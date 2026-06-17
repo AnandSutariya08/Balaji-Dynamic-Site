@@ -227,7 +227,7 @@ export const staticServices: Service[] = [
     tagline: "Hole and shape creation using punch press machines",
     description:
       "Punching creates holes or shapes in sheet metal using punch press machines and is well suited for mass production environments.",
-    image: "/service-profile.png",
+    image: "/service-punching.png",
     features: [
       "Hole and cutout creation in sheet metal",
       "Punch press based operation",
