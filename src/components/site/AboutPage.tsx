@@ -184,7 +184,7 @@ export default function AboutPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute inset-0 bg-primary/10 mix-blend-multiply" />
                   <div className="absolute bottom-6 left-6 right-6">
-                    <div className="text-xs font-bold tracking-[0.3em] text-zinc-300 uppercase">Soham Industrial Estate · Surat, Gujarat</div>
+                    <div className="text-xs font-bold tracking-[0.3em] text-zinc-300 uppercase">Kamrej · Surat, Gujarat</div>
                   </div>
                 </motion.div>
                 <div className="grid grid-cols-2 gap-3 md:gap-4">
