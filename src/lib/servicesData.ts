@@ -29,7 +29,7 @@ export const staticServices: Service[] = [
     tagline: "Hydraulic shearing for long-length and thicker plate cutting jobs",
     description:
       "Sheet metal shearing cutting service for accurate straight-line cutting of sheets and plates. Ideal for production blanks, strip cutting, and fabrication-ready material preparation with dependable batch consistency.",
-    image: "/service-steel-cutting.png",
+    image: "/service-shearing-cutting.png",
     features: [
       "Straight-line hydraulic shearing process",
       "Suitable for sheet and plate job work",
